@@ -1,13 +1,15 @@
 import React from "react"
 import { Router, Route } from 'react-router'
 
-import Home from "components/home"
+import HomePage from "components/home-page"
+import LoginPage from "components/login-page"
 
 export default React.createClass({
   render: function() {
     return (
       <Router>
-        <Route path="/" component={Home} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/" component={HomePage} />
       </Router>
     );
   }

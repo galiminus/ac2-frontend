@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { LeftNav, MenuItem, FlatButton } from "material-ui"
 
-import LoginModal from "components/login-modal"
+import DisconnectedModal from "components/disconnected-modal"
 
 function mapStateToProps(state) {
   return { currentUser: state.currentUser }
@@ -36,7 +36,7 @@ export default React.createClass({
           <MenuItem index={1}>Inbox</MenuItem>
         </LeftNav>
         <ActionButton />
-        <LoginModal />
+        <DisconnectedModal />
       </div>
     );
   }

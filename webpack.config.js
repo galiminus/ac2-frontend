@@ -1,3 +1,6 @@
+envify = require('envify/custom')
+webpack = require("webpack")
+
 module.exports = {
   context: __dirname + "/source",
   entry: {
@@ -28,9 +31,14 @@ module.exports = {
         loader: "style-loader!css-loader!less-loader"
       },
       {
+        test: /\.coffee$/,
+        exclude: /node_modules/,
+        loaders: ['coffee', 'cjsx']
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ["babel-loader"],
+        loader: "babel-loader",
       },
       {
         test: /\.html$/,
@@ -44,5 +52,10 @@ module.exports = {
           ]
       }
     ],
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
+  ]
 };
