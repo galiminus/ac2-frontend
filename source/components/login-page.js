@@ -1,46 +1,29 @@
 import React from "react";
 import { connect } from "react-redux"
 import {
-  TextField,
-  FlatButton,
-  Dialog,
-  Snackbar,
   Toolbar,
   ToolbarGroup,
-  Paper
+  Paper,
+  FlatButton
 } from 'material-ui'
-import { FormattedMessage, injectIntl } from "react-intl"
-import { reduxForm } from 'redux-form';
+import { FormattedMessage } from "react-intl"
+import { bindActionCreators } from "redux"
 
-import { createToken } from "action-creators/oauth"
+import LoginForm from "components/login-form"
+
+import api from "api"
 
 function mapStateToProps(state) {
   return { isLoggedIn: !!state.currentUser }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    authenticate: => () {
+let authenticate = (fields) => api.actions.tokens.create(fields)
 
-    }
-  }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({authenticate}, dispatch)
 }
 
-let EmailField = injectIntl(({intl}) => {
-  return (
-    <TextField type="email" floatingLabelText={intl.formatMessage({id: "label.email"})} />
-  )
-})
-
-let PasswordField = injectIntl(({intl}) => {
-  return (
-    <TextField type="password" floatingLabelText={intl.formatMessage({id: "label.password"})} />
-  )
-})
-
-let LoginModal = (props) => {
-  const {fields: {email, password}, authenticate} = this.props;
-
+let LoginPage = (props) => {
   return (
     <div>
       <Toolbar>
@@ -56,19 +39,7 @@ let LoginModal = (props) => {
 
         <section className="col-lg-4" style={{display: "flex", flexDirection: "column", flexGrow: 1}}>
 
-          <form onSubmit={authenticate}>
-            <div className="column">
-              <EmailField />
-              <PasswordField />
-            </div>
-            <FlatButton
-              label={<FormattedMessage id="actions.goToPasswordRecovery" />}
-              secondary={false} />
-            <FlatButton
-              label={<FormattedMessage id="actions.login" />}
-              secondary={true}
-              onTouchTap={authenticate} />
-          </form>
+        <LoginForm onSubmit={props.authenticate} />
 
        </section>
      </div>
@@ -76,4 +47,4 @@ let LoginModal = (props) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

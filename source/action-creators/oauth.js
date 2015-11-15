@@ -1,9 +1,13 @@
-import thunk from 'redux-thunk'
+import { createToken } from "api"
 
-export function createToken(params) {
-  fetch("/oauth/token", {
-    method: "POST"
-  }).then(function() {
-
-  })
+export default {
+  createToken: (fields, dispatch) => {
+    createToken(fields)
+      .then((response) => {
+        console.log("RESP", response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 }
