@@ -1,18 +1,6 @@
 import { baseUrl } from "config"
 import reduxApi, {transformers} from "redux-api"
 
-// export default {
-//   createToken: (params) =>
-//     fetch(`${baseUrl}/oauth/token`, {
-//       method: "POST",
-//       data: JSON.stringify({
-//         username: params.email,
-//         password: params.password,
-//         grant_type: "password"
-//       })
-//     })
-// }
-
 let adapter = function(fetch) {
   return function(url, opts) {
     return fetch(url, opts).then((resp)=> resp.json());

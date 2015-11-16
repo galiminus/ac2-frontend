@@ -1,15 +1,14 @@
 import { combineReducers } from 'redux'
-import {reducer as form} from 'redux-form';
+import {reducer as form} from 'redux-form'
+import api from "api"
 
 import currentUser from "./currentUser"
 
 let reducers = combineReducers({
-  currentUser,
-  form
-})
+    currentUser,
+    form,
+    ...api.reducers,
+  }
+)
 
-console.log({
-  currentUser,
-  form
-})
 export default reducers

@@ -9,6 +9,8 @@ import {
 import { FormattedMessage } from "react-intl"
 import { bindActionCreators } from "redux"
 
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
+
 import LoginForm from "components/login-form"
 
 import api from "api"
@@ -43,7 +45,7 @@ let LoginPage = (props) => {
 
        </section>
      </div>
-  </div>
+   </div>
   )
 }
 
