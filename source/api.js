@@ -8,7 +8,7 @@ let adapter = function(fetch) {
 }
 
 export default reduxApi({
-  tokens: {
+  token: {
     url: `${baseUrl}/oauth/token`,
     options: {
       method: "POST",

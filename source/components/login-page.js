@@ -16,10 +16,10 @@ import LoginForm from "components/login-form"
 import api from "api"
 
 function mapStateToProps(state) {
-  return { isLoggedIn: !!state.currentUser }
+  return { isLoggedIn: !!state.token.data.access_token }
 }
 
-let authenticate = (fields) => api.actions.tokens.create(fields)
+let authenticate = (fields) => api.actions.token.create(fields)
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({authenticate}, dispatch)

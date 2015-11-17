@@ -5,18 +5,10 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from "react-router"
 
 function mapStateToProps(state) {
-  return { isDisconnected: !state.currentUser }
+  return { isDisconnected: !state.token.data.access_token }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    redirectToLoginPage: () => {
-
-    }
-  }
-}
-
-let LoginModal = function(props) {
+let DisconnectedModal = function(props) {
   return (
     <Dialog
       actions={[
@@ -32,4 +24,4 @@ let LoginModal = function(props) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal)
+export default connect(mapStateToProps)(DisconnectedModal)
