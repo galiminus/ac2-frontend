@@ -36,13 +36,11 @@ let LoginPage = (props) => {
 
       <div className="row">
 
-        <aside className="col-lg-6 column">
+        <aside className="col-lg-6">
         </aside>
 
-        <section className="col-lg-4" style={{display: "flex", flexDirection: "column", flexGrow: 1}}>
-
-        <LoginForm onSubmit={props.authenticate} />
-
+        <section className="col-lg-3">
+          <LoginForm onSubmit={props.authenticate} />
        </section>
      </div>
    </div>

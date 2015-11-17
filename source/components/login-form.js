@@ -22,18 +22,16 @@ let form = React.createClass({
 
     return(
       <form onSubmit={handleSubmit}>
-        <div className="column">
-          <TextField type="email" {...email} hintText={<FormattedMessage id="label.email" />} />
-          <TextField type="password" {...password} hintText={<FormattedMessage id="label.password" />} />
-        </div>
-        <FlatButton
-          label={<FormattedMessage id="actions.goToPasswordRecovery" />}
-          secondary={false} />
-        <FlatButton
-          type="submit"
-          label={<FormattedMessage id="actions.login" />}
-          secondary={true}
-          onTouchTap={handleSubmit} />
+          <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="label.email" />} />
+          <TextField fullWidth={true} type="password" {...password} hintText={<FormattedMessage id="label.password" />} />
+          <FlatButton
+            label={<FormattedMessage id="actions.goToPasswordRecovery" />}
+            secondary={false} />
+          <FlatButton
+            type="submit"
+            label={<FormattedMessage id="actions.login" />}
+            secondary={true}
+            onTouchTap={handleSubmit} />
       </form>
     )
   }
