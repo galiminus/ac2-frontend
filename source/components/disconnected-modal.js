@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from "react-router"
 
 function mapStateToProps(state) {
-  return { isDisconnected: !state.token.data.access_token }
+  return { isDisconnected: state.tokens.length > 0 }
 }
 
 let DisconnectedModal = function(props) {

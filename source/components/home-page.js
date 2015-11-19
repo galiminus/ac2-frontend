@@ -13,7 +13,7 @@ import Navigation from "components/navigation"
 import Feed from "components/feed"
 
 function mapStateToProps(state) {
-  return { currentUser: state.currentUser }
+  return {}
 }
 
 function mapDispatchToProps(dispatch) {

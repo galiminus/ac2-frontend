@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
-import {reducer as form} from 'redux-form'
-import api from "api"
+import { reducer as form } from 'redux-form'
+import { routeReducer } from 'redux-simple-router'
 
-import currentUser from "./currentUser"
+import tokens from "reducers/tokens"
 
 let reducers = combineReducers({
-    currentUser,
+    tokens,
     form,
-    ...api.reducers,
+    routing: routeReducer
   }
 )
 

@@ -11,5 +11,3 @@ let createStoreWithMiddleware = compose(
 )(createStore)
 
 export default createStoreWithMiddleware(reducer)
-
-// persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))

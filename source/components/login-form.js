@@ -1,7 +1,6 @@
 import React, { PropTypes } from "react"
 import {reduxForm} from 'redux-form'
 import { FormattedMessage, injectIntl } from "react-intl"
-import Immutable from 'immutable'
 export const fields = ['email', 'password']
 
 import {
@@ -9,29 +8,36 @@ import {
   FlatButton
 } from 'material-ui'
 
+import { tokens } from "api"
+
+
+let authenticate = (fields) => tokens.create(fields)
+
 let form = React.createClass({
   propTypes: {
     fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    error: PropTypes.string
   },
   render: function() {
     const {
       fields: { email, password },
-      handleSubmit
+      handleSubmit,
+      error
     } = this.props
 
     return(
-      <form onSubmit={handleSubmit}>
-          <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="label.email" />} />
-          <TextField fullWidth={true} type="password" {...password} hintText={<FormattedMessage id="label.password" />} />
-          <FlatButton
-            label={<FormattedMessage id="actions.goToPasswordRecovery" />}
-            secondary={false} />
-          <FlatButton
-            type="submit"
-            label={<FormattedMessage id="actions.login" />}
-            secondary={true}
-            onTouchTap={handleSubmit} />
+      <form onSubmit={handleSubmit(authenticate)}>
+        <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="label.email" />} />
+        <TextField fullWidth={true} type="password" {...password} hintText={<FormattedMessage id="label.password" />} />
+        <FlatButton
+          label={<FormattedMessage id="actions.goToPasswordRecovery" />}
+          secondary={false} />
+        <FlatButton
+          type="submit"
+          label={<FormattedMessage id="actions.login" />}
+          secondary={true}
+          onTouchTap={handleSubmit(tokens.create)} />
       </form>
     )
   }

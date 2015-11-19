@@ -4,12 +4,12 @@ webpack = require("webpack")
 module.exports = {
   context: __dirname + "/source",
   entry: {
-    javascript: "./bootstrap.js",
+    javascript: "./application.js",
     html: "./index.html"
   },
   output: {
       path: __dirname + "/build",
-      filename: "/bootstrap.js"
+      filename: "/application.js"
   },
   resolve: {
     extensions: ['', '.js'],

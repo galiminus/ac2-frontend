@@ -13,13 +13,13 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
 
 import LoginForm from "components/login-form"
 
-import api from "api"
+import { tokens } from "api"
 
 function mapStateToProps(state) {
-  return { isLoggedIn: !!state.token.data.access_token }
+  return { isLoggedIn: state.tokens.length > 0 }
 }
 
-let authenticate = (fields) => api.actions.token.create(fields)
+let authenticate = (fields) => tokens.create(fields)
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({authenticate}, dispatch)
@@ -40,7 +40,7 @@ let LoginPage = (props) => {
         </aside>
 
         <section className="col-lg-3">
-          <LoginForm onSubmit={props.authenticate} />
+          <LoginForm />
        </section>
      </div>
    </div>
