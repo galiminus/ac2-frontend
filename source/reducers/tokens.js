@@ -1,8 +1,9 @@
-export default function(state = [], action) {
-  console.log(state, action)
+import Immutable from "immutable"
+
+export default function(state = Immutable.List.of(), action) {
   switch (action.type) {
     case "ADD_TOKEN":
-      return state.merge({name: action.name})
+      return state.push(action.data)
     default:
       return state
   }

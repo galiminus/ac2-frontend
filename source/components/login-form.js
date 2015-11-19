@@ -8,10 +8,13 @@ import {
   FlatButton
 } from 'material-ui'
 
-import { tokens } from "api"
+import { tokens, users } from "api"
 
 
-let authenticate = (fields) => tokens.create(fields)
+let authenticate = (fields, dispatch) =>
+  tokens.create(fields, dispatch).then((data) => {
+    users.findMe(data, dispatch)
+  })
 
 let form = React.createClass({
   propTypes: {
@@ -37,7 +40,8 @@ let form = React.createClass({
           type="submit"
           label={<FormattedMessage id="actions.login" />}
           secondary={true}
-          onTouchTap={handleSubmit(tokens.create)} />
+          onTouchTap={handleSubmit(authenticate)} />
+        {error}
       </form>
     )
   }

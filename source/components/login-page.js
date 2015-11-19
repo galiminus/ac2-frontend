@@ -6,23 +6,11 @@ import {
   Paper,
   FlatButton
 } from 'material-ui'
-import { FormattedMessage } from "react-intl"
-import { bindActionCreators } from "redux"
-
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
 
 import LoginForm from "components/login-form"
 
-import { tokens } from "api"
-
 function mapStateToProps(state) {
-  return { isLoggedIn: state.tokens.length > 0 }
-}
-
-let authenticate = (fields) => tokens.create(fields)
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({authenticate}, dispatch)
+  return { isLoggedIn: state.tokens.count() > 0 }
 }
 
 let LoginPage = (props) => {
@@ -47,4 +35,4 @@ let LoginPage = (props) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps)(LoginPage)
