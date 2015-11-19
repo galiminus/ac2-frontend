@@ -24,10 +24,10 @@ let LoginPage = (props) => {
 
       <div className="row">
 
-        <aside className="col-lg-6">
+        <aside className="col-md-6">
         </aside>
 
-        <section className="col-lg-3">
+        <section className="col-md-3 col-xs-10 col-xs-offset-1">
           <LoginForm />
        </section>
      </div>
