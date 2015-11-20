@@ -21,7 +21,6 @@ import messages from "messages/fr-FR"
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
 
 const history = createBrowserHistory()
-
 syncReduxAndRouter(history, store)
 
 ReactDOM.render(

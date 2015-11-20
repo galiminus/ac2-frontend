@@ -1,13 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import reducer from "reducers/index"
+import reducer from "reducers"
 import thunk from 'redux-thunk'
-import persistState from 'redux-localstorage'
 import { devTools } from 'redux-devtools'
 
 let createStoreWithMiddleware = compose(
   applyMiddleware(thunk),
-  devTools(),
-  persistState()
+  devTools()
 )(createStore)
 
 export default createStoreWithMiddleware(reducer)

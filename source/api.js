@@ -68,7 +68,7 @@ export default {
             type: "ADD_TOKEN",
             data: data
           })
-          resolve()
+          resolve(data)
         })
         .catch((error) => {
           if (error.response) {
@@ -94,6 +94,7 @@ export default {
             type: "ADD_USER",
             data: data
           })
+          resolve(data)
         })
         .catch(reject)
       })
@@ -104,9 +105,10 @@ export default {
         find("/users/me", query)
         .then((data) => {
           dispatch({
-            type: "SET_ME",
+            type: "ADD_USER",
             data: data
           })
+          resolve(data)
         })
         .catch(reject)
       })

@@ -4,15 +4,17 @@ import {
   Toolbar,
   ToolbarGroup,
   Paper,
-  FlatButton
+  FlatButton,
+  Modal
 } from 'material-ui'
+import { FormattedMessage } from "react-intl"
 
 import LoginForm from "components/login-form"
 import ToolbarLogo from "components/toolbar-logo"
 import { toolbarBackgroundColor, loginPageBackground } from "config"
 
 function mapStateToProps(state) {
-  return { isLoggedIn: state.tokens.count() > 0 }
+  return { isLoggedIn: state.currentUser !== null }
 }
 
 let LoginPage = (props) => {
@@ -23,12 +25,14 @@ let LoginPage = (props) => {
           <ToolbarLogo />
         </ToolbarGroup>
         <ToolbarGroup key={1} float="right">
-          <FlatButton label="À propos" />
+          <FlatButton
+            label={<FormattedMessage id="actions.goToSignupPage" />}
+            secondary={false} />
         </ToolbarGroup>
       </Toolbar>
 
-      <div className="row middle-xs middle-md" style={{height: "70%"}}>
-        <Paper className="col-md-4 col-md-offset-7 col-xs-10 col-xs-offset-1" style={{padding: "2em"}}>
+      <div className="row middle-xs middle-md" style={{height: "100%"}}>
+        <Paper className="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1" style={{padding: "2em"}}>
           <LoginForm />
        </Paper>
      </div>

@@ -1,11 +1,18 @@
-import React from "react";
+import React from "react"
 import { connect } from "react-redux"
 import { FlatButton, Dialog } from 'material-ui'
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl'
 import { Link } from "react-router"
+import { updatePath } from 'redux-simple-router'
 
 function mapStateToProps(state) {
-  return { isDisconnected: state.tokens.count() > 0 }
+  return { isDisconnected: state.currentUser === null }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    goToLoginPage: dispatch(updatePath('/login'))
+  }
 }
 
 let DisconnectedModal = function(props) {
@@ -16,7 +23,7 @@ let DisconnectedModal = function(props) {
           label={<FormattedMessage id="actions.goToLoginPage" />}
           linkButton={true}
           primary={true}
-          containerElement={<Link to="/login" />} />
+          onClick={props.goToLoginPage} />
       ]}
       open={props.isDisconnected}>
       <FormattedMessage id="errors.disconnected" />
@@ -24,4 +31,4 @@ let DisconnectedModal = function(props) {
   )
 }
 
-export default connect(mapStateToProps)(DisconnectedModal)
+export default connect(mapStateToProps, mapDispatchToProps)(DisconnectedModal)
