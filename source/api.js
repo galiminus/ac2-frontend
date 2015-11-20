@@ -33,6 +33,7 @@ function create(path, record) {
   return fetch(`${baseUrl}${path}`, {
     method: "POST",
     body: JSON.stringify(record),
+    mode: 'cors',
     headers: {
       ...headers()
     }
@@ -44,6 +45,7 @@ function create(path, record) {
 function find(path, query) {
   return fetch(`${baseUrl}${path}`, {
     method: "GET",
+    mode: 'cors',
     headers: {
       ...headers()
     }
