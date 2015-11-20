@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    goToLoginPage: dispatch(updatePath('/login'))
+    goToLoginPage: () => dispatch(updatePath('/login'))
   }
 }
 
