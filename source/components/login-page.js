@@ -2,14 +2,13 @@ import React from "react";
 import { connect } from "react-redux"
 import {
   Toolbar,
-  ToolbarTitle,
   ToolbarGroup,
   Paper,
   FlatButton
 } from 'material-ui'
 
 import LoginForm from "components/login-form"
-import { title } from "config"
+import ToolbarLogo from "components/toolbar-logo"
 
 function mapStateToProps(state) {
   return { isLoggedIn: state.tokens.count() > 0 }
@@ -20,7 +19,7 @@ let LoginPage = (props) => {
     <div>
       <Toolbar>
         <ToolbarGroup key={0}>
-          <ToolbarTitle text={title} />
+          <ToolbarLogo />
         </ToolbarGroup>
         <ToolbarGroup key={1} float="right">
           <FlatButton label="À propos" />
