@@ -25,7 +25,7 @@ const history = createBrowserHistory()
 syncReduxAndRouter(history, store)
 
 ReactDOM.render(
-  <div>
+  <div className="fill">
     <Provider store={store}>
       <IntlProvider locale="fr" messages={messages}>
         <Router history={history}>

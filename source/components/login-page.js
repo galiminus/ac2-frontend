@@ -9,6 +9,7 @@ import {
 
 import LoginForm from "components/login-form"
 import ToolbarLogo from "components/toolbar-logo"
+import { toolbarBackgroundColor, loginPageBackground } from "config"
 
 function mapStateToProps(state) {
   return { isLoggedIn: state.tokens.count() > 0 }
@@ -16,8 +17,8 @@ function mapStateToProps(state) {
 
 let LoginPage = (props) => {
   return (
-    <div>
-      <Toolbar>
+    <div className="fill" style={{background: loginPageBackground}}>
+      <Toolbar style={{backgroundColor: toolbarBackgroundColor}}>
         <ToolbarGroup key={0}>
           <ToolbarLogo />
         </ToolbarGroup>
@@ -26,14 +27,10 @@ let LoginPage = (props) => {
         </ToolbarGroup>
       </Toolbar>
 
-      <div className="row">
-
-        <aside className="col-md-6">
-        </aside>
-
-        <section className="col-md-3 col-xs-10 col-xs-offset-1">
+      <div className="row middle-xs middle-md" style={{height: "70%"}}>
+        <Paper className="col-md-4 col-md-offset-7 col-xs-10 col-xs-offset-1" style={{padding: "2em"}}>
           <LoginForm />
-       </section>
+       </Paper>
      </div>
    </div>
   )
