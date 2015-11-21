@@ -19,7 +19,7 @@ function mapStateToProps(state) {
 
 let LoginPage = (props) => {
   return (
-    <div style={{background: loginPageBackground, height: "100%", width: "100"}}>
+    <div style={{background: loginPageBackground, height: "100%", width: "100%"}}>
       <Toolbar style={{backgroundColor: toolbarBackgroundColor}}>
         <ToolbarGroup key={0}>
           <ToolbarLogo />
@@ -32,7 +32,7 @@ let LoginPage = (props) => {
       </Toolbar>
 
       <div className="row middle-xs middle-md" style={{height: "100%"}}>
-        <Paper className="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1" style={{padding: "2em"}}>
+        <Paper className="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1" style={{padding: "2em"}}>
           <LoginForm />
        </Paper>
      </div>
