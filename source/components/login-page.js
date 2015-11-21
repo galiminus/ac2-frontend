@@ -19,7 +19,7 @@ function mapStateToProps(state) {
 
 let LoginPage = (props) => {
   return (
-    <div className="fill" style={{background: loginPageBackground}}>
+    <div style={{background: loginPageBackground, height: "100%", width: "100"}}>
       <Toolbar style={{backgroundColor: toolbarBackgroundColor}}>
         <ToolbarGroup key={0}>
           <ToolbarLogo />

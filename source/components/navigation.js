@@ -8,7 +8,7 @@ import {
 
 let Navigation = function(props) {
   return (
-    <List>
+    <List {...props}>
       <ListItem key={"inbox"} primaryText="Inbox" />
     </List>
   )
