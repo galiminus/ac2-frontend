@@ -18,24 +18,17 @@ import store from "store"
 
 import messages from "messages/fr-FR"
 
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
-
 const history = createBrowserHistory()
 syncReduxAndRouter(history, store)
 
 ReactDOM.render(
-  <div className="fill">
-    <Provider store={store}>
-      <IntlProvider locale="fr" messages={messages}>
-        <Router history={history}>
-          <Route path="/login" component={LoginPage} />
-          <Route path="/" component={HomePage} />
-        </Router>
-      </IntlProvider>
-    </Provider>
-    <DebugPanel top right bottom>
-      <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
-    </DebugPanel>
-  </div>
+  <Provider store={store}>
+    <IntlProvider locale="fr" messages={messages}>
+      <Router history={history}>
+        <Route path="/login" component={LoginPage} />
+        <Route path="/" component={HomePage} />
+      </Router>
+    </IntlProvider>
+  </Provider>
   ,
 document.getElementsByTagName("main")[0])
