@@ -4,8 +4,9 @@ export default {
   "actions.goToLoginPage": "Revenir à la page d'accueil",
   "actions.goToPasswordRecovery": "Mot de passe oublié ?",
   "actions.login": "Se connecter",
-  "actions.goToSignupPage": "S'inscrire",
+  "actions.signup": "S'inscrire",
 
   "label.email": "Adresse email",
-  "label.password": "Mot de passe"
+  "label.password": "Mot de passe",
+  "label.name": "Votre nom"
 }

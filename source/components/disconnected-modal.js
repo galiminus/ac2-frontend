@@ -11,7 +11,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    goToLoginPage: () => dispatch(updatePath('/login'))
+    goToLoginPage: () => {
+      dispatch(updatePath('/login'))
+    }
   }
 }
 
@@ -20,10 +22,10 @@ let DisconnectedModal = function(props) {
     <Dialog
       actions={[
         <FlatButton
-          label={<FormattedMessage id="actions.goToLoginPage" />}
-          linkButton={true}
+          key={"goToLoginPage"}
+          label="LOL"
           primary={true}
-          onClick={props.goToLoginPage} />
+          onTouchTap={() => console.log("LOL")} />
       ]}
       open={props.isDisconnected}>
       <FormattedMessage id="errors.disconnected" />

@@ -8,8 +8,11 @@ import {
   Modal
 } from 'material-ui'
 import { FormattedMessage } from "react-intl"
+import { Link } from "react-router"
 
 import LoginForm from "components/login-form"
+import SignupForm from "components/signup-form"
+
 import ToolbarLogo from "components/toolbar-logo"
 import { toolbarBackgroundColor, loginPageBackground } from "config"
 
@@ -19,22 +22,24 @@ function mapStateToProps(state) {
 
 let LoginPage = (props) => {
   return (
-    <div style={{background: loginPageBackground, height: "100%", width: "100%"}}>
+    <div style={{background: loginPageBackground, height: "100%", width: "100%", position: "fixed"}}>
       <Toolbar style={{backgroundColor: toolbarBackgroundColor}}>
         <ToolbarGroup key={0}>
           <ToolbarLogo />
         </ToolbarGroup>
-        <ToolbarGroup key={1} float="right">
-          <FlatButton
-            label={<FormattedMessage id="actions.goToSignupPage" />}
-            secondary={false} />
-        </ToolbarGroup>
       </Toolbar>
 
-      <div className="row middle-xs middle-md" style={{height: "100%"}}>
-        <Paper className="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1" style={{padding: "2em"}}>
-          <LoginForm />
-       </Paper>
+      <div className="row middle-xs middle-md between-xs" style={{height: "100%"}}>
+        <div className="col-md-4 col-md-offset-7 col-xs-10 col-xs-offset-1">
+          <div className="col">
+            <Paper className="col-md-12" style={{padding: "1em"}}>
+              <LoginForm />
+           </Paper>
+           <Paper className="col-md-12" style={{padding: "1em"}}>
+             <SignupForm />
+          </Paper>
+        </div>
+      </div>
      </div>
    </div>
   )

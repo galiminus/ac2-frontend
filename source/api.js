@@ -86,6 +86,22 @@ export default {
   },
 
   users: {
+    create: (params, dispatch) => {
+      return new Promise((resolve, reject) => {
+        create("/users", {
+          user: params
+        })
+        .then((data) => {
+          dispatch({
+            type: "ADD_USER",
+            data: data
+          })
+          resolve(data)
+        })
+        .catch(reject)
+      })
+    },
+
     find: (query, dispatch) => {
       return new Promise((resolve, reject) => {
         find("/users", query)

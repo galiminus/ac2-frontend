@@ -1,9 +1,12 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
+// import injectTapEventPlugin from "react-tap-event-plugin"
+// injectTapEventPlugin()
+
 import { Router, Route } from 'react-router'
 
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import createHashHistory from 'history/lib/createHashHistory'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
 import HomePage from "components/home-page"
@@ -18,7 +21,7 @@ import store from "store"
 
 import messages from "messages/fr-FR"
 
-const history = createBrowserHistory()
+const history = createHashHistory()
 syncReduxAndRouter(history, store)
 
 ReactDOM.render(

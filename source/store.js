@@ -5,6 +5,7 @@ import thunk from 'redux-thunk'
 import persistState, {mergePersistedState} from 'redux-localstorage';
 import adapter from 'redux-localstorage/lib/adapters/localStorage/adapter';
 import filter from 'redux-localstorage-filter';
+import createLogger from 'redux-logger';
 
 const reducer = compose(
   mergePersistedState((state, persistedState) => {
@@ -18,8 +19,10 @@ const storage = compose(
   filter(["tokens", "currentUser"])
 )(adapter(window.localStorage));
 
+const logger = createLogger();
+
 let createStoreWithMiddleware = compose(
-  applyMiddleware(thunk),
+  applyMiddleware(thunk, logger),
 )(createStore)
 
 const createPersistentStore = compose(
