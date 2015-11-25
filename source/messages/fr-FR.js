@@ -8,5 +8,7 @@ export default {
 
   "label.email": "Adresse email",
   "label.password": "Mot de passe",
-  "label.name": "Votre nom"
+  "label.name": "Votre nom",
+
+  "errors.invalid_grant": "Adresse email ou mot de passe invalide"
 }

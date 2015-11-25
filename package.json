@@ -26,7 +26,7 @@
     "flexboxgrid": "^6.3.0",
     "history": "^1.13.0",
     "immutable": "^3.7.5",
-    "material-ui": "^0.13.3",
+    "material-ui": "^0.13.4",
     "react": "^0.14.3",
     "react-addons-create-fragment": "^0.14.3",
     "react-addons-pure-render-mixin": "^0.14.2",

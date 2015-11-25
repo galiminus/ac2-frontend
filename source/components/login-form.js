@@ -12,10 +12,12 @@ import {
 } from 'material-ui'
 
 import { tokens, users } from "api"
-import { currentUser } from "action-creators"
+import { currentUser, currentToken } from "action-creators"
 
 let authenticate = (fields, dispatch) =>
   tokens.create(fields, dispatch).then((data) => {
+    dispatch(currentToken.set(data.access_token))
+    
     users.findMe({}, dispatch).then((data) => {
       dispatch(currentUser.set(data.id))
       dispatch(updatePath("/"))
@@ -28,6 +30,13 @@ let form = React.createClass({
     handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string
   },
+
+  componentWillReceiveProps(props) {
+    if (props.error) {
+      this.refs.notice.show()
+    }
+  },
+
   render: function() {
     const {
       fields: { email, password },
@@ -49,7 +58,7 @@ let form = React.createClass({
             secondary={true}
             onTouchTap={handleSubmit(authenticate)} />
         </div>
-        <Snackbar message={error || ""} ref="notice" />
+        <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
       </form>
     )
   }

@@ -58,6 +58,6 @@ let form = React.createClass({
 })
 
 export default reduxForm({
-  form: "login",
+  form: "signup",
   fields: ['name', 'email', 'password']
 })(form)

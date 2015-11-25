@@ -7,8 +7,9 @@ function headers() {
     'Content-Type': 'application/json'
   }
 
-  if (store.getState().tokens.get(0)) {
-    base['Authorization'] = 'Bearer ' + store.getState().tokens.get(0).access_token
+  const { tokens, currentToken } = store.getState()
+  if (tokens.get(currentToken)) {
+    base['Authorization'] = 'Bearer ' + tokens.get(currentToken).access_token
   }
 
   return (base)
@@ -74,7 +75,7 @@ export default {
           if (error.response) {
             let authError = error.response.headers.get('www-authenticate')
             if (authError && authError.match("error=\"invalid_grant\"")) {
-              reject({password: "invalid_grant", _error: "invalid_grant"})
+              reject({_error: "invalid_grant"})
             }
           }
           else {
