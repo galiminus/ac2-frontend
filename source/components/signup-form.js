@@ -12,7 +12,7 @@ import {
 } from 'material-ui'
 
 import { tokens, users } from "api"
-import { currentUser } from "action-creators"
+import { currentUser, currentToken } from "action-creators"
 
 let authenticate = (fields, dispatch) =>
   users.create({
@@ -23,7 +23,12 @@ let authenticate = (fields, dispatch) =>
     }
   }, dispatch).then((data) => {
     dispatch(currentUser.set(data.id))
-    dispatch(updatePath("/"))
+
+    tokens.create({email: fields.email, password: fields.password}, dispatch).then((data) => {
+      dispatch(currentToken.set(data.access_token))
+
+      dispatch(updatePath("/"))
+    })
   })
 
 let form = React.createClass({
