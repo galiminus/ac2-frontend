@@ -15,7 +15,7 @@ export default React.createClass({
 
   render() {
     return(
-      <ToolbarTitle {...this.props} text={title} style={this.getStyle()}/>
+      <ToolbarTitle {...this.props} text={title} style={this.getStyle()} />
     )
   }
 })

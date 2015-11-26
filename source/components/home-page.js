@@ -16,21 +16,27 @@ import DisconnectedModal from "components/disconnected-modal"
 import Navigation from "components/navigation"
 import Feed from "components/feed"
 import ToolbarLogo from "components/toolbar-logo"
+import UserAvatar from "components/user-avatar"
 
 function mapStateToProps(state) {
-  return {}
+  return {
+    currentUser: state.currentUser
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {}
 }
 
-let HomePage = function() {
+let HomePage = function(props) {
   return (
     <div style={{height: "100%"}}>
       <Toolbar style={{backgroundColor: toolbarBackgroundColor, position: "fixed"}}>
         <ToolbarGroup key={0}>
           <ToolbarLogo />
+        </ToolbarGroup>
+        <ToolbarGroup key={1} float="right">
+          <UserAvatar userId={props.currentUser} />
         </ToolbarGroup>
       </Toolbar>
       <LeftNav ref="leftNav" docked={false}>
