@@ -18,5 +18,6 @@ export default {
   "labels.recover": "Mot de passe oublié ?",
 
 
-  "errors.invalid_grant": "Adresse email ou mot de passe invalide"
+  "errors.invalid_grant": "Adresse email ou mot de passe invalide",
+  "errors.email_already_in_use": "Cette adresse email est déjà utilisé"
 }

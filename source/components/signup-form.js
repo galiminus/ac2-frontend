@@ -47,6 +47,13 @@ let form = React.createClass({
     handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string
   },
+
+  componentWillReceiveProps(props) {
+    if (props.error) {
+      this.refs.notice.show()
+    }
+  },
+
   render: function() {
     const {
       fields: { name, email, password },
@@ -68,7 +75,7 @@ let form = React.createClass({
             onTouchTap={handleSubmit(authenticate)} />
           <FlatButton label={<FormattedMessage id="labels.have_account" />} linkButton={true} href="#/welcome/login" />
         </div>
-        <Snackbar message={error || ""} ref="notice" />
+        <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
       </form>
     )
   }
