@@ -9,7 +9,8 @@ import createLogger from 'redux-logger';
 
 const reducer = compose(
   mergePersistedState((state, persistedState) => {
-    state.tokens = Immutable.fromJS(persistedState.tokens)
+    state.tokens = Immutable.Map(persistedState.tokens)
+    state.users = Immutable.Map(persistedState.users)
     state.currentToken = persistedState.currentToken
     state.currentUser = persistedState.currentUser
     return state
@@ -17,7 +18,7 @@ const reducer = compose(
 )(rootReducer);
 
 const storage = compose(
-  filter(["tokens", "currentUser"])
+  filter(["tokens", "currentUser", "users", "currentUser"])
 )(adapter(window.localStorage));
 
 const logger = createLogger();
