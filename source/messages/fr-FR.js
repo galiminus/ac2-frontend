@@ -7,7 +7,7 @@ export default {
   "actions.continue": "Continuer",
 
   "forms.login": "Connectez-vous pour continuer",
-  "forms.signup": "Créer un nouveau compte",
+  "forms.signup": "Créez un nouveau compte",
   "forms.recover": "Vous avez oublié votre mot de passe ?",
 
   "labels.email": "Email",

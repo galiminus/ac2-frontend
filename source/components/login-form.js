@@ -14,8 +14,9 @@ import {
 
 import { tokens, users } from "api"
 import { currentUser, currentToken } from "action-creators"
+import { validateEmail, validatePassword } from "validators"
 
-let authenticate = (fields, dispatch) =>
+const authenticate = (fields, dispatch) =>
   tokens.create(fields, dispatch).then((data) => {
     dispatch(currentToken.set(data.access_token))
 
@@ -24,6 +25,13 @@ let authenticate = (fields, dispatch) =>
       dispatch(updatePath("/"))
     })
   })
+
+const validate = values => {
+  return {
+    email: validateEmail(values.email),
+    password: validatePassword(values.password)
+  }
+}
 
 let form = React.createClass({
   propTypes: {
@@ -51,7 +59,7 @@ let form = React.createClass({
         <TextField fullWidth={true} type="password" {...password} hintText={<FormattedMessage id="labels.password" />} />
         <div className="row between-md between-xs center-xs" style={{marginTop: 32}}>
           <RaisedButton
-            disabled={true}
+            disabled={email.invalid || password.invalid}
             type="submit"
             label={<FormattedMessage id="actions.login" />}
             secondary={true}
@@ -74,5 +82,6 @@ let form = React.createClass({
 
 export default reduxForm({
   form: "login",
-  fields: ['email', 'password']
+  fields: ['email', 'password'],
+  validate
 })(form)
