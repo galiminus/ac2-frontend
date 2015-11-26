@@ -10,7 +10,9 @@ import createHashHistory from 'history/lib/createHashHistory'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
 import HomePage from "components/home-page"
-import LoginPage from "components/login-page"
+import WelcomePage from "components/welcome-page"
+import LoginForm from "components/login-form"
+import SignupForm from "components/signup-form"
 
 import FlexBoxGrid from "flexboxgrid"
 
@@ -28,7 +30,10 @@ ReactDOM.render(
   <Provider store={store}>
     <IntlProvider locale="fr" messages={messages}>
       <Router history={history}>
-        <Route path="/login" component={LoginPage} />
+        <Route path="/welcome" component={WelcomePage}>
+          <Route path="login" component={LoginForm} />
+          <Route path="signup" component={SignupForm} />
+        </Route>
         <Route path="/" component={HomePage} />
       </Router>
     </IntlProvider>
