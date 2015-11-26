@@ -13,6 +13,7 @@ import HomePage from "components/home-page"
 import WelcomePage from "components/welcome-page"
 import LoginForm from "components/login-form"
 import SignupForm from "components/signup-form"
+import RecoverForm from "components/recover-form"
 
 import FlexBoxGrid from "flexboxgrid"
 
@@ -32,6 +33,7 @@ ReactDOM.render(
       <Router history={history}>
         <Route path="/welcome" component={WelcomePage}>
           <Route path="login" component={LoginForm} />
+          <Route path="recover" component={RecoverForm} />
           <Route path="signup" component={SignupForm} />
         </Route>
         <Route path="/" component={HomePage} />

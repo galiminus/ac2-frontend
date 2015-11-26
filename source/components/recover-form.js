@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 import { FormattedMessage } from "react-intl"
 import { updatePath } from 'redux-simple-router'
 
-export const fields = ['email', 'password']
+export const fields = ['email']
 
 import {
   TextField,
@@ -16,18 +16,11 @@ import { tokens, users } from "api"
 import { currentUser, currentToken } from "action-creators"
 
 let authenticate = (fields, dispatch) =>
-  users.create({
-    email: fields.email,
-    password: fields.password,
-    profile: {
-      name: fields.name
-    }
-  }, dispatch).then((data) => {
-    dispatch(currentUser.set(data.id))
+  tokens.create(fields, dispatch).then((data) => {
+    dispatch(currentToken.set(data.access_token))
 
-    tokens.create({email: fields.email, password: fields.password}, dispatch).then((data) => {
-      dispatch(currentToken.set(data.access_token))
-
+    users.findMe({}, dispatch).then((data) => {
+      dispatch(currentUser.set(data.id))
       dispatch(updatePath("/"))
     })
   })
@@ -38,33 +31,37 @@ let form = React.createClass({
     handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string
   },
+
+  componentWillReceiveProps(props) {
+    if (props.error) {
+      this.refs.notice.show()
+    }
+  },
+
   render: function() {
     const {
-      fields: { name, email, password },
+      fields: { email, password },
       handleSubmit,
       error
     } = this.props
 
     return(
       <form onSubmit={handleSubmit(authenticate)}>
-        <TextField fullWidth={true} type="text" {...name} hintText={<FormattedMessage id="labels.name" />} />
         <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="labels.email" />} />
-        <TextField fullWidth={true} type="password" {...password} hintText={<FormattedMessage id="labels.password" />} />
-        <div className="row between-xs center-xs" style={{marginTop: 32}}>
+        <div className="row center-xs" style={{marginTop: "1em"}}>
           <RaisedButton
             type="submit"
-            label={<FormattedMessage id="actions.signup" />}
+            label={<FormattedMessage id="actions.continue" />}
             secondary={true}
             onTouchTap={handleSubmit(authenticate)} />
-          <FlatButton label={<FormattedMessage id="labels.have_account" />} linkButton={true} href="#/welcome/login" />
         </div>
-        <Snackbar message={error || ""} ref="notice" />
+        <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
       </form>
     )
   }
 })
 
 export default reduxForm({
-  form: "signup",
-  fields: ['name', 'email', 'password']
+  form: "login",
+  fields: ['email']
 })(form)
