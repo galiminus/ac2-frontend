@@ -55,7 +55,7 @@ export default {
     })
     .then(handleError)
     .then(handleJSON)
-  }
+  },
 
   find: (path, query) => {
     return fetch(`${baseUrl}${path}`, {
