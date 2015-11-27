@@ -7,6 +7,8 @@ import {
   CardHeader
 } from "material-ui"
 
+import PostForm from "components/post-form"
+
 function mapStateToProps(state) {
   return {
     posts: state.posts
@@ -38,6 +40,7 @@ let Feed = function(props) {
       <img style={{width: "100%"}} src="" />
       <div className="container-fluid">
         <div className="col-md-10 col-md-offset-1 col-xs-12">
+          <PostForm className="col-xs-12" />
           {postCards}
         </div>
       </div>
