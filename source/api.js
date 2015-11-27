@@ -1,6 +1,6 @@
 import createToken from "api/createToken"
 import createUser from "api/createUser"
-import findUser from "api/findUser"
+import findUser from "api/findUsers"
 import findMe from "api/findMe"
 
 export default {
@@ -10,7 +10,7 @@ export default {
 
   users: {
     create: createUser,
-    find: findUser,
+    find: findUsers,
     findMe: findMe
   }
 }
