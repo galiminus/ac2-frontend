@@ -1,9 +1,9 @@
 import { create } from "api/http"
 
-export default (params, dispatch) => {
+export default (record, dispatch) => {
   return new Promise((resolve, reject) => {
     create("/posts", {
-      post: params
+      post: record
     })
     .then((data) => {
       dispatch({
