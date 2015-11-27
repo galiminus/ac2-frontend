@@ -44,6 +44,19 @@ export default {
     .then(handleJSON)
   },
 
+  update: (path, record) => {
+    return fetch(`${baseUrl}${path}`, {
+      method: "PUT",
+      body: JSON.stringify(record),
+      mode: 'cors',
+      headers: {
+        ...headers()
+      }
+    })
+    .then(handleError)
+    .then(handleJSON)
+  }
+
   find: (path, query) => {
     return fetch(`${baseUrl}${path}`, {
       method: "GET",
