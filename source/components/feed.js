@@ -1,5 +1,4 @@
 import React from "react"
-import { connect } from 'react-redux'
 
 import {
   Card,
@@ -9,17 +8,7 @@ import {
 
 import PostForm from "components/post-form"
 
-function mapStateToProps(state) {
-  return {
-    posts: state.posts
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
-let Feed = function(props) {
+export default function(props) {
   const postCards = props.posts.map(post =>
     <Card key={i} style={{marginTop: 32}}>
       <CardHeader title="Title" />
@@ -47,5 +36,3 @@ let Feed = function(props) {
     </div>
   );
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Feed)

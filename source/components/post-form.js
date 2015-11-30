@@ -17,7 +17,7 @@ import {
 import { posts } from "api"
 import { validateText } from "validators"
 
-const post = (fields, dispatch) => {
+let post = (fields, dispatch) => {
   posts.create({
     type: "text",
     data: {
@@ -52,9 +52,11 @@ let form = React.createClass({
       error
     } = this.props
 
+    console.log(body)
+
     return(
       <form onSubmit={handleSubmit(post)}>
-        <Tabs {...this.props}>
+        <Tabs>
           <Tab label={<FormattedMessage id="labels.textPost" />}>
             <TextField fullWidth={true}
               type="text"
@@ -72,7 +74,7 @@ let form = React.createClass({
         </Tabs>
         <div className="row end-xs" style={{marginTop: 32}}>
           <RaisedButton
-            disabled={!body.invalid}
+            disabled={body.invalid}
             type="submit"
             label={<FormattedMessage id="actions.login" />}
             secondary={true}

@@ -48,7 +48,7 @@ let LoginPage = (props) => {
       </Toolbar>
 
       <div className="row middle-xs center-xs" style={{height: "100%"}}>
-        <Paper className="col-md-3 col-sm-8 col-xs-11" style={{padding: "16px 32px 32px 32px"}}>
+        <Paper className="col-md-4 col-sm-8 col-xs-11" style={{padding: "16px 32px 32px 32px"}}>
           <h3 style={{marginBottom: 32, fontWeight: 200, fontSize: 14, textTransform: "uppercase"}}>
             <FormattedMessage id={`forms.${formTitle}`} />
           </h3>
