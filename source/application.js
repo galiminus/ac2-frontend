@@ -6,7 +6,7 @@ import ReactDOM from "react-dom"
 
 import { Router, Route } from 'react-router'
 
-import createHashHistory from 'history/lib/createHashHistory'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
 import HomePage from "components/home-page"
@@ -24,7 +24,7 @@ import store from "store"
 
 import messages from "messages/fr-FR"
 
-const history = createHashHistory()
+const history = createBrowserHistory()
 syncReduxAndRouter(history, store)
 
 ReactDOM.render(

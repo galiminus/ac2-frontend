@@ -2,6 +2,7 @@ import React, { PropTypes } from "react"
 import { reduxForm } from 'redux-form'
 import { FormattedMessage } from "react-intl"
 import { updatePath } from 'redux-simple-router'
+import { dispatch } from "store"
 
 export const fields = ['email', 'password']
 
@@ -54,6 +55,11 @@ let form = React.createClass({
     }
   },
 
+  goToLoginForm(e) {
+    dispatch(updatePath("/welcome/login"))
+    e.preventDefault()
+  },
+
   render: function() {
     const {
       fields: { name, email, password },
@@ -73,7 +79,7 @@ let form = React.createClass({
             label={<FormattedMessage id="actions.signup" />}
             secondary={true}
             onTouchTap={handleSubmit(authenticate)} />
-          <FlatButton label={<FormattedMessage id="labels.have_account" />} linkButton={true} href="#/welcome/login" />
+          <FlatButton label={<FormattedMessage id="labels.have_account" />} linkButton={true} href="/welcome/login" onClick={this.goToLoginForm}/>
         </div>
         <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
       </form>

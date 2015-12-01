@@ -54,10 +54,10 @@ let HomePage = function(props) {
         <Navigation />
       </LeftNav>
       <div className="row" style={{minHeight: "100%"}}>
-        <Paper className="col-md-3" style={{paddingRight: 0, marginTop: 56}}>
+        <Paper className="col-md-3 col-xs-12" style={{paddingRight: 0, marginTop: 56}}>
           <Navigation />
         </Paper>
-        <Feed posts={props.posts} className="col-md-9" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56}} />
+        <Feed posts={props.posts} className="col-md-9 col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56}} />
       </div>
       <DisconnectedModal isDisconnected={!props.currentUser} />
     </div>

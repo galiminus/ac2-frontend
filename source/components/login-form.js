@@ -1,6 +1,7 @@
 import React, { PropTypes } from "react"
 import { reduxForm } from 'redux-form'
 import { FormattedMessage } from "react-intl"
+import { dispatch } from "store"
 import { updatePath } from 'redux-simple-router'
 
 export const fields = ['email', 'password']
@@ -46,6 +47,16 @@ let form = React.createClass({
     }
   },
 
+  goToSignupForm(e) {
+    dispatch(updatePath("/welcome/signup"))
+    e.preventDefault()
+  },
+
+  goToRecoverForm(e) {
+    dispatch(updatePath("/welcome/recover"))
+    e.preventDefault()
+  },
+
   render: function() {
     const {
       fields: { email, password },
@@ -64,7 +75,7 @@ let form = React.createClass({
             label={<FormattedMessage id="actions.login" />}
             secondary={true}
             onTouchTap={handleSubmit(authenticate)} />
-          <FlatButton label={<FormattedMessage id="labels.signup" />} linkButton={true} href="#/welcome/signup" />
+          <FlatButton label={<FormattedMessage id="labels.signup" />} linkButton={true} href="/welcome/signup" onClick={this.goToSignupForm} />
         </div>
         <div className="row center-xs">
           <FlatButton
@@ -72,7 +83,8 @@ let form = React.createClass({
             label={<FormattedMessage id="labels.recover" />}
             secondary={false}
             linkButton={true}
-            href="#/welcome/recover" />
+            href="/welcome/recover"
+            onClick={this.goToRecoverForm} />
         </div>
         <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
       </form>

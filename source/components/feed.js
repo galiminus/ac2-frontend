@@ -8,25 +8,27 @@ import {
 
 import PostForm from "components/post-form"
 
-export default function(props) {
-  const postCards = props.posts.map(post =>
-    <Card key={post.id} style={{marginTop: 32}}>
-      <CardHeader title="Title" />
-      <CardText>
-        {post.data.body}
-      </CardText>
-    </Card>
-  )
+export default React.createClass({
+  render: function() {
+    const postCards = this.props.posts.map(post =>
+      <Card key={post.id} style={{marginTop: 32}}>
+        <CardHeader title="Title" />
+        <CardText>
+          {post.data.body}
+        </CardText>
+      </Card>
+    )
 
-  return (
-    <div {...props}>
-      <img style={{width: "100%"}} src="" />
-      <div className="container-fluid">
-        <div className="col-md-10 col-md-offset-1 col-xs-12">
-          <PostForm className="col-xs-12" />
-          {postCards}
+    return (
+      <div {...this.props}>
+        <img style={{width: "100%"}} src="" />
+        <div className="container-fluid">
+          <div className="col-md-10 col-md-offset-1 col-xs-12">
+            <PostForm className="col-xs-12" />
+            {postCards}
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+})
