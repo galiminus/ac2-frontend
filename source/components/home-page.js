@@ -21,6 +21,9 @@ import Feed from "components/feed"
 import ToolbarLogo from "components/toolbar-logo"
 import UserAvatar from "components/user-avatar"
 
+import { posts } from "api"
+import store from "store"
+
 function mapStateToProps(state) {
   return {
     currentUser: state.users.get(state.currentUser),
@@ -31,6 +34,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {}
 }
+
+posts.find({}, store.dispatch)
 
 let HomePage = function(props) {
   return (

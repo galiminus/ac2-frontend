@@ -10,16 +10,10 @@ import PostForm from "components/post-form"
 
 export default function(props) {
   const postCards = props.posts.map(post =>
-    <Card key={i} style={{marginTop: 32}}>
+    <Card key={post.id} style={{marginTop: 32}}>
       <CardHeader title="Title" />
       <CardText>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-        culpa qui officia deserunt mollit anim id est laborum
+        {post.data.body}
       </CardText>
     </Card>
   )

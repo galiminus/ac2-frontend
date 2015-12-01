@@ -5,6 +5,7 @@ export default {
   "actions.login": "Se connecter",
   "actions.signup": "S'inscrire",
   "actions.continue": "Continuer",
+  "actions.post": "Partager",
 
   "forms.login": "Connectez-vous pour continuer",
   "forms.signup": "Créez un nouveau compte",
@@ -16,7 +17,8 @@ export default {
   "labels.signup": "Créer un compte",
   "labels.have_account": "Déjà inscrit ?",
   "labels.recover": "Mot de passe oublié ?",
-  "labels.text": "Texte",
+  "labels.textPost": "Texte",
+  "labels.pollPost": "Sondage",
 
   "errors.invalid_grant": "Adresse email ou mot de passe invalide",
   "errors.email_already_in_use": "Cette adresse email est déjà utilisé"

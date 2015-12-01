@@ -14,6 +14,6 @@ export default function(props) {
   }
 
   return (
-    <Avatar {...this.props} style={getStyle()}>{props.user.profile.name[0]}</Avatar>
+    <Avatar {...props} style={getStyle()}>{props.user.profile.name[0]}</Avatar>
   )
 }

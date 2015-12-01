@@ -52,8 +52,6 @@ let form = React.createClass({
       error
     } = this.props
 
-    console.log(body)
-
     return(
       <form onSubmit={handleSubmit(post)}>
         <Tabs>
@@ -68,15 +66,12 @@ let form = React.createClass({
           <Tab label={<FormattedMessage id="labels.pollPost" />}>
             LOL
           </Tab>
-          <Tab label={<FormattedMessage id="labels.pollPost" />}>
-            KIKOU
-          </Tab>
         </Tabs>
-        <div className="row end-xs" style={{marginTop: 32}}>
+        <div className="row end-xs" style={{marginTop: 16}}>
           <RaisedButton
             disabled={body.invalid}
             type="submit"
-            label={<FormattedMessage id="actions.login" />}
+            label={<FormattedMessage id="actions.post" />}
             secondary={true}
             onTouchTap={handleSubmit(post)} />
         </div>
