@@ -25,7 +25,7 @@ export default function(props) {
     ];
 
   return (
-    <DropDownIcon iconClassName="icon-navigation-expand-more" menuItems={iconMenuItems} />
+    <DropDownIcon iconClassName="material-icons" menuItems={iconMenuItems} iconLigature="face"></DropDownIcon>
 
   )
 }

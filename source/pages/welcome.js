@@ -10,7 +10,7 @@ import {
 } from 'material-ui'
 import { Link } from "react-router"
 
-import AcToolbar from "components/ac-toolbar"
+import { AcToolbar } from "components"
 import { toolbarBackgroundColor, loginPageBackground } from "config"
 
 function mapStateToProps(state) {

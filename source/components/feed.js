@@ -23,7 +23,7 @@ export default React.createClass({
       <div {...this.props}>
         <img style={{width: "100%"}} src="" />
         <div className="container-fluid">
-          <div className="col-md-10 col-md-offset-1 col-xs-12">
+          <div className="col-md-12 col-xs-12">
             <PostForm className="col-xs-12" />
             {postCards}
           </div>

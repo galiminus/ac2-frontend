@@ -10,17 +10,22 @@ import {
   IconMenu,
   TextField,
   ToolbarSeparator,
-  AutoComplete
+  AutoComplete,
+  Tabs,
+  Tab,
+  IconButton
 } from "material-ui"
 
 import { toolbarBackgroundColor } from "config"
 
-import DisconnectedModal from "components/disconnected-modal"
-import Navigation from "components/navigation"
-import Feed from "components/feed"
-import ToolbarLogo from "components/toolbar-logo"
-import UserAvatar from "components/user-avatar"
-import AcToolbar from "components/ac-toolbar"
+import {
+  DisconnectedModal,
+  Navigation,
+  Feed,
+  ToolbarLogo,
+  UserAvatar,
+  AcToolbar
+} from "components"
 
 import { posts } from "api"
 import store from "store"
@@ -42,7 +47,10 @@ let HomePage = function(props) {
   return (
     <div style={{height: "100%"}}>
       <AcToolbar>
-        <ToolbarGroup key={1} float="right">
+        <ToolbarGroup key={0} float="left">
+          <IconButton className="material-icons">menu</IconButton>
+        </ToolbarGroup>
+        <ToolbarGroup key={1} float="right" className="hide-sm hide-xs">
           <AutoComplete hintText="search" />
           <UserAvatar user={props.currentUser} />
         </ToolbarGroup>
@@ -51,10 +59,10 @@ let HomePage = function(props) {
         <Navigation />
       </LeftNav>
       <div className="row" style={{minHeight: "100%"}}>
-        <Paper className="col-md-3 col-xs-12" style={{paddingRight: 0, marginTop: 56}}>
+        <Paper className="col-md-2 hide-sm hide-xs" style={{paddingRight: 0, marginTop: 56}}>
           <Navigation />
         </Paper>
-        <Feed posts={props.posts} className="col-md-9 col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56}} />
+        <Feed posts={props.posts} className="col-md-7 col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56}} />
       </div>
       <DisconnectedModal isDisconnected={!props.currentUser} />
     </div>

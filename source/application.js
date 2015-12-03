@@ -14,13 +14,13 @@ import Spacing from 'material-ui/lib/styles/spacing'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
-import HomePage from "components/home-page"
-import WelcomePage from "components/welcome-page"
-import LoginForm from "components/login-form"
-import SignupForm from "components/signup-form"
-import RecoverForm from "components/recover-form"
+import HomePage from "pages/home"
+import WelcomePage from "pages/welcome"
+import LoginForm from "pages/login-form"
+import SignupForm from "pages/signup-form"
+import RecoverForm from "pages/recover-form"
 
-import FlexBoxGrid from "flexboxgrid"
+import FlexBoxGrid from "flexboxgrid-with-hide"
 
 import { Provider } from "react-redux"
 import { IntlProvider } from 'react-intl';
