@@ -2,7 +2,6 @@ import React from "react"
 import { connect } from 'react-redux'
 
 import {
-  Toolbar,
   ToolbarGroup,
   LeftNav,
   MenuItem,
@@ -10,7 +9,8 @@ import {
   Paper,
   IconMenu,
   TextField,
-  ToolbarSeparator
+  ToolbarSeparator,
+  AutoComplete
 } from "material-ui"
 
 import { toolbarBackgroundColor } from "config"
@@ -20,6 +20,7 @@ import Navigation from "components/navigation"
 import Feed from "components/feed"
 import ToolbarLogo from "components/toolbar-logo"
 import UserAvatar from "components/user-avatar"
+import AcToolbar from "components/ac-toolbar"
 
 import { posts } from "api"
 import store from "store"
@@ -40,16 +41,12 @@ posts.find({}, store.dispatch)
 let HomePage = function(props) {
   return (
     <div style={{height: "100%"}}>
-      <Toolbar style={{backgroundColor: toolbarBackgroundColor, position: "fixed", zIndex: 1}}>
-        <ToolbarGroup key={0}>
-          <ToolbarLogo />
-        </ToolbarGroup>
+      <AcToolbar>
         <ToolbarGroup key={1} float="right">
-          <TextField hintText="search" />
-          <ToolbarSeparator />
+          <AutoComplete hintText="search" />
           <UserAvatar user={props.currentUser} />
         </ToolbarGroup>
-      </Toolbar>
+      </AcToolbar>
       <LeftNav docked={false}>
         <Navigation />
       </LeftNav>
