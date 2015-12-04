@@ -61,12 +61,14 @@ let HomePage = React.createClass({
       <div style={{height: "100%"}}>
         <AcToolbar>
           <ToolbarGroup key={0} float="left">
-            <FontIcon className="material-icons hide-md" style={{paddingLeft: 0, paddingRight: 24}} onClick={this.props.toggleLeftNav}>menu</FontIcon>
+            <FontIcon className="material-icons hide-md hide-lg" style={{paddingLeft: 0, paddingRight: 24}} onClick={this.props.toggleLeftNav}>menu</FontIcon>
             <ToolbarLogo />
           </ToolbarGroup>
-          <ToolbarGroup key={1} float="right" className="hide-sm hide-xs">
-            <AutoComplete hintText="search" />
+          <ToolbarGroup key={2} float="right">
             <UserAvatar user={this.props.currentUser} />
+          </ToolbarGroup>
+          <ToolbarGroup key={1} float="right">
+            <AutoComplete hintText="search" className="hide-sm hide-xs" />
           </ToolbarGroup>
         </AcToolbar>
         <LeftNav docked={false} ref="leftNav">

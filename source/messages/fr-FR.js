@@ -6,6 +6,7 @@ export default {
   "actions.signup": "S'inscrire",
   "actions.continue": "Continuer",
   "actions.post": "Partager",
+  "actions.disconnect": "Déconnexion",
 
   "forms.login": "Connectez-vous pour continuer",
   "forms.signup": "Créez un nouveau compte",
@@ -19,6 +20,10 @@ export default {
   "labels.recover": "Mot de passe oublié ?",
   "labels.textPost": "Texte",
   "labels.pollPost": "Sondage",
+
+  "links.currentUserProfile": "Mon profil",
+  "links.accountSettings": "Paramètres de compte",
+  "links.privacySettings": "Paramètres de confidentialité",
 
   "errors.invalid_grant": "Adresse email ou mot de passe invalide",
   "errors.email_already_in_use": "Cette adresse email est déjà utilisé"

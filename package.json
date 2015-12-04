@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "exports-loader": "^0.6.2",
-    "flexboxgrid": "^6.3.0",
+    "flexboxgrid": "git@github.com:phorque/flexboxgrid.git",
     "history": "^1.13.0",
     "immutable": "^3.7.5",
     "material-ui": "^0.13.4",
