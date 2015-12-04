@@ -10,7 +10,7 @@ import {
 } from 'material-ui'
 import { Link } from "react-router"
 
-import { AcToolbar } from "components"
+import { AcToolbar, ToolbarLogo } from "components"
 import { toolbarBackgroundColor, loginPageBackground } from "config"
 
 function mapStateToProps(state) {
@@ -33,7 +33,8 @@ const LoginPage = React.createClass({
     return (
       <div style={{background: loginPageBackground, height: "100%", width: "100%", position: "fixed"}}>
         <AcToolbar style={{backgroundColor: toolbarBackgroundColor}}>
-          <ToolbarGroup key={1} float="right">
+          <ToolbarGroup key={1} float="left">
+            <ToolbarLogo />
           </ToolbarGroup>
         </AcToolbar>
 
