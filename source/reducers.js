@@ -10,12 +10,15 @@ import currentToken from "reducers/current-token"
 
 import posts from "reducers/posts"
 
+import leftNav from "reducers/leftnav"
+
 let reducers = combineReducers({
     tokens,
     currentToken,
     users,
     currentUser,
     posts,
+    leftNav,
     form,
     routing: routeReducer
   }

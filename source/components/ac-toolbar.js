@@ -5,8 +5,6 @@ import Colors from 'material-ui/lib/styles/colors'
 import ColorManipulator from 'material-ui/lib/utils/color-manipulator'
 import Spacing from 'material-ui/lib/styles/spacing'
 
-import ToolbarLogo from "components/toolbar-logo"
-
 export default React.createClass({
   childContextTypes : {
     muiTheme: React.PropTypes.object,
@@ -24,8 +22,8 @@ export default React.createClass({
           accent1Color: Colors.pinkA200,
           accent2Color: Colors.blueGrey800,
           accent3Color: Colors.grey500,
-          textColor: Colors.white,
-          alternateTextColor: Colors.white,
+          textColor: Colors.fullWhite,
+          alternateTextColor: Colors.fullWhite,
           canvasColor: Colors.blueGrey400,
           borderColor: Colors.grey300,
           disabledColor: Colors.lightWhite
@@ -37,9 +35,6 @@ export default React.createClass({
   render() {
     return (
       <Toolbar style={{position: "fixed", zIndex: 1}}>
-        <ToolbarGroup key={0}>
-          <ToolbarLogo />
-        </ToolbarGroup>
         {this.props.children}
       </Toolbar>
     )

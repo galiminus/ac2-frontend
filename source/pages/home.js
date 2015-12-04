@@ -8,6 +8,7 @@ import {
   FlatButton,
   Paper,
   IconMenu,
+  FontIcon,
   TextField,
   ToolbarSeparator,
   AutoComplete,
@@ -27,46 +28,60 @@ import {
   AcToolbar
 } from "components"
 
+import { leftNav } from "action-creators"
+
 import { posts } from "api"
 import store from "store"
 
 function mapStateToProps(state) {
   return {
     currentUser: state.users.get(state.currentUser),
-    posts: state.posts
+    posts: state.posts,
+    leftNav: state.leftNav
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {}
+  return {
+    toggleLeftNav: () => dispatch(leftNav.toggle())
+  }
 }
 
 posts.find({}, store.dispatch)
 
-let HomePage = function(props) {
-  return (
-    <div style={{height: "100%"}}>
-      <AcToolbar>
-        <ToolbarGroup key={0} float="left">
-          <IconButton className="material-icons">menu</IconButton>
-        </ToolbarGroup>
-        <ToolbarGroup key={1} float="right" className="hide-sm hide-xs">
-          <AutoComplete hintText="search" />
-          <UserAvatar user={props.currentUser} />
-        </ToolbarGroup>
-      </AcToolbar>
-      <LeftNav docked={false}>
-        <Navigation />
-      </LeftNav>
-      <div className="row" style={{minHeight: "100%"}}>
-        <Paper className="col-md-2 hide-sm hide-xs" style={{paddingRight: 0, marginTop: 56}}>
+let HomePage = React.createClass({
+  componentWillReceiveProps(props) {
+    if (this.props.leftNav != props.leftNav) {
+      this.refs.leftNav.toggle()
+    }
+  },
+
+  render() {
+    return (
+      <div style={{height: "100%"}}>
+        <AcToolbar>
+          <ToolbarGroup key={0} float="left">
+            <FontIcon className="material-icons hide-md" style={{paddingLeft: 0, paddingRight: 24}} onClick={this.props.toggleLeftNav}>menu</FontIcon>
+            <ToolbarLogo />
+          </ToolbarGroup>
+          <ToolbarGroup key={1} float="right" className="hide-sm hide-xs">
+            <AutoComplete hintText="search" />
+            <UserAvatar user={this.props.currentUser} />
+          </ToolbarGroup>
+        </AcToolbar>
+        <LeftNav docked={false} ref="leftNav">
           <Navigation />
-        </Paper>
-        <Feed posts={props.posts} className="col-md-7 col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56}} />
+        </LeftNav>
+        <div className="row" style={{minHeight: "100%"}}>
+          <Paper className="col-md-2 hide-sm hide-xs" style={{paddingRight: 0, marginTop: 56}}>
+            <Navigation />
+          </Paper>
+          <Feed posts={this.props.posts} className="col-md-7 col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56}} />
+        </div>
+        <DisconnectedModal isDisconnected={!this.props.currentUser} />
       </div>
-      <DisconnectedModal isDisconnected={!props.currentUser} />
-    </div>
-  );
-}
+    );
+  }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
