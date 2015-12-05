@@ -38,7 +38,7 @@ const Feed = React.createClass({
         width: "100%",
         background: `#000 url(${bannerImage}) no-repeat center/cover`,
         height: 0,
-        paddingBottom: "40%",
+        paddingBottom: "30%",
         position: "relative"
       },
       infos: {
@@ -46,8 +46,7 @@ const Feed = React.createClass({
         width: "100%",
         background: DefaultRawTheme.palette.textColor,
         opacity: 0.8,
-        padding: 16,
-        paddingLeft: 32,
+        padding: "16px 0",
         position: "absolute",
         bottom: 0,
         color: DefaultRawTheme.palette.alternateTextColor

@@ -68,10 +68,10 @@ let HomePage = React.createClass({
           <Navigation />
         </LeftNav>
         <div className="row" style={{minHeight: "100%"}}>
-          <Paper className="col-md-2 hide-sm hide-xs" style={{paddingRight: 0, marginTop: 56}}>
-            <Navigation />
+          <Paper className="hide-sm hide-xs" style={{paddingRight: 0, marginTop: 56, width: 220}}>
+            <Navigation style={{position: "fixed", width: 220}} />
           </Paper>
-          <section className="col-md-10 col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56, marginBottom: 32}}>
+          <section className="col-md col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56, marginBottom: 32}}>
             {this.props.children}
           </section>
         </div>

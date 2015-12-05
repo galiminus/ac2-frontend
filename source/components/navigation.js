@@ -20,7 +20,7 @@ export default React.createClass({
 
   render() {
     return (
-      <List>
+      <List {...this.props}>
         <ListItem index={0} primaryText={<FormattedMessage id="links.mainFeed" />} href="/" onClick={this.goToMainFeed} />
       </List>
     )
