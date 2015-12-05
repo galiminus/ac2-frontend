@@ -21,9 +21,10 @@ export default {
   "labels.textPost": "Texte",
   "labels.pollPost": "Sondage",
 
-  "links.currentUserProfile": "Mon profil",
+  "links.currentUserProfile": "Ma page",
   "links.accountSettings": "Paramètres de compte",
   "links.privacySettings": "Paramètres de confidentialité",
+  "links.mainFeed": "Mur principal",
 
   "errors.invalid_grant": "Adresse email ou mot de passe invalide",
   "errors.email_already_in_use": "Cette adresse email est déjà utilisé"

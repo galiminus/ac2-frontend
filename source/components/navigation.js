@@ -2,13 +2,27 @@ import React from "react"
 import {
   List,
   ListItem,
-  ListDivider
+  ListDivider,
 } from "material-ui"
 
-export default function(props) {
-  return (
-    <List {...props}>
-      <ListItem key={"inbox"} primaryText="Inbox" />
-    </List>
-  )
-}
+import MenuItem from 'material-ui/lib/menus/menu-item'
+
+import { dispatch } from "store"
+import { updatePath } from 'redux-simple-router'
+
+import { FormattedMessage } from "react-intl"
+
+export default React.createClass({
+  goToMainFeed(e) {
+    dispatch(updatePath("/"))
+    e.preventDefault()
+  },
+
+  render() {
+    return (
+      <List>
+        <ListItem index={0} primaryText={<FormattedMessage id="links.mainFeed" />} href="/" onClick={this.goToMainFeed} />
+      </List>
+    )
+  }
+})
