@@ -22,7 +22,6 @@ import { toolbarBackgroundColor } from "config"
 import {
   DisconnectedModal,
   Navigation,
-  Feed,
   ToolbarLogo,
   UserAvatar,
   AcToolbar
@@ -30,13 +29,9 @@ import {
 
 import { leftNav } from "action-creators"
 
-import { posts } from "api"
-import store from "store"
-
 function mapStateToProps(state) {
   return {
     currentUser: state.users.get(state.currentUser),
-    posts: state.posts,
     leftNav: state.leftNav
   }
 }
@@ -46,8 +41,6 @@ function mapDispatchToProps(dispatch) {
     toggleLeftNav: () => dispatch(leftNav.toggle())
   }
 }
-
-posts.find({}, store.dispatch)
 
 let HomePage = React.createClass({
   componentWillReceiveProps(props) {
@@ -78,7 +71,9 @@ let HomePage = React.createClass({
           <Paper className="col-md-2 hide-sm hide-xs" style={{paddingRight: 0, marginTop: 56}}>
             <Navigation />
           </Paper>
-          <Feed posts={this.props.posts} className="col-md-7 col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56}} />
+          <section className="col-md-7 col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56, marginBottom: 32}}>
+            {this.props.children}
+          </section>
         </div>
         <DisconnectedModal isDisconnected={!this.props.currentUser} />
       </div>

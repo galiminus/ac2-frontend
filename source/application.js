@@ -4,7 +4,7 @@ injectTapEventPlugin()
 
 import ReactDOM from "react-dom"
 
-import { Router, Route } from 'react-router'
+import { Router, Route, IndexRoute } from 'react-router'
 
 import ThemeManager from 'material-ui/lib/styles/theme-manager'
 import Colors from 'material-ui/lib/styles/colors'
@@ -19,6 +19,8 @@ import WelcomePage from "pages/welcome"
 import LoginForm from "pages/login-form"
 import SignupForm from "pages/signup-form"
 import RecoverForm from "pages/recover-form"
+import Profile from "pages/profile"
+import Feed from "pages/feed"
 
 import FlexBoxGrid from "flexboxgrid-with-hide"
 
@@ -69,7 +71,11 @@ const Application = React.createClass({
               <Route path="recover" component={RecoverForm} />
               <Route path="signup" component={SignupForm} />
             </Route>
-            <Route path="/" component={HomePage} />
+            <Route path="/" component={HomePage}>
+              <IndexRoute component={Feed} />
+
+              <Route path=":userId" component={Profile} />
+            </Route>
           </Router>
         </IntlProvider>
       </Provider>
