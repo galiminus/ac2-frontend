@@ -19,7 +19,6 @@ import WelcomePage from "pages/welcome"
 import LoginForm from "pages/login-form"
 import SignupForm from "pages/signup-form"
 import RecoverForm from "pages/recover-form"
-import Profile from "pages/profile"
 import Feed from "pages/feed"
 
 import FlexBoxGrid from "flexboxgrid-with-hide"
@@ -74,7 +73,7 @@ const Application = React.createClass({
             <Route path="/" component={HomePage}>
               <IndexRoute component={Feed} />
 
-              <Route path=":userId" component={Profile} />
+              <Route path=":pageId" component={Feed} />
             </Route>
           </Router>
         </IntlProvider>

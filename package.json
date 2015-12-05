@@ -27,6 +27,7 @@
     "history": "^1.13.0",
     "immutable": "^3.7.5",
     "material-ui": "^0.13.4",
+    "query-string": "^3.0.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-intl": "^2.0.0-beta-1",

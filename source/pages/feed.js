@@ -27,7 +27,12 @@ function mapDispatchToProps(dispatch) {
 
 const Feed = React.createClass({
   componentWillMount() {
-    this.props.loadPosts({})
+    let query = {}
+
+    if (this.props.params.pageId) {
+      query.page = this.props.params.pageId
+    }
+    this.props.loadPosts(query)
   },
 
   getStyles() {

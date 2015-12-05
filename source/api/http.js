@@ -1,5 +1,6 @@
 import { baseUrl } from "config"
 import store from "store"
+import queryString from "query-string"
 
 function headers() {
   let base = {
@@ -58,7 +59,7 @@ export default {
   },
 
   find: (path, query) => {
-    return fetch(`${baseUrl}${path}`, {
+    return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
       method: "GET",
       mode: 'cors',
       headers: {
