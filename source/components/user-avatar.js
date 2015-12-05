@@ -13,10 +13,17 @@ import { updatePath } from 'redux-simple-router'
 
 import { FormattedMessage } from 'react-intl'
 
+import { tokens } from "action-creators"
+
 export default React.createClass({
   goToProfile(e) {
     dispatch(updatePath(`/${this.props.user.id}`))
     e.preventDefault()
+  },
+
+  disconnect() {
+    dispatch(tokens.removeAll())
+    dispatch(updatePath("/welcome/login"))
   },
 
   render() {
@@ -32,7 +39,7 @@ export default React.createClass({
         <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserProfile" />} href={`/${this.props.user.id}`} onClick={this.goToProfile} />
         <MenuItem index={2} primaryText={<FormattedMessage id="links.accountSettings" />} />
         <MenuItem index={3} primaryText={<FormattedMessage id="links.privacySettings" />} />
-        <MenuItem index={4} primaryText={<FormattedMessage id="actions.disconnect" />} />
+        <MenuItem index={4} primaryText={<FormattedMessage id="actions.disconnect" />} onClick={this.disconnect} />
       </IconMenu>
     )
   }
