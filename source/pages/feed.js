@@ -6,6 +6,8 @@ import {
   ListItem
 } from "material-ui"
 
+import DefaultRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
+
 import PostForm from "components/post-form"
 
 import store from "store"
@@ -28,16 +30,47 @@ const Feed = React.createClass({
     this.props.loadPosts({})
   },
 
+  getStyles() {
+    let bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_p51mustang_mini.jpg"
+
+    return {
+      banner: {
+        width: "100%",
+        background: `#000 url(${bannerImage}) no-repeat center/cover`,
+        height: 0,
+        paddingBottom: "40%",
+        position: "relative"
+      },
+      infos: {
+        fontFamily: DefaultRawTheme.fontFamily,
+        width: "100%",
+        background: DefaultRawTheme.palette.textColor,
+        opacity: 0.8,
+        padding: 16,
+        paddingLeft: 32,
+        position: "absolute",
+        bottom: 0,
+        color: DefaultRawTheme.palette.alternateTextColor
+      }
+    }
+  },
+
   render: function() {
+    const style = this.getStyles()
+
     const postCards = this.props.posts.map(post =>
       <ListItem key={post.id} style={{marginTop: 32}} secondaryText={post.data.body} />
     )
 
     return (
       <div {...this.props}>
-        <img style={{width: "100%"}} src="" />
+        <div style={style.banner}>
+          <aside style={style.infos}>
+            LOL
+          </aside>
+        </div>
         <div className="container-fluid">
-          <div className="col-md-12 col-xs-12">
+          <div className="col-md-8 col-xs-12" style={{marginTop: 32}}>
             <PostForm className="col-xs-12" />
             <List>
               {postCards}
