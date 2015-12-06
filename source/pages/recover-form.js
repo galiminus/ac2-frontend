@@ -61,7 +61,7 @@ let form = React.createClass({
             type="submit"
             label={<FormattedMessage id="actions.continue" />}
             secondary={true}
-            onTouchTap={handleSubmit(authenticate)} />
+            onClick={handleSubmit(authenticate)} />
         </div>
         <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
       </form>

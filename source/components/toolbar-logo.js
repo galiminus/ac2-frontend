@@ -8,8 +8,7 @@ export default React.createClass({
     return {
       fontFamily: "Roboto, sans-serif",
       fontWeight: 100,
-      letterSpacing: 3,
-      color: toolbarTitleColor
+      letterSpacing: 3
     }
   },
 

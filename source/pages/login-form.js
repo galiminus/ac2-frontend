@@ -74,7 +74,7 @@ let form = React.createClass({
             type="submit"
             label={<FormattedMessage id="actions.login" />}
             secondary={true}
-            onTouchTap={handleSubmit(authenticate)} />
+            onClick={handleSubmit(authenticate)} />
           <FlatButton label={<FormattedMessage id="labels.signup" />} linkButton={true} href="/welcome/signup" onClick={this.goToSignupForm} />
         </div>
         <div className="row center-xs">

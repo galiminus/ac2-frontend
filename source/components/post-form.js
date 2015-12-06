@@ -81,18 +81,18 @@ let form = React.createClass({
         <div className="row end-xs" style={{padding: 8}}>
           <FlatButton
             style={{marginRight: 8}}
-            onTouchTap={() => this.setState({pollModalOpen: true})}
+            onClick={() => this.setState({pollModalOpen: true})}
             label={<FormattedMessage id="actions.addPoll" />} />
           <FlatButton
             style={{marginRight: 8}}
-            onTouchTap={() => this.setState({imagesModalOpen: true})}
+            onClick={() => this.setState({imagesModalOpen: true})}
             label={<FormattedMessage id="actions.addImages" />} />
           <RaisedButton
             disabled={body.invalid}
             type="submit"
             label={<FormattedMessage id="actions.post" />}
             secondary={true}
-            onTouchTap={handleSubmit(post)} />
+            onClick={handleSubmit(post)} />
         </div>
         <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
 
@@ -107,11 +107,11 @@ let form = React.createClass({
             <FlatButton
               label={<FormattedMessage id="actions.cancel" />}
               secondary={true}
-              onTouchTap={() => this.setState({imagesModalOpen: false})} />,
+              onClick={() => this.setState({imagesModalOpen: false})} />,
             <FlatButton
               label={<FormattedMessage id="actions.submit" />}
               primary={true}
-              onTouchTap={this._handleCustomDialogSubmit} />]}>
+              onClick={this._handleCustomDialogSubmit} />]}>
           <DropZone onDrop={this.onDropImage} style={dropZoneStyle} className="row middle-xs center-xs">
             <FormattedMessage id="labels.imageUploadDropZone"  />
           </DropZone>

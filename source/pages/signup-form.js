@@ -78,7 +78,7 @@ let form = React.createClass({
             type="submit"
             label={<FormattedMessage id="actions.signup" />}
             secondary={true}
-            onTouchTap={handleSubmit(authenticate)} />
+            onClick={handleSubmit(authenticate)} />
           <FlatButton label={<FormattedMessage id="labels.have_account" />} linkButton={true} href="/welcome/login" onClick={this.goToLoginForm}/>
         </div>
         <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
