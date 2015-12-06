@@ -6,38 +6,50 @@ import {
   ListItem
 } from "material-ui"
 
+import { FormattedMessage } from "react-intl"
+
 import DefaultRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
 
 import PostForm from "components/post-form"
 
 import store from "store"
-import { posts } from "api"
+import { posts, pages } from "api"
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
-    posts: state.posts
+    posts: state.posts,
+    page: state.pages.get(props.params.pageId)
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPosts: (query) => posts.find(query, store.dispatch)
+    loadPosts: (query) => posts.find(query, dispatch),
+    getPage: (id, query) => pages.get(id, query, dispatch)
   }
 }
 
 const Feed = React.createClass({
   componentWillMount() {
+    const { params, loadPosts, getPage } = this.props
     let query = {}
 
-    if (this.props.params.pageId) {
-      query.page = this.props.params.pageId
+    if (params.pageId) {
+      getPage(params.pageId)
+
+      query.page = params.pageId
     }
-    this.props.loadPosts(query)
+    loadPosts(query)
   },
 
   getStyles() {
-    let bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_p51mustang_mini.jpg"
-
+    let bannerImage;
+    if (this.props.params.pageId) {
+      bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_p51mustang_mini.jpg"
+    }
+    else {
+      bannerImage = "http://www.hdwallpaperscool.com/wp-content/uploads/2014/10/harp-seal-desktop-wallpaper-in-high-resolution-wide-free.jpg"
+    }
     return {
       banner: {
         width: "100%",
@@ -51,7 +63,6 @@ const Feed = React.createClass({
         width: "100%",
         background: DefaultRawTheme.palette.textColor,
         opacity: 0.8,
-        padding: "16px 0",
         position: "absolute",
         bottom: 0,
         color: DefaultRawTheme.palette.alternateTextColor
@@ -62,6 +73,28 @@ const Feed = React.createClass({
   render: function() {
     const style = this.getStyles()
 
+    let infos;
+    if (this.props.page) {
+      switch (this.props.page.owner_type) {
+        case "User":
+          infos = <h1>{this.props.page.owner.profile.name}</h1>
+          break;
+        default:
+
+      }
+    }
+    else if (!this.props.params.pageId) {
+      infos = <h1><FormattedMessage id="links.mainFeed" /></h1>
+    }
+
+    let infosContainer = "";
+    if (infos) {
+      infosContainer =
+        <aside style={style.infos}>
+          <div style={{padding: "16px 32px"}}>{infos}</div>
+        </aside>
+    }
+
     const postCards = this.props.posts.map(post =>
       <ListItem key={post.id} style={{marginTop: 32}} secondaryText={post.data.body} />
     )
@@ -69,9 +102,7 @@ const Feed = React.createClass({
     return (
       <div {...this.props}>
         <div style={style.banner}>
-          <aside style={style.infos}>
-            LOL
-          </aside>
+          {infosContainer}
         </div>
         <div className="container-fluid">
           <div className="col-md-8 col-xs-12" style={{marginTop: 32}}>

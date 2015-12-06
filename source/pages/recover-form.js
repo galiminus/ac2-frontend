@@ -20,7 +20,7 @@ let authenticate = (fields, dispatch) =>
   tokens.create(fields, dispatch).then((data) => {
     dispatch(currentToken.set(data.access_token))
 
-    users.findMe({}, dispatch).then((data) => {
+    users.getMe({}, dispatch).then((data) => {
       dispatch(currentUser.set(data.id))
       dispatch(updatePath("/"))
     })
