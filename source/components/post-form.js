@@ -13,6 +13,8 @@ import {
   Dialog
 } from 'material-ui'
 
+import DropZone from "react-dropzone"
+
 import { posts } from "api"
 import { validateText } from "validators"
 
@@ -51,12 +53,23 @@ let form = React.createClass({
     }
   },
 
+  onDropImage(e) {
+    console.log(e)
+  },
+
   render: function() {
     const {
       fields: { body },
       handleSubmit,
       error
     } = this.props
+
+    const dropZoneStyle = {
+      background: "rgba(0, 0, 0, 0.05)",
+      border: "1px solid rgba(0, 0, 0, 0.1)",
+      padding: "64px 96px",
+      display: "flex"
+    }
 
     return(
       <form onSubmit={handleSubmit(post)}>
@@ -87,8 +100,21 @@ let form = React.createClass({
           LOL
         </Dialog>
 
-        <Dialog open={this.state.imagesModalOpen}>
-          LOL
+        <Dialog
+          open={this.state.imagesModalOpen}
+          title={"LOL"}
+          actions={[
+            <FlatButton
+              label={<FormattedMessage id="actions.cancel" />}
+              secondary={true}
+              onTouchTap={() => this.setState({imagesModalOpen: false})} />,
+            <FlatButton
+              label={<FormattedMessage id="actions.submit" />}
+              primary={true}
+              onTouchTap={this._handleCustomDialogSubmit} />]}>
+          <DropZone onDrop={this.onDropImage} style={dropZoneStyle} className="row middle-xs center-xs">
+            <FormattedMessage id="labels.imageUploadDropZone"  />
+          </DropZone>
         </Dialog>
       </form>
 

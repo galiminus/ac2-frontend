@@ -1,4 +1,6 @@
 export default {
+  "titles.imageUploadDialog": "Ajouter des images",
+
   "errors.disconnected": "Vous avez été déconnecté.",
 
   "actions.goToLoginPage": "Revenir à la page d'accueil",
@@ -9,6 +11,8 @@ export default {
   "actions.disconnect": "Déconnexion",
   "actions.addImages": "Ajouter des images",
   "actions.addPoll": "Ajouter un sondage",
+  "actions.cancel": "Annuler",
+  "actions.submit": "Valider",
 
   "forms.login": "Connectez-vous pour continuer",
   "forms.signup": "Créez un nouveau compte",
@@ -22,6 +26,7 @@ export default {
   "labels.recover": "Mot de passe oublié ?",
   "labels.textPost": "Texte",
   "labels.pollPost": "Sondage",
+  "labels.imageUploadDropZone": "Glissez une image dans cette zone ou cliquez pour ouvrir la boite de sélection.",
 
   "links.currentUserProfile": "Ma page",
   "links.accountSettings": "Paramètres de compte",
