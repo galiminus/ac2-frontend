@@ -23,7 +23,7 @@ import {
   DisconnectedModal,
   Navigation,
   ToolbarLogo,
-  UserAvatar,
+  CurrentUserMenu,
   AcToolbar
 } from "components"
 
@@ -58,7 +58,7 @@ let HomePage = React.createClass({
             <ToolbarLogo />
           </ToolbarGroup>
           <ToolbarGroup key={2} float="right">
-            <UserAvatar user={this.props.currentUser} />
+            <CurrentUserMenu user={this.props.currentUser} />
           </ToolbarGroup>
           <ToolbarGroup key={1} float="right">
             <AutoComplete hintText="search" className="hide-sm hide-xs" />

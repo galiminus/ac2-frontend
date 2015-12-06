@@ -18,6 +18,7 @@ import PostForm from "components/post-form"
 
 import store from "store"
 import { posts, pages } from "api"
+import { UserAvatar } from "components"
 
 function mapStateToProps(state, props) {
   return {
@@ -119,7 +120,11 @@ const Feed = React.createClass({
     let ownerInfos;
     switch (post.owner_type) {
       case "User":
-        ownerInfos = <ToolbarTitle text={post.owner.profile.name} />
+        ownerInfos =
+          <div>
+            <UserAvatar user={post.owner} />
+            <ToolbarTitle text={post.owner.profile.name} />
+          </div>
         break;
     }
 
