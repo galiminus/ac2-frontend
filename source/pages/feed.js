@@ -3,7 +3,11 @@ import { connect } from 'react-redux'
 
 import {
   List,
-  ListItem
+  ListItem,
+  Paper,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarTitle
 } from "material-ui"
 
 import { FormattedMessage } from "react-intl"
@@ -70,45 +74,68 @@ const Feed = React.createClass({
     }
   },
 
-  render: function() {
+  renderInfoBanner: function() {
     const style = this.getStyles()
 
-    let infos;
+    let ownerInfos;
     if (this.props.page) {
       switch (this.props.page.owner_type) {
         case "User":
-          infos = <h1>{this.props.page.owner.profile.name}</h1>
+          ownerInfos = <h1>{this.props.page.owner.profile.name}</h1>
           break;
-        default:
-
       }
     }
     else if (!this.props.params.pageId) {
-      infos = <h1><FormattedMessage id="links.mainFeed" /></h1>
+      ownerInfos = <h1><FormattedMessage id="links.mainFeed" /></h1>
     }
 
-    let infosContainer = "";
-    if (infos) {
-      infosContainer =
+    let ownerInfosContainer = "";
+    if (ownerInfos) {
+      ownerInfosContainer =
         <aside style={style.infos}>
-          <div style={{padding: "16px 32px"}}>{infos}</div>
+          <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
         </aside>
     }
 
-    const postCards = this.props.posts.map(post =>
-      <ListItem key={post.id} style={{marginTop: 32}} secondaryText={post.data.body} />
+    return (
+      <div style={style.banner}>
+        {ownerInfosContainer}
+      </div>
     )
+  },
+
+  renderPost(post) {
+    let ownerInfos;
+    switch (post.owner_type) {
+      case "User":
+        ownerInfos = <ToolbarTitle text={post.owner.profile.name} />
+        break;
+    }
 
     return (
-      <div {...this.props}>
-        <div style={style.banner}>
-          {infosContainer}
+      <Paper style={{marginTop: 24}}>
+        <Toolbar>
+          <ToolbarGroup key={1} float="left">
+            {ownerInfos}
+          </ToolbarGroup>
+        </Toolbar>
+        <div style={{padding: 24}}>
+          {post.data.body}
         </div>
+      </Paper>
+    )
+  },
+
+  render: function() {
+    const posts = this.props.posts.map(post => this.renderPost(post))
+    return (
+      <div {...this.props}>
+        {this.renderInfoBanner()}
         <div className="container-fluid">
           <div className="col-md-8 col-xs-12" style={{marginTop: 32}}>
             <PostForm className="col-xs-12" />
             <List>
-              {postCards}
+              {posts}
             </List>
           </div>
         </div>
