@@ -10,8 +10,7 @@ import {
   FlatButton,
   RaisedButton,
   Snackbar,
-  Tabs,
-  Tab
+  Dialog
 } from 'material-ui'
 
 import { posts } from "api"
@@ -39,6 +38,13 @@ let form = React.createClass({
     error: PropTypes.string
   },
 
+  getInitialState() {
+    return {
+      imagesModalOpen: false,
+      pollModalOpen: false
+    }
+  },
+
   componentWillReceiveProps(props) {
     if (props.error) {
       this.refs.notice.show()
@@ -54,20 +60,20 @@ let form = React.createClass({
 
     return(
       <form onSubmit={handleSubmit(post)}>
-        <Tabs>
-          <Tab label={<FormattedMessage id="labels.textPost" />}>
-            <TextField fullWidth={true}
-              type="text"
-              multiLine={true}
-              rows={4}
-              {...body}
-            />
-          </Tab>
-          <Tab label={<FormattedMessage id="labels.pollPost" />}>
-            LOL
-          </Tab>
-        </Tabs>
-        <div className="row end-xs" style={{marginTop: 16}}>
+        <TextField fullWidth={true}
+          type="text"
+          multiLine={true}
+          rows={3}
+          {...body} />
+        <div className="row end-xs" style={{padding: 8}}>
+          <FlatButton
+            style={{marginRight: 8}}
+            onTouchTap={() => this.setState({pollModalOpen: true})}
+            label={<FormattedMessage id="actions.addPoll" />} />
+          <FlatButton
+            style={{marginRight: 8}}
+            onTouchTap={() => this.setState({imagesModalOpen: true})}
+            label={<FormattedMessage id="actions.addImages" />} />
           <RaisedButton
             disabled={body.invalid}
             type="submit"
@@ -76,6 +82,14 @@ let form = React.createClass({
             onTouchTap={handleSubmit(post)} />
         </div>
         <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
+
+        <Dialog open={this.state.pollModalOpen}>
+          LOL
+        </Dialog>
+
+        <Dialog open={this.state.imagesModalOpen}>
+          LOL
+        </Dialog>
       </form>
 
     )

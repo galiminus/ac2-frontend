@@ -7,6 +7,8 @@ export default {
   "actions.continue": "Continuer",
   "actions.post": "Partager",
   "actions.disconnect": "Déconnexion",
+  "actions.addImages": "Ajouter des images",
+  "actions.addPoll": "Ajouter un sondage",
 
   "forms.login": "Connectez-vous pour continuer",
   "forms.signup": "Créez un nouveau compte",
