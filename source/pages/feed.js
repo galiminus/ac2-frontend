@@ -132,7 +132,7 @@ const Feed = React.createClass({
       <div {...this.props}>
         {this.renderInfoBanner()}
         <div className="container-fluid">
-          <div className="col-md-8 col-xs-12" style={{marginTop: 32}}>
+          <div className="col-md-8 col-sm-8 col-xs-12" style={{marginTop: 32}}>
             <PostForm className="col-xs-12" />
             <List>
               {posts}

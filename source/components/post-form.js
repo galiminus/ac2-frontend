@@ -80,14 +80,14 @@ let form = React.createClass({
           {...body} />
         <div className="row end-xs" style={{padding: 8}}>
           <FlatButton
-            style={{marginRight: 8}}
             onClick={() => this.setState({pollModalOpen: true})}
             label={<FormattedMessage id="actions.addPoll" />} />
           <FlatButton
-            style={{marginRight: 8}}
+            style={{marginLeft: 8}}
             onClick={() => this.setState({imagesModalOpen: true})}
             label={<FormattedMessage id="actions.addImages" />} />
           <RaisedButton
+            style={{marginLeft: 8}}
             disabled={body.invalid}
             type="submit"
             label={<FormattedMessage id="actions.post" />}
