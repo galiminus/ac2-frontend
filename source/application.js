@@ -33,6 +33,18 @@ import messages from "messages/fr-FR"
 const history = createBrowserHistory()
 syncReduxAndRouter(history, store)
 
+function redirectToHomePage(nextState, replaceState) {
+  if (store.getState().currentUser) {
+    replaceState(null, "/")
+  }
+}
+
+function redirectToLoginPage(nextState, replaceState) {
+  if (!store.getState().currentUser) {
+    replaceState(null, "/welcome/login")
+  }
+}
+
 const Application = React.createClass({
   childContextTypes : {
     muiTheme: React.PropTypes.object,
@@ -65,12 +77,12 @@ const Application = React.createClass({
       <Provider store={store}>
         <IntlProvider locale="fr" messages={messages}>
           <Router history={history}>
-            <Route path="/welcome" component={WelcomePage}>
+            <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
               <Route path="login" component={LoginForm} />
               <Route path="recover" component={RecoverForm} />
               <Route path="signup" component={SignupForm} />
             </Route>
-            <Route path="/" component={HomePage}>
+            <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
               <IndexRoute component={Feed} />
 
               <Route path=":pageId" component={Feed} />
