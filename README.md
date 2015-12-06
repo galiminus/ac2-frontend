@@ -14,9 +14,9 @@ webpack-dev-server --history-api-fallback
 
 ## Dependencies
 
-AC2-frontend use webpack to manage its assets, the code itself written is in ES6 and requires Babel to transpile.
+AC2-frontend use webpack to manage its assets, the code itself is written in ES6 and requires Babel to transpile.
 
-To better understand the code, you should take a look to:
+To better understand the code, you should take a look at:
 
 * react
 * redux
