@@ -28,14 +28,25 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPosts: (query) => posts.find(query, dispatch),
+    findPosts: (query) => posts.find(query, dispatch),
     getPage: (id, query) => pages.get(id, query, dispatch)
   }
 }
 
 const Feed = React.createClass({
   componentWillMount() {
-    const { params, loadPosts, getPage } = this.props
+    this.loadPosts()
+  },
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.params.pageId != newProps.params.pageId) {
+      this.loadPosts()
+    }
+  },
+
+  loadPosts() {
+    const { params, findPosts, getPage } = this.props
+
     let query = {}
 
     if (params.pageId) {
@@ -43,7 +54,7 @@ const Feed = React.createClass({
 
       query.page = params.pageId
     }
-    loadPosts(query)
+    findPosts(query)
   },
 
   getStyles() {
