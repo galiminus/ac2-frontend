@@ -3,6 +3,7 @@
 ```
 # install all the dependencies
 npm install
+npm install webpack-dev-server -g
 
 # copy and edit the configuration file
 cp source/config.js.example source/config.js
