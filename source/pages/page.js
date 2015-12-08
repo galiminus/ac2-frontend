@@ -34,8 +34,8 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const Feed = React.createClass({
-  componentWillMount() {
+const Page = React.createClass({
+  componentDidMount() {
     this.loadPosts()
   },
 
@@ -160,4 +160,4 @@ const Feed = React.createClass({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Feed)
+export default connect(mapStateToProps, mapDispatchToProps)(Page)
