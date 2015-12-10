@@ -5,6 +5,7 @@ import PostForm           from "components/post-form"
 import ToolbarLogo        from "components/toolbar-logo"
 import CurrentUserMenu    from "components/current-user-menu"
 import UserAvatar         from "components/user-avatar"
+import InfoBanner         from "components/info-banner"
 
 export default {
   AcToolbar,
@@ -13,5 +14,6 @@ export default {
   PostForm,
   ToolbarLogo,
   CurrentUserMenu,
-  UserAvatar
+  UserAvatar,
+  InfoBanner
 }
