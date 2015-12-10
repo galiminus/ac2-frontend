@@ -4,7 +4,7 @@ import {
   Avatar,
 } from "material-ui"
 
-export default React.createClass({
+const UserAvatar = React.createClass({
   render() {
     const style = {
       marginTop: 8,
@@ -19,3 +19,5 @@ export default React.createClass({
     )
   }
 })
+
+export default UserAvatar

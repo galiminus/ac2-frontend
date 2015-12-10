@@ -6,6 +6,7 @@ import ToolbarLogo        from "components/toolbar-logo"
 import CurrentUserMenu    from "components/current-user-menu"
 import UserAvatar         from "components/user-avatar"
 import InfoBanner         from "components/info-banner"
+import Post               from "components/post"
 
 export default {
   AcToolbar,
@@ -15,5 +16,6 @@ export default {
   ToolbarLogo,
   CurrentUserMenu,
   UserAvatar,
-  InfoBanner
+  InfoBanner,
+  Post
 }
