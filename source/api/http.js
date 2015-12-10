@@ -31,6 +31,29 @@ function handleJSON(response) {
   return response.json()
 }
 
+function dispatchRecord(record) {
+    for (let name of Object.keys(record.relationships)) {
+        if (record.relationships[name].data) {
+            record[`${name}_id`] = record.relationships[name].data.id
+        }
+    }
+    store.dispatch({
+        type: `${record.type.toUpperCase()}_ADD`,
+        data: record
+    })
+}
+
+function handleJSONAPI(response) {
+    if (Array.isArray(response.data)) {
+        for (let record of response.data) {
+            dispatchRecord(record)
+        }
+    }
+    else {
+        dispatchRecord(response.data)
+    }
+}
+
 export default {
   create: (path, record) => {
     return fetch(`${baseUrl}${path}`, {
@@ -43,6 +66,7 @@ export default {
     })
     .then(handleError)
     .then(handleJSON)
+    .then(handleJSONAPI)
   },
 
   update: (path, record) => {
@@ -56,6 +80,7 @@ export default {
     })
     .then(handleError)
     .then(handleJSON)
+    .then(handleJSONAPI)
   },
 
   find: (path, query) => {
@@ -68,5 +93,6 @@ export default {
     })
     .then(handleError)
     .then(handleJSON)
+    .then(handleJSONAPI)
   }
 }

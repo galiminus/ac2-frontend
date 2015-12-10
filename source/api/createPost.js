@@ -5,13 +5,7 @@ export default (record, dispatch) => {
     create("/posts", {
       post: record
     })
-    .then((data) => {
-      dispatch({
-        type: "ADD_POST",
-        data: data
-      })
-      resolve(data)
-    })
+    .then(resolve)
     .catch((error) => {
       error.response.json().then((response) => {
         reject({_error: "unknown"})
