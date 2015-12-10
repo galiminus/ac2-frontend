@@ -54,7 +54,6 @@ let form = React.createClass({
   },
 
   onDropImage(e) {
-    console.log(e)
   },
 
   render: function() {

@@ -48,9 +48,14 @@ function handleJSONAPI(response) {
         for (let record of response.data) {
             dispatchRecord(record)
         }
+        return (response.data)
+    }
+    else if (typeof(response.data) === 'object') {
+        dispatchRecord(response.data)
+        return (response.data)
     }
     else {
-        dispatchRecord(response.data)
+        return (response)
     }
 }
 
