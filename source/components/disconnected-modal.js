@@ -8,10 +8,10 @@ export default function(props) {
       actions={[
         <FlatButton
           key={"goToLoginPage"}
-          label="LOL"
+          label={<FormattedMessage id="actions.goToLoginPage" />}
           primary={true}
           linkButton={true}
-          href="#/welcome/login" />
+          href="/welcome/login" />
       ]}
       open={props.isDisconnected}>
       <FormattedMessage id="errors.disconnected" />

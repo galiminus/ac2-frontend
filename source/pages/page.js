@@ -25,8 +25,8 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    findPosts: (query) => posts.find(query, dispatch),
-    getPage: (id, query) => pages.get(id, query, dispatch)
+    findPosts: (query) => posts.find(query),
+    getPage: (id, query) => pages.get(id, query)
   }
 }
 
@@ -47,7 +47,7 @@ const Page = React.createClass({
     let query = {}
 
     if (params.pageId) {
-      getPage(params.pageId)
+      getPage(params.pageId, { include: "owner" })
 
       query.page = params.pageId
     }

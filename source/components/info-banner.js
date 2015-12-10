@@ -1,4 +1,6 @@
 import React from "react"
+import { connect } from 'react-redux'
+
 import DefaultRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
 import { FormattedMessage } from "react-intl"
 
@@ -30,17 +32,29 @@ const style = {
     }
 }
 
+function mapStateToProps(state, props) {
+  return {
+    owner: state.users.get(props.page.owner_id)
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+  }
+}
+
 const InfoBanner = React.createClass({
     render() {
         let ownerInfos;
         if (this.props.page) {
-            switch (this.props.page.owner_type) {
-                case "Main":
-                    ownerInfos = <h1><FormattedMessage id="links.mainFeed" /></h1>
-                    break ;
-                case "User":
-                    ownerInfos = <h1>{this.props.page.owner.profile.name}</h1>
-                    break ;
+            if (this.props.page.owner_type == "Main") {
+                ownerInfos = <h1><FormattedMessage id="links.mainFeed" /></h1>
+            }
+            else if (this.props.owner) {
+                switch (this.props.page.owner_type) {
+                    case "User":
+                        ownerInfos = <h1>{this.props.owner.profile.name}</h1>
+                }
             }
         }
         else {
@@ -67,4 +81,4 @@ const InfoBanner = React.createClass({
     }
 })
 
-export default InfoBanner
+export default connect(mapStateToProps, mapDispatchToProps)(InfoBanner)

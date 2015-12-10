@@ -34,7 +34,7 @@ function handleJSON(response) {
 function dispatchRecord(record) {
     for (let name of Object.keys(record.relationships)) {
         if (record.relationships[name].data) {
-            record[`${name}_id`] = record.relationships[name].data.id
+            record.attributes[`${name}_id`] = record.relationships[name].data.id
         }
     }
     store.dispatch({
@@ -48,15 +48,20 @@ function handleJSONAPI(response) {
         for (let record of response.data) {
             dispatchRecord(record)
         }
-        return (response.data)
     }
     else if (typeof(response.data) === 'object') {
         dispatchRecord(response.data)
-        return (response.data)
     }
     else {
         return (response)
     }
+
+    if (response.included) {
+        for (let record of response.included) {
+            dispatchRecord(record)
+        }
+    }
+    return (response.data)
 }
 
 export default {

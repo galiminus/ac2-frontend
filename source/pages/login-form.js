@@ -13,18 +13,14 @@ import {
   Snackbar
 } from 'material-ui'
 
-import { tokens, users } from "api"
-import { currentUser, currentToken } from "action-creators"
+import { tokens } from "api"
+import { currentToken } from "action-creators"
 import { validateEmail, validatePassword } from "validators"
 
 const authenticate = (fields, dispatch) =>
   tokens.create(fields, dispatch).then((data) => {
     dispatch(currentToken.set(data.access_token))
-
-    users.getMe({}).then((data) => {
-      dispatch(currentUser.set(data.id))
-      dispatch(updatePath("/"))
-    })
+    dispatch(updatePath("/"))
   })
 
 const validate = values => {

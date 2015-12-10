@@ -34,6 +34,7 @@ export default React.createClass({
       textTransform: "uppercase",
       cursor: "pointer"
     }
+
     return (
       <IconMenu iconButtonElement={<Avatar style={style}>{this.props.user.profile.name[0]}</Avatar>}>
         <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserProfile" />} href={`/${this.props.user.page_id}`} onClick={this.goToProfile} />

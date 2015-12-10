@@ -34,13 +34,13 @@ const history = createBrowserHistory()
 syncReduxAndRouter(history, store)
 
 function redirectToHomePage(nextState, replaceState) {
-  if (store.getState().currentUser) {
+  if (store.getState().currentToken) {
     replaceState(null, "/")
   }
 }
 
 function redirectToLoginPage(nextState, replaceState) {
-  if (!store.getState().currentUser) {
+  if (!store.getState().currentToken) {
     replaceState(null, "/welcome/login")
   }
 }
