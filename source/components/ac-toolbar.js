@@ -34,7 +34,7 @@ export default React.createClass({
 
   render() {
     return (
-      <Toolbar style={{position: "fixed", zIndex: 1}}>
+      <Toolbar style={{position: "fixed", zIndex: 2}}>
         {this.props.children}
       </Toolbar>
     )

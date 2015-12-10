@@ -68,11 +68,17 @@ const Page = React.createClass({
     }
     return {
       banner: {
-        width: "100%",
-        background: `#000 url(${bannerImage}) no-repeat center/cover`,
-        height: 0,
-        paddingBottom: "30%",
-        position: "relative"
+        minHeight: "40vw",
+      },
+      bannerBefore: {
+        background: "center / cover",
+        backgroundImage: `url(${bannerImage})`,
+        position: "relative",
+        transformOrigin: "center center 0",
+        transform: "translateZ(-1px) scale(2)",
+        zIndex: -1,
+        minHeight: "100vh",
+        marginTop: "-20vw"
       },
       infos: {
         fontFamily: DefaultRawTheme.fontFamily,
@@ -81,6 +87,7 @@ const Page = React.createClass({
         opacity: 0.8,
         position: "absolute",
         bottom: 0,
+        zIndex: 1,
         color: DefaultRawTheme.palette.alternateTextColor
       }
     }
@@ -110,7 +117,11 @@ const Page = React.createClass({
     }
 
     return (
-      <div style={style.banner}>
+      <div style={{position: "relative", maxHeight: "50vw"}}>
+        <div style={style.bannerBefore}>
+        </div>
+        <div style={style.banner}>
+        </div>
         {ownerInfosContainer}
       </div>
     )
@@ -145,10 +156,10 @@ const Page = React.createClass({
   render: function() {
     const posts = this.props.posts.map(post => this.renderPost(post))
     return (
-      <div {...this.props}>
+      <div style={{perspective: 1, transformStyle: "preserve-3d", overflowX: "hidden", overflowY: "scroll", "height": "100vh"}}>
         {this.renderInfoBanner()}
-        <div className="container-fluid">
-          <div className="col-md-8 col-sm-8 col-xs-12" style={{marginTop: 32}}>
+        <div className="container-fluid" style={{zIndex: 2, background: "white", height: "100%"}}>
+          <div className="col-md-8 col-sm-8 col-xs-12">
             <PostForm className="col-xs-12" />
             <List>
               {posts}
