@@ -28,24 +28,24 @@ function mapDispatchToProps(dispatch) {
 
 const Page = React.createClass({
   componentDidMount() {
-    this.loadPosts()
+    this.loadPosts(this.props.params.pageId)
   },
 
   componentWillReceiveProps(newProps) {
     if (this.props.params.pageId != newProps.params.pageId) {
-      this.loadPosts()
+      this.loadPosts(newProps.params.pageId)
     }
   },
 
-  loadPosts() {
-    const { params, findPosts, getPage } = this.props
+  loadPosts(pageId) {
+    const { findPosts, getPage } = this.props
 
     let query = { include: "sender,recipient" }
 
-    if (params.pageId) {
-      getPage(params.pageId, { include: "owner" })
+    if (pageId) {
+      getPage(pageId, { include: "owner" })
 
-      query.page = params.pageId
+      query.page = pageId
     }
     findPosts(query)
   },
@@ -55,7 +55,7 @@ const Page = React.createClass({
     return (
       <div style={{perspective: 1, transformStyle: "preserve-3d", overflowX: "hidden", overflowY: "scroll", "height": "100vh"}}>
         <InfoBanner page={this.props.page || { owner_type: "Main" }} />
-        <div className="container-fluid" style={{zIndex: 2, background: "white", height: "100%"}}>
+        <div className="container-fluid" style={{zIndex: 2, background: "white", height: "100%", paddingTop: 12}}>
           <div className="col-md-8 col-sm-8 col-xs-12">
             <PostForm className="col-xs-12" />
             <List>
