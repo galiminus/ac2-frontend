@@ -32,6 +32,8 @@ function handleJSON(response) {
 }
 
 function dispatchRecord(record) {
+    record.attributes.id = record.id
+    
     for (let name of Object.keys(record.relationships)) {
         if (record.relationships[name].data) {
             record.attributes[`${name}_id`] = record.relationships[name].data.id

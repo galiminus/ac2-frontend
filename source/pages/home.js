@@ -46,7 +46,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-let HomePage = React.createClass({
+const HomePage = React.createClass({
     componentWillReceiveProps(props) {
         if (this.props.leftNav != props.leftNav) {
             this.refs.leftNav.toggle()
@@ -74,7 +74,7 @@ let HomePage = React.createClass({
                         <AutoComplete hintText="search" className="hide-sm hide-xs" />
                     </ToolbarGroup>
                 </AcToolbar>
-                <LeftNav docked={false} ref="leftNav">
+                <LeftNav docked={false} ref="leftNav" onChante={this.lol}>
                     <Navigation />
                 </LeftNav>
                 <div className="row" style={{minHeight: "100%"}}>

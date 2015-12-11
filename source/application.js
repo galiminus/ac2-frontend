@@ -20,6 +20,8 @@ import LoginForm from "pages/login-form"
 import SignupForm from "pages/signup-form"
 import RecoverForm from "pages/recover-form"
 import Page from "pages/page"
+import Profile from "pages/profile"
+import Posts from "pages/posts"
 
 import FlexBoxGrid from "flexboxgrid-with-hide"
 
@@ -34,64 +36,68 @@ const history = createBrowserHistory()
 syncReduxAndRouter(history, store)
 
 function redirectToHomePage(nextState, replaceState) {
-  if (store.getState().currentToken) {
-    replaceState(null, "/")
-  }
+    if (store.getState().currentToken) {
+        replaceState(null, "/")
+    }
 }
 
 function redirectToLoginPage(nextState, replaceState) {
-  if (!store.getState().currentToken) {
-    replaceState(null, "/welcome/login")
-  }
+    if (!store.getState().currentToken) {
+        replaceState(null, "/welcome/login")
+    }
 }
 
 const Application = React.createClass({
-  childContextTypes : {
-    muiTheme: React.PropTypes.object,
-  },
+    childContextTypes : {
+        muiTheme: React.PropTypes.object,
+    },
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getMuiTheme({
-        spacing: Spacing,
-        fontFamily: 'Roboto, sans-serif',
-        palette: {
-          primary1Color: Colors.indigo400,
-          primary2Color: Colors.cyan700,
-          primary3Color: Colors.grey400,
-          accent1Color: Colors.orangeA700,
-          accent2Color: Colors.grey100,
-          accent3Color: Colors.grey500,
-          textColor: Colors.darkBlack,
-          alternateTextColor: Colors.white,
-          canvasColor: Colors.white,
-          borderColor: Colors.grey300,
-          disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3)
-        }
-      })
-    };
-  },
+    getChildContext() {
+        return {
+            muiTheme: ThemeManager.getMuiTheme({
+                spacing: Spacing,
+                fontFamily: 'Roboto, sans-serif',
+                palette: {
+                    primary1Color: Colors.indigo400,
+                    primary2Color: Colors.cyan700,
+                    primary3Color: Colors.grey400,
+                    accent1Color: Colors.orangeA700,
+                    accent2Color: Colors.grey100,
+                    accent3Color: Colors.grey500,
+                    textColor: Colors.darkBlack,
+                    alternateTextColor: Colors.white,
+                    canvasColor: Colors.white,
+                    borderColor: Colors.grey300,
+                    disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3)
+                }
+            })
+        };
+    },
 
-  render() {
-    return (
-      <Provider store={store}>
-        <IntlProvider locale="fr" messages={messages}>
-          <Router history={history}>
-            <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
-              <Route path="login" component={LoginForm} />
-              <Route path="recover" component={RecoverForm} />
-              <Route path="signup" component={SignupForm} />
-            </Route>
-            <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
-              <IndexRoute component={Page} />
+    render() {
+        return (
+            <Provider store={store}>
+                <IntlProvider locale="fr" messages={messages}>
+                    <Router history={history}>
+                        <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
+                            <Route path="login" component={LoginForm} />
+                            <Route path="recover" component={RecoverForm} />
+                            <Route path="signup" component={SignupForm} />
+                        </Route>
+                        <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
+                            <IndexRoute component={Page} />
 
-              <Route path=":pageId" component={Page} />
-            </Route>
-          </Router>
-        </IntlProvider>
-      </Provider>
-    )
-  }
+                            <Route path=":pageId" component={Page}>
+                                <IndexRoute component={Posts} />
+
+                                <Route path="profile" component={Profile} />
+                            </Route>
+                        </Route>
+                    </Router>
+                </IntlProvider>
+            </Provider>
+        )
+    }
 })
 
 ReactDOM.render(<Application />, document.getElementsByTagName("main")[0])

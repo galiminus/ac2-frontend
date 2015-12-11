@@ -28,9 +28,9 @@ export default {
   "labels.pollPost": "Sondage",
   "labels.imageUploadDropZone": "Glissez une image dans cette zone ou cliquez pour ouvrir la boite de sélection.",
 
-  "links.currentUserProfile": "Ma page",
+  "links.currentUserPage": "Ma page",
+  "links.currentUserProfile": "Mon profil",
   "links.accountSettings": "Paramètres de compte",
-  "links.privacySettings": "Paramètres de confidentialité",
   "links.mainFeed": "Mur principal",
 
   "errors.invalid_grant": "Adresse email ou mot de passe invalide",
