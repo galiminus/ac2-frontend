@@ -7,28 +7,36 @@ import { FormattedMessage } from "react-intl"
 let bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_p51mustang_mini.jpg"
 
 const style = {
-    banner: {
-        minHeight: "40vw",
+    parallax: {
+        banner: {
+            background: "center / cover",
+            backgroundImage: `url(${bannerImage})`,
+            position: "relative",
+            transformOrigin: "center center 0",
+            transform: "translateZ(-1px) scale(2)",
+            zIndex: -1,
+            minHeight: "100vh",
+            marginTop: "-25vw"
+        },
+        infos: {
+            fontFamily: DefaultRawTheme.fontFamily,
+            width: "100%",
+            background: DefaultRawTheme.palette.textColor,
+            opacity: 0.8,
+            position: "absolute",
+            bottom: 0,
+            zIndex: 1,
+            color: DefaultRawTheme.palette.alternateTextColor
+        }
     },
-    bannerBefore: {
-        background: "center / cover",
-        backgroundImage: `url(${bannerImage})`,
-        position: "relative",
-        transformOrigin: "center center 0",
-        transform: "translateZ(-1px) scale(2)",
-        zIndex: -1,
-        minHeight: "100vh",
-        marginTop: "-20vw"
-    },
-    infos: {
-        fontFamily: DefaultRawTheme.fontFamily,
-        width: "100%",
-        background: DefaultRawTheme.palette.textColor,
-        opacity: 0.8,
-        position: "absolute",
-        bottom: 0,
-        zIndex: 1,
-        color: DefaultRawTheme.palette.alternateTextColor
+    classic: {
+        infos: {
+            fontFamily: DefaultRawTheme.fontFamily,
+            width: "100%",
+            opacity: 0.8,
+            background: DefaultRawTheme.palette.textColor,
+            color: DefaultRawTheme.palette.alternateTextColor
+        }
     }
 }
 
@@ -61,21 +69,19 @@ const InfoBanner = React.createClass({
             return (<div />)
         }
 
-        let ownerInfosContainer = "";
-        if (ownerInfos) {
-            ownerInfosContainer =
-            <aside style={style.infos}>
-                <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
-            </aside>
-        }
-
         return (
-            <div style={{position: "relative", maxHeight: "50vw"}}>
-                <div style={style.bannerBefore}>
+            <div>
+                <div style={{position: "relative", maxHeight: "100vh"}} className="hide-xs hide-sm">
+                    <div style={style.parallax.banner}></div>
+                    <aside style={style.parallax.infos}>
+                        <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
+                    </aside>
                 </div>
-                <div style={style.banner}>
+                <div className="hide-md hide-lg" style={{marginTop: 56}}>
+                    <aside style={style.classic.infos}>
+                        <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
+                    </aside>
                 </div>
-                {ownerInfosContainer}
             </div>
         )
     }

@@ -81,7 +81,7 @@ let HomePage = React.createClass({
                     <Paper className="hide-sm hide-xs" style={{paddingRight: 0, marginTop: 56, width: 220, zIndex: 1}}>
                         <Navigation style={{width: 220}} />
                     </Paper>
-                    <section className="col-md col-xs-12" style={{paddingLeft: 0, paddingRight: 0, marginTop: 56, marginBottom: 32}}>
+                    <section className="col-md col-xs-12" style={{paddingLeft: 0, paddingRight: 0}}>
                         {this.props.children}
                     </section>
                 </div>
