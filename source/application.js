@@ -14,14 +14,15 @@ import Spacing from 'material-ui/lib/styles/spacing'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
-import HomePage from "pages/home"
-import WelcomePage from "pages/welcome"
-import LoginForm from "pages/login-form"
-import SignupForm from "pages/signup-form"
-import RecoverForm from "pages/recover-form"
-import Page from "pages/page"
-import Profile from "pages/profile"
-import Posts from "pages/posts"
+import HomePage         from "pages/home"
+import WelcomePage      from "pages/welcome"
+import LoginForm        from "pages/login-form"
+import SignupForm       from "pages/signup-form"
+import RecoverForm      from "pages/recover-form"
+import Page             from "pages/page"
+import Profile          from "pages/profile"
+import Posts            from "pages/posts"
+import Account          from "pages/account"
 
 import FlexBoxGrid from "flexboxgrid-with-hide"
 
@@ -84,9 +85,11 @@ const Application = React.createClass({
                             <Route path="recover" component={RecoverForm} />
                             <Route path="signup" component={SignupForm} />
                         </Route>
+
                         <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
                             <IndexRoute component={Page} />
 
+                            <Route path="/account" component={Account} />
                             <Route path=":pageId" component={Page}>
                                 <IndexRoute component={Posts} />
 

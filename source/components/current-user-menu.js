@@ -26,6 +26,11 @@ export default React.createClass({
         e.preventDefault()
     },
 
+    goToAccount(e) {
+        dispatch(updatePath('/account'))
+        e.preventDefault()
+    },
+
     disconnect() {
         dispatch(tokens.removeAll())
         dispatch(updatePath("/welcome/login"))
@@ -44,7 +49,7 @@ export default React.createClass({
             <IconMenu iconButtonElement={<Avatar style={style}>{this.props.user.profile.name[0]}</Avatar>}>
                 <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserPage" />} href={`/${this.props.user.page_id}`} onClick={this.goToPage} />
                 <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserProfile" />} href={`/${this.props.user.page_id}/profile`} onClick={this.goToProfile} />
-                <MenuItem index={2} primaryText={<FormattedMessage id="links.accountSettings" />} />
+                <MenuItem index={2} primaryText={<FormattedMessage id="links.accountSettings" />} href="/account" onClick={this.goToAccount} />
                 <MenuItem index={4} primaryText={<FormattedMessage id="actions.disconnect" />} onClick={this.disconnect} />
             </IconMenu>
         )
