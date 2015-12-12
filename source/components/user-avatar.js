@@ -1,8 +1,22 @@
 import React from "react"
+import { connect } from "react-redux"
 
 import {
   Avatar,
 } from "material-ui"
+
+function mapStateToProps(state, props) {
+    let page;
+    if (props.user) {
+        page = state.pages.get(props.user.page_id)
+    }
+
+    if (!page) {
+        page = { data: { name: "" } }
+    }
+
+    return ({ page })
+}
 
 const UserAvatar = React.createClass({
   render() {
@@ -15,9 +29,9 @@ const UserAvatar = React.createClass({
       cursor: "pointer"
     }
     return (
-      <Avatar style={style}>{this.props.user.profile.name[0]}</Avatar>
+      <Avatar style={style}>{this.props.page.data.name[0]}</Avatar>
     )
   }
 })
 
-export default UserAvatar
+export default connect(mapStateToProps)(UserAvatar)

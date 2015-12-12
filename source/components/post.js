@@ -14,12 +14,7 @@ import UserAvatar from "components/user-avatar"
 
 function mapStateToProps(state, props) {
     return {
-        sender: state.users.get(props.post.sender_id) || { profile: { name: "" } }
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
+        sender: state.pages.get(props.post.sender_id) || { data: { name: "" } }
     }
 }
 
@@ -31,7 +26,7 @@ const Post = React.createClass({
             senderInfos =
               <div>
                 <UserAvatar user={this.props.sender} />
-                <ToolbarTitle text={this.props.sender.profile.name} />
+                <ToolbarTitle text={this.props.sender.data.name} />
               </div>
             break;
         }
@@ -51,4 +46,4 @@ const Post = React.createClass({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post)
+export default connect(mapStateToProps)(Post)

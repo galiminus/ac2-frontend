@@ -42,7 +42,7 @@ const style = {
 
 function mapStateToProps(state, props) {
   return {
-    owner: state.users.get(props.page.owner_id)
+      page: state.pages.get(props.pageId) || { owner_type: "Main", data: { name: "" } }
   }
 }
 
@@ -61,7 +61,7 @@ const InfoBanner = React.createClass({
             else if (this.props.owner) {
                 switch (this.props.page.owner_type) {
                     case "User":
-                        ownerInfos = <h1>{this.props.owner.profile.name}</h1>
+                        ownerInfos = <h1>{this.props.page.data.name}</h1>
                 }
             }
         }

@@ -66,21 +66,26 @@ function handleJSONAPI(response) {
             dispatchRecord(record)
             ids.push(record.id)
         }
+        if (response.included) {
+            for (let record of response.included) {
+                dispatchRecord(record)
+            }
+        }
 
         return (ids)
     }
     else if (typeof(response.data) === 'object') {
         dispatchRecord(response.data)
+        if (response.included) {
+            for (let record of response.included) {
+                dispatchRecord(record)
+            }
+        }
+
         return (response.data.id)
     }
     else {
         return (response)
-    }
-
-    if (response.included) {
-        for (let record of response.included) {
-            dispatchRecord(record)
-        }
     }
 }
 

@@ -1,4 +1,5 @@
 import React from "react"
+import { connect } from 'react-redux'
 import Link from "react-router"
 
 import {
@@ -15,7 +16,20 @@ import { FormattedMessage } from 'react-intl'
 
 import { tokens } from "action-creators"
 
-export default React.createClass({
+function mapStateToProps(state, props) {
+    let page;
+    if (props.user) {
+        page = state.pages.get(props.user.page_id)
+    }
+
+    if (!page) {
+        page = { data: { name: "" } }
+    }
+
+    return ({ page })
+}
+
+const CurrentUserMenu = React.createClass({
     goToPage(e) {
         dispatch(updatePath(`/${this.props.user.page_id}`))
         e.preventDefault()
@@ -46,7 +60,7 @@ export default React.createClass({
         }
 
         return (
-            <IconMenu iconButtonElement={<Avatar style={style}>{this.props.user.profile.name[0]}</Avatar>}>
+            <IconMenu iconButtonElement={<Avatar style={style}>{this.props.page.data.name[0]}</Avatar>}>
                 <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserPage" />} href={`/${this.props.user.page_id}`} onClick={this.goToPage} />
                 <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserProfile" />} href={`/${this.props.user.page_id}/profile`} onClick={this.goToProfile} />
                 <MenuItem index={2} primaryText={<FormattedMessage id="links.accountSettings" />} href="/account" onClick={this.goToAccount} />
@@ -55,3 +69,5 @@ export default React.createClass({
         )
     }
 })
+
+export default connect(mapStateToProps)(CurrentUserMenu)
