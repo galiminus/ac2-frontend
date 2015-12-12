@@ -1,11 +1,13 @@
 import validateEmail from "validators/email"
 import validatePassword from "validators/password"
-import validateName from "validators/name"
+import validateFullName from "validators/full-name"
+import validateUserName from "validators/user-name"
 import validateText from "validators/text"
 
 export default {
   validateEmail,
   validatePassword,
-  validateName,
+  validateFullName,
+  validateUserName,
   validateText
 }

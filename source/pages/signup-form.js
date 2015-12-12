@@ -15,7 +15,7 @@ import {
 
 import { tokens, users } from "api"
 import { currentUser, currentToken } from "action-creators"
-import { validateEmail, validatePassword, validateName } from "validators"
+import { validateEmail, validatePassword, validateFullName, validateUserName } from "validators"
 
 let authenticate = (fields, dispatch) =>
   users.create({
@@ -36,7 +36,8 @@ let authenticate = (fields, dispatch) =>
 
 const validate = values => {
   return {
-    name: validateName(values.name),
+    full_name: validateFullName(values.full_name),
+    user_name: validateUserName(values.user_name),
     email: validateEmail(values.email),
     password: validatePassword(values.password)
   }
@@ -49,12 +50,6 @@ let form = React.createClass({
     error: PropTypes.string
   },
 
-  componentWillReceiveProps(props) {
-    if (props.error) {
-      this.refs.notice.show()
-    }
-  },
-
   goToLoginForm(e) {
     dispatch(updatePath("/welcome/login"))
     e.preventDefault()
@@ -62,26 +57,26 @@ let form = React.createClass({
 
   render: function() {
     const {
-      fields: { name, email, password },
+      fields: { full_name, user_name, email, password },
       handleSubmit,
       error
     } = this.props
 
     return(
       <form onSubmit={handleSubmit(authenticate)}>
-        <TextField fullWidth={true} type="text" {...name} hintText={<FormattedMessage id="labels.name" />} />
-        <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="labels.email" />} />
-        <TextField fullWidth={true} type="password" {...password} hintText={<FormattedMessage id="labels.password" />} />
+        <TextField fullWidth={true} type="text" {...full_name} hintText={<FormattedMessage id="labels.signup.full_name" />} />
+        <TextField fullWidth={true} type="text" {...user_name} hintText={<FormattedMessage id="labels.signup.user_name" />} />
+        <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="labels.signup.email" />} />
+        <TextField fullWidth={true} type="password" {...password} hintText={<FormattedMessage id="labels.signup.password" />} />
         <div className="row between-xs center-xs" style={{marginTop: 32}}>
           <RaisedButton
-            disabled={name.invalid || email.invalid || password.invalid}
+            disabled={full_name.invalid || user_name.invalid || email.invalid || password.invalid}
             type="submit"
             label={<FormattedMessage id="actions.signup" />}
             secondary={true}
             onClick={handleSubmit(authenticate)} />
           <FlatButton label={<FormattedMessage id="labels.have_account" />} linkButton={true} href="/welcome/login" onClick={this.goToLoginForm}/>
         </div>
-        <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
       </form>
     )
   }
@@ -89,6 +84,6 @@ let form = React.createClass({
 
 export default reduxForm({
   form: "signup",
-  fields: ['name', 'email', 'password'],
+  fields: ['full_name', 'user_name', 'email', 'password'],
   validate
 })(form)
