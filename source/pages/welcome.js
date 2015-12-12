@@ -10,7 +10,7 @@ import {
 } from 'material-ui'
 import { Link } from "react-router"
 
-import { AcToolbar, ToolbarLogo } from "components"
+import { AcToolbar, ToolbarLogo, Notifier } from "components"
 import { toolbarBackgroundColor, loginPageBackground } from "config"
 
 function mapStateToProps(state) {
@@ -46,6 +46,7 @@ const LoginPage = React.createClass({
             {this.props.children}
           </Paper>
         </div>
+        <Notifier />
      </div>
     )
   }

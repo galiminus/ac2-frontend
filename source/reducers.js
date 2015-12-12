@@ -12,6 +12,8 @@ import pages            from "reducers/pages"
 import pagesPosts       from "reducers/pages-posts"
 import posts            from "reducers/posts"
 
+import notifications    from "reducers/notifications"
+
 import leftNav          from "reducers/leftnav"
 
 let reducers = combineReducers({
@@ -24,6 +26,7 @@ let reducers = combineReducers({
     pagesPosts,
     leftNav,
     form,
+    notifications,
     routing: routeReducer
   }
 )

@@ -7,6 +7,7 @@ import CurrentUserMenu    from "components/current-user-menu"
 import UserAvatar         from "components/user-avatar"
 import InfoBanner         from "components/info-banner"
 import Post               from "components/post"
+import Notifier           from "components/notifier"
 
 export default {
   AcToolbar,
@@ -17,5 +18,6 @@ export default {
   CurrentUserMenu,
   UserAvatar,
   InfoBanner,
-  Post
+  Post,
+  Notifier
 }

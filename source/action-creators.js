@@ -4,6 +4,7 @@ import tokens           from "action-creators/tokens"
 import leftNav          from "action-creators/leftnav"
 import pages            from "action-creators/pages"
 import pagesPosts       from "action-creators/pages-posts"
+import notifications    from "action-creators/notifications"
 
 export default {
   currentUser,
@@ -11,5 +12,6 @@ export default {
   tokens,
   leftNav,
   pages,
-  pagesPosts
+  pagesPosts,
+  notifications
 }

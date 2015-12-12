@@ -39,12 +39,6 @@ let form = React.createClass({
     error: PropTypes.string
   },
 
-  componentWillReceiveProps(props) {
-    if (props.error) {
-      this.refs.notice.show()
-    }
-  },
-
   render: function() {
     const {
       fields: { email },
@@ -54,7 +48,7 @@ let form = React.createClass({
 
     return(
       <form onSubmit={handleSubmit(authenticate)}>
-        <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="labels.email" />} />
+        <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="labels.recover.email" />} />
         <div className="row center-xs" style={{marginTop: "1em"}}>
           <RaisedButton
             disabled={email.invalid}
@@ -63,7 +57,6 @@ let form = React.createClass({
             secondary={true}
             onClick={handleSubmit(authenticate)} />
         </div>
-        <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
       </form>
     )
   }

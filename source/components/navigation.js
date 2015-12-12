@@ -12,7 +12,7 @@ import { updatePath } from 'redux-simple-router'
 
 import { FormattedMessage } from "react-intl"
 
-export default React.createClass({
+const Navigation = React.createClass({
   goToMainFeed(e) {
     dispatch(updatePath("/"))
     e.preventDefault()
@@ -26,3 +26,5 @@ export default React.createClass({
     )
   }
 })
+
+export default Navigation
