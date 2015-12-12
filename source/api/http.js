@@ -33,7 +33,7 @@ function handleJSON(response) {
 
 function dispatchRecord(record) {
     record.attributes.id = record.id
-    
+
     for (let name of Object.keys(record.relationships)) {
         if (record.relationships[name].data) {
             record.attributes[`${name}_id`] = record.relationships[name].data.id
@@ -47,12 +47,18 @@ function dispatchRecord(record) {
 
 function handleJSONAPI(response) {
     if (Array.isArray(response.data)) {
+        let ids = []
+
         for (let record of response.data) {
             dispatchRecord(record)
+            ids.push(record.id)
         }
+
+        return (ids)
     }
     else if (typeof(response.data) === 'object') {
         dispatchRecord(response.data)
+        return (response.data.id)
     }
     else {
         return (response)
@@ -63,7 +69,6 @@ function handleJSONAPI(response) {
             dispatchRecord(record)
         }
     }
-    return (response.data)
 }
 
 export default {

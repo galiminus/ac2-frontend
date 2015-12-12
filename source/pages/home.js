@@ -54,8 +54,8 @@ const HomePage = React.createClass({
     },
 
     componentDidMount() {
-        users.getMe({}).then((data) => {
-            this.props.setCurrentUser(data.id)
+        users.getMe({}).then((id) => {
+            this.props.setCurrentUser(id)
         })
     },
 
