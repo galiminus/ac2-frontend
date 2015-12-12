@@ -1,6 +1,9 @@
+import queryString from "query-string"
+
 import { baseUrl } from "config"
 import store from "store"
-import queryString from "query-string"
+import { tokens } from "action-creators"
+
 
 function headers() {
   let base = {
@@ -14,6 +17,16 @@ function headers() {
   }
 
   return (base)
+}
+
+function handleDisconnect(response) {
+    if (response.status == 401) {
+        let unauthorizedError = response.headers.get('www-authenticate')
+        if (unauthorizedError && unauthorizedError.match("error=\"invalid_token\"")) {
+            store.dispatch(tokens.removeAll())
+        }
+    }
+    return response
 }
 
 function handleError(response) {
@@ -81,6 +94,7 @@ export default {
         ...headers()
       }
     })
+    .then(handleDisconnect)
     .then(handleError)
     .then(handleJSON)
     .then(handleJSONAPI)
@@ -95,6 +109,7 @@ export default {
         ...headers()
       }
     })
+    .then(handleDisconnect)
     .then(handleError)
     .then(handleJSON)
     .then(handleJSONAPI)
@@ -108,6 +123,7 @@ export default {
         ...headers()
       }
     })
+    .then(handleDisconnect)
     .then(handleError)
     .then(handleJSON)
     .then(handleJSONAPI)
