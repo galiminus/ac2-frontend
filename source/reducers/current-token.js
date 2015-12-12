@@ -2,9 +2,9 @@ import Immutable from "immutable"
 
 export default function(state = null, action) {
   switch (action.type) {
-    case "SET_CURRENT_TOKEN":
+    case "CURRENT_TOKEN_SET":
       return action.access_token
-    case "REMOVE_ALL_TOKENS":
+    case "TOKENS_CLEAR":
       return null
     default:
       return state

@@ -1,3 +1,3 @@
 export default {
-  toggle: () => ({ type: "TOGGLE_LEFTNAV" }),
+  toggle: () => ({ type: "LEFTNAV_TOGGLE" }),
 }

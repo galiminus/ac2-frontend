@@ -7,7 +7,7 @@ export default (record, dispatch) => {
     })
     .then((data) => {
       dispatch({
-        type: "ADD_USER",
+        type: "USERS_ADD",
         data: data
       })
       resolve(data)

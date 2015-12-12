@@ -46,7 +46,7 @@ const CurrentUserMenu = React.createClass({
     },
 
     disconnect() {
-        dispatch(tokens.removeAll())
+        dispatch(tokens.clear())
         dispatch(updatePath("/welcome/login"))
     },
 

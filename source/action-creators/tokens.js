@@ -1,3 +1,3 @@
 export default {
-  removeAll: () => ({ type: "REMOVE_ALL_TOKENS" })
+  clear: () => ({ type: "TOKENS_CLEAR" })
 }

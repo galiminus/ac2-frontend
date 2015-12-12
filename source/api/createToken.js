@@ -9,7 +9,7 @@ export default (record, dispatch) => {
     })
     .then((data) => {
       dispatch({
-        type: "ADD_TOKEN",
+        type: "TOKENS_ADD",
         data: data
       })
       resolve(data)

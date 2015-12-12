@@ -7,7 +7,7 @@ export default (record, dispatch) => {
     })
     .then((data) => {
       dispatch({
-        type: "ADD_POST",
+        type: "POSTS_ADD",
         data: record
       })
       resolve(record)
