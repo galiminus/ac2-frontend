@@ -14,21 +14,23 @@ import UserAvatar from "components/user-avatar"
 
 function mapStateToProps(state, props) {
     return {
-        sender: state.pages.get(props.post.sender_id) || { data: { name: "" } }
+        sender: state.pages.get(props.post.sender_id)
     }
 }
 
 const Post = React.createClass({
     render() {
         let senderInfos;
-        switch (this.props.post.sender_type) {
-          case "User":
-            senderInfos =
-              <div>
-                <UserAvatar user={this.props.sender} />
-                <ToolbarTitle text={this.props.sender.data.name} />
-              </div>
-            break;
+        if (this.props.sender) {
+            switch (this.props.sender.type) {
+              case "user_pages":
+                senderInfos =
+                  <div>
+                    <UserAvatar page={this.props.sender} />
+                    <ToolbarTitle text={this.props.sender.data.full_name} />
+                  </div>
+                break;
+            }
         }
 
         return (

@@ -41,32 +41,30 @@ const style = {
 }
 
 function mapStateToProps(state, props) {
-  return {
-      page: state.pages.get(props.pageId) || { owner_type: "Main", data: { name: "" } }
-  }
-}
+    if (props.main || !props.page) return {}
 
-function mapDispatchToProps(dispatch) {
-  return {
-  }
+    let owner;
+    switch (props.page.owner_type) {
+        case "users":
+        owner = state.users.get(props.page.owner_id)
+        break;
+        default:
+    }
+
+    return { owner }
 }
 
 const InfoBanner = React.createClass({
     render() {
         let ownerInfos;
-        if (this.props.page) {
-            if (this.props.page.owner_type == "Main") {
-                ownerInfos = <h1><FormattedMessage id="links.mainFeed" /></h1>
-            }
-            else if (this.props.owner) {
-                switch (this.props.page.owner_type) {
-                    case "User":
-                        ownerInfos = <h1>{this.props.page.data.name}</h1>
-                }
+        if (this.props.owner) {
+            switch (this.props.owner.type) {
+                case "users":
+                ownerInfos = <h1>{this.props.page.data.full_name}</h1>
             }
         }
-        else {
-            return (<div />)
+        else if (this.props.main) {
+            ownerInfos = <h1><FormattedMessage id="links.mainFeed" /></h1>
         }
 
         return (
@@ -87,4 +85,4 @@ const InfoBanner = React.createClass({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(InfoBanner)
+export default connect(mapStateToProps)(InfoBanner)

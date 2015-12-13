@@ -45,11 +45,12 @@ function handleJSON(response) {
 }
 
 function dispatchRecord(record) {
-    record.attributes = { id: record.id, ...(record.attributes || {}) }
+    record.attributes = { ...(record.attributes || {}), id: record.id, type: record.type }
 
     for (let name of Object.keys(record.relationships)) {
         if (record.relationships[name].data) {
             record.attributes[`${name}_id`] = record.relationships[name].data.id
+            record.attributes[`${name}_type`] = record.relationships[name].data.type
         }
     }
     store.dispatch({
