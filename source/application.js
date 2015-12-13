@@ -87,7 +87,9 @@ const Application = React.createClass({
                         </Route>
 
                         <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
-                            <IndexRoute component={Page} />
+                            <Route component={Page}>
+                                <IndexRoute component={Posts} />
+                            </Route>
 
                             <Route path="/account" component={Account} />
                             <Route path=":pageId" component={Page}>

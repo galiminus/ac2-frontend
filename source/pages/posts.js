@@ -48,10 +48,12 @@ const Posts = React.createClass({
     let query = { include: "sender,recipient" }
 
     if (pageId) {
-      query.page = pageId
+      query["filter[participant_id]"] = pageId
     }
 
-    query.page = pageNum
+    query["page[number]"] = pageNum
+    query["page[size]"] = 25
+    query["sort"] = "-updated_at"
 
     posts.find(query).then((postIds) => this.props.pushPosts(pageId, postIds))
   },

@@ -23,7 +23,7 @@ function mapStateToProps(state, props) {
     }
 
     if (!page) {
-        page = { data: { name: "" } }
+        page = { data: { full_name: "" } }
     }
 
     return ({ page })

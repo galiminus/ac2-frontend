@@ -1,6 +1,6 @@
 export default function(state = false, action) {
   switch (action.type) {
-    case "TOGGLE_LEFTNAV":
+    case "LEFTNAV_TOGGLE":
       return !state
     default:
       return state

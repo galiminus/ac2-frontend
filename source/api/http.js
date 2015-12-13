@@ -89,10 +89,6 @@ function handleJSONAPI(response) {
     }
 }
 
-function catchError(error) {
-    console.log(error, error.stack)
-}
-
 export default {
   create: (path, record, query) => {
     return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
@@ -107,7 +103,6 @@ export default {
     .then(handleError)
     .then(handleJSON)
     .then(handleJSONAPI)
-    .catch(catchError)
   },
 
   update: (path, record, query) => {
@@ -121,7 +116,6 @@ export default {
     })
     .then(handleDisconnect)
     .then(handleError)
-    .catch(catchError)
   },
 
   find: (path, query) => {
@@ -136,6 +130,5 @@ export default {
     .then(handleError)
     .then(handleJSON)
     .then(handleJSONAPI)
-    .catch(catchError)
   }
 }
