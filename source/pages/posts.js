@@ -68,7 +68,7 @@ const Posts = React.createClass({
   render: function() {
     const posts = this.props.posts.map(post => <Post key={post.id} post={post} />)
     return (
-        <div>
+        <div className="col-md-8 col-sm-8 col-xs-12">
             <PostForm className="col-xs-12" />
             <List>
               {posts}

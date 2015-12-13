@@ -1,7 +1,11 @@
+import { locales } from "config"
+
 export default {
   "titles.imageUploadDialog": "Ajouter des images",
 
   "errors.disconnected": "Vous avez été déconnecté.",
+  "errors.invalid_grant": "Adresse email ou mot de passe invalide",
+  "errors.email_already_in_use": "Cette adresse email est déjà utilisé",
 
   "actions.goToLoginPage": "Revenir à la page d'accueil",
   "actions.login": "Se connecter",
@@ -32,11 +36,12 @@ export default {
   "labels.pollPost": "Sondage",
   "labels.imageUploadDropZone": "Glissez une image dans cette zone ou cliquez pour ouvrir la boite de sélection.",
 
+  "texts.emptyField": "Ce champ n'est pas renseigné",
+
   "links.currentUserPage": "Ma page",
   "links.currentUserProfile": "Mon profil",
   "links.accountSettings": "Paramètres de compte",
   "links.mainFeed": "Mur principal",
 
-  "errors.invalid_grant": "Adresse email ou mot de passe invalide",
-  "errors.email_already_in_use": "Cette adresse email est déjà utilisé"
+  ...(locales["fr-FR"])
 }
