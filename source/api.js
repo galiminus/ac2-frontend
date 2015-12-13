@@ -6,6 +6,7 @@ import createPost     from "api/createPost"
 import findPosts      from "api/findPosts"
 import updatePost     from "api/updatePost"
 import getPage        from "api/getPage"
+import updatePage     from "api/updatePage"
 
 export default {
   tokens: {
@@ -25,6 +26,7 @@ export default {
   },
 
   pages: {
-    get: getPage
+    get: getPage,
+    update: updatePage
   }
 }

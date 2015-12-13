@@ -45,7 +45,7 @@ function handleJSON(response) {
 }
 
 function dispatchRecord(record) {
-    record.attributes.id = record.id
+    record.attributes = { id: record.id, ...(record.attributes || {}) }
 
     for (let name of Object.keys(record.relationships)) {
         if (record.relationships[name].data) {
@@ -89,9 +89,13 @@ function handleJSONAPI(response) {
     }
 }
 
+function catchError(error) {
+    console.log(error, error.stack)
+}
+
 export default {
-  create: (path, record) => {
-    return fetch(`${baseUrl}${path}`, {
+  create: (path, record, query) => {
+    return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
       method: "POST",
       body: JSON.stringify(record),
       mode: 'cors',
@@ -103,10 +107,11 @@ export default {
     .then(handleError)
     .then(handleJSON)
     .then(handleJSONAPI)
+    .catch(catchError)
   },
 
-  update: (path, record) => {
-    return fetch(`${baseUrl}${path}`, {
+  update: (path, record, query) => {
+    return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
       method: "PUT",
       body: JSON.stringify(record),
       mode: 'cors',
@@ -116,8 +121,7 @@ export default {
     })
     .then(handleDisconnect)
     .then(handleError)
-    .then(handleJSON)
-    .then(handleJSONAPI)
+    .catch(catchError)
   },
 
   find: (path, query) => {
@@ -132,5 +136,6 @@ export default {
     .then(handleError)
     .then(handleJSON)
     .then(handleJSONAPI)
+    .catch(catchError)
   }
 }

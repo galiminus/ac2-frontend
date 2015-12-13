@@ -5,7 +5,6 @@ import { FormattedMessage } from "react-intl"
 import { Snackbar } from "material-ui"
 
 function mapStateToProps(state, props) {
-    console.log(state)
     return {
         notification: state.notifications || { message: null }
     }
