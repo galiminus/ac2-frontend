@@ -37,6 +37,7 @@ const Profile = React.createClass({
 
         return (
             <ListItem
+                key={`labels.userPageFields.${field}`}
                 primaryText={<FormattedMessage id={`labels.userPageFields.${field}`} />}
                 secondaryText={secondaryText} />
         )
@@ -60,7 +61,7 @@ const Profile = React.createClass({
             }
 
             tabs.push(
-                <Tab label={<FormattedMessage id={`titles.userPageFields.${category}`} />}>
+                <Tab key={`titles.userPageFields.${category}`} label={<FormattedMessage id={`titles.userPageFields.${category}`} />}>
                     <List>
                         {fields}
                     </List>
