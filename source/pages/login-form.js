@@ -17,10 +17,10 @@ import { currentToken } from "action-creators"
 import { validateEmail, validatePassword } from "validators"
 
 const authenticate = (fields, dispatch) =>
-tokens.create(fields, dispatch).then((data) => {
-    dispatch(currentToken.set(data.access_token))
-    dispatch(updatePath("/"))
-})
+    tokens.create(fields, dispatch).then((data) => {
+        dispatch(currentToken.set(data.access_token))
+        dispatch(updatePath("/"))
+    })
 
 const validate = values => {
     return {
@@ -49,7 +49,7 @@ let form = React.createClass({
     render: function() {
         const {
             fields: { email, password },
-            handleSubmit,
+            handleSubmit
         } = this.props
 
         return(

@@ -8,7 +8,7 @@ export default function(state = "", action) {
         return {...action.data, timestamp }
 
         case "redux-form/STOP_SUBMIT":
-        if (action.error && action.errors._error) {
+        if (action.errors && action.errors._error) {
             return { message: action.errors._error, timestamp }
         }
         else {
