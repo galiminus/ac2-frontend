@@ -1,5 +1,7 @@
 import React from "react"
 
+import randomColor from "utils/random-color"
+
 import {
   Avatar,
 } from "material-ui"
@@ -15,7 +17,7 @@ const UserAvatar = React.createClass({
       cursor: "pointer"
     }
     return (
-      <Avatar style={style}>{this.props.page.data.full_name[0]}</Avatar>
+      <Avatar backgroundColor={randomColor(this.props.page.data.full_name)} style={style}>{this.props.page.data.full_name[0]}</Avatar>
     )
   }
 })

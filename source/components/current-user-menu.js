@@ -12,6 +12,8 @@ import MenuItem from "material-ui/lib/menus/menu-item"
 import { dispatch } from "store"
 import { updatePath } from 'redux-simple-router'
 
+import randomColor from "utils/random-color"
+
 import { FormattedMessage } from 'react-intl'
 
 import { tokens } from "action-creators"
@@ -56,7 +58,8 @@ const CurrentUserMenu = React.createClass({
             marginLeft: 24,
             fontFamily: "Roboto, sans-serif",
             textTransform: "uppercase",
-            cursor: "pointer"
+            cursor: "pointer",
+            backgroundColor: randomColor(this.props.page.data.full_name)
         }
 
         return (
