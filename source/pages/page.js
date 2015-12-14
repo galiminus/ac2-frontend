@@ -39,7 +39,7 @@ const Page = React.createClass({
         return (
             <div style={{perspective: 1, transformStyle: "preserve-3d", overflowX: "hidden", overflowY: "scroll", "height": "100vh"}}>
                 <InfoBanner page={this.props.page} main={this.props.params.pageId === undefined} />
-                <div className="container-fluid" style={{zIndex: 2, background: "white", height: "100%", paddingTop: 12}}>
+                <div style={{zIndex: 2, background: "white", height: "100%"}}>
                     {this.props.children}
                 </div>
             </div>

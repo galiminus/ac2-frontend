@@ -49,7 +49,6 @@ const Profile = React.createClass({
             zIndex: 2,
             background: "white",
             height: "100%",
-            paddingTop: 12
         }
 
         let tabs = []
@@ -69,8 +68,8 @@ const Profile = React.createClass({
             )
         }
         return (
-            <div className="container-fluid" style={style}>
-                <Tabs className="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">{tabs}</Tabs>
+            <div style={style}>
+                <Tabs className="col-xs-12 col-sm-12 col-md-8" style={{padding: 0}}>{tabs}</Tabs>
             </div>
         )
     }
