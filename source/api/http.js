@@ -23,7 +23,7 @@ function handleDisconnect(response) {
     if (response.status == 401) {
         let unauthorizedError = response.headers.get('www-authenticate')
         if (unauthorizedError && unauthorizedError.match("error=\"invalid_token\"")) {
-            store.dispatch(tokens.removeAll())
+            store.dispatch(tokens.clear())
         }
     }
     return response

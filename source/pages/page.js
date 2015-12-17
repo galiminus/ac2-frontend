@@ -37,9 +37,9 @@ const Page = React.createClass({
         let infoBanner;
 
         return (
-            <div style={{perspective: 1, transformStyle: "preserve-3d", overflowX: "hidden", overflowY: "scroll", "height": "100vh"}}>
+            <div style={{perspective: 1, overflowX: "hidden", overflowY: "scroll", "height": "100vmin"}}>
                 <InfoBanner page={this.props.page} main={this.props.params.pageId === undefined} />
-                <div style={{zIndex: 2, background: "white", height: "100%"}}>
+                <div style={{background: "white", height: "100%"}}>
                     {this.props.children}
                 </div>
             </div>

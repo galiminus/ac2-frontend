@@ -13,7 +13,7 @@ import {
 } from 'material-ui'
 
 import { tokens } from "api"
-import { currentToken } from "action-creators"
+import { currentToken, actionCableConsumers } from "action-creators"
 import { validateEmail, validatePassword } from "validators"
 
 const authenticate = (fields, dispatch) =>

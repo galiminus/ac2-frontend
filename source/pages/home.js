@@ -27,9 +27,13 @@ import {
     AcToolbar
 } from "components"
 
-import { leftNav, currentUser } from "action-creators"
+import ActionCable      from "components/action-cable"
+
+
+import { leftNav, currentUser, actionCableSubscriptions } from "action-creators"
 
 import { users } from "api"
+
 
 function mapStateToProps(state) {
     return {
@@ -42,7 +46,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         toggleLeftNav: () => dispatch(leftNav.toggle()),
-        setCurrentUser: (id) => dispatch(currentUser.set(id))
+        setCurrentUser: (id) => dispatch(currentUser.set(id)),
+        subscribeToAppeareance: () => dispatch(actionCableSubscriptions.add("appearance"))
     }
 }
 
@@ -62,6 +67,7 @@ const HomePage = React.createClass({
     render() {
         return (
             <div style={{height: "100%"}}>
+                <ActionCable channel="AppearanceChannel" />
                 <AcToolbar>
                     <ToolbarGroup key={0} float="left">
                         <FontIcon className="material-icons hide-md hide-lg" style={{paddingLeft: 0, paddingRight: 24}} onClick={this.props.toggleLeftNav}>menu</FontIcon>

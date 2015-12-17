@@ -104,6 +104,7 @@ let form = React.createClass({
 
                 <Dialog
                     open={this.state.imagesModalOpen}
+                    style={{position: "absolute"}}
                     title={"LOL"}
                     actions={[
                         <FlatButton

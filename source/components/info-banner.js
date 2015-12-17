@@ -23,7 +23,7 @@ const style = {
             width: "100%",
             background: DefaultRawTheme.palette.textColor,
             opacity: 0.8,
-            position: "absolute",
+            position: "static",
             bottom: 0,
             zIndex: 1,
             color: DefaultRawTheme.palette.alternateTextColor
@@ -69,7 +69,7 @@ const InfoBanner = React.createClass({
 
         return (
             <div>
-                <div style={{position: "relative", maxHeight: "100vh"}} className="hide-xs hide-sm">
+                <div className="hide-xs hide-sm">
                     <div style={style.parallax.banner}></div>
                     <aside style={style.parallax.infos}>
                         <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
