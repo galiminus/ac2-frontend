@@ -9,23 +9,19 @@ let bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_
 const style = {
     parallax: {
         banner: {
-            background: "center / cover",
-            backgroundImage: `url(${bannerImage})`,
-            position: "relative",
-            transformOrigin: "center center 0",
-            transform: "translateZ(-1px) scale(2)",
-            zIndex: -1,
-            minHeight: "100vh",
-            marginTop: "-25vw"
+            width: "100%",
+            background: `#000 url(${bannerImage}) no-repeat center/cover`,
+            height: 0,
+            paddingBottom: "30%",
+            position: "relative"
         },
         infos: {
             fontFamily: DefaultRawTheme.fontFamily,
             width: "100%",
             background: DefaultRawTheme.palette.textColor,
             opacity: 0.8,
-            position: "static",
+            position: "absolute",
             bottom: 0,
-            zIndex: 1,
             color: DefaultRawTheme.palette.alternateTextColor
         }
     },
@@ -70,12 +66,13 @@ const InfoBanner = React.createClass({
         return (
             <div>
                 <div className="hide-xs hide-sm">
-                    <div style={style.parallax.banner}></div>
-                    <aside style={style.parallax.infos}>
-                        <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
-                    </aside>
+                    <div style={style.parallax.banner}>
+                        <aside style={style.parallax.infos}>
+                            <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
+                        </aside>
+                    </div>
                 </div>
-                <div className="hide-md hide-lg" style={{marginTop: 56}}>
+                <div className="hide-md hide-lg">
                     <aside style={style.classic.infos}>
                         <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
                     </aside>
