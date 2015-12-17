@@ -22,6 +22,7 @@
     "webpack": "^1.12.3"
   },
   "dependencies": {
+    "es6-actioncable": "0.0.1",
     "exports-loader": "^0.6.2",
     "flexboxgrid": "git@github.com:phorque/flexboxgrid.git",
     "history": "^1.13.0",
