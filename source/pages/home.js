@@ -24,11 +24,8 @@ import {
     Navigation,
     ToolbarLogo,
     CurrentUserMenu,
-    AcToolbar
+    AcToolbar,
 } from "components"
-
-import ActionCable      from "components/action-cable"
-
 
 import { leftNav, currentUser, actionCableSubscriptions } from "action-creators"
 
@@ -67,7 +64,6 @@ const HomePage = React.createClass({
     render() {
         return (
             <div style={{height: "100%"}}>
-                <ActionCable channel="AppearanceChannel" />
                 <AcToolbar>
                     <ToolbarGroup key={0} float="left">
                         <FontIcon className="material-icons hide-md hide-lg" style={{paddingLeft: 0, paddingRight: 24}} onClick={this.props.toggleLeftNav}>menu</FontIcon>

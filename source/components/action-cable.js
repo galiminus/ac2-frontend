@@ -2,9 +2,26 @@ import React from "react"
 import { connect } from "react-redux"
 import Cable from 'es6-actioncable'
 
+import { dispatchRecord } from "json-api"
+
 function mapStateToProps(state, props) {
     return {
-        tokens: state.tokens || {}
+        tokens: state.tokens
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        push: (message) => {
+            if (message && message.data) {
+                dispatchRecord(message.data)
+                if (message.included) {
+                    for (let record of message.included) {
+                        dispatchRecord(record)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -25,14 +42,8 @@ const ActionCable = React.createClass({
 
     subscribe(consumer, channel) {
         return consumer.subscriptions.create(channel, {
-            connected: () => {
-                console.log("Connected to " + channel)
-            },
-
-            received: (data) => {
-                console.log(data)
-            }
-        })
+            received: this.props.push
+         })
     },
 
     componentDidMount() {
@@ -43,23 +54,24 @@ const ActionCable = React.createClass({
         this.setState({subscriptions})
     },
 
-    componentWillUnmount() {
-        for (let subscription of this.state.subscriptions) {
-            subscription.unsubscribe()
-        }
-
+    componentWillReceiveProps(props) {
         for (let accessToken in consumers) {
-            let consumer = consumers[accessToken]
-
-            if (consumer.subscriptions.subscriptions.length == 1) {
-                Cable.endConsumer(consumer)
+            if (!props.tokens.get(accessToken)) {
+                Cable.endConsumer(consumers[accessToken])
+                delete consumers[accessToken]
             }
         }
     },
 
+    componentWillUnmount() {
+        for (let subscription of this.state.subscriptions) {
+            subscription.unsubscribe()
+        }
+    },
+
     render() {
-        return null;
+        return this.props.children;
     }
 })
 
-export default connect(mapStateToProps)(ActionCable)
+export default connect(mapStateToProps, mapDispatchToProps)(ActionCable)

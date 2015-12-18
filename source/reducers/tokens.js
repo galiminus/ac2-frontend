@@ -6,7 +6,7 @@ export default function(state = Immutable.Map({}), action) {
         return state.set(action.data.access_token, action.data)
 
         case "TOKENS_CLEAR":
-        return Immutable.Map({})
+        return state.clear()
 
         default:
         return state

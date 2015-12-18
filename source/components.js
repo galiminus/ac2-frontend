@@ -8,6 +8,7 @@ import UserAvatar         from "components/user-avatar"
 import InfoBanner         from "components/info-banner"
 import Post               from "components/post"
 import Notifier           from "components/notifier"
+import ActionCable        from "components/action-cable"
 
 export default {
   AcToolbar,
@@ -19,5 +20,6 @@ export default {
   UserAvatar,
   InfoBanner,
   Post,
-  Notifier
+  Notifier,
+  ActionCable
 }

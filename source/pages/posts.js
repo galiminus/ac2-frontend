@@ -10,7 +10,7 @@ import PostForm from "components/post-form"
 
 import { posts } from "api"
 import { pagesPosts } from "action-creators"
-import { Post } from "components"
+import { Post, ActionCable } from "components"
 
 function mapStateToProps(state, props) {
     let posts
@@ -24,7 +24,7 @@ function mapStateToProps(state, props) {
     }
 
     return {
-        posts: state.posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? 0 : 1))
+        posts: posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1))
     }
 }
 
@@ -76,15 +76,17 @@ const Posts = React.createClass({
     render: function() {
         const posts = this.props.posts.map(post => <Post key={post.id} post={post} />)
         return (
-            <div className="container-fluid" style={{paddingTop: 12}}>
-                <div className="col-md-8 col-sm-8 col-xs-12">
-                    <PostForm className="col-xs-12" />
-                    <List>
-                        {posts}
-                    </List>
-                    <FlatButton label="Load more" style={{width: "100%", padding: 8}} onClick={this.loadMorePosts} />
+            <ActionCable channel="PostsChannel">
+                <div className="container-fluid" style={{paddingTop: 12}}>
+                    <div className="col-md-8 col-sm-8 col-xs-12">
+                        <PostForm className="col-xs-12" />
+                        <List>
+                            {posts}
+                        </List>
+                        <FlatButton label="Load more" style={{width: "100%", padding: 8}} onClick={this.loadMorePosts} />
+                    </div>
                 </div>
-            </div>
+            </ActionCable>
         );
     }
 })

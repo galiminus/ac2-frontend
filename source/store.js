@@ -31,7 +31,7 @@ const storage = compose(
 const logger = createLogger();
 
 let createStoreWithMiddleware = compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunk, logger),
 )(createStore)
 
 const createPersistentStore = compose(

@@ -2,10 +2,10 @@ import React from "react"
 import { connect } from 'react-redux'
 
 import {
-  Paper,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarTitle
+    Paper,
+    Toolbar,
+    ToolbarGroup,
+    ToolbarTitle
 } from "material-ui"
 
 import { FormattedMessage } from "react-intl"
@@ -23,29 +23,30 @@ const Post = React.createClass({
         let senderInfos;
         if (this.props.sender) {
             switch (this.props.sender.type) {
-              case "user_pages":
+                case "user_pages":
+                console.log(this.props.sender.data)
                 senderInfos =
-                  <div>
-                    <UserAvatar page={this.props.sender} />
-                    <ToolbarTitle text={this.props.sender.data.full_name} />
-                  </div>
+                    <div>
+                        <UserAvatar page={this.props.sender} />
+                        <ToolbarTitle text={this.props.sender.data.full_name + this.props.post.id} />
+                    </div>
                 break;
             }
         }
 
         return (
-          <Paper style={{marginTop: 24}}>
-            <Toolbar>
-              <ToolbarGroup key={1} float="left">
-                {senderInfos}
-              </ToolbarGroup>
-            </Toolbar>
-            <div style={{padding: 24}}>
-              {this.props.post.data.body}
-            </div>
-          </Paper>
-        )
-    }
-})
+            <Paper style={{marginTop: 24}}>
+                <Toolbar>
+                    <ToolbarGroup key={1} float="left">
+                        {senderInfos}
+                    </ToolbarGroup>
+                </Toolbar>
+                <div style={{padding: 24}}>
+                    {this.props.post.data.body}
+                </div>
+            </Paper>
+            )
+        }
+    })
 
-export default connect(mapStateToProps)(Post)
+    export default connect(mapStateToProps)(Post)

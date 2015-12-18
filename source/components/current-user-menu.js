@@ -9,7 +9,6 @@ import {
 
 import MenuItem from "material-ui/lib/menus/menu-item"
 
-import { dispatch } from "store"
 import { updatePath } from 'redux-simple-router'
 
 import randomColor from "utils/random-color"
@@ -31,25 +30,33 @@ function mapStateToProps(state, props) {
     return ({ page })
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        goToPage: () => dispatch(updatePath(`/${this.props.user.page_id}`)),
+        goToProfile: () => dispatch(updatePath(`/${this.props.user.page_id}/profile`)),
+        goToAccount: () => dispatch(dispatch(updatePath('/account'))),
+        clearTokens: () => dispatch(tokens.clear()),
+        goToLogin: () => dispatch(updatePath("/welcome/login"))
+    }
+}
 const CurrentUserMenu = React.createClass({
     goToPage(e) {
-        dispatch(updatePath(`/${this.props.user.page_id}`))
+        this.props.goToPage()
         e.preventDefault()
     },
 
     goToProfile(e) {
-        dispatch(updatePath(`/${this.props.user.page_id}/profile`))
+        this.props.goToProfile()
         e.preventDefault()
     },
 
     goToAccount(e) {
-        dispatch(updatePath('/account'))
+        this.props.goToAccount()
         e.preventDefault()
     },
 
     disconnect() {
-        dispatch(tokens.clear())
-        dispatch(updatePath("/welcome/login"))
+        this.props.clearTokens()
     },
 
     render() {
@@ -73,4 +80,4 @@ const CurrentUserMenu = React.createClass({
     }
 })
 
-export default connect(mapStateToProps)(CurrentUserMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentUserMenu)
