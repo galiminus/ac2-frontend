@@ -9,7 +9,6 @@ import tokens           from "reducers/tokens"
 import currentToken     from "reducers/current-token"
 
 import pages            from "reducers/pages"
-import pagesPosts       from "reducers/pages-posts"
 import posts            from "reducers/posts"
 
 import notifications    from "reducers/notifications"
@@ -23,7 +22,6 @@ let reducers = combineReducers({
     currentUser,
     posts,
     pages,
-    pagesPosts,
     leftNav,
     form,
     notifications,

@@ -9,7 +9,6 @@ import {
 import PostForm from "components/post-form"
 
 import { posts } from "api"
-import { pagesPosts } from "action-creators"
 import { Post, ActionCable } from "components"
 
 function mapStateToProps(state, props) {
@@ -30,8 +29,6 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        clearPosts: (pageId) => dispatch(pagesPosts.clear(pageId)),
-        pushPosts: (pageId, postIds) => dispatch(pagesPosts.push(pageId, postIds))
     }
 }
 
@@ -41,13 +38,11 @@ const Posts = React.createClass({
     },
 
     componentDidMount() {
-        this.props.clearPosts(this.props.params.pageId)
         this.loadPosts(this.props.params.pageId, 1)
     },
 
     componentWillReceiveProps(newProps) {
         if (this.props.params.pageId != newProps.params.pageId) {
-            this.props.clearPosts(newProps.params.pageId)
             this.loadPosts(newProps.params.pageId, 1)
         }
     },
@@ -63,7 +58,7 @@ const Posts = React.createClass({
         query["page[size]"] = 25
         query["sort"] = "-updated_at"
 
-        posts.find(query).then((postIds) => this.props.pushPosts(pageId, postIds))
+        posts.find(query)
     },
 
     loadMorePosts() {

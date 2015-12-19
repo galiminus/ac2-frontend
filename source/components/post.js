@@ -24,11 +24,10 @@ const Post = React.createClass({
         if (this.props.sender) {
             switch (this.props.sender.type) {
                 case "user_pages":
-                console.log(this.props.sender.data)
                 senderInfos =
                     <div>
                         <UserAvatar page={this.props.sender} />
-                        <ToolbarTitle text={this.props.sender.data.full_name + this.props.post.id} />
+                        <ToolbarTitle text={this.props.sender.data.full_name} />
                     </div>
                 break;
             }

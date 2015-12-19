@@ -32,26 +32,23 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        goToPage: () => dispatch(updatePath(`/${this.props.user.page_id}`)),
-        goToProfile: () => dispatch(updatePath(`/${this.props.user.page_id}/profile`)),
-        goToAccount: () => dispatch(dispatch(updatePath('/account'))),
-        clearTokens: () => dispatch(tokens.clear()),
-        goToLogin: () => dispatch(updatePath("/welcome/login"))
+        updatePath: (path) => dispatch(updatePath(path)),
+        clearTokens: () => dispatch(tokens.clear())
     }
 }
 const CurrentUserMenu = React.createClass({
     goToPage(e) {
-        this.props.goToPage()
+        this.props.updatePath(`/${this.props.user.page_id}`)
         e.preventDefault()
     },
 
     goToProfile(e) {
-        this.props.goToProfile()
+        this.props.updatePath(`/${this.props.user.page_id}/profile`)
         e.preventDefault()
     },
 
     goToAccount(e) {
-        this.props.goToAccount()
+        this.props.updatePath("/account")
         e.preventDefault()
     },
 
