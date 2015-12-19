@@ -1,8 +1,8 @@
 import { update } from "api/http"
 
-export default (record, dispatch) =>
+export default (id, record) =>
     new Promise((resolve, reject) =>
-        update(`/pages/${record.id}`, {
+        update(`/pages/${id}`, {
             page: record
         })
         .then(resolve)

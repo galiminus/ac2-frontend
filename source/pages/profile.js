@@ -6,11 +6,11 @@ import {
     Tabs,
     Tab,
     List,
-    ListItem
 } from "material-ui"
 
 import { pages } from "api"
 import { userPageFields } from "config"
+import FieldCreator from "components/field-creator"
 
 function mapStateToProps(state, props) {
     return {
@@ -19,30 +19,6 @@ function mapStateToProps(state, props) {
 }
 
 const Profile = React.createClass({
-    renderField(field, type) {
-        let value = this.props.page.data[field];
-
-        let secondaryText;
-        if (value) {
-            switch (type) {
-                case "string":
-                secondaryText = <p>{this.props.page.data[field]}</p>
-
-                default:
-            }
-        }
-        else {
-            secondaryText = <p><FormattedMessage id="texts.emptyField" /></p>
-        }
-
-        return (
-            <ListItem
-                key={`labels.userPageFields.${field}`}
-                primaryText={<FormattedMessage id={`labels.userPageFields.${field}`} />}
-                secondaryText={secondaryText} />
-        )
-    },
-
     render() {
         const style = {
             fontFamily: "Roboto, sans-serif",
@@ -56,7 +32,18 @@ const Profile = React.createClass({
             let fields = []
 
             for (let field in userPageFields[category]) {
-                fields.push(this.renderField(field, userPageFields[category][field]))
+                let fieldForm = FieldCreator(field, this.props.page.data[field], userPageFields[category][field])
+
+                const updateValue = (value) => {
+                    let data = Object.assign({}, this.props.page.data)
+                    data[field] = value
+
+                    pages.update(this.props.page.id, { data })
+                }
+
+                fields.push(
+                    React.createElement(fieldForm, { key: field, onChange: updateValue })
+                )
             }
 
             tabs.push(

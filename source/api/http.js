@@ -102,6 +102,8 @@ export default {
     })
     .then(handleDisconnect)
     .then(handleError)
+    .then(handleJSON)
+    .then(handleJSONAPI)
   },
 
   find: (path, query) => {
