@@ -1,3 +1,3 @@
 export default {
-  push: (message) => ({ type: "NOTIFICATIONS_PUSH", data: { message } }),
-}
+    push: (message) => ({ type: "NOTIFICATIONS_PUSH", data: { message } })
+};

@@ -1,10 +1,10 @@
-import React from "react"
-import { connect } from 'react-redux'
+import React, { PropTypes } from "react";
+import { connect } from "react-redux";
 
-import DefaultRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
-import { FormattedMessage } from "react-intl"
+import DefaultRawTheme from "material-ui/lib/styles/raw-themes/light-raw-theme";
+import { FormattedMessage } from "react-intl";
 
-let bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_p51mustang_mini.jpg"
+const bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_p51mustang_mini.jpg";
 
 const style = {
     parallax: {
@@ -34,33 +34,43 @@ const style = {
             color: DefaultRawTheme.palette.alternateTextColor
         }
     }
-}
+};
 
 function mapStateToProps(state, props) {
-    if (props.main || !props.page) return {}
+    if (props.main || !props.page) return {};
 
     let owner;
     switch (props.page.owner_type) {
-        case "users":
-        owner = state.users.get(props.page.owner_id)
+    case "users":
+        owner = state.users.get(props.page.owner_id);
         break;
-        default:
+    default:
+        break;
     }
 
-    return { owner }
+    return { owner };
 }
 
 const InfoBanner = React.createClass({
+    propTypes: {
+        owner: PropTypes.object,
+        main: PropTypes.bool,
+        page: PropTypes.object
+    },
+
     render() {
         let ownerInfos;
+
         if (this.props.owner) {
             switch (this.props.owner.type) {
-                case "users":
-                ownerInfos = <h1>{this.props.page.data.full_name}</h1>
+            case "users":
+                ownerInfos = <h1>{this.props.page.data.full_name}</h1>;
+                break;
+            default:
+                break;
             }
-        }
-        else if (this.props.main) {
-            ownerInfos = <h1><FormattedMessage id="links.mainFeed" /></h1>
+        } else if (this.props.main) {
+            ownerInfos = <h1><FormattedMessage id="links.mainFeed" /></h1>;
         }
 
         return (
@@ -68,18 +78,18 @@ const InfoBanner = React.createClass({
                 <div className="hide-xs hide-sm">
                     <div style={style.parallax.banner}>
                         <aside style={style.parallax.infos}>
-                            <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
+                            <div style={{ padding: "16px 32px" }}>{ownerInfos}</div>
                         </aside>
                     </div>
                 </div>
                 <div className="hide-md hide-lg">
                     <aside style={style.classic.infos}>
-                        <div style={{padding: "16px 32px"}}>{ownerInfos}</div>
+                        <div style={{ padding: "16px 32px" }}>{ownerInfos}</div>
                     </aside>
                 </div>
             </div>
-        )
+        );
     }
-})
+});
 
-export default connect(mapStateToProps)(InfoBanner)
+export default connect(mapStateToProps)(InfoBanner);

@@ -1,6 +1,6 @@
-import { create } from "api/http"
+import { create } from "api/http";
 
-export default (record, query, dispatch) => {
+export default (record, query) => {
     return new Promise((resolve, reject) => {
         create("/users", {
             user: record
@@ -8,13 +8,12 @@ export default (record, query, dispatch) => {
         .then(resolve)
         .catch((error) => {
             error.response.json().then((response) => {
-                if (response.email == "has already been taken") {
-                    reject({_error: "email_already_in_use"})
+                if (response.email === "has already been taken") {
+                    reject({ _error: "email_already_in_use" });
+                } else {
+                    reject({ _error: "unknown" });
                 }
-                else {
-                    reject({_error: "unknown"})
-                }
-            })
-        })
-    })
-}
+            });
+        });
+    });
+};

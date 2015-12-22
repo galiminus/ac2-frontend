@@ -1,122 +1,119 @@
-import queryString from "query-string"
+import queryString from "query-string";
 
-import { baseUrl } from "config"
-import store from "store"
-import { tokens } from "action-creators"
-import { dispatchRecord } from "json-api"
+import { baseUrl } from "config";
+import store from "store";
+import { tokens } from "action-creators";
+import { dispatchRecord } from "json-api";
 
 function headers() {
-  let base = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
+    const base = {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    };
 
-  const { tokens, currentToken } = store.getState()
-  if (tokens.get(currentToken)) {
-    base['Authorization'] = 'Bearer ' + tokens.get(currentToken).access_token
-  }
+    const state = store.getState();
+    if (state.tokens.get(state.currentToken)) {
+        base.Authorization = "Bearer " + state.tokens.get(state.currentToken).access_token;
+    }
 
-  return (base)
+    return (base);
 }
 
 function handleDisconnect(response) {
-    if (response.status == 401) {
-        let unauthorizedError = response.headers.get('www-authenticate')
+    if (response.status === 401) {
+        const unauthorizedError = response.headers.get("www-authenticate");
         if (unauthorizedError && unauthorizedError.match("error=\"invalid_token\"")) {
-            store.dispatch(tokens.clear())
+            store.dispatch(tokens.clear());
         }
     }
-    return response
+    return response;
 }
 
 function handleError(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
-  }
-  else {
-    let error = new Error(response.statusText)
-    error.response = response
-    throw error
-  }
+    if (response.status >= 200 && response.status < 300) {
+        return response;
+    }
+
+    const error = new Error(response.statusText);
+    error.response = response;
+    throw error;
 }
 
 function handleJSON(response) {
-  return response.json()
+    return response.json();
 }
 
 function handleJSONAPI(response) {
     if (Array.isArray(response.data)) {
-        let ids = []
+        const ids = [];
 
-        for (let record of response.data) {
-            dispatchRecord(record)
-            ids.push(record.id)
+        for (const record of response.data) {
+            dispatchRecord(record);
+            ids.push(record.id);
         }
         if (response.included) {
-            for (let record of response.included) {
-                dispatchRecord(record)
+            for (const record of response.included) {
+                dispatchRecord(record);
             }
         }
 
-        return (ids)
-    }
-    else if (typeof(response.data) === 'object') {
-        dispatchRecord(response.data)
+        return (ids);
+    } else if (typeof(response.data) === "object") {
+        dispatchRecord(response.data);
         if (response.included) {
-            for (let record of response.included) {
-                dispatchRecord(record)
+            for (const record of response.included) {
+                dispatchRecord(record);
             }
         }
 
-        return (response.data.id)
+        return (response.data.id);
     }
-    else {
-        return (response)
-    }
+
+    return (response);
 }
 
 export default {
-  create: (path, record, query) => {
-    return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
-      method: "POST",
-      body: JSON.stringify(record),
-      mode: 'cors',
-      headers: {
-        ...headers()
-      }
-    })
-    .then(handleDisconnect)
-    .then(handleError)
-    .then(handleJSON)
-    .then(handleJSONAPI)
-  },
+    create: (path, record, query) => {
+        return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+            method: "POST",
+            body: JSON.stringify(record),
+            mode: "cors",
+            headers: {
+                ...headers()
+            }
+        })
+        .then(handleDisconnect)
+        .then(handleError)
+        .then(handleJSON)
+        .then(handleJSONAPI);
+    },
 
-  update: (path, record, query) => {
-    return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
-      method: "PUT",
-      body: JSON.stringify(record),
-      mode: 'cors',
-      headers: {
-        ...headers()
-      }
-    })
-    .then(handleDisconnect)
-    .then(handleError)
-    .then(handleJSON)
-    .then(handleJSONAPI)
-  },
+    update: (path, record, query) => {
+        return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+            method: "PUT",
+            body: JSON.stringify(record),
+            mode: "cors",
+            headers: {
+                ...headers()
+            }
+        })
+        .then(handleDisconnect)
+        .then(handleError)
+        .then(handleJSON)
+        .then(handleJSONAPI);
+    },
 
-  find: (path, query) => {
-    return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
-      method: "GET",
-      mode: 'cors',
-      headers: {
-        ...headers()
-      }
-    })
-    .then(handleDisconnect)
-    .then(handleError)
-    .then(handleJSON)
-    .then(handleJSONAPI)
-  }
-}
+    find: (path, query) => {
+        return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                ...headers()
+            }
+        })
+        .then(handleDisconnect)
+        .then(handleError)
+        .then(handleJSON)
+        .then(handleJSONAPI);
+    }
+};

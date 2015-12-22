@@ -1,12 +1,14 @@
-import Immutable from "immutable"
+import Immutable from "immutable";
 
-export default function(state = Immutable.Map({}), action) {
-  switch (action.type) {
+export default function (state = Immutable.Map({}), action) {
+    switch (action.type) {
     case "USERS_ADD":
-      return state.set(String(action.data.id), action.data.attributes)
+        return state.set(action.data.id, action.data.attributes);
+
     case "TOKENS_CLEAR":
-      return Immutable.Map({})
+        return Immutable.Map({});
+
     default:
-      return state
-  }
+        return state;
+    }
 }

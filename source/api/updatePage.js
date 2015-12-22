@@ -1,4 +1,4 @@
-import { update } from "api/http"
+import { update } from "api/http";
 
 export default (id, record) =>
     new Promise((resolve, reject) =>
@@ -7,4 +7,4 @@ export default (id, record) =>
         })
         .then(resolve)
         .catch(reject)
-    )
+    );

@@ -1,16 +1,16 @@
-import { create } from "api/http"
-import generateUUID from "utils/uuid"
+import { create } from "api/http";
+import generateUUID from "utils/uuid";
 
-export default (record, dispatch) => {
+export default (record) => {
     return new Promise((resolve, reject) => {
         create("/posts", {
             post: { uuid: generateUUID(), ...record }
         })
         .then(resolve)
         .catch((error) => {
-            error.response.json().then((response) => {
-                reject({_error: "unknown"})
-            })
-        })
-    })
-}
+            error.response.json().then(() => {
+                reject({ _error: "unknown" });
+            });
+        });
+    });
+};

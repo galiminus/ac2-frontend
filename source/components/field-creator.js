@@ -1,61 +1,63 @@
-import React, { PropTypes } from "react"
-import { reduxForm } from 'redux-form'
-import { FormattedMessage } from "react-intl"
+import React, { PropTypes } from "react";
+import { reduxForm } from "redux-form";
+import { FormattedMessage } from "react-intl";
 
 import {
     ListItem,
     TextField
-} from "material-ui"
+} from "material-ui";
 
 const FieldCreator = (field, initialValue, type) => {
-    const validate = values => {
+    const validate = (values) => {
         return {
-            value: undefined
-        }
-    }
+            value: !!values
+        };
+    };
 
-    let form = React.createClass({
+    const form = React.createClass({
         propTypes: {
             fields: PropTypes.object.isRequired,
             handleSubmit: PropTypes.func.isRequired,
             error: PropTypes.string,
-            onChange: PropTypes.func,
+            onChange: PropTypes.func
         },
 
         getInitialState() {
-            return { edit: false, mouseInside: false }
-        },
-
-        switchToValueMode() {
-            if (!this.state.mouseInside)
-                this.setState({edit: false})
-        },
-
-        switchToEditMode() {
-            if (!this.state.mouseInside)
-                this.setState({edit: true, mouseInside: true})
+            return { edit: false, mouseInside: false };
         },
 
         setMouseInside() {
-            this.setState({mouseInside: true})
+            this.setState({ mouseInside: true });
         },
 
         setMouseOutside() {
-            this.setState({mouseInside: false})
+            this.setState({ mouseInside: false });
+        },
+
+        switchToEditMode() {
+            if (!this.state.mouseInside) {
+                this.setState({ edit: true, mouseInside: true });
+            }
+        },
+
+        switchToValueMode() {
+            if (!this.state.mouseInside) {
+                this.setState({ edit: false });
+            }
         },
 
         update() {
-            this.props.onChange(this.props.fields.value.value)
-            this.setState({edit: false, mouseInside: false})
+            this.props.onChange(field, this.props.fields.value.value);
+            this.setState({ edit: false, mouseInside: false });
         },
 
         renderEdit() {
             const {
                 fields: { value },
                 handleSubmit
-            } = this.props
+            } = this.props;
 
-            let valueField =
+            const valueField = (
                 <ListItem
                     onMouseEnter={this.setMouseInside}
                     onMouseLeave={this.setMouseOutside}
@@ -65,15 +67,16 @@ const FieldCreator = (field, initialValue, type) => {
                                 ref="valueField"
                                 {...value}
                                 onBlur={this.switchToValueMode}
-                                fullWidth={true}
+                                fullWidth
                                 hintText={<FormattedMessage id={`labels.userPageFields.${field}`} />}
                             />
                         </form>
                     }
                 />
+            );
 
-            setTimeout(() => { this.refs.valueField.focus() }, 1)
-            return (valueField)
+            setTimeout(() => { this.refs.valueField.focus(); }, 1);
+            return (valueField);
         },
 
         renderValue() {
@@ -81,44 +84,44 @@ const FieldCreator = (field, initialValue, type) => {
 
             if (initialValue) {
                 switch (type) {
-                    case "string":
-                    case "country":
-                    secondaryText =
+                case "string":
+                case "country":
+                    secondaryText = (
                         <p>
                             {initialValue}
                         </p>
-
-                    default:
+                    );
+                    break;
+                default:
+                    secondaryText = <div />;
                 }
-            }
-            else {
-                secondaryText = <p><FormattedMessage id="texts.emptyField" /></p>
+            } else {
+                secondaryText = <p><FormattedMessage id="texts.emptyField" /></p>;
             }
 
             return (
                 <ListItem
-                    style={{maxHeight: 80, minHeight: 80}}
+                    style={{ maxHeight: 80, minHeight: 80 }}
                     primaryText={<FormattedMessage id={`labels.userPageFields.${field}`} />}
                     secondaryText={secondaryText}
-                    onTouchTap={this.switchToEditMode} />
-            )
+                    onTouchTap={this.switchToEditMode}
+                />
+            );
         },
 
         render() {
-            return (this.state.edit ? this.renderEdit() : this.renderValue())
+            return (this.state.edit ? this.renderEdit() : this.renderValue());
         }
-    })
-
+    });
 
     return reduxForm({
         form: field,
-        fields: ['value'],
+        fields: ["value"],
         initialValues: {
             value: initialValue
         },
         validate
-    })(form)
+    })(form);
+};
 
-}
-
-export default FieldCreator
+export default FieldCreator;

@@ -1,8 +1,9 @@
-export default function(state = false, action) {
-  switch (action.type) {
+export default function (state = false, action) {
+    switch (action.type) {
     case "LEFTNAV_TOGGLE":
-      return !state
+        return !state;
+
     default:
-      return state
-  }
+        return state;
+    }
 }

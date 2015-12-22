@@ -1,9 +1,6 @@
-import React, { PropTypes } from "react"
-import { reduxForm, reset } from 'redux-form'
-import { FormattedMessage } from "react-intl"
-import { updatePath } from 'redux-simple-router'
-
-export const fields = ['body']
+import React, { PropTypes } from "react";
+import { reduxForm, reset } from "redux-form";
+import { FormattedMessage } from "react-intl";
 
 import {
     TextField,
@@ -11,29 +8,29 @@ import {
     RaisedButton,
     Snackbar,
     Dialog
-} from 'material-ui'
+} from "material-ui";
 
-import DropZone from "react-dropzone"
+import DropZone from "react-dropzone";
 
-import { posts } from "api"
-import { validateText } from "validators"
+import { posts } from "api";
+import { validateText } from "validators";
 
-let post = (fields, dispatch) => {
+const post = (fields, dispatch) => {
     posts.create({
         type: "text",
         data: {
             body: fields.body
         }
-    }).then(() => dispatch(reset("post")))
-}
+    }).then(() => dispatch(reset("post")));
+};
 
 const validate = values => {
     return {
         body: validateText(values.body)
-    }
-}
+    };
+};
 
-let form = React.createClass({
+const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
@@ -44,57 +41,62 @@ let form = React.createClass({
         return {
             imagesModalOpen: false,
             pollModalOpen: false
-        }
+        };
     },
 
     componentWillReceiveProps(props) {
         if (props.error) {
-            this.refs.notice.show()
+            this.refs.notice.show();
         }
     },
 
-    onDropImage(e) {
+    handleDropImage() {
     },
 
-    render: function() {
+    render() {
         const {
             fields: { body },
             handleSubmit,
             error
-        } = this.props
+        } = this.props;
 
         const dropZoneStyle = {
             background: "rgba(0, 0, 0, 0.05)",
             border: "1px solid rgba(0, 0, 0, 0.1)",
             padding: "64px 96px",
             display: "flex"
-        }
+        };
 
         if (!body.value) {
-            body.value = ""
+            body.value = "";
         }
-        return(
+        return (
             <form onSubmit={handleSubmit(post)}>
-                <TextField fullWidth={true}
+                <TextField
+                    fullWidth
                     type="text"
-                    multiLine={true}
+                    multiLine
                     rows={3}
-                    {...body} />
-                <div className="row end-xs" style={{padding: 8}}>
+                    {...body}
+                />
+                <div className="row end-xs" style={{ padding: 8 }}>
                     <FlatButton
-                        onClick={() => this.setState({pollModalOpen: true})}
-                        label={<FormattedMessage id="actions.addPoll" />} />
+                        onClick={() => this.setState({ pollModalOpen: true })}
+                        label={<FormattedMessage id="actions.addPoll" />}
+                    />
                     <FlatButton
-                        style={{marginLeft: 8}}
-                        onClick={() => this.setState({imagesModalOpen: true})}
-                        label={<FormattedMessage id="actions.addImages" />} />
+                        style={{ marginLeft: 8 }}
+                        onClick={() => this.setState({ imagesModalOpen: true })}
+                        label={<FormattedMessage id="actions.addImages" />}
+                    />
                     <RaisedButton
-                        style={{marginLeft: 8}}
+                        style={{ marginLeft: 8 }}
                         disabled={body.invalid}
                         type="submit"
                         label={<FormattedMessage id="actions.post" />}
-                        secondary={true}
-                        onClick={handleSubmit(post)} />
+                        secondary
+                        onClick={handleSubmit(post)}
+                    />
                 </div>
                 <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />
 
@@ -104,29 +106,32 @@ let form = React.createClass({
 
                 <Dialog
                     open={this.state.imagesModalOpen}
-                    style={{position: "absolute"}}
+                    style={{ position: "absolute" }}
                     title={"LOL"}
                     actions={[
                         <FlatButton
                             label={<FormattedMessage id="actions.cancel" />}
-                            secondary={true}
-                            onClick={() => this.setState({imagesModalOpen: false})} />,
+                            secondary
+                            onClick={() => this.setState({ imagesModalOpen: false })}
+                        />,
                         <FlatButton
                             label={<FormattedMessage id="actions.submit" />}
-                            primary={true}
-                            onClick={this._handleCustomDialogSubmit} />]}>
-                            <DropZone onDrop={this.onDropImage} style={dropZoneStyle} className="row middle-xs center-xs">
-                                <FormattedMessage id="labels.imageUploadDropZone"  />
-                            </DropZone>
-                        </Dialog>
-                    </form>
-
-            )
+                            primary
+                            onClick={this._handleCustomDialogSubmit}
+                        />
+                    ]}
+                >
+                    <DropZone onDrop={this.handleDropImage} style={dropZoneStyle} className="row middle-xs center-xs">
+                        <FormattedMessage id="labels.imageUploadDropZone" />
+                    </DropZone>
+                </Dialog>
+            </form>
+        );
     }
-})
+});
 
 export default reduxForm({
     form: "post",
-    fields: ['body'],
+    fields: ["body"],
     validate
-})(form)
+})(form);

@@ -1,4 +1,4 @@
-import Colors from 'material-ui/lib/styles/colors'
+import Colors from "material-ui/lib/styles/colors";
 
 const underWhite = [
     Colors.red400,
@@ -120,8 +120,8 @@ const underWhite = [
     Colors.grey600,
     Colors.grey700,
     Colors.grey800,
-    Colors.grey900,
-]
+    Colors.grey900
+];
 
 const underBlack = [
     Colors.red50,
@@ -291,32 +291,31 @@ const underBlack = [
     Colors.grey200,
     Colors.grey300,
     Colors.grey400,
-    Colors.grey500,
-]
+    Colors.grey500
+];
 
 const colorsByTextColor = {
     white: underWhite,
     black: underBlack,
     any: underWhite.concat(underBlack)
-}
+};
 
-function hash(seed) {
+function hashString(seed) {
     let hash = 5381;
     for (let i = 0; i < seed.length; i++) {
-        let char = seed.charCodeAt(i)
-        hash = ((hash << 5) + hash) + char
+        hash = ((hash << 5) + hash) + seed.charCodeAt(i);
     }
     return hash;
 }
 
 function randomColor(seed, textColor = "white") {
-    if (seed.length == 0) {
-        return "transparent"
+    if (seed.length === 0) {
+        return "transparent";
     }
 
-    const colors = colorsByTextColor[textColor]
+    const colors = colorsByTextColor[textColor];
 
-    return (colors[hash(seed) % colors.length])
+    return (colors[hashString(seed) % colors.length]);
 }
 
-export default randomColor
+export default randomColor;

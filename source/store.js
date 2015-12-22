@@ -1,26 +1,26 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import Immutable from "immutable"
-import rootReducer from "reducers"
-import thunk from 'redux-thunk'
-import persistState, {mergePersistedState} from 'redux-localstorage';
-import adapter from 'redux-localstorage/lib/adapters/localStorage/adapter';
-import filter from 'redux-localstorage-filter';
-import createLogger from 'redux-logger';
+import { createStore, applyMiddleware, compose } from "redux";
+import Immutable from "immutable";
+import rootReducer from "reducers";
+import thunk from "redux-thunk";
+import persistState, { mergePersistedState } from "redux-localstorage";
+import adapter from "redux-localstorage/lib/adapters/localStorage/adapter";
+import filter from "redux-localstorage-filter";
+import createLogger from "redux-logger";
 
 const reducer = compose(
     mergePersistedState((state, persistedState) => {
-        state.tokens = Immutable.Map(persistedState.tokens)
-        state.currentToken = persistedState.currentToken
+        state.tokens = Immutable.Map(persistedState.tokens);
+        state.currentToken = persistedState.currentToken;
 
-        state.users = Immutable.Map(persistedState.users)
-        state.currentUser = persistedState.currentUser
+        state.users = Immutable.Map(persistedState.users);
+        state.currentUser = persistedState.currentUser;
 
-        state.pages = Immutable.Map(persistedState.pages)
-        state.posts = Immutable.Map(persistedState.posts)
+        state.pages = Immutable.Map(persistedState.pages);
+        state.posts = Immutable.Map(persistedState.posts);
 
-        state.form = persistedState.form
+        state.form = persistedState.form;
 
-        return state
+        return state;
     })
 )(rootReducer);
 
@@ -30,12 +30,12 @@ const storage = compose(
 
 const logger = createLogger();
 
-let createStoreWithMiddleware = compose(
+const createStoreWithMiddleware = compose(
     applyMiddleware(thunk, logger),
-)(createStore)
+)(createStore);
 
 const createPersistentStore = compose(
-    persistState(storage, 'state')
+    persistState(storage, "state")
 )(createStoreWithMiddleware);
 
-export default createPersistentStore(reducer)
+export default createPersistentStore(reducer);

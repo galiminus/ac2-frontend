@@ -1,69 +1,66 @@
-import React, { PropTypes } from "react"
-import { reduxForm } from 'redux-form'
-import { FormattedMessage } from "react-intl"
-import { updatePath } from 'redux-simple-router'
-
-export const fields = ['email']
+import React, { PropTypes } from "react";
+import { reduxForm } from "redux-form";
+import { FormattedMessage } from "react-intl";
+import { updatePath } from "redux-simple-router";
 
 import {
-  TextField,
-  FlatButton,
-  RaisedButton,
-  Snackbar
-} from 'material-ui'
+    TextField,
+    RaisedButton
+} from "material-ui";
 
-import { tokens, users } from "api"
-import { currentUser, currentToken } from "action-creators"
-import { validateEmail } from "validators"
+import { tokens, users } from "api";
+import { currentUser, currentToken } from "action-creators";
+import { validateEmail } from "validators";
 
-let authenticate = (fields, dispatch) =>
-  tokens.create(fields, dispatch).then((data) => {
-    dispatch(currentToken.set(data.access_token))
+const authenticate = (fields, dispatch) =>
+tokens.create(fields, dispatch).then((accessTokenData) => {
+    dispatch(currentToken.set(accessTokenData.access_token));
 
-    users.getMe({}, dispatch).then((data) => {
-      dispatch(currentUser.set(data.id))
-      dispatch(updatePath("/"))
-    })
-  })
+    users.me({}, dispatch).then((userData) => {
+        dispatch(currentUser.set(userData.id));
+        dispatch(updatePath("/"));
+    });
+});
 
 const validate = values => {
-  return {
-    email: validateEmail(values.email)
-  }
-}
+    return {
+        email: validateEmail(values.email)
+    };
+};
 
-let form = React.createClass({
-  propTypes: {
-    fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    error: PropTypes.string
-  },
+const form = React.createClass({
+    propTypes: {
+        fields: PropTypes.object.isRequired,
+        handleSubmit: PropTypes.func.isRequired,
+        error: PropTypes.string
+    },
 
-  render: function() {
-    const {
-      fields: { email },
-      handleSubmit,
-      error
-    } = this.props
+    render() {
+        const {
+            fields: { email },
+            handleSubmit
+            // error
+        } = this.props;
 
-    return(
-      <form onSubmit={handleSubmit(authenticate)}>
-        <TextField fullWidth={true} type="email" {...email} hintText={<FormattedMessage id="labels.recover.email" />} />
-        <div className="row center-xs" style={{marginTop: "1em"}}>
-          <RaisedButton
-            disabled={email.invalid}
-            type="submit"
-            label={<FormattedMessage id="actions.continue" />}
-            secondary={true}
-            onClick={handleSubmit(authenticate)} />
-        </div>
-      </form>
-    )
-  }
-})
+        return (
+            <form onSubmit={handleSubmit(authenticate)}>
+                <TextField fullWidth type="email" {...email} hintText={<FormattedMessage id="labels.recover.email" />} />
+                <div className="row center-xs" style={{ marginTop: "1em" }}>
+                    <RaisedButton
+                        disabled={email.invalid}
+                        type="submit"
+                        label={<FormattedMessage id="actions.continue" />}
+                        secondary
+                        onClick={handleSubmit(authenticate)}
+                    />
+                </div>
+            </form>
+        );
+    }
+});
 
 export default reduxForm({
-  form: "login",
-  fields: ['email'],
-  validate
-})(form)
+    form: "login",
+    fields: ["email"],
+    validate
+})(form);

@@ -1,3 +1,3 @@
 export default {
-  set: (id) => ({ type: "CURRENT_USER_SET", id: id})
-}
+    set: (id) => ({ type: "CURRENT_USER_SET", id })
+};

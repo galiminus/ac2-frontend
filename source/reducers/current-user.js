@@ -1,12 +1,12 @@
-import Immutable from "immutable"
-
-export default function(state = null, action) {
-  switch (action.type) {
+export default function (state = null, action) {
+    switch (action.type) {
     case "CURRENT_USER_SET":
-      return state = String(action.id)
+        return action.id;
+
     case "TOKENS_CLEAR":
-      return null
+        return null;
+
     default:
-      return state
-  }
+        return state;
+    }
 }

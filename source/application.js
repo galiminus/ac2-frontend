@@ -24,7 +24,7 @@ import Profile from "pages/profile";
 import Posts from "pages/posts";
 import Account from "pages/account";
 
-import FlexBoxGrid from "flexboxgrid-with-hide";
+import _FlexBoxGrid from "flexboxgrid-with-hide";
 
 import { Provider } from "react-redux";
 import { IntlProvider } from "react-intl";
@@ -36,13 +36,13 @@ import messages from "messages/fr-FR";
 const history = createBrowserHistory();
 syncReduxAndRouter(history, store);
 
-function redirectToHomePage(nextState, replaceState) {
+function redirectToHomePage(_nextState, replaceState) {
     if (store.getState().currentToken) {
         replaceState(null, "/");
     }
 }
 
-function redirectToLoginPage(nextState, replaceState) {
+function redirectToLoginPage(_nextState, replaceState) {
     if (!store.getState().currentToken) {
         replaceState(null, "/welcome/login");
     }
