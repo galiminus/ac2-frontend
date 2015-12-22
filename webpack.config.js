@@ -1,5 +1,6 @@
 envify = require('envify/custom')
 webpack = require("webpack")
+const path = require('path');
 
 module.exports = {
   context: __dirname + "/source",
@@ -23,22 +24,9 @@ module.exports = {
         loader: "style-loader!css-loader"
       },
       {
-        test: /\.scss$/,
-        loader: "style!css!sass!"
-      },
-      {
-        test: /\.less$/,
-        loader: "style-loader!css-loader!less-loader"
-      },
-      {
-        test: /\.coffee$/,
-        exclude: /node_modules/,
-        loaders: ['coffee', 'cjsx']
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
+          test: /\.js$/,
+          loaders: ['babel-loader', 'eslint-loader'],
+          include: [new RegExp(path.join(__dirname, 'source')), new RegExp(path.join(__dirname, 'tests'))]
       },
       {
         test: /\.html$/,
@@ -52,6 +40,17 @@ module.exports = {
           ]
       }
     ],
+  },
+  preLoaders: [
+     {
+         test: /\.js$/,
+         loaders: ['eslint'],
+         include: [new RegExp(path.join(__dirname, 'source'))]
+     }
+  ],
+  eslint: {
+    failOnError: false,
+    failOnWarning: false
   },
   plugins: [
     new webpack.ProvidePlugin({
