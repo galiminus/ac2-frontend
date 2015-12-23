@@ -1,9 +1,12 @@
 import { create } from "api/http";
 
-export default (record, query) => {
+export default (attributes, query) => {
     return new Promise((resolve, reject) => {
         create("/users", {
-            user: record
+            data: {
+                type: "users",
+                attributes
+            }
         }, query)
         .then(resolve)
         .catch((error) => {

@@ -1,9 +1,12 @@
 import { update } from "api/http";
 
-export default (id, record) =>
+export default (id, attributes) =>
     new Promise((resolve, reject) =>
         update(`/pages/${id}`, {
-            page: record
+            data: {
+                type: "pages",
+                attributes
+            }
         })
         .then(resolve)
         .catch(reject)

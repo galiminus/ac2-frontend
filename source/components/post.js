@@ -18,7 +18,7 @@ function mapStateToProps(state, props) {
 
 const Post = React.createClass({
     propTypes: {
-        sender: PropTypes.object.isRequired,
+        sender: PropTypes.object,
         post: PropTypes.object.isRequired
     },
 

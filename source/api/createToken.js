@@ -18,7 +18,7 @@ export default (record, dispatch) => {
             const authError = error.response.headers.get("www-authenticate");
 
             if (authError && authError.match("error=\"invalid_grant\"")) {
-                reject({ _error: "invalid_grant" });
+                reject({ _error: "invalidGrant" });
             }
         });
     });

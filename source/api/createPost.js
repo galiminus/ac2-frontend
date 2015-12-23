@@ -1,10 +1,14 @@
 import { create } from "api/http";
 import generateUUID from "utils/uuid";
 
-export default (record) => {
+export default (attributes) => {
     return new Promise((resolve, reject) => {
         create("/posts", {
-            post: { uuid: generateUUID(), ...record }
+            data: {
+                type: "posts",
+                id: generateUUID(),
+                attributes
+            }
         })
         .then(resolve)
         .catch((error) => {

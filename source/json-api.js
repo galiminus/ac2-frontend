@@ -12,12 +12,15 @@ export default {
             record.attributes.updated_at = new Date(record.attributes.updated_at);
         }
 
-        for (const name of Object.keys(record.relationships)) {
-            if (record.relationships[name].data) {
-                record.attributes[`${name}_id`] = record.relationships[name].data.id;
-                record.attributes[`${name}_type`] = record.relationships[name].data.type;
+        if (record.relationships) {
+            for (const name of Object.keys(record.relationships)) {
+                if (record.relationships[name].data) {
+                    record.attributes[`${name}_id`] = record.relationships[name].data.id;
+                    record.attributes[`${name}_type`] = record.relationships[name].data.type;
+                }
             }
         }
+
         store.dispatch({
             type: `${record.type.toUpperCase()}_ADD`,
             data: record

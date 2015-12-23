@@ -20,7 +20,7 @@ const Page = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         getPage: PropTypes.func.isRequired,
-        page: PropTypes.object.isRequired,
+        page: PropTypes.object,
         children: PropTypes.node.isRequired
     },
 
