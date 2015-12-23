@@ -74,7 +74,7 @@ const Posts = React.createClass({
     },
 
     render() {
-        const postNodes = this.props.posts.map(post => <Post key={post.uuid} post={post} />);
+        const postNodes = this.props.posts.map(post => <Post key={post.id} post={post} />);
 
         return (
             <ActionCable channel="PostsChannel">
