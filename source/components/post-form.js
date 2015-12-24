@@ -80,7 +80,7 @@ const form = React.createClass({
                     {...body}
                 />
                 <div className="row end-xs" style={{ padding: 8 }}>
-                    <FlatButton
+                    {/* <FlatButton
                         onClick={() => this.setState({ pollModalOpen: true })}
                         label={<FormattedMessage id="actions.addPoll" />}
                     />
@@ -88,7 +88,7 @@ const form = React.createClass({
                         style={{ marginLeft: 8 }}
                         onClick={() => this.setState({ imagesModalOpen: true })}
                         label={<FormattedMessage id="actions.addImages" />}
-                    />
+                    /> */}
                     <RaisedButton
                         style={{ marginLeft: 8 }}
                         disabled={body.invalid}
