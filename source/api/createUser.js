@@ -10,13 +10,15 @@ export default (attributes, query) => {
         }, query)
         .then(resolve)
         .catch((error) => {
-            error.response.json().then((response) => {
-                if (response.email === "has already been taken") {
-                    reject({ _error: "email_already_in_use" });
-                } else {
-                    reject({ _error: "unknown" });
-                }
-            });
+            if (error.response) {
+                error.response.json().then((response) => {
+                    if (response.email === "has already been taken") {
+                        reject({ _error: "email_already_in_use" });
+                    } else {
+                        reject({ _error: "unknown" });
+                    }
+                });
+            }
         });
     });
 };

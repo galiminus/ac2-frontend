@@ -15,10 +15,12 @@ export default (record, dispatch) => {
             resolve(data);
         })
         .catch((error) => {
-            const authError = error.response.headers.get("www-authenticate");
+            if (error.reponse) {
+                const authError = error.response.headers.get("www-authenticate");
 
-            if (authError && authError.match("error=\"invalid_grant\"")) {
-                reject({ _error: "invalidGrant" });
+                if (authError && authError.match("error=\"invalid_grant\"")) {
+                    reject({ _error: "invalidGrant" });
+                }
             }
         });
     });

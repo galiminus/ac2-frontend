@@ -2,7 +2,7 @@ import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import Cable from "es6-actioncable";
 
-import { dispatchRecord } from "json-api";
+import { resources } from "action-creators";
 
 function mapStateToProps(state) {
     return {
@@ -10,14 +10,14 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
     return {
         push: (message) => {
             if (message && message.data) {
-                dispatchRecord(message.data);
+                dispatch(resources.add(message.data));
                 if (message.included) {
                     for (const record of message.included) {
-                        dispatchRecord(record);
+                        dispatch(resources.add(record));
                     }
                 }
             }

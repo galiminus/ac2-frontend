@@ -12,9 +12,11 @@ export default (attributes) => {
         })
         .then(resolve)
         .catch((error) => {
-            error.response.json().then(() => {
-                reject({ _error: "unknown" });
-            });
+            if (error.reponse) {
+                error.response.json().then(() => {
+                    reject({ _error: "unknown" });
+                });
+            }
         });
     });
 };

@@ -2,8 +2,7 @@ import queryString from "query-string";
 
 import { baseUrl } from "config";
 import store from "store";
-import { tokens } from "action-creators";
-import { dispatchRecord } from "json-api";
+import { tokens, resources } from "action-creators";
 
 function headers() {
     const base = {
@@ -48,21 +47,21 @@ function handleJSONAPI(response) {
         const ids = [];
 
         for (const record of response.data) {
-            dispatchRecord(record);
+            store.dispatch(resources.add(record));
             ids.push(record.id);
         }
         if (response.included) {
             for (const record of response.included) {
-                dispatchRecord(record);
+                store.dispatch(resources.add(record));
             }
         }
 
         return (ids);
     } else if (typeof(response.data) === "object") {
-        dispatchRecord(response.data);
+        store.dispatch(resources.add(response.data));
         if (response.included) {
             for (const record of response.included) {
-                dispatchRecord(record);
+                store.dispatch(resources.add(record));
             }
         }
 
@@ -72,48 +71,53 @@ function handleJSONAPI(response) {
     return (response);
 }
 
+function fetchJSON(path, params) {
+    return fetch(path, params)
+        .then(handleDisconnect)
+        .then(handleError)
+        .then(handleJSON)
+        .then(handleJSONAPI)
+        .catch((error) => {
+            if (error.name === "TypeError") {
+                setTimeout(() => fetchJSON(path, params), 5000);
+            }
+        });
+}
+
 export default {
     create: (path, record, query) => {
-        return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+        store.dispatch(resources.add(record.data, { commited: false, error: false }));
+
+        return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
             method: "POST",
             body: JSON.stringify(record),
             mode: "cors",
             headers: {
                 ...headers()
             }
-        })
-        .then(handleDisconnect)
-        .then(handleError)
-        .then(handleJSON)
-        .then(handleJSONAPI);
+        });
     },
 
     update: (path, record, query) => {
-        return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+        store.dispatch(resources.add(record.data, { commited: false, error: false }));
+
+        return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
             method: "PUT",
             body: JSON.stringify(record),
             mode: "cors",
             headers: {
                 ...headers()
             }
-        })
-        .then(handleDisconnect)
-        .then(handleError)
-        .then(handleJSON)
-        .then(handleJSONAPI);
+        });
     },
 
     find: (path, query) => {
-        return fetch(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+        return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
             method: "GET",
             mode: "cors",
             headers: {
                 ...headers()
             }
-        })
-        .then(handleDisconnect)
-        .then(handleError)
-        .then(handleJSON)
-        .then(handleJSONAPI);
+        });
     }
 };
