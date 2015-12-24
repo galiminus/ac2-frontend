@@ -85,8 +85,10 @@ function fetchJSON(path, params) {
 }
 
 export default {
-    create: (path, record, query) => {
-        store.dispatch(resources.add(record.data, { commited: false, error: false }));
+    create: (path, record, query, optimistic = false) => {
+        if (optimistic) {
+            store.dispatch(resources.add(record.data, { commited: false, error: false }));
+        }
 
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
             method: "POST",
@@ -98,8 +100,10 @@ export default {
         });
     },
 
-    update: (path, record, query) => {
-        store.dispatch(resources.add(record.data, { commited: false, error: false }));
+    update: (path, record, query, optimistic = false) => {
+        if (optimistic) {
+            store.dispatch(resources.add(record.data, { commited: false, error: false }));
+        }
 
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
             method: "PUT",
