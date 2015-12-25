@@ -29,7 +29,7 @@
     "eslint-loader": "^1.1.1",
     "eslint-plugin-react": "^3.11.3",
     "exports-loader": "^0.6.2",
-    "flexboxgrid": "git@github.com:phorque/flexboxgrid.git",
+    "flexboxgrid-with-hide": "6.3.0 ",
     "history": "^1.13.0",
     "immutable": "^3.7.5",
     "material-ui": "^0.13.4",
