@@ -44,19 +44,14 @@ function handleJSON(response) {
 
 function handleJSONAPI(response) {
     if (Array.isArray(response.data)) {
-        const ids = [];
-
         for (const record of response.data) {
             store.dispatch(resources.add(record));
-            ids.push(record.id);
         }
         if (response.included) {
             for (const record of response.included) {
                 store.dispatch(resources.add(record));
             }
         }
-
-        return (ids);
     } else if (typeof(response.data) === "object") {
         store.dispatch(resources.add(response.data));
         if (response.included) {
@@ -64,8 +59,6 @@ function handleJSONAPI(response) {
                 store.dispatch(resources.add(record));
             }
         }
-
-        return (response.data.id);
     }
 
     return (response);

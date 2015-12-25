@@ -16,7 +16,6 @@ const reducer = compose(
         state.currentUser = persistedState.currentUser;
 
         state.pages = Immutable.Map(persistedState.pages);
-        state.posts = Immutable.Map(persistedState.posts);
 
         state.form = persistedState.form;
 

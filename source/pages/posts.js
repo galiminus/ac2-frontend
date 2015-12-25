@@ -39,7 +39,7 @@ const Posts = React.createClass({
     },
 
     getInitialState() {
-        return { page: 1 };
+        return { page: 1, hasMore: false };
     },
 
     componentDidMount() {
@@ -63,7 +63,9 @@ const Posts = React.createClass({
         query["page[size]"] = 25;
         query.sort = "-updated_at";
 
-        posts.find(query);
+        posts.find(query).then((response) => {
+            this.setState({ hasMore: !!(response.links && response.links.next) });
+        });
     },
 
     loadMorePosts() {
@@ -71,6 +73,13 @@ const Posts = React.createClass({
 
         this.setState({ page: nextPage });
         this.loadPosts(this.props.params.pageId, nextPage);
+    },
+
+    loadMoreButton() {
+        if (this.state.hasMore) {
+            return (<FlatButton label="Load more" style={{ width: "100%", padding: 8 }} onClick={this.loadMorePosts} />);
+        }
+        return (<div />);
     },
 
     render() {
@@ -84,7 +93,7 @@ const Posts = React.createClass({
                         <List>
                             {postNodes}
                         </List>
-                        <FlatButton label="Load more" style={{ width: "100%", padding: 8 }} onClick={this.loadMorePosts} />
+                        {this.loadMoreButton()}
                     </div>
                 </div>
             </ActionCable>

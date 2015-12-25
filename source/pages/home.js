@@ -5,8 +5,7 @@ import {
     ToolbarGroup,
     LeftNav,
     Paper,
-    FontIcon,
-    AutoComplete
+    FontIcon
 } from "material-ui";
 
 import {
@@ -37,7 +36,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-const HomePage = React.createClass({
+const Home = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
         setCurrentUser: PropTypes.func.isRequired,
@@ -45,6 +44,12 @@ const HomePage = React.createClass({
         currentToken: PropTypes.object.isRequired,
         leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object
+    },
+
+    getDefaultProps() {
+        return {
+            currentUser: {}
+        };
     },
 
     componentDidMount() {
@@ -70,9 +75,9 @@ const HomePage = React.createClass({
                     <ToolbarGroup key={2} float="right">
                         { this.props.currentUser ? <CurrentUserMenu user={this.props.currentUser} /> : ""}
                     </ToolbarGroup>
-                    {/*<ToolbarGroup key={1} float="right">
+                    {/* <ToolbarGroup key={1} float="right">
                         <AutoComplete hintText="search" className="hide-sm hide-xs" />
-                    </ToolbarGroup>*/}
+                    </ToolbarGroup> */}
                 </AcToolbar>
                 <LeftNav docked={false} ref="leftNav" onChante={this.lol}>
                     <Navigation />
@@ -91,4 +96,4 @@ const HomePage = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
