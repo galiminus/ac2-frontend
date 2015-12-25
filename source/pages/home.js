@@ -84,7 +84,7 @@ const Home = React.createClass({
                 </LeftNav>
                 <div className="row" style={{ minHeight: "100%" }}>
                     <Paper className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 220, zIndex: 1 }}>
-                        <Navigation style={{ width: 220 }} />
+                        <Navigation style={{ width: 220, position: "fixed" }} />
                     </Paper>
                     <section className="col-md col-xs-12" style={{ paddingLeft: 0, paddingRight: 0, marginTop: 56 }}>
                         {this.props.children}
