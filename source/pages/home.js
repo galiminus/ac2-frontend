@@ -53,8 +53,8 @@ const Home = React.createClass({
     },
 
     componentDidMount() {
-        users.me({ include: "page" }).then((id) => {
-            this.props.setCurrentUser(id);
+        users.me({ include: "page" }).then((response) => {
+            this.props.setCurrentUser(response.data.id);
         });
     },
 
