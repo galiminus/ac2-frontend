@@ -15,15 +15,6 @@ import DropZone from "react-dropzone";
 import { posts } from "api";
 import { validateText } from "validators";
 
-const post = (fields, dispatch) => {
-    posts.create({
-        type: "text",
-        data: {
-            body: fields.body
-        }
-    }).then(() => dispatch(reset("post")));
-};
-
 const validate = values => {
     return {
         body: validateText(values.body)
@@ -53,6 +44,15 @@ const form = React.createClass({
     handleDropImage() {
     },
 
+    post(fields, dispatch) {
+        posts.create({
+            type: "text",
+            data: {
+                body: fields.body
+            }
+        }).then(() => dispatch(reset("post")));
+    },
+
     render() {
         const {
             fields: { body },
@@ -71,7 +71,7 @@ const form = React.createClass({
             body.value = "";
         }
         return (
-            <form onSubmit={handleSubmit(post)}>
+            <form onSubmit={handleSubmit(this.post)}>
                 <TextField
                     fullWidth
                     type="text"
@@ -95,7 +95,7 @@ const form = React.createClass({
                         type="submit"
                         label={<FormattedMessage id="actions.post" />}
                         secondary
-                        onClick={handleSubmit(post)}
+                        onClick={handleSubmit(this.post)}
                     />
                 </div>
                 <Snackbar message={error ? <FormattedMessage id={`errors.${error}`} /> : ""} ref="notice" />

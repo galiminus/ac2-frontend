@@ -17,6 +17,7 @@ export default {
     "actions.addPoll": "Ajouter un sondage",
     "actions.cancel": "Annuler",
     "actions.submit": "Valider",
+    "actions.comment": "Commenter",
 
     "forms.login": "Connectez-vous pour continuer",
     "forms.signup": "Créez un nouveau compte",

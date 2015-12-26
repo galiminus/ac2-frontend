@@ -7,6 +7,8 @@ import findPosts from "api/findPosts";
 import updatePost from "api/updatePost";
 import getPage from "api/getPage";
 import updatePage from "api/updatePage";
+import createComment from "api/createComment";
+import findComments from "api/findComments";
 
 export default {
     tokens: {
@@ -28,5 +30,10 @@ export default {
     pages: {
         get: getPage,
         update: updatePage
+    },
+
+    comments: {
+        create: createComment,
+        find: findComments
     }
 };

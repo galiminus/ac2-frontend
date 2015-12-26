@@ -1,27 +1,21 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-
 import {
-    Paper,
-    Toolbar,
-    ToolbarGroup,
-    ToolbarTitle,
-    Divider
+    ToolbarTitle
 } from "material-ui";
 
 import UserAvatar from "components/user-avatar";
-import Comments from "components/comments";
 
 function mapStateToProps(state, props) {
     return {
-        sender: state.pages.get(props.post.sender_id)
+        sender: state.pages.get(props.comment.sender_id)
     };
 }
 
-const Post = React.createClass({
+const Comment = React.createClass({
     propTypes: {
         sender: PropTypes.object,
-        post: PropTypes.object.isRequired
+        comment: PropTypes.object.isRequired
     },
 
     render() {
@@ -44,22 +38,12 @@ const Post = React.createClass({
         }
 
         return (
-            <Paper style={{ marginTop: 24 }}>
-                <Toolbar>
-                    <ToolbarGroup key={1} float="left">
-                        {senderInfos}
-                    </ToolbarGroup>
-                </Toolbar>
-                <div style={{ padding: 24 }}>
-                    {this.props.post.data.body}
-                </div>
-                <Divider />
-                <div style={{ padding: 24 }}>
-                    <Comments postId={this.props.post.id} parentId={null} />
-                </div>
-            </Paper>
+            <div style={{ padding: 24 }}>
+                {senderInfos}
+                {this.props.comment.data.body}
+            </div>
         );
     }
 });
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps)(Comment);
