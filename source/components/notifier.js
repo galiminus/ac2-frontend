@@ -6,7 +6,7 @@ import { Snackbar } from "material-ui";
 
 function mapStateToProps(state) {
     return {
-        notification: state.notifications || { message: null }
+        notification: state.notifications
     };
 }
 
@@ -15,10 +15,10 @@ const Notifier = React.createClass({
         notification: PropTypes.object.isRequired
     },
 
-    componentWillReceiveProps(newProps) {
-        if (newProps.notification.message) {
-            this.refs.notice.show();
-        }
+    getDefaultProps() {
+        return ({
+            notification: { message: null }
+        })
     },
 
     render() {
@@ -35,7 +35,7 @@ const Notifier = React.createClass({
         }
 
         return (
-            <Snackbar message={message} ref="notice" style={style} />
+            <Snackbar message={message} ref="notice" style={style} open={message !== ""} />
         );
     }
 });

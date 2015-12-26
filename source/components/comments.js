@@ -23,7 +23,7 @@ function mapStateToProps(state, props) {
     }
 
     return {
-        comments: commentProps.sort((comment1, comment2) => (comment1.updated_at > comment2.updated_at ? -1 : 1))
+        comments: commentProps.sort((comment1, comment2) => (comment1.updated_at > comment2.updated_at ? 1 : -1))
     };
 }
 
@@ -45,9 +45,7 @@ const Comments = React.createClass({
     },
 
     componentDidMount() {
-        if (!!this.props.load) {
-            this.loadComments(this.props.postId, 1);
-        }
+        this.loadComments(this.props.postId, 1);
     },
 
     loadComments(postId, pageNum) {
@@ -55,7 +53,7 @@ const Comments = React.createClass({
 
         query["page[number]"] = pageNum;
         query["page[size]"] = 25;
-        query.sort = "-updated_at";
+        query.sort = "updated_at";
 
         comments.find(postId, query).then((response) => {
             this.setState({ hasMore: !!(response.links && response.links.next) });
@@ -81,7 +79,7 @@ const Comments = React.createClass({
 
         return (
             <div>
-                <List>
+                <List style={{ padding: 24 }}>
                     {commentNodes}
                 </List>
                 <CommentForm postId={this.props.postId} formKey={this.props.postId} />

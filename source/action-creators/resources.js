@@ -15,6 +15,8 @@ export default {
                 if (record.relationships[name].data) {
                     record.attributes[`${name}_id`] = record.relationships[name].data.id;
                     record.attributes[`${name}_type`] = record.relationships[name].data.type;
+                } else {
+                    record.attributes[`${name}_id`] = null;
                 }
             }
         }

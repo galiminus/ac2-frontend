@@ -1,4 +1,4 @@
-export default function (state = "", action) {
+export default function (state = { message: "" }, action) {
     const timestamp = new Date().getTime();
 
     switch (action.type) {

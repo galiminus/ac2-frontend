@@ -44,21 +44,21 @@ function handleJSON(response) {
 
 function handleJSONAPI(response) {
     if (Array.isArray(response.data)) {
+        if (response.included) {
+            for (const record of response.included) {
+                store.dispatch(resources.add(record));
+            }
+        }
         for (const record of response.data) {
             store.dispatch(resources.add(record));
         }
-        if (response.included) {
-            for (const record of response.included) {
-                store.dispatch(resources.add(record));
-            }
-        }
     } else if (typeof(response.data) === "object") {
-        store.dispatch(resources.add(response.data));
         if (response.included) {
             for (const record of response.included) {
                 store.dispatch(resources.add(record));
             }
         }
+        store.dispatch(resources.add(response.data));
     }
 
     return (response);
@@ -74,6 +74,7 @@ function fetchJSON(path, params) {
             if (error.name === "TypeError") {
                 setTimeout(() => fetchJSON(path, params), 5000);
             }
+            throw (error);
         });
 }
 
