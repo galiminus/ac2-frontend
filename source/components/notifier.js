@@ -18,7 +18,7 @@ const Notifier = React.createClass({
     getDefaultProps() {
         return ({
             notification: { message: null }
-        })
+        });
     },
 
     render() {

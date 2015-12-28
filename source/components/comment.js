@@ -1,10 +1,6 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router";
-import {
-    ToolbarTitle,
-    Divider
-} from "material-ui";
 
 import UserAvatar from "components/user-avatar";
 
@@ -29,7 +25,7 @@ const Comment = React.createClass({
     render() {
         switch (this.props.sender.type) {
         case "user_pages":
-             return (
+            return (
                 <div className="row middle-xs">
                     <div>
                         <UserAvatar page={this.props.sender} />
@@ -41,7 +37,7 @@ const Comment = React.createClass({
             );
 
         default:
-            return (<div />)
+            return (<div />);
         }
     }
 });

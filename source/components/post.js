@@ -27,8 +27,8 @@ const Post = React.createClass({
     render() {
         let senderInfos;
         if (this.props.sender) {
-            switch (this.props.sender.type) {
-            case "user_pages":
+            switch (this.props.sender.data_type) {
+            case "user":
                 senderInfos = (
                     <div>
                         <UserAvatar page={this.props.sender} />
