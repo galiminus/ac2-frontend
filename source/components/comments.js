@@ -10,6 +10,7 @@ import { comments } from "api";
 
 import CommentForm from "components/comment-form";
 import Comment from "components/comment";
+import ActionCable from "components/action-cable";
 
 function mapStateToProps(state, props) {
     let commentProps;
@@ -78,12 +79,12 @@ const Comments = React.createClass({
         const commentNodes = this.props.comments.map(comment => <Comment key={comment.id} comment={comment} />);
 
         return (
-            <div>
+            <ActionCable channel="CommentsChannel">
                 <List style={{ padding: 24 }}>
                     {commentNodes}
                 </List>
                 <CommentForm postId={this.props.postId} formKey={this.props.postId} />
-            </div>
+            </ActionCable>
         );
     }
 });

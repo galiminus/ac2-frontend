@@ -36,6 +36,7 @@ export default {
     "labels.textPost": "Texte",
     "labels.pollPost": "Sondage",
     "labels.imageUploadDropZone": "Glissez une image dans cette zone ou cliquez pour ouvrir la boite de sélection.",
+    "labels.comment": "Rédiger un commentaire...",
 
     "texts.emptyField": "Ce champ n'est pas renseigné",
 

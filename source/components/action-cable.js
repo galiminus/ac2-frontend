@@ -81,7 +81,7 @@ const ActionCable = React.createClass({
     },
 
     render() {
-        return this.props.children;
+        return <div>{this.props.children}</div>;
     }
 });
 

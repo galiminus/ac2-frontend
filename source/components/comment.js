@@ -23,8 +23,8 @@ const Comment = React.createClass({
     },
 
     render() {
-        switch (this.props.sender.type) {
-        case "user_pages":
+        switch (this.props.sender.data_type) {
+        case "user":
             return (
                 <div className="row middle-xs">
                     <div>

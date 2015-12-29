@@ -42,15 +42,10 @@ const form = React.createClass({
         if (!body.value) {
             body.value = "";
         }
-        return (
-            <form onSubmit={handleSubmit(this.post)}>
-                <TextField
-                    fullWidth
-                    type="text"
-                    multiLine
-                    rows={2}
-                    {...body}
-                />
+
+        let commentButton;
+        if (body.dirty) {
+            commentButton = (
                 <div className="row end-xs" style={{ padding: 8 }}>
                     <RaisedButton
                         style={{ marginLeft: 8 }}
@@ -61,6 +56,22 @@ const form = React.createClass({
                         onClick={handleSubmit(this.post)}
                     />
                 </div>
+            );
+        } else {
+            commentButton = <div />;
+        }
+
+        return (
+            <form onSubmit={handleSubmit(this.post)}>
+                <TextField
+                    fullWidth
+                    type="text"
+                    multiLine
+                    rows={1}
+                    hintText={<FormattedMessage id="labels.comment" />}
+                    {...body}
+                />
+                {commentButton}
             </form>
         );
     }
