@@ -1,6 +1,7 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router";
+import Colors from "material-ui/lib/styles/colors";
 
 import UserAvatar from "components/user-avatar";
 
@@ -23,6 +24,18 @@ const Comment = React.createClass({
     },
 
     render() {
+        const commentStyle = {
+            fontSize: "0.9em"
+        };
+
+        const userLinkStyle = {
+            textDecoration: "none",
+            fontWeight: "bold",
+            color: Colors.teal600,
+            display: "block",
+            padding: 0
+        };
+
         switch (this.props.sender.data_type) {
         case "user":
             return (
@@ -30,9 +43,14 @@ const Comment = React.createClass({
                     <div>
                         <UserAvatar page={this.props.sender} />
                     </div>
-                    <p className="col-xs">
-                        <Link to={`/${this.props.sender.id}`}>{this.props.sender.data.full_name}</Link> {this.props.comment.data.body}
-                    </p>
+                    <div className="col-xs">
+                        <p style={commentStyle}>
+                            <Link to={`/${this.props.sender.id}`} style={userLinkStyle} className="col-xs-2">
+                                {this.props.sender.data.full_name}
+                            </Link>
+                            {this.props.comment.data.body}
+                        </p>
+                    </div>
                 </div>
             );
 

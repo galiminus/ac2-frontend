@@ -1,5 +1,6 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
+import { FormattedMessage } from "react-intl";
 
 import {
     List,
@@ -53,8 +54,8 @@ const Comments = React.createClass({
         const query = { include: "sender" };
 
         query["page[number]"] = pageNum;
-        query["page[size]"] = 25;
-        query.sort = "updated_at";
+        query["page[size]"] = 10;
+        query.sort = "-updated_at";
 
         comments.find(postId, query).then((response) => {
             this.setState({ hasMore: !!(response.links && response.links.next) });
@@ -70,7 +71,7 @@ const Comments = React.createClass({
 
     loadMoreButton() {
         if (this.state.hasMore) {
-            return (<FlatButton label="Load more" style={{ width: "100%", padding: 8 }} onClick={this.loadMoreComments} />);
+            return (<FlatButton label={<FormattedMessage id="actions.loadPreviousComments" />} style={{ width: "100%", padding: 8 }} onClick={this.loadMoreComments} />);
         }
         return (<div />);
     },
@@ -80,7 +81,8 @@ const Comments = React.createClass({
 
         return (
             <ActionCable channel="CommentsChannel">
-                <List style={{ padding: 24 }}>
+                {this.loadMoreButton()}
+                <List style={{ padding: 24, paddingBottom: 32 }}>
                     {commentNodes}
                 </List>
                 <CommentForm postId={this.props.postId} formKey={this.props.postId} />

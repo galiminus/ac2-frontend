@@ -18,6 +18,7 @@ export default {
     "actions.cancel": "Annuler",
     "actions.submit": "Valider",
     "actions.comment": "Commenter",
+    "actions.loadPreviousComments": "Voir les commentaires précédents",
 
     "forms.login": "Connectez-vous pour continuer",
     "forms.signup": "Créez un nouveau compte",

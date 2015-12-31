@@ -13,7 +13,6 @@ const UserAvatar = React.createClass({
 
     render() {
         const style = {
-            marginTop: 8,
             marginLeft: -16,
             marginRight: 8,
             fontFamily: "Roboto, sans-serif",
