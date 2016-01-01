@@ -58,7 +58,7 @@ const Comments = React.createClass({
         query.sort = "-updated_at";
 
         comments.find(postId, query).then((response) => {
-            this.setState({ hasMore: !!(response.links && response.links.next) });
+            this.setState({ hasMore: !!(response.links && response.links.next) && response.data.length > 0 });
         });
     },
 
