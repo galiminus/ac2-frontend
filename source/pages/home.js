@@ -18,7 +18,7 @@ import {
 
 import { leftNav, currentUser } from "action-creators";
 
-import { users } from "api";
+import { users, pageTypes } from "api";
 
 
 function mapStateToProps(state) {
@@ -56,6 +56,7 @@ const Home = React.createClass({
         users.me({ include: "page" }).then((response) => {
             this.props.setCurrentUser(response.data.id);
         });
+        pageTypes.find("user");
     },
 
     componentWillReceiveProps(props) {

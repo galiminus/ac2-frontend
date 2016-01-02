@@ -9,18 +9,26 @@ import {
 } from "material-ui";
 
 import { pages } from "api";
-import { userPageFields } from "config";
-import fieldCreator from "components/field-creator";
+import Field from "components/field";
 
 function mapStateToProps(state, props) {
     return {
-        page: state.pages.get(props.params.pageId) || { data: {} }
+        pageType: state.pageTypes.get("user"),
+        page: state.pages.get(props.params.pageId)
     };
 }
 
 const Profile = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired
+        page: PropTypes.object.isRequired,
+        pageType: PropTypes.object.isRequired
+    },
+
+    getDefaultProps() {
+        return {
+            page: { data: {} },
+            pageType: { data_schema: { properties: {} } }
+        };
     },
 
     handleChange(field, value) {
@@ -39,17 +47,19 @@ const Profile = React.createClass({
         };
 
         const tabs = [];
-        for (const category of Object.keys(userPageFields)) {
+        for (const category of Object.keys(this.props.pageType.data_schema.properties)) {
             const fields = [];
 
-            for (const field of Object.keys(userPageFields[category])) {
-                const fieldForm = fieldCreator(field, this.props.page.data[field], userPageFields[category][field]);
-
+            for (const field of Object.keys(this.props.pageType.data_schema.properties[category].properties)) {
                 fields.push(
-                    React.createElement(fieldForm, {
-                        key: field,
-                        onChange: this.handleChange
-                    })
+                    <Field
+                        field={field}
+                        initialValues={{ value: this.props.page.data[category][field] }}
+                        type={this.props.pageType.data_schema.properties[category].properties[field].type}
+                        key={field}
+                        formKey={field}
+                        onChange={this.handleChange}
+                    />
                 );
             }
 

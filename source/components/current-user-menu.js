@@ -17,16 +17,7 @@ import { FormattedMessage } from "react-intl";
 import { tokens } from "action-creators";
 
 function mapStateToProps(state, props) {
-    let page;
-    if (props.user) {
-        page = state.pages.get(props.user.page_id);
-    }
-
-    if (!page) {
-        page = { data: { full_name: "" } };
-    }
-
-    return ({ page });
+    return ({ page: state.pages.get(props.user.page_id) });
 }
 
 function mapDispatchToProps(dispatch) {
@@ -41,6 +32,18 @@ const CurrentUserMenu = React.createClass({
         clearTokens: PropTypes.func.isRequired,
         page: PropTypes.object.isRequired,
         user: PropTypes.object.isRequired
+    },
+
+    getDefaultProps() {
+        return ({
+            page: {
+                data: {
+                    personal_informations: {
+                        full_name: ""
+                    }
+                }
+            }
+        });
     },
 
     goToPage(e) {
@@ -69,11 +72,11 @@ const CurrentUserMenu = React.createClass({
             fontFamily: "Roboto, sans-serif",
             textTransform: "uppercase",
             cursor: "pointer",
-            backgroundColor: randomColor(this.props.page.data.full_name)
+            backgroundColor: randomColor(this.props.page.data.personal_informations.full_name)
         };
 
         return (
-            <IconMenu iconButtonElement={<Avatar style={style}>{this.props.page.data.full_name[0]}</Avatar>}>
+            <IconMenu iconButtonElement={<Avatar style={style}>{this.props.page.data.personal_informations.full_name[0]}</Avatar>}>
                 <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserPage" />} href={`/${this.props.user.page_id}`} onClick={this.goToPage} />
                 <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserProfile" />} href={`/${this.props.user.page_id}/profile`} onClick={this.goToProfile} />
                 {/* <MenuItem index={2} primaryText={<FormattedMessage id="links.accountSettings" />} href="/account" onClick={this.goToAccount} /> */}

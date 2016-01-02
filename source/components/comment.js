@@ -46,7 +46,7 @@ const Comment = React.createClass({
                     <div className="col-xs">
                         <p style={commentStyle}>
                             <Link to={`/${this.props.sender.id}`} style={userLinkStyle} className="col-xs-2">
-                                {this.props.sender.data.full_name}
+                                {this.props.sender.data.personal_informations.full_name}
                             </Link>
                             {this.props.comment.data.body}
                         </p>

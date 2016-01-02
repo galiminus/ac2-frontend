@@ -9,6 +9,7 @@ import getPage from "api/getPage";
 import updatePage from "api/updatePage";
 import createComment from "api/createComment";
 import findComments from "api/findComments";
+import findPageTypes from "api/findPageTypes";
 
 export default {
     tokens: {
@@ -35,5 +36,9 @@ export default {
     comments: {
         create: createComment,
         find: findComments
+    },
+
+    pageTypes: {
+        find: findPageTypes
     }
 };

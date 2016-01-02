@@ -32,7 +32,7 @@ const Post = React.createClass({
                 senderInfos = (
                     <div>
                         <UserAvatar page={this.props.sender} />
-                        <ToolbarTitle text={this.props.sender.data.full_name} />
+                        <ToolbarTitle text={this.props.sender.data.personal_informations.full_name} />
                     </div>
                 );
                 break;

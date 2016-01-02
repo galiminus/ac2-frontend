@@ -64,7 +64,7 @@ const InfoBanner = React.createClass({
         if (this.props.owner) {
             switch (this.props.owner.type) {
             case "users":
-                ownerInfos = <h1>{this.props.page.data.full_name}</h1>;
+                ownerInfos = <h1>{this.props.page.data.personal_informations.full_name}</h1>;
                 break;
             default:
                 break;
