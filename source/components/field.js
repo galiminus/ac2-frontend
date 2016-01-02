@@ -7,9 +7,11 @@ import {
     TextField
 } from "material-ui";
 
+import { validateText } from "validators";
+
 const validate = (values) => {
     return {
-        value: !!values
+        value: validateText(values.value)
     };
 };
 
@@ -48,8 +50,8 @@ const Field = React.createClass({
         }
     },
 
-    update(_fields, _dispatch) {
-        this.props.onChange(this.props.field, this.props.fields.value.value);
+    update() {
+        this.props.onChange(this.props.fields.value.value);
         this.setState({ edit: false, mouseInside: false });
     },
 
@@ -70,7 +72,7 @@ const Field = React.createClass({
                             {...value}
                             onBlur={this.switchToValueMode}
                             fullWidth
-                            hintText={<FormattedMessage id={`labels.userPageFields.${this.props.field}`} />}
+                            hintText={<FormattedMessage id={this.props.label} />}
                         />
                     </form>
                 }
@@ -104,7 +106,7 @@ const Field = React.createClass({
         return (
             <ListItem
                 style={{ maxHeight: 80, minHeight: 80 }}
-                primaryText={<FormattedMessage id={`labels.userPageFields.${this.props.field}`} />}
+                primaryText={<FormattedMessage id={this.props.label} />}
                 secondaryText={secondaryText}
                 onTouchTap={this.switchToEditMode}
             />

@@ -31,13 +31,6 @@ const Profile = React.createClass({
         };
     },
 
-    handleChange(field, value) {
-        const data = Object.assign({}, this.props.page.data);
-        data[field] = value;
-
-        pages.update(this.props.page.id, { data });
-    },
-
     render() {
         const style = {
             fontFamily: "Roboto, sans-serif",
@@ -46,6 +39,15 @@ const Profile = React.createClass({
             height: "100%"
         };
 
+        const generateChangeHandler = (category, field) => {
+            return ((value) => {
+                const data = Object.assign({}, this.props.page.data);
+                data[category][field] = value;
+
+                pages.update(this.props.page.id, { data });
+            })
+        }
+
         const tabs = [];
         for (const category of Object.keys(this.props.pageType.data_schema.properties)) {
             const fields = [];
@@ -53,12 +55,12 @@ const Profile = React.createClass({
             for (const field of Object.keys(this.props.pageType.data_schema.properties[category].properties)) {
                 fields.push(
                     <Field
-                        field={field}
+                        label={`labels.userPageFields.${field}`}
                         initialValues={{ value: this.props.page.data[category][field] }}
                         type={this.props.pageType.data_schema.properties[category].properties[field].type}
                         key={field}
                         formKey={field}
-                        onChange={this.handleChange}
+                        onChange={generateChangeHandler(category, field)}
                     />
                 );
             }
