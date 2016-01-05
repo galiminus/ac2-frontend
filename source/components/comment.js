@@ -25,15 +25,16 @@ const Comment = React.createClass({
 
     render() {
         const commentStyle = {
-            fontSize: "0.9em"
+            fontSize: "0.8em"
         };
 
         const userLinkStyle = {
             textDecoration: "none",
             fontWeight: "bold",
-            color: Colors.teal600,
+            color: Colors.indigo600,
             display: "block",
-            padding: 0
+            padding: 0,
+            marginBottom: 2
         };
 
         switch (this.props.sender.data_type) {

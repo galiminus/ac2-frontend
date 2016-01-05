@@ -10,6 +10,8 @@ import {
 import { comments } from "api";
 import { validateText } from "validators";
 
+import UserAvatar from "components/user-avatar";
+
 const validate = values => {
     return {
         body: validateText(values.body)
@@ -20,6 +22,7 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
+        currentUserPage: PropTypes.object.isRequired,
         error: PropTypes.string,
         postId: PropTypes.string.isRequired
     },
@@ -43,7 +46,7 @@ const form = React.createClass({
             body.value = "";
         }
 
-        let commentButton;
+        let commentButton = null;
         if (body.dirty) {
             commentButton = (
                 <div className="row end-xs" style={{ padding: 8 }}>
@@ -57,20 +60,26 @@ const form = React.createClass({
                     />
                 </div>
             );
-        } else {
-            commentButton = <div />;
         }
+        console.log(this.props.currentUserPage);
 
         return (
-            <form onSubmit={handleSubmit(this.post)}>
-                <TextField
-                    fullWidth
-                    type="text"
-                    multiLine
-                    rows={1}
-                    hintText={<FormattedMessage id="labels.comment" />}
-                    {...body}
-                />
+            <form onSubmit={handleSubmit(this.post)} {...this.props} >
+                <div className="row middle-xs">
+                    <div>
+                        <UserAvatar page={this.props.currentUserPage} />
+                    </div>
+                    <div className="col-xs">
+                        <TextField
+                            fullWidth
+                            type="text"
+                            multiLine
+                            rows={1}
+                            hintText={<FormattedMessage id="labels.comment" />}
+                            {...body}
+                        />
+                    </div>
+                </div>
                 {commentButton}
             </form>
         );

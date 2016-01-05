@@ -38,6 +38,7 @@ const Comments = React.createClass({
     propTypes: {
         postId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired,
         parentId: PropTypes.string,
         load: PropTypes.bool
     },
@@ -77,15 +78,25 @@ const Comments = React.createClass({
     },
 
     render() {
-        const commentNodes = this.props.comments.map(comment => <Comment key={comment.id} comment={comment} />);
+        let commentNodes = null;
+        if (this.props.comments.count() > 0) {
+            commentNodes = (
+                <List style={{ padding: 24, paddingBottom: 24 }}>
+                    {this.props.comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+                </List>
+            );
+        }
 
         return (
             <ActionCable channel="CommentsChannel">
                 {this.loadMoreButton()}
-                <List style={{ padding: 24, paddingBottom: 32 }}>
-                    {commentNodes}
-                </List>
-                <CommentForm postId={this.props.postId} formKey={this.props.postId} />
+                {commentNodes}
+                <CommentForm
+                    style={{ padding: "0 24px" }}
+                    postId={this.props.postId}
+                    formKey={this.props.postId}
+                    currentUserPage={this.props.currentUserPage}
+            />
             </ActionCable>
         );
     }

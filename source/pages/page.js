@@ -45,7 +45,7 @@ const Page = React.createClass({
             <div>
                 <InfoBanner page={this.props.page} main={this.props.params.pageId === undefined} />
                 <div>
-                    {this.props.children}
+                    {React.cloneElement(this.props.children, { currentUserPage: this.props.currentUserPage })}
                 </div>
             </div>
         );

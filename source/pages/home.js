@@ -22,8 +22,16 @@ import { users, pageTypes } from "api";
 
 
 function mapStateToProps(state) {
+    const currentUserProp = state.users.get(state.currentUser);
+
+    let currentUserPageProp;
+    if (currentUserProp) {
+        currentUserPageProp = state.pages.get(currentUserProp.page_id);
+    }
+
     return {
-        currentUser: state.users.get(state.currentUser),
+        currentUser: currentUserProp,
+        currentUserPage: currentUserPageProp,
         currentToken: state.tokens.get(state.currentToken),
         leftNav: state.leftNav
     };
@@ -41,6 +49,7 @@ const Home = React.createClass({
         toggleLeftNav: PropTypes.func.isRequired,
         setCurrentUser: PropTypes.func.isRequired,
         currentUser: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired,
         currentToken: PropTypes.object.isRequired,
         leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object
@@ -48,7 +57,16 @@ const Home = React.createClass({
 
     getDefaultProps() {
         return {
-            currentUser: {}
+            currentUser: {},
+            currentUserPage: {
+                page: {
+                    data: {
+                        personal_informations: {
+                            full_name: ""
+                        }
+                    }
+                }
+            }
         };
     },
 
@@ -74,7 +92,7 @@ const Home = React.createClass({
                         <ToolbarLogo />
                     </ToolbarGroup>
                     <ToolbarGroup key={2} float="right">
-                        { this.props.currentUser ? <CurrentUserMenu user={this.props.currentUser} /> : ""}
+                        <CurrentUserMenu currentUserPage={this.props.currentUserPage} />
                     </ToolbarGroup>
                     {/* <ToolbarGroup key={1} float="right">
                         <AutoComplete hintText="search" className="hide-sm hide-xs" />
@@ -88,7 +106,7 @@ const Home = React.createClass({
                         <Navigation style={{ width: 220, position: "fixed" }} />
                     </Paper>
                     <section className="col-md col-xs-12" style={{ paddingLeft: 0, paddingRight: 0, marginTop: 56 }}>
-                        {this.props.children}
+                        {React.cloneElement(this.props.children, { currentUserPage: this.props.currentUserPage })}
                     </section>
                 </div>
                 <DisconnectedModal isDisconnected={!this.props.currentToken} />

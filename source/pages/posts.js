@@ -23,7 +23,7 @@ function mapStateToProps(state, props) {
     }
 
     return {
-        posts: postProps.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1))
+        posts: postProps
     };
 }
 
@@ -79,16 +79,16 @@ const Posts = React.createClass({
         if (this.state.hasMore) {
             return (<FlatButton label="Load more" style={{ width: "100%", padding: 8 }} onClick={this.loadMorePosts} />);
         }
-        return (<div />);
+        return (null);
     },
 
     render() {
-        const postNodes = this.props.posts.map(post => <Post key={post.id} post={post} />);
+        const postNodes = this.props.posts.map(post => <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} />);
 
         return (
             <ActionCable channel="PostsChannel">
                 <div className="container-fluid" style={{ paddingTop: 12 }}>
-                    <div className="col-md-8 col-sm-8 col-xs-12">
+                    <div className="col-md-6 col-md-offset-3 col-sm-8 col-xs-12">
                         <PostForm className="col-xs-12" />
                         <List>
                             {postNodes}

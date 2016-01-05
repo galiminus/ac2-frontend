@@ -20,7 +20,8 @@ function mapStateToProps(state, props) {
 
 const Post = React.createClass({
     propTypes: {
-        sender: PropTypes.object,
+        sender: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired,
         post: PropTypes.object.isRequired
     },
 
@@ -38,7 +39,7 @@ const Post = React.createClass({
                 break;
 
             default:
-                senderInfos = <div />;
+                senderInfos = null;
                 break;
             }
         }
@@ -50,12 +51,11 @@ const Post = React.createClass({
                         {senderInfos}
                     </ToolbarGroup>
                 </Toolbar>
-                <div style={{ padding: 24 }}>
+                <div style={{ padding: "1em" }}>
                     {this.props.post.data.body}
                 </div>
-                <Divider />
-                <div style={{ padding: 24 }}>
-                    <Comments postId={this.props.post.id} parentId={null} />
+                <div style={{ padding: "0.5em 1em" }}>
+                    <Comments postId={this.props.post.id} parentId={null} currentUserPage={this.props.currentUserPage} />
                 </div>
             </Paper>
         );

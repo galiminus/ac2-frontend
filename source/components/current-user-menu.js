@@ -14,24 +14,12 @@ import randomColor from "utils/random-color";
 
 import { FormattedMessage } from "react-intl";
 
+import { dispatch } from "store";
 import { tokens } from "action-creators";
 
-function mapStateToProps(state, props) {
-    return ({ page: state.pages.get(props.user.page_id) });
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        updatePath: (path) => dispatch(updatePath(path)),
-        clearTokens: () => dispatch(tokens.clear())
-    };
-}
 const CurrentUserMenu = React.createClass({
     propTypes: {
-        updatePath: PropTypes.func.isRequired,
-        clearTokens: PropTypes.func.isRequired,
-        page: PropTypes.object.isRequired,
-        user: PropTypes.object.isRequired
+        currentUserPage: PropTypes.object.isRequired
     },
 
     getDefaultProps() {
@@ -47,22 +35,22 @@ const CurrentUserMenu = React.createClass({
     },
 
     goToPage(e) {
-        this.props.updatePath(`/${this.props.user.page_id}`);
+        dispatch(updatePath(`/${this.props.user.page_id}`));
         e.preventDefault();
     },
 
     goToProfile(e) {
-        this.props.updatePath(`/${this.props.user.page_id}/profile`);
+        dispatch(updatePath(`/${this.props.user.page_id}/profile`));
         e.preventDefault();
     },
 
     goToAccount(e) {
-        this.props.updatePath("/account");
+        dispatch(updatePath("/account"));
         e.preventDefault();
     },
 
     disconnect() {
-        this.props.clearTokens();
+        dispatch(tokens.clear())
     },
 
     render() {
@@ -72,13 +60,13 @@ const CurrentUserMenu = React.createClass({
             fontFamily: "Roboto, sans-serif",
             textTransform: "uppercase",
             cursor: "pointer",
-            backgroundColor: randomColor(this.props.page.data.personal_informations.full_name)
+            backgroundColor: randomColor(this.props.currentUserPage.data.personal_informations.full_name)
         };
 
         return (
-            <IconMenu iconButtonElement={<Avatar style={style}>{this.props.page.data.personal_informations.full_name[0]}</Avatar>}>
-                <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserPage" />} href={`/${this.props.user.page_id}`} onClick={this.goToPage} />
-                <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserProfile" />} href={`/${this.props.user.page_id}/profile`} onClick={this.goToProfile} />
+            <IconMenu iconButtonElement={<Avatar style={style}>{this.props.currentUserPage.data.personal_informations.full_name[0]}</Avatar>}>
+                <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserPage" />} href={`/${this.props.currentUserPage.id}`} onClick={this.goToPage} />
+                <MenuItem index={1} primaryText={<FormattedMessage id="links.currentUserProfile" />} href={`/${this.props.currentUserPage.id}/profile`} onClick={this.goToProfile} />
                 {/* <MenuItem index={2} primaryText={<FormattedMessage id="links.accountSettings" />} href="/account" onClick={this.goToAccount} /> */}
                 <MenuItem index={4} primaryText={<FormattedMessage id="actions.disconnect" />} onClick={this.disconnect} />
             </IconMenu>
@@ -86,4 +74,4 @@ const CurrentUserMenu = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentUserMenu);
+export default CurrentUserMenu;
