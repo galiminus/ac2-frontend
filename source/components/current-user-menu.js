@@ -1,5 +1,4 @@
 import React, { PropTypes } from "react";
-import { connect } from "react-redux";
 
 import {
     Avatar,
@@ -35,12 +34,12 @@ const CurrentUserMenu = React.createClass({
     },
 
     goToPage(e) {
-        dispatch(updatePath(`/${this.props.user.page_id}`));
+        dispatch(updatePath(`/${this.props.currentUserPage.id}`));
         e.preventDefault();
     },
 
     goToProfile(e) {
-        dispatch(updatePath(`/${this.props.user.page_id}/profile`));
+        dispatch(updatePath(`/${this.props.currentUserPage.id}/profile`));
         e.preventDefault();
     },
 
@@ -50,7 +49,7 @@ const CurrentUserMenu = React.createClass({
     },
 
     disconnect() {
-        dispatch(tokens.clear())
+        dispatch(tokens.clear());
     },
 
     render() {

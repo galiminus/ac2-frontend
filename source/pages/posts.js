@@ -35,7 +35,8 @@ function mapDispatchToProps() {
 const Posts = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
-        posts: PropTypes.object.isRequired
+        posts: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired
     },
 
     getInitialState() {

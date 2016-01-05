@@ -61,7 +61,6 @@ const form = React.createClass({
                 </div>
             );
         }
-        console.log(this.props.currentUserPage);
 
         return (
             <form onSubmit={handleSubmit(this.post)} {...this.props} >

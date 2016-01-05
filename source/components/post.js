@@ -5,8 +5,7 @@ import {
     Paper,
     Toolbar,
     ToolbarGroup,
-    ToolbarTitle,
-    Divider
+    ToolbarTitle
 } from "material-ui";
 
 import UserAvatar from "components/user-avatar";

@@ -96,7 +96,7 @@ const Comments = React.createClass({
                     postId={this.props.postId}
                     formKey={this.props.postId}
                     currentUserPage={this.props.currentUserPage}
-            />
+                />
             </ActionCable>
         );
     }

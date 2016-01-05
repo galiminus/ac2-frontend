@@ -23,6 +23,7 @@ const Field = React.createClass({
         values: PropTypes.object.isRequired,
         type: PropTypes.string.isRequired,
         error: PropTypes.string,
+        label: PropTypes.object.isRequired,
         onChange: PropTypes.func
     },
 

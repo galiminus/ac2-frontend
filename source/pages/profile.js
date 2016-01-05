@@ -40,13 +40,13 @@ const Profile = React.createClass({
         };
 
         const generateChangeHandler = (category, field) => {
-            return ((value) => {
+            return (value) => {
                 const data = Object.assign({}, this.props.page.data);
                 data[category][field] = value;
 
                 pages.update(this.props.page.id, { data });
-            })
-        }
+            };
+        };
 
         const tabs = [];
         for (const category of Object.keys(this.props.pageType.data_schema.properties)) {

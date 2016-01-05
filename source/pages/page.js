@@ -21,7 +21,8 @@ const Page = React.createClass({
         params: PropTypes.object.isRequired,
         getPage: PropTypes.func.isRequired,
         page: PropTypes.object,
-        children: PropTypes.node.isRequired
+        children: PropTypes.node.isRequired,
+        currentUserPage: PropTypes.object.isRequired
     },
 
     componentDidMount() {
