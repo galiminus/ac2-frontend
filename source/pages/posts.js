@@ -85,7 +85,7 @@ const Posts = React.createClass({
     },
 
     render() {
-        const postNodes = this.props.posts.map(post =>
+        const postNodes = this.props.posts.valueSeq().map(post =>
             <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} translations={this.props.translations} />
         );
 

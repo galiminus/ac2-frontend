@@ -48,8 +48,7 @@ const form = React.createClass({
     render() {
         const {
             fields: { body },
-            handleSubmit,
-            error
+            handleSubmit
         } = this.props;
 
         if (!body.value) {

@@ -83,7 +83,7 @@ const Comments = React.createClass({
         if (this.props.comments.count() > 0) {
             commentNodes = (
                 <List style={{ padding: 24, paddingBottom: 24 }}>
-                    {this.props.comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+                    {this.props.comments.valueSeq().map(comment => <Comment key={comment.id} comment={comment} />)}
                 </List>
             );
         }

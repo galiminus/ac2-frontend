@@ -20,6 +20,8 @@ const Notifier = React.createClass({
         });
     },
 
+    handleRequestClose() {},
+
     render() {
         const style = {
             fontFamily: "Roboto, sans-serif"
@@ -27,7 +29,7 @@ const Notifier = React.createClass({
 
         const message = this.props.notification.message ? this.props.translations.t(`errors.${this.props.notification.message}`) : "";
         return (
-            <Snackbar message={message} ref="notice" style={style} open={message !== ""} />
+            <Snackbar message={message} style={style} open={message !== ""} onRequestClose={this.handleRequestClose} />
         );
     }
 });
