@@ -185,9 +185,9 @@ const colorsByTextColor = {
 };
 
 function hashString(seed) {
-    let hash = 5381;
+    let hash = 0;
     for (let i = 0; i < seed.length; i++) {
-        hash = ((hash << 5) + hash) + seed.charCodeAt(i);
+        hash = hash + seed.charCodeAt(i);
     }
     return hash;
 }
