@@ -2,7 +2,6 @@ import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
 import DefaultRawTheme from "material-ui/lib/styles/raw-themes/light-raw-theme";
-import { FormattedMessage } from "react-intl";
 
 const bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_p51mustang_mini.jpg";
 
@@ -53,9 +52,10 @@ function mapStateToProps(state, props) {
 
 const InfoBanner = React.createClass({
     propTypes: {
-        owner: PropTypes.object,
-        main: PropTypes.bool,
-        page: PropTypes.object
+        owner: PropTypes.object.isRequired,
+        page: PropTypes.object.isRequired,
+        translations: PropTypes.object.isRequired,
+        main: PropTypes.bool
     },
 
     render() {
@@ -70,7 +70,7 @@ const InfoBanner = React.createClass({
                 break;
             }
         } else if (this.props.main) {
-            ownerInfos = <h1><FormattedMessage id="links.mainFeed" /></h1>;
+            ownerInfos = <h1>{this.props.translations.t("links.mainFeed")}</h1>;
         }
 
         return (

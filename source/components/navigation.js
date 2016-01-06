@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropTypes } from "react";
 import {
     List,
     ListItem
@@ -7,9 +7,11 @@ import {
 import { dispatch } from "store";
 import { updatePath } from "redux-simple-router";
 
-import { FormattedMessage } from "react-intl";
-
 const Navigation = React.createClass({
+    propTypes: {
+        translations: PropTypes.object.isRequired
+    },
+
     goToMainFeed(e) {
         dispatch(updatePath("/"));
         e.preventDefault();
@@ -18,7 +20,7 @@ const Navigation = React.createClass({
     render() {
         return (
             <List {...this.props}>
-                <ListItem index={0} primaryText={<FormattedMessage id="links.mainFeed" />} href="/" onClick={this.goToMainFeed} />
+                <ListItem index={0} primaryText={this.props.translations.t("links.mainFeed")} href="/" onClick={this.goToMainFeed} />
             </List>
         );
     }

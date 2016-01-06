@@ -15,6 +15,8 @@ import comments from "reducers/comments";
 
 import notifications from "reducers/notifications";
 
+import translations from "reducers/translations";
+
 import leftNav from "reducers/leftnav";
 
 const reducers = combineReducers({
@@ -29,6 +31,7 @@ const reducers = combineReducers({
     leftNav,
     form,
     notifications,
+    translations,
     routing: routeReducer
 });
 

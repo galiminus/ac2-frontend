@@ -27,11 +27,12 @@ import Account from "pages/account";
 import _FlexBoxGrid from "flexboxgrid-with-hide";
 
 import { Provider } from "react-redux";
-import { IntlProvider } from "react-intl";
 
 import store from "store";
 
-import messages from "messages/fr-FR";
+import { translations } from "action-creators";
+
+import { frFR } from "translations";
 
 const history = createBrowserHistory();
 syncReduxAndRouter(history, store);
@@ -75,31 +76,33 @@ const Application = React.createClass({
         };
     },
 
+    componentWillMount() {
+        store.dispatch(translations.add("fr-FR", frFR));
+    },
+
     render() {
         return (
             <Provider store={store}>
-                <IntlProvider locale="fr" messages={messages}>
-                    <Router history={history}>
-                        <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
-                            <Route path="login" component={LoginForm} />
-                            <Route path="recover" component={RecoverForm} />
-                            <Route path="signup" component={SignupForm} />
+                <Router history={history}>
+                    <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
+                        <Route path="login" component={LoginForm} />
+                        <Route path="recover" component={RecoverForm} />
+                        <Route path="signup" component={SignupForm} />
+                    </Route>
+
+                    <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
+                        <Route component={Page}>
+                            <IndexRoute component={Posts} />
                         </Route>
 
-                        <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
-                            <Route component={Page}>
-                                <IndexRoute component={Posts} />
-                            </Route>
+                        <Route path="/account" component={Account} />
+                        <Route path=":pageId" component={Page}>
+                            <IndexRoute component={Posts} />
 
-                            <Route path="/account" component={Account} />
-                            <Route path=":pageId" component={Page}>
-                                <IndexRoute component={Posts} />
-
-                                <Route path="profile" component={Profile} />
-                            </Route>
+                            <Route path="profile" component={Profile} />
                         </Route>
-                    </Router>
-                </IntlProvider>
+                    </Route>
+                </Router>
             </Provider>
         );
     }

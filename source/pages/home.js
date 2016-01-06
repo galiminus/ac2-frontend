@@ -32,6 +32,7 @@ function mapStateToProps(state) {
     return {
         currentUserPage: currentUserPageProp,
         currentToken: state.tokens.get(state.currentToken),
+        translations: state.translations.get("fr-FR"),
         leftNav: state.leftNav
     };
 }
@@ -50,7 +51,8 @@ const Home = React.createClass({
         currentUserPage: PropTypes.object.isRequired,
         currentToken: PropTypes.object.isRequired,
         leftNav: PropTypes.bool.isRequired,
-        children: PropTypes.object
+        children: PropTypes.object.isRequired,
+        translations: PropTypes.object.isRequired
     },
 
     getDefaultProps() {
@@ -81,24 +83,27 @@ const Home = React.createClass({
                         <ToolbarLogo />
                     </ToolbarGroup>
                     <ToolbarGroup key={2} float="right">
-                        <CurrentUserMenu currentUserPage={this.props.currentUserPage} />
+                        <CurrentUserMenu currentUserPage={this.props.currentUserPage} translations={this.props.translations} />
                     </ToolbarGroup>
                     {/* <ToolbarGroup key={1} float="right">
                         <AutoComplete hintText="search" className="hide-sm hide-xs" />
                     </ToolbarGroup> */}
                 </AcToolbar>
                 <LeftNav docked={false} ref="leftNav">
-                    <Navigation />
+                    <Navigation translations={this.props.translations} />
                 </LeftNav>
                 <div className="row" style={{ minHeight: "100%" }}>
                     <Paper className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 220, zIndex: 1 }}>
-                        <Navigation style={{ width: 220, position: "fixed" }} />
+                        <Navigation style={{ width: 220, position: "fixed" }} translations={this.props.translations} />
                     </Paper>
                     <section className="col-md col-xs-12" style={{ paddingLeft: 0, paddingRight: 0, marginTop: 56 }}>
-                        {React.cloneElement(this.props.children, { currentUserPage: this.props.currentUserPage })}
+                        {React.cloneElement(this.props.children, {
+                            currentUserPage: this.props.currentUserPage,
+                            translations: this.props.translations
+                        })}
                     </section>
                 </div>
-                <DisconnectedModal isDisconnected={!this.props.currentToken} />
+                <DisconnectedModal isDisconnected={!this.props.currentToken} translations={this.props.translations} />
             </div>
         );
     }

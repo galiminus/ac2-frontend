@@ -1,6 +1,5 @@
 import React, { PropTypes } from "react";
 import { reduxForm } from "redux-form";
-import { FormattedMessage } from "react-intl";
 
 import {
     ListItem,
@@ -24,7 +23,8 @@ const Field = React.createClass({
         type: PropTypes.string.isRequired,
         error: PropTypes.string,
         label: PropTypes.object.isRequired,
-        onChange: PropTypes.func
+        translations: PropTypes.object.isRequired,
+        onChange: PropTypes.func.isRequired
     },
 
     getInitialState() {
@@ -73,7 +73,7 @@ const Field = React.createClass({
                             {...value}
                             onBlur={this.switchToValueMode}
                             fullWidth
-                            hintText={<FormattedMessage id={this.props.label} />}
+                            hintText={this.props.translations.t(this.props.label)}
                         />
                     </form>
                 }
@@ -101,13 +101,13 @@ const Field = React.createClass({
                 secondaryText = <div />;
             }
         } else {
-            secondaryText = <p><FormattedMessage id="texts.emptyField" /></p>;
+            secondaryText = <p>{this.props.translations.t("texts.emptyField")}</p>;
         }
 
         return (
             <ListItem
                 style={{ maxHeight: 80, minHeight: 80 }}
-                primaryText={<FormattedMessage id={this.props.label} />}
+                primaryText={this.props.translations.t(this.props.label)}
                 secondaryText={secondaryText}
                 onTouchTap={this.switchToEditMode}
             />

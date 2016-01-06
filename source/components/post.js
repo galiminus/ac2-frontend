@@ -22,7 +22,8 @@ const Post = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        post: PropTypes.object.isRequired
+        post: PropTypes.object.isRequired,
+        translations: PropTypes.object.isRequired
     },
 
     render() {
@@ -56,7 +57,12 @@ const Post = React.createClass({
                 </div>
                 <Divider />
                 <div style={{ padding: "0.5em 1em" }}>
-                    <Comments postId={this.props.post.id} parentId={null} currentUserPage={this.props.currentUserPage} />
+                    <Comments
+                        postId={this.props.post.id}
+                        parentId={null}
+                        currentUserPage={this.props.currentUserPage}
+                        translations={this.props.translations}
+                    />
                 </div>
             </Paper>
         );

@@ -1,6 +1,5 @@
 import React, { PropTypes } from "react";
 import { reduxForm } from "redux-form";
-import { FormattedMessage } from "react-intl";
 import { updatePath } from "redux-simple-router";
 
 import {
@@ -32,6 +31,7 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
+        translations: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
@@ -44,12 +44,12 @@ const form = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={<FormattedMessage id="labels.recover.email" />} />
+                <TextField fullWidth type="email" {...email} hintText={this.props.translations.t("labels.recover.email")} />
                 <div className="row center-xs" style={{ marginTop: "1em" }}>
                     <RaisedButton
                         disabled={email.invalid}
                         type="submit"
-                        label={<FormattedMessage id="actions.continue" />}
+                        label={this.props.translations.t("actions.continue")}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />

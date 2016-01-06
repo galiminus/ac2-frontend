@@ -1,6 +1,5 @@
 import React, { PropTypes } from "react";
 import { reduxForm } from "redux-form";
-import { FormattedMessage } from "react-intl";
 import { dispatch } from "store";
 import { updatePath } from "redux-simple-router";
 
@@ -31,6 +30,7 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
+        translations: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
@@ -52,22 +52,22 @@ const form = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={<FormattedMessage id="labels.login.email" />} />
-                <TextField fullWidth type="password" {...password} hintText={<FormattedMessage id="labels.login.password" />} />
+                <TextField fullWidth type="email" {...email} hintText={this.props.translations.t("labels.login.email")} />
+                <TextField fullWidth type="password" {...password} hintText={this.props.translations.t("labels.login.password")} />
                 <div className="row between-md between-xs center-xs" style={{ marginTop: 32 }}>
                     <RaisedButton
                         disabled={email.invalid || password.invalid}
                         type="submit"
-                        label={<FormattedMessage id="actions.login" />}
+                        label={this.props.translations.t("actions.login")}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
-                    <FlatButton label={<FormattedMessage id="labels.signup.signup" />} linkButton href="/welcome/signup" onClick={this.goToSignupForm} />
+                    <FlatButton label={this.props.translations.t("labels.signup.signup")} linkButton href="/welcome/signup" onClick={this.goToSignupForm} />
                 </div>
                 <div className="row center-xs">
                     <FlatButton
                         style={{ fontSize: "0.7em", marginTop: 32 }}
-                        label={<FormattedMessage id="labels.recover" />}
+                        label={this.props.translations.t("labels.recover")}
                         secondary={false}
                         linkButton
                         href="/welcome/recover"

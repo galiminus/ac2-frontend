@@ -1,6 +1,5 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
 
 import {
     Tabs,
@@ -21,7 +20,8 @@ function mapStateToProps(state, props) {
 const Profile = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        pageType: PropTypes.object.isRequired
+        pageType: PropTypes.object.isRequired,
+        translations: PropTypes.object.isRequired
     },
 
     getDefaultProps() {
@@ -61,12 +61,13 @@ const Profile = React.createClass({
                         key={field}
                         formKey={field}
                         onChange={generateChangeHandler(category, field)}
+                        translations={this.props.translations}
                     />
                 );
             }
 
             tabs.push(
-                <Tab key={`titles.userPageFields.${category}`} label={<FormattedMessage id={`titles.userPageFields.${category}`} />}>
+                <Tab key={`titles.userPageFields.${category}`} label={this.props.translations.t(`titles.userPageFields.${category}`)}>
                     <List>
                         {fields}
                     </List>

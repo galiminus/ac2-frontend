@@ -36,7 +36,8 @@ const Posts = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         posts: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        currentUserPage: PropTypes.object.isRequired,
+        translations: PropTypes.object.isRequired
     },
 
     getInitialState() {
@@ -84,13 +85,15 @@ const Posts = React.createClass({
     },
 
     render() {
-        const postNodes = this.props.posts.map(post => <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} />);
+        const postNodes = this.props.posts.map(post =>
+            <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} translations={this.props.translations} />
+        );
 
         return (
             <ActionCable channel="PostsChannel">
                 <div className="container-fluid" style={{ paddingTop: 12 }}>
                     <div className="col-md-6 col-md-offset-3 col-sm-8 col-xs-12">
-                        <PostForm className="col-xs-12" />
+                        <PostForm className="col-xs-12" translations={this.props.translations} />
                         <List>
                             {postNodes}
                         </List>

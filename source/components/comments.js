@@ -1,10 +1,8 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
 
 import {
     List,
-    RaidedButton,
     FlatButton
 } from "material-ui";
 
@@ -30,16 +28,12 @@ function mapStateToProps(state, props) {
     };
 }
 
-function mapDispatchToProps() {
-    return {
-    };
-}
-
 const Comments = React.createClass({
     propTypes: {
         postId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
+        translations: PropTypes.object.isRequired,
         parentId: PropTypes.string,
         load: PropTypes.bool
     },
@@ -75,7 +69,7 @@ const Comments = React.createClass({
         if (this.state.hasMore) {
             return (
                 <FlatButton
-                    label={<FormattedMessage id="actions.loadPreviousComments" />}
+                    label={this.props.translations.t("actions.loadPreviousComments")}
                     style={{ width: "100%", fontSize: "0.8em" }}
                     onClick={this.loadMoreComments}
                 />
@@ -103,10 +97,11 @@ const Comments = React.createClass({
                     postId={this.props.postId}
                     formKey={this.props.postId}
                     currentUserPage={this.props.currentUserPage}
+                    translations={this.props.translations}
                 />
             </ActionCable>
         );
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments);
+export default connect(mapStateToProps)(Comments);

@@ -1,7 +1,5 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
-
 import { Snackbar } from "material-ui";
 
 function mapStateToProps(state) {
@@ -12,7 +10,8 @@ function mapStateToProps(state) {
 
 const Notifier = React.createClass({
     propTypes: {
-        notification: PropTypes.object.isRequired
+        notification: PropTypes.object.isRequired,
+        translations: PropTypes.object.isRequired
     },
 
     getDefaultProps() {
@@ -26,14 +25,7 @@ const Notifier = React.createClass({
             fontFamily: "Roboto, sans-serif"
         };
 
-        let message;
-
-        if (this.props.notification.message) {
-            message = <FormattedMessage id={`errors.${this.props.notification.message}`} />;
-        } else {
-            message = "";
-        }
-
+        const message = this.props.notification.message ? this.props.translations.t(`errors.${this.props.notification.message}`) : "";
         return (
             <Snackbar message={message} ref="notice" style={style} open={message !== ""} />
         );

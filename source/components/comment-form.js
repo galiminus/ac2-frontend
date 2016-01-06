@@ -1,6 +1,5 @@
 import React, { PropTypes } from "react";
 import { reduxForm, reset } from "redux-form";
-import { FormattedMessage } from "react-intl";
 
 import {
     TextField
@@ -23,7 +22,8 @@ const form = React.createClass({
         handleSubmit: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
         error: PropTypes.string,
-        postId: PropTypes.string.isRequired
+        postId: PropTypes.string.isRequired,
+        translations: PropTypes.object.isRequired
     },
 
     post(fields, dispatch) {
@@ -56,7 +56,7 @@ const form = React.createClass({
                             style={{ fontSize: "1em" }}
                             fullWidth
                             type="text"
-                            hintText={<FormattedMessage id="labels.comment" />}
+                            hintText={this.props.translations.t("labels.comment")}
                             {...body}
                         />
                     </div>

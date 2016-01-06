@@ -1,10 +1,10 @@
 import React, { PropTypes } from "react";
 import { FlatButton, Dialog } from "material-ui";
-import { FormattedMessage } from "react-intl";
 
 const DisconnectedModal = React.createClass({
     propTypes: {
-        isDisconnected: PropTypes.bool.isRequired
+        isDisconnected: PropTypes.bool.isRequired,
+        translations: PropTypes.object.isRequired
     },
 
     render() {
@@ -13,7 +13,7 @@ const DisconnectedModal = React.createClass({
                 actions={[
                     <FlatButton
                         key={"goToLoginPage"}
-                        label={<FormattedMessage id="actions.goToLoginPage" />}
+                        label={this.props.translations.t("actions.goToLoginPage")}
                         primary
                         linkButton
                         href="/welcome/login"
@@ -21,7 +21,7 @@ const DisconnectedModal = React.createClass({
                 ]}
                 open={this.props.isDisconnected}
             >
-                <FormattedMessage id="errors.disconnected" />
+                {this.props.translations.t("errors.disconnected")}
             </Dialog>
         );
     }

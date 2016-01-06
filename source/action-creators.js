@@ -4,6 +4,7 @@ import tokens from "action-creators/tokens";
 import leftNav from "action-creators/leftnav";
 import notifications from "action-creators/notifications";
 import resources from "action-creators/resources";
+import translations from "action-creators/translations";
 
 export default {
     currentUser,
@@ -11,5 +12,6 @@ export default {
     tokens,
     leftNav,
     notifications,
-    resources
+    resources,
+    translations
 };
