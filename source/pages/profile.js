@@ -75,7 +75,7 @@ const Profile = React.createClass({
         }
         return (
             <div style={style}>
-                <Tabs className="col-xs-12 col-sm-12 col-md-8" style={{ padding: 0 }}>{tabs}</Tabs>
+                <Tabs className="col-xs-12 col-sm-12 col-md-6 col-md-offset-3" style={{ padding: 0 }}>{tabs}</Tabs>
             </div>
         );
     }

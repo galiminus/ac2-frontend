@@ -4,6 +4,7 @@ import { FormattedMessage } from "react-intl";
 
 import {
     List,
+    RaidedButton,
     FlatButton
 } from "material-ui";
 
@@ -72,7 +73,13 @@ const Comments = React.createClass({
 
     loadMoreButton() {
         if (this.state.hasMore) {
-            return (<FlatButton label={<FormattedMessage id="actions.loadPreviousComments" />} style={{ width: "100%", padding: 8 }} onClick={this.loadMoreComments} />);
+            return (
+                <FlatButton
+                    label={<FormattedMessage id="actions.loadPreviousComments" />}
+                    style={{ width: "100%", fontSize: "0.8em" }}
+                    onClick={this.loadMoreComments}
+                />
+            );
         }
         return (<div />);
     },

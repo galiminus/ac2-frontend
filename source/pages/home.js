@@ -30,7 +30,6 @@ function mapStateToProps(state) {
     }
 
     return {
-        currentUser: currentUserProp,
         currentUserPage: currentUserPageProp,
         currentToken: state.tokens.get(state.currentToken),
         leftNav: state.leftNav
@@ -48,7 +47,6 @@ const Home = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
         setCurrentUser: PropTypes.func.isRequired,
-        currentUser: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
         currentToken: PropTypes.object.isRequired,
         leftNav: PropTypes.bool.isRequired,
@@ -57,13 +55,10 @@ const Home = React.createClass({
 
     getDefaultProps() {
         return {
-            currentUser: {},
             currentUserPage: {
-                page: {
-                    data: {
-                        personal_informations: {
-                            full_name: ""
-                        }
+                data: {
+                    personal_informations: {
+                        full_name: ""
                     }
                 }
             }
@@ -75,12 +70,6 @@ const Home = React.createClass({
             this.props.setCurrentUser(response.data.id);
         });
         pageTypes.find("user");
-    },
-
-    componentWillReceiveProps(props) {
-        if (this.props.leftNav !== props.leftNav) {
-            this.refs.leftNav.toggle();
-        }
     },
 
     render() {
@@ -98,7 +87,7 @@ const Home = React.createClass({
                         <AutoComplete hintText="search" className="hide-sm hide-xs" />
                     </ToolbarGroup> */}
                 </AcToolbar>
-                <LeftNav docked={false} ref="leftNav" onChante={this.lol}>
+                <LeftNav docked={false} ref="leftNav">
                     <Navigation />
                 </LeftNav>
                 <div className="row" style={{ minHeight: "100%" }}>

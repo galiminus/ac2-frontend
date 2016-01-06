@@ -5,7 +5,8 @@ import {
     Paper,
     Toolbar,
     ToolbarGroup,
-    ToolbarTitle
+    ToolbarTitle,
+    Divider
 } from "material-ui";
 
 import UserAvatar from "components/user-avatar";
@@ -32,7 +33,7 @@ const Post = React.createClass({
                 senderInfos = (
                     <div>
                         <UserAvatar page={this.props.sender} />
-                        <ToolbarTitle text={this.props.sender.data.personal_informations.full_name} />
+                        <ToolbarTitle style={{ fontWeight: 200 }} text={this.props.sender.data.personal_informations.full_name} />
                     </div>
                 );
                 break;
@@ -44,16 +45,17 @@ const Post = React.createClass({
         }
 
         return (
-            <Paper style={{ marginTop: 24 }}>
+            <Paper style={{ marginTop: 24, fontSize: "0.85em" }}>
                 <Toolbar>
                     <ToolbarGroup key={1} float="left">
                         {senderInfos}
                     </ToolbarGroup>
                 </Toolbar>
-                <div style={{ padding: "1em" }}>
+                <div style={{ padding: "2em 1em" }}>
                     {this.props.post.data.body}
                 </div>
-                <div style={{ padding: "0.5em 1em", fontSize: "0.9em" }}>
+                <Divider />
+                <div style={{ padding: "0.5em 1em" }}>
                     <Comments postId={this.props.post.id} parentId={null} currentUserPage={this.props.currentUserPage} />
                 </div>
             </Paper>
