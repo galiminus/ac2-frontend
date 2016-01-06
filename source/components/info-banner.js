@@ -52,8 +52,8 @@ function mapStateToProps(state, props) {
 
 const InfoBanner = React.createClass({
     propTypes: {
-        owner: PropTypes.object.isRequired,
-        page: PropTypes.object.isRequired,
+        owner: PropTypes.object,
+        page: PropTypes.object,
         translations: PropTypes.object.isRequired,
         main: PropTypes.bool
     },

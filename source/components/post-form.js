@@ -3,8 +3,7 @@ import { reduxForm, reset } from "redux-form";
 
 import {
     TextField,
-    RaisedButton,
-    Snackbar
+    RaisedButton
 } from "material-ui";
 
 import { posts } from "api";
@@ -75,7 +74,6 @@ const form = React.createClass({
                         onClick={handleSubmit(this.post)}
                     />
                 </div>
-                <Snackbar message={error ? this.props.translations.t(`errors.${error}`) : ""} ref="notice" />
             </form>
         );
     }

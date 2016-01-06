@@ -13,7 +13,8 @@ import {
     Navigation,
     ToolbarLogo,
     CurrentUserMenu,
-    AcToolbar
+    AcToolbar,
+    Notifier
 } from "components";
 
 import { leftNav, currentUser } from "action-creators";
@@ -103,6 +104,7 @@ const Home = React.createClass({
                         })}
                     </section>
                 </div>
+                <Notifier translations={this.props.translations} />
                 <DisconnectedModal isDisconnected={!this.props.currentToken} translations={this.props.translations} />
             </div>
         );

@@ -50,7 +50,7 @@ const LoginPage = React.createClass({
                         {React.cloneElement(this.props.children, { translations: this.props.translations })}
                     </Paper>
                 </div>
-                <Notifier />
+                <Notifier translations={this.props.translations} />
             </div>
         );
     }
