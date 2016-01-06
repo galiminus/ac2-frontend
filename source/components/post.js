@@ -53,7 +53,7 @@ const Post = React.createClass({
                 <div style={{ padding: "1em" }}>
                     {this.props.post.data.body}
                 </div>
-                <div style={{ padding: "0.5em 1em" }}>
+                <div style={{ padding: "0.5em 1em", fontSize: "0.9em" }}>
                     <Comments postId={this.props.post.id} parentId={null} currentUserPage={this.props.currentUserPage} />
                 </div>
             </Paper>

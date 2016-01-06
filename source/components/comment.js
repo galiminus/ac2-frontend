@@ -24,10 +24,6 @@ const Comment = React.createClass({
     },
 
     render() {
-        const commentStyle = {
-            fontSize: "0.8em"
-        };
-
         const userLinkStyle = {
             textDecoration: "none",
             fontWeight: "bold",
@@ -45,7 +41,7 @@ const Comment = React.createClass({
                         <UserAvatar page={this.props.sender} />
                     </div>
                     <div className="col-xs">
-                        <p style={commentStyle}>
+                        <p>
                             <Link to={`/${this.props.sender.id}`} style={userLinkStyle} className="col-xs-2">
                                 {this.props.sender.data.personal_informations.full_name}
                             </Link>

@@ -3,8 +3,7 @@ import { reduxForm, reset } from "redux-form";
 import { FormattedMessage } from "react-intl";
 
 import {
-    TextField,
-    RaisedButton
+    TextField
 } from "material-ui";
 
 import { comments } from "api";
@@ -46,22 +45,6 @@ const form = React.createClass({
             body.value = "";
         }
 
-        let commentButton = null;
-        if (body.dirty) {
-            commentButton = (
-                <div className="row end-xs" style={{ padding: 8 }}>
-                    <RaisedButton
-                        style={{ marginLeft: 8 }}
-                        disabled={body.invalid}
-                        type="submit"
-                        label={<FormattedMessage id="actions.comment" />}
-                        secondary
-                        onClick={handleSubmit(this.post)}
-                    />
-                </div>
-            );
-        }
-
         return (
             <form onSubmit={handleSubmit(this.post)} {...this.props} >
                 <div className="row middle-xs">
@@ -70,16 +53,14 @@ const form = React.createClass({
                     </div>
                     <div className="col-xs">
                         <TextField
+                            style={{ fontSize: "1em" }}
                             fullWidth
                             type="text"
-                            multiLine
-                            rows={1}
                             hintText={<FormattedMessage id="labels.comment" />}
                             {...body}
                         />
                     </div>
                 </div>
-                {commentButton}
             </form>
         );
     }
