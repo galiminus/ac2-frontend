@@ -17,7 +17,7 @@ import {
     Notifier
 } from "components";
 
-import { leftNav, currentUser } from "action-creators";
+import actions from "action-creators";
 
 import { users, pageTypes } from "api";
 
@@ -40,8 +40,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        toggleLeftNav: () => dispatch(leftNav.toggle()),
-        setCurrentUser: (id) => dispatch(currentUser.set(id))
+        toggleLeftNav: () => dispatch(actions.leftNav.toggle()),
+        setCurrentUser: (id) => dispatch(actions.currentUser.set(id))
     };
 }
 

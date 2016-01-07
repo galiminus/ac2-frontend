@@ -30,7 +30,7 @@ import { Provider } from "react-redux";
 
 import store from "store";
 
-import { translations } from "action-creators";
+import actions from "action-creators";
 
 import { frFR } from "translations";
 
@@ -77,7 +77,7 @@ const Application = React.createClass({
     },
 
     componentWillMount() {
-        store.dispatch(translations.add("fr-FR", frFR));
+        store.dispatch(actions.translations.add("fr-FR", frFR));
     },
 
     render() {

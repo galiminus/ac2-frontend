@@ -5,6 +5,7 @@ import leftNav from "action-creators/leftnav";
 import notifications from "action-creators/notifications";
 import resources from "action-creators/resources";
 import translations from "action-creators/translations";
+import posts from "action-creators/posts"
 
 export default {
     currentUser,
@@ -13,5 +14,6 @@ export default {
     leftNav,
     notifications,
     resources,
-    translations
+    translations,
+    posts
 };

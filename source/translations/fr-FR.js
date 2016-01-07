@@ -19,6 +19,8 @@ export default {
     "actions.submit": "Valider",
     "actions.comment": "Commenter",
     "actions.loadPreviousComments": "Voir les commentaires précédents",
+    "actions.loadMorePosts": "Afficher plus de posts",
+    "actions.loadPostUpdates": "Afficher les mises à jours",
 
     "forms.login": "Connectez-vous pour continuer",
     "forms.signup": "Créez un nouveau compte",

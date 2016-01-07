@@ -12,7 +12,7 @@ import { updatePath } from "redux-simple-router";
 import randomColor from "utils/random-color";
 
 import { dispatch } from "store";
-import { tokens } from "action-creators";
+import actions from "action-creators";
 
 const CurrentUserMenu = React.createClass({
     propTypes: {
@@ -48,7 +48,7 @@ const CurrentUserMenu = React.createClass({
     },
 
     disconnect() {
-        dispatch(tokens.clear());
+        dispatch(actions.tokens.clear());
     },
 
     render() {

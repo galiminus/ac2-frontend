@@ -2,26 +2,9 @@ import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import Cable from "es6-actioncable";
 
-import { resources } from "action-creators";
-
 function mapStateToProps(state) {
     return {
         tokens: state.tokens
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        push: (message) => {
-            if (message && message.data) {
-                dispatch(resources.add(message.data));
-                if (message.included) {
-                    for (const record of message.included) {
-                        dispatch(resources.add(record));
-                    }
-                }
-            }
-        }
     };
 }
 
@@ -29,9 +12,9 @@ const consumers = {};
 
 const ActionCable = React.createClass({
     propTypes: {
-        push: PropTypes.func.isRequired,
         tokens: PropTypes.object.isRequired,
         channel: PropTypes.string.isRequired,
+        onMessage: PropTypes.func.isRequired,
         children: React.PropTypes.node
     },
 
@@ -76,7 +59,7 @@ const ActionCable = React.createClass({
 
     subscribe(consumer, channel) {
         return consumer.subscriptions.create(channel, {
-            received: this.props.push
+            received: this.props.onMessage
         });
     },
 
@@ -85,4 +68,4 @@ const ActionCable = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActionCable);
+export default connect(mapStateToProps)(ActionCable);

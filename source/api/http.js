@@ -2,7 +2,7 @@ import queryString from "query-string";
 
 import { baseUrl } from "config";
 import store from "store";
-import { tokens, resources } from "action-creators";
+import actions from "action-creators";
 
 function headers() {
     const base = {
@@ -22,7 +22,7 @@ function handleDisconnect(response) {
     if (response.status === 401) {
         const unauthorizedError = response.headers.get("www-authenticate");
         if (unauthorizedError && unauthorizedError.match("error=\"invalid_token\"")) {
-            store.dispatch(tokens.clear());
+            store.dispatch(actions.tokens.clear());
         }
     }
     return response;
@@ -43,23 +43,7 @@ function handleJSON(response) {
 }
 
 function handleJSONAPI(response) {
-    if (Array.isArray(response.data)) {
-        if (response.included) {
-            for (const record of response.included) {
-                store.dispatch(resources.add(record));
-            }
-        }
-        for (const record of response.data) {
-            store.dispatch(resources.add(record));
-        }
-    } else if (typeof(response.data) === "object") {
-        if (response.included) {
-            for (const record of response.included) {
-                store.dispatch(resources.add(record));
-            }
-        }
-        store.dispatch(resources.add(response.data));
-    }
+    store.dispatch(actions.resources.add(response));
 
     return (response);
 }
@@ -81,7 +65,7 @@ function fetchJSON(path, params) {
 export default {
     create: (path, record, query, optimistic = false) => {
         if (optimistic) {
-            store.dispatch(resources.add(record.data, { commited: false, error: false }));
+            store.dispatch(actions.resources.add(record, { commited: false, error: false }));
         }
 
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
@@ -96,7 +80,7 @@ export default {
 
     update: (path, record, query, optimistic = false) => {
         if (optimistic) {
-            store.dispatch(resources.add(record.data, { commited: false, error: false }));
+            store.dispatch(actions.resources.add(record, { commited: false, error: false }));
         }
 
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {

@@ -1,5 +1,5 @@
 import { create } from "api/http";
-import { notifications } from "action-creators";
+import actions from "action-creators";
 
 export default (record, dispatch) => {
     return new Promise((resolve, reject) => {
@@ -21,7 +21,7 @@ export default (record, dispatch) => {
 
                 if (authError && authError.match("error=\"invalid_grant\"")) {
                     reject({ _error: "invalidGrant" });
-                    dispatch(notifications.push({ message: "invalidGrant" }));
+                    dispatch(actions.notifications.push({ message: "invalidGrant" }));
                 }
             }
         });

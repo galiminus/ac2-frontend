@@ -8,27 +8,29 @@ import {
 
 import PostForm from "components/post-form";
 
-import { posts } from "api";
+import actions from "action-creators";
+import api from "api";
 import { Post, ActionCable } from "components";
 
 function mapStateToProps(state, props) {
-    let postProps;
+    let posts;
 
     if (!props.params.pageId) {
-        postProps = state.posts;
+        posts = state.posts;
     } else {
-        postProps = state.posts.filter((post) => {
+        posts = state.posts.filter((post) => {
             return (post.sender_id === props.params.pageId || post.recipient_id === props.params.pageId);
         });
     }
 
     return {
-        posts: postProps
+        posts
     };
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
     return {
+        clear: () => dispatch(actions.posts.clear())
     };
 }
 
@@ -41,15 +43,17 @@ const Posts = React.createClass({
     },
 
     getInitialState() {
-        return { page: 1, hasMore: false };
+        return { page: 1, hasMore: false, lastPostDate: null, updateCount: 0 };
     },
 
     componentDidMount() {
+        this.props.clear();
         this.loadPosts(this.props.params.pageId, 1);
     },
 
     componentWillReceiveProps(newProps) {
         if (this.props.params.pageId !== newProps.params.pageId) {
+            this.props.clear();
             this.loadPosts(newProps.params.pageId, 1);
         }
     },
@@ -65,9 +69,29 @@ const Posts = React.createClass({
         query["page[size]"] = 25;
         query.sort = "-updated_at";
 
-        posts.find(query).then((response) => {
-            this.setState({ hasMore: !!(response.links && response.links.next) });
+        api.posts.find(query).then((response) => {
+            if (response.data.length > 0) {
+                this.setState({ lastPostDate: response.data[0].updated_at });
+            }
+            this.setState({ hasMore: !!(response.links && response.links.next), loadDate: null });
         });
+    },
+
+    loadUpdates() {
+        this.setState({ updateCount: 0 });
+    },
+
+    loadUpdatesButton() {
+        if (this.state.updateCount > 0) {
+            return (
+                <FlatButton
+                    label={this.props.translations.t("actions.loadPostUpdates")}
+                    style={{ width: "100%", padding: 8 }}
+                    onClick={this.loadMorePosts}
+                />
+            );
+        }
+        return (null);
     },
 
     loadMorePosts() {
@@ -79,9 +103,21 @@ const Posts = React.createClass({
 
     loadMoreButton() {
         if (this.state.hasMore) {
-            return (<FlatButton label="Load more" style={{ width: "100%", padding: 8 }} onClick={this.loadMorePosts} />);
+            return (
+                <FlatButton
+                    label={this.props.translations.t("actions.loadMorePosts")}
+                    style={{ width: "100%", padding: 8 }}
+                    onClick={this.loadMorePosts}
+                />
+            );
         }
         return (null);
+    },
+
+    handleMessage(message) {
+        if (message) {
+            this.setState({ updateCount: this.state.updateCount + 1 });
+        }
     },
 
     render() {
@@ -90,10 +126,11 @@ const Posts = React.createClass({
         );
 
         return (
-            <ActionCable channel="PostsChannel">
+            <ActionCable channel="PostsChannel" onMessage={this.handleMessage}>
                 <div className="container-fluid" style={{ paddingTop: 12 }}>
                     <div className="col-md-6 col-md-offset-3 col-sm-8 col-xs-12">
                         <PostForm className="col-xs-12" translations={this.props.translations} />
+                        {this.loadUpdatesButton()}
                         <List>
                             {postNodes}
                         </List>

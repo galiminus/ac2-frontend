@@ -8,6 +8,8 @@ import {
 
 import { comments } from "api";
 
+import actions from "action-creators";
+
 import CommentForm from "components/comment-form";
 import Comment from "components/comment";
 import ActionCable from "components/action-cable";
@@ -28,8 +30,15 @@ function mapStateToProps(state, props) {
     };
 }
 
+function mapDispatchToProps(dispatch) {
+    return ({
+        addComment: (comment) => dispatch(actions.resources.add(comment))
+    });
+}
+
 const Comments = React.createClass({
     propTypes: {
+        addComment: PropTypes.func.isRequired,
         postId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
@@ -78,6 +87,12 @@ const Comments = React.createClass({
         return (<div />);
     },
 
+    handleMessage(comment) {
+        if (comment) {
+            this.props.addComment(comment);
+        }
+    },
+
     render() {
         let commentNodes = null;
         if (this.props.comments.count() > 0) {
@@ -89,7 +104,7 @@ const Comments = React.createClass({
         }
 
         return (
-            <ActionCable channel="CommentsChannel">
+            <ActionCable channel="CommentsChannel" onMessage={this.handleMessage}>
                 {this.loadMoreButton()}
                 {commentNodes}
                 <CommentForm
@@ -104,4 +119,4 @@ const Comments = React.createClass({
     }
 });
 
-export default connect(mapStateToProps)(Comments);
+export default connect(mapStateToProps, mapDispatchToProps)(Comments);

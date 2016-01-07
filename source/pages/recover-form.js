@@ -8,15 +8,15 @@ import {
 } from "material-ui";
 
 import { tokens, users } from "api";
-import { currentUser, currentToken } from "action-creators";
+import actions from "action-creators";
 import { validateEmail } from "validators";
 
 const authenticate = (fields, dispatch) =>
 tokens.create(fields, dispatch).then((accessTokenData) => {
-    dispatch(currentToken.set(accessTokenData.access_token));
+    dispatch(actions.currentToken.set(accessTokenData.access_token));
 
     users.me({}, dispatch).then((userData) => {
-        dispatch(currentUser.set(userData.id));
+        dispatch(actions.currentUser.set(userData.id));
         dispatch(updatePath("/"));
     });
 });

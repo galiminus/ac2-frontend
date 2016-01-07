@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import Immutable from "immutable";
 import rootReducer from "reducers";
 import thunk from "redux-thunk";
+import multi from "redux-multi";
 import persistState, { mergePersistedState } from "redux-localstorage";
 import adapter from "redux-localstorage/lib/adapters/localStorage/adapter";
 import filter from "redux-localstorage-filter";
@@ -30,7 +31,7 @@ const storage = compose(
 const logger = createLogger();
 
 const createStoreWithMiddleware = compose(
-    applyMiddleware(thunk, logger),
+    applyMiddleware(thunk, multi, logger),
 )(createStore);
 
 const createPersistentStore = compose(
