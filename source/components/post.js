@@ -46,7 +46,7 @@ const Post = React.createClass({
         }
 
         return (
-            <Paper style={{ marginTop: 24, fontSize: "0.85em" }}>
+            <Paper style={{ marginTop: 24, fontSize: "0.9em", lineHeight: "1.4em" }}>
                 <Toolbar>
                     <ToolbarGroup key={1} float="left">
                         {senderInfos}

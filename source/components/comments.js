@@ -97,7 +97,7 @@ const Comments = React.createClass({
         let commentNodes = null;
         if (this.props.comments.count() > 0) {
             commentNodes = (
-                <List style={{ padding: 24, paddingBottom: 24 }}>
+                <List style={{ padding: 18, paddingBottom: 18 }}>
                     {this.props.comments.valueSeq().map(comment => <Comment key={comment.id} comment={comment} />)}
                 </List>
             );
@@ -108,7 +108,7 @@ const Comments = React.createClass({
                 {this.loadMoreButton()}
                 {commentNodes}
                 <CommentForm
-                    style={{ padding: "0 24px" }}
+                    style={{ padding: "0 18px" }}
                     postId={this.props.postId}
                     formKey={this.props.postId}
                     currentUserPage={this.props.currentUserPage}

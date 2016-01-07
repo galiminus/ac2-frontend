@@ -2,7 +2,8 @@ import React, { PropTypes } from "react";
 import { reduxForm, reset } from "redux-form";
 
 import {
-    TextField
+    TextField,
+    FlatButton
 } from "material-ui";
 
 import { comments } from "api";
@@ -45,6 +46,20 @@ const form = React.createClass({
             body.value = "";
         }
 
+        let commentButton = null;
+        if (body.active || body.value.length > 0) {
+            commentButton = (
+                <FlatButton
+                    labelStyle={{ padding: "0 8px" }}
+                    disabled={body.invalid}
+                    type="submit"
+                    label={this.props.translations.t("actions.comment")}
+                    secondary
+                    onClick={handleSubmit(this.post)}
+                />
+            );
+        }
+
         return (
             <form onSubmit={handleSubmit(this.post)} {...this.props} >
                 <div className="row middle-xs">
@@ -60,6 +75,9 @@ const form = React.createClass({
                             {...body}
                         />
                     </div>
+                </div>
+                <div className="row middle-xs end-xs">
+                    {commentButton}
                 </div>
             </form>
         );

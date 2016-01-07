@@ -21,7 +21,6 @@ import actions from "action-creators";
 
 import { users, pageTypes } from "api";
 
-
 function mapStateToProps(state) {
     const currentUserProp = state.users.get(state.currentUser);
 

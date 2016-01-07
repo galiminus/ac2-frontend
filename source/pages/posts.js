@@ -24,7 +24,7 @@ function mapStateToProps(state, props) {
     }
 
     return {
-        posts
+        posts: posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1))
     };
 }
 
@@ -39,7 +39,8 @@ const Posts = React.createClass({
         params: PropTypes.object.isRequired,
         posts: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        translations: PropTypes.object.isRequired
+        translations: PropTypes.object.isRequired,
+        clear: PropTypes.func.isRequired
     },
 
     getInitialState() {
@@ -66,7 +67,7 @@ const Posts = React.createClass({
         }
 
         query["page[number]"] = pageNum;
-        query["page[size]"] = 25;
+        query["page[size]"] = 2;
         query.sort = "-updated_at";
 
         api.posts.find(query).then((response) => {
@@ -79,6 +80,8 @@ const Posts = React.createClass({
 
     loadUpdates() {
         this.setState({ updateCount: 0 });
+        this.props.clear();
+        this.loadPosts(this.props.params.pageId, 1);
     },
 
     loadUpdatesButton() {
@@ -87,7 +90,7 @@ const Posts = React.createClass({
                 <FlatButton
                     label={this.props.translations.t("actions.loadPostUpdates")}
                     style={{ width: "100%", padding: 8 }}
-                    onClick={this.loadMorePosts}
+                    onClick={this.loadUpdates}
                 />
             );
         }
@@ -115,7 +118,9 @@ const Posts = React.createClass({
     },
 
     handleMessage(message) {
-        if (message) {
+        if (message &&
+            message.data.attributes.created_at === message.data.attributes.updated_at &&
+            message.data.relationships.sender.data.id !== this.props.currentUserPage.id) {
             this.setState({ updateCount: this.state.updateCount + 1 });
         }
     },

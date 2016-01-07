@@ -18,14 +18,12 @@ const reducer = compose(
 
         state.pages = Immutable.Map(persistedState.pages);
 
-        state.form = persistedState.form;
-
         return state;
     })
 )(rootReducer);
 
 const storage = compose(
-    filter(["tokens", "currentUser", "users", "currentToken", "pages", "posts", "form"])
+    filter(["tokens", "currentUser", "users", "currentToken", "pages", "posts"])
 )(adapter(window.localStorage));
 
 const logger = createLogger();
