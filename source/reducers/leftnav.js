@@ -3,6 +3,9 @@ export default function (state = false, action) {
     case "LEFTNAV_TOGGLE":
         return !state;
 
+    case "@@router/UPDATE_PATH":
+        return false;
+
     default:
         return state;
     }

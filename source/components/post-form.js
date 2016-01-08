@@ -30,12 +30,6 @@ const form = React.createClass({
         };
     },
 
-    componentWillReceiveProps(props) {
-        if (props.error) {
-            this.refs.notice.show();
-        }
-    },
-
     post(fields, dispatch) {
         posts.create({
             type: "text",

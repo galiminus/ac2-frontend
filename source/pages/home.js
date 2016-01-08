@@ -89,7 +89,7 @@ const Home = React.createClass({
                         <AutoComplete hintText="search" className="hide-sm hide-xs" />
                     </ToolbarGroup> */}
                 </AcToolbar>
-                <LeftNav docked={false} ref="leftNav">
+                <LeftNav docked={false} open={this.props.leftNav} onRequestChange={this.props.toggleLeftNav}>
                     <Navigation translations={this.props.translations} />
                 </LeftNav>
                 <div className="row" style={{ minHeight: "100%" }}>
