@@ -9,5 +9,8 @@ const RaisedButton = require("material-ui").RaisedButton;
 
 describe("PostsPages", () => {
     it("should works", () => {
+        const page = TestUtils.renderIntoDocument(
+            <PostsPages params={{ pageId: 1 }}/>
+        );
     });
 });

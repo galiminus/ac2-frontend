@@ -3,32 +3,13 @@ import { connect } from "react-redux";
 
 import DefaultRawTheme from "material-ui/lib/styles/raw-themes/light-raw-theme";
 
-const bannerImage = "http://d.facdn.net/art/phorque/1397922715/1397922715.phorque_p51mustang_mini.jpg";
-
 const style = {
-    parallax: {
-        banner: {
-            width: "100%",
-            background: `#000 url(${bannerImage}) no-repeat center/cover`,
-            height: 0,
-            paddingBottom: "30%",
-            position: "relative"
-        },
-        infos: {
-            fontFamily: DefaultRawTheme.fontFamily,
-            width: "100%",
-            background: DefaultRawTheme.palette.textColor,
-            opacity: 0.8,
-            position: "absolute",
-            bottom: 0,
-            color: DefaultRawTheme.palette.alternateTextColor
-        }
-    },
     classic: {
         infos: {
             fontFamily: DefaultRawTheme.fontFamily,
             width: "100%",
-            opacity: 0.8,
+            position: "fixed",
+            zIndex: 2,
             background: DefaultRawTheme.palette.textColor,
             color: DefaultRawTheme.palette.alternateTextColor
         }
@@ -74,19 +55,10 @@ const InfoBanner = React.createClass({
         }
 
         return (
-            <div>
-                <div className="hide-xs hide-sm">
-                    <div style={style.parallax.banner}>
-                        <aside style={style.parallax.infos}>
-                            <div style={{ padding: "16px 32px" }}>{ownerInfos}</div>
-                        </aside>
-                    </div>
-                </div>
-                <div className="hide-md hide-lg">
-                    <aside style={style.classic.infos}>
-                        <div style={{ padding: "16px 32px" }}>{ownerInfos}</div>
-                    </aside>
-                </div>
+            <div className="col-xs-12">
+                <aside style={style.classic.infos}>
+                    <div style={{ padding: "16px 32px" }}>{ownerInfos}</div>
+                </aside>
             </div>
         );
     }

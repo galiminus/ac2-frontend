@@ -46,7 +46,7 @@ const Page = React.createClass({
         return (
             <div>
                 <InfoBanner page={this.props.page} main={this.props.params.pageId === undefined} translations={this.props.translations} />
-                <div>
+                <div style={{ paddingTop: 90 }}>
                     {React.cloneElement(this.props.children, {
                         currentUserPage: this.props.currentUserPage,
                         translations: this.props.translations
