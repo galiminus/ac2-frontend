@@ -48,8 +48,11 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        translations: PropTypes.object.isRequired,
         error: PropTypes.string
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     goToLoginForm(e) {
@@ -65,19 +68,19 @@ const form = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(signup)}>
-                <TextField fullWidth type="text" {...fullName} hintText={this.props.translations.t("labels.signup.fullName")} />
-                <TextField fullWidth type="text" {...userName} hintText={this.props.translations.t("labels.signup.userName")} />
-                <TextField fullWidth type="email" {...email} hintText={this.props.translations.t("labels.signup.email")} />
-                <TextField fullWidth type="password" {...password} hintText={this.props.translations.t("labels.signup.password")} />
+                <TextField fullWidth type="text" {...fullName} hintText={this.context.translation.t("labels.signup.fullName")} />
+                <TextField fullWidth type="text" {...userName} hintText={this.context.translation.t("labels.signup.userName")} />
+                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t("labels.signup.email")} />
+                <TextField fullWidth type="password" {...password} hintText={this.context.translation.t("labels.signup.password")} />
                 <div className="row between-xs center-xs" style={{ marginTop: 32 }}>
                     <RaisedButton
                         disabled={fullName.invalid || userName.invalid || email.invalid || password.invalid}
                         type="submit"
-                        label={this.props.translations.t("actions.signup")}
+                        label={this.context.translation.t("actions.signup")}
                         secondary
                         onClick={handleSubmit(signup)}
                     />
-                    <FlatButton label={this.props.translations.t("labels.have_account")} linkButton href="/welcome/login" onClick={this.goToLoginForm} />
+                    <FlatButton label={this.context.translation.t("labels.have_account")} linkButton href="/welcome/login" onClick={this.goToLoginForm} />
                 </div>
             </form>
         );

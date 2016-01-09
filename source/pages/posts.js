@@ -38,9 +38,12 @@ const Posts = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         posts: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
-        translations: PropTypes.object.isRequired,
         clear: PropTypes.func.isRequired
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired
     },
 
     getInitialState() {
@@ -88,7 +91,7 @@ const Posts = React.createClass({
         if (this.state.updateCount > 0) {
             return (
                 <FlatButton
-                    label={this.props.translations.t("actions.loadPostUpdates")}
+                    label={this.context.translation.t("actions.loadPostUpdates")}
                     style={{ width: "100%", padding: 8 }}
                     onClick={this.loadUpdates}
                 />
@@ -108,7 +111,7 @@ const Posts = React.createClass({
         if (this.state.hasMore) {
             return (
                 <FlatButton
-                    label={this.props.translations.t("actions.loadMorePosts")}
+                    label={this.context.translation.t("actions.loadMorePosts")}
                     style={{ width: "100%", padding: 8 }}
                     onClick={this.loadMorePosts}
                 />
@@ -120,21 +123,21 @@ const Posts = React.createClass({
     handleMessage(message) {
         if (message &&
             message.data.attributes.created_at === message.data.attributes.updated_at &&
-            message.data.relationships.sender.data.id !== this.props.currentUserPage.id) {
+            message.data.relationships.sender.data.id !== this.context.currentUserPage.id) {
             this.setState({ updateCount: this.state.updateCount + 1 });
         }
     },
 
     render() {
         const postNodes = this.props.posts.valueSeq().map(post =>
-            <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} translations={this.props.translations} />
+            <Post key={post.id} post={post} />
         );
 
         return (
             <ActionCable channel="PostsChannel" onMessage={this.handleMessage}>
                 <div className="container-fluid" style={{ paddingTop: 12 }}>
                     <div className="col-md-6 col-md-offset-3 col-sm-8 col-xs-12">
-                        <PostForm className="col-xs-12" translations={this.props.translations} />
+                        <PostForm className="col-xs-12" />
                         {this.loadUpdatesButton()}
                         <List>
                             {postNodes}

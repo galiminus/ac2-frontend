@@ -12,8 +12,7 @@ import { toolbarBackgroundColor, loginPageBackground } from "config";
 function mapStateToProps(state) {
     return {
         isLoggedIn: state.currentUser !== null,
-        currentPath: state.routing.path,
-        translations: state.translations.get("fr-FR")
+        currentPath: state.routing.path
     };
 }
 
@@ -21,8 +20,11 @@ const LoginPage = React.createClass({
     propTypes: {
         isLoggedIn: PropTypes.bool.isRequired,
         currentPath: PropTypes.string.isRequired,
-        translations: PropTypes.object.isRequired,
         children: PropTypes.node
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     getFormTitle() {
@@ -45,12 +47,12 @@ const LoginPage = React.createClass({
                 <div className="row middle-xs center-xs" style={{ height: "100%" }}>
                     <Paper className="col-md-4 col-sm-8 col-xs-11" style={{ padding: "16px 32px 32px 32px" }}>
                         <h3 style={{ marginBottom: 32, fontWeight: 200, fontSize: 14, textTransform: "uppercase" }}>
-                            { this.props.translations.t(`forms.${this.getFormTitle()}`) }
+                            { this.context.translation.t(`forms.${this.getFormTitle()}`) }
                         </h3>
-                        {React.cloneElement(this.props.children, { translations: this.props.translations })}
+                        {this.props.children}
                     </Paper>
                 </div>
-                <Notifier translations={this.props.translations} />
+                <Notifier />
             </div>
         );
     }

@@ -26,12 +26,15 @@ const validate = values => {
     };
 };
 
-const form = React.createClass({
+const LoginForm = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        translations: PropTypes.object.isRequired,
         error: PropTypes.string
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     goToSignupForm(e) {
@@ -52,22 +55,22 @@ const form = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={this.props.translations.t("labels.login.email")} />
-                <TextField fullWidth type="password" {...password} hintText={this.props.translations.t("labels.login.password")} />
+                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t("labels.login.email")} />
+                <TextField fullWidth type="password" {...password} hintText={this.context.translation.t("labels.login.password")} />
                 <div className="row between-md between-xs center-xs" style={{ marginTop: 32 }}>
                     <RaisedButton
                         disabled={email.invalid || password.invalid}
                         type="submit"
-                        label={this.props.translations.t("actions.login")}
+                        label={this.context.translation.t("actions.login")}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
-                    <FlatButton label={this.props.translations.t("labels.signup.signup")} linkButton href="/welcome/signup" onClick={this.goToSignupForm} />
+                <FlatButton label={this.context.translation.t("labels.signup.signup")} linkButton href="/welcome/signup" onClick={this.goToSignupForm} />
                 </div>
                 <div className="row center-xs">
                     <FlatButton
                         style={{ fontSize: "0.7em", marginTop: 32 }}
-                        label={this.props.translations.t("labels.recover")}
+                        label={this.context.translation.t("labels.recover")}
                         secondary={false}
                         linkButton
                         href="/welcome/recover"
@@ -83,4 +86,4 @@ export default reduxForm({
     form: "login",
     fields: ["email", "password"],
     validate
-})(form);
+})(LoginForm);

@@ -20,8 +20,11 @@ function mapStateToProps(state, props) {
 const Profile = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        pageType: PropTypes.object.isRequired,
-        translations: PropTypes.object.isRequired
+        pageType: PropTypes.object.isRequired
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     getDefaultProps() {
@@ -61,13 +64,12 @@ const Profile = React.createClass({
                         key={field}
                         formKey={field}
                         onChange={generateChangeHandler(category, field)}
-                        translations={this.props.translations}
                     />
                 );
             }
 
             tabs.push(
-                <Tab key={`titles.userPageFields.${category}`} label={this.props.translations.t(`titles.userPageFields.${category}`)}>
+                <Tab key={`titles.userPageFields.${category}`} label={this.context.translation.t(`titles.userPageFields.${category}`)}>
                     <List>
                         {fields}
                     </List>

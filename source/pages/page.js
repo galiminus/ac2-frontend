@@ -21,9 +21,7 @@ const Page = React.createClass({
         params: PropTypes.object.isRequired,
         getPage: PropTypes.func.isRequired,
         page: PropTypes.object,
-        children: PropTypes.node.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
-        translations: PropTypes.object.isRequired
+        children: PropTypes.node.isRequired
     },
 
     componentDidMount() {
@@ -45,12 +43,9 @@ const Page = React.createClass({
     render() {
         return (
             <div>
-                <InfoBanner page={this.props.page} main={this.props.params.pageId === undefined} translations={this.props.translations} />
+                <InfoBanner page={this.props.page} main={this.props.params.pageId === undefined} />
                 <div style={{ paddingTop: 90 }}>
-                    {React.cloneElement(this.props.children, {
-                        currentUserPage: this.props.currentUserPage,
-                        translations: this.props.translations
-                    })}
+                    {this.props.children}
                 </div>
             </div>
         );

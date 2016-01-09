@@ -49,9 +49,12 @@ function redirectToLoginPage(_nextState, replaceState) {
     }
 }
 
+store.dispatch(actions.translations.add("fr-FR", frFR));
+
 const Application = React.createClass({
     childContextTypes: {
-        muiTheme: React.PropTypes.object
+        muiTheme: React.PropTypes.object,
+        translation: React.PropTypes.object
     },
 
     getChildContext() {
@@ -72,40 +75,39 @@ const Application = React.createClass({
                     borderColor: Colors.grey300,
                     disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3)
                 }
-            })
+            }),
+            translation: store.getState().translations.get("fr-FR")
         };
-    },
-
-    componentWillMount() {
-        store.dispatch(actions.translations.add("fr-FR", frFR));
     },
 
     render() {
         return (
-            <Provider store={store}>
-                <Router history={history}>
-                    <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
-                        <Route path="login" component={LoginForm} />
-                        <Route path="recover" component={RecoverForm} />
-                        <Route path="signup" component={SignupForm} />
+            <Router history={history}>
+                <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
+                    <Route path="login" component={LoginForm} />
+                    <Route path="recover" component={RecoverForm} />
+                    <Route path="signup" component={SignupForm} />
+                </Route>
+
+                <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
+                    <Route component={Page}>
+                        <IndexRoute component={Posts} />
                     </Route>
 
-                    <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
-                        <Route component={Page}>
-                            <IndexRoute component={Posts} />
-                        </Route>
+                    <Route path="/account" component={Account} />
+                    <Route path=":pageId" component={Page}>
+                        <IndexRoute component={Posts} />
 
-                        <Route path="/account" component={Account} />
-                        <Route path=":pageId" component={Page}>
-                            <IndexRoute component={Posts} />
-
-                            <Route path="profile" component={Profile} />
-                        </Route>
+                        <Route path="profile" component={Profile} />
                     </Route>
-                </Router>
-            </Provider>
+                </Route>
+            </Router>
         );
     }
 });
 
-ReactDOM.render(<Application />, document.getElementsByTagName("main")[0]);
+ReactDOM.render(
+    <Provider store={store}>
+        <Application />
+    </Provider>
+, document.getElementsByTagName("main")[0]);

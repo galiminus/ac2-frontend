@@ -15,30 +15,18 @@ import { dispatch } from "store";
 import actions from "action-creators";
 
 const CurrentUserMenu = React.createClass({
-    propTypes: {
-        currentUserPage: PropTypes.object.isRequired,
-        translations: PropTypes.object.isRequired
-    },
-
-    getDefaultProps() {
-        return ({
-            page: {
-                data: {
-                    personal_informations: {
-                        full_name: ""
-                    }
-                }
-            }
-        });
+    contextTypes: {
+        translation: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired
     },
 
     goToPage(e) {
-        dispatch(updatePath(`/${this.props.currentUserPage.id}`));
+        dispatch(updatePath(`/${this.context.currentUserPage.id}`));
         e.preventDefault();
     },
 
     goToProfile(e) {
-        dispatch(updatePath(`/${this.props.currentUserPage.id}/profile`));
+        dispatch(updatePath(`/${this.context.currentUserPage.id}/profile`));
         e.preventDefault();
     },
 
@@ -58,14 +46,14 @@ const CurrentUserMenu = React.createClass({
             fontFamily: "Roboto, sans-serif",
             textTransform: "uppercase",
             cursor: "pointer",
-            backgroundColor: randomColor(this.props.currentUserPage.data.personal_informations.full_name)
+            backgroundColor: randomColor(this.context.currentUserPage.data.personal_informations.full_name)
         };
 
         return (
-            <IconMenu iconButtonElement={<Avatar style={style}>{this.props.currentUserPage.data.personal_informations.full_name[0]}</Avatar>}>
-                <MenuItem index={1} primaryText={this.props.translations.t("links.currentUserPage")} href={`/${this.props.currentUserPage.id}`} onClick={this.goToPage} />
-                <MenuItem index={1} primaryText={this.props.translations.t("links.currentUserProfile")} href={`/${this.props.currentUserPage.id}/profile`} onClick={this.goToProfile} />
-                <MenuItem index={4} primaryText={this.props.translations.t("actions.disconnect")} onClick={this.disconnect} />
+            <IconMenu iconButtonElement={<Avatar style={style}>{this.context.currentUserPage.data.personal_informations.full_name[0]}</Avatar>}>
+                <MenuItem index={1} primaryText={this.context.translation.t("links.currentUserPage")} href={`/${this.context.currentUserPage.id}`} onClick={this.goToPage} />
+                <MenuItem index={1} primaryText={this.context.translation.t("links.currentUserProfile")} href={`/${this.context.currentUserPage.id}/profile`} onClick={this.goToProfile} />
+                <MenuItem index={4} primaryText={this.context.translation.t("actions.disconnect")} onClick={this.disconnect} />
             </IconMenu>
         );
     }

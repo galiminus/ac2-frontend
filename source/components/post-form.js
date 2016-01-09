@@ -19,8 +19,11 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        translations: PropTypes.object.isRequired,
         error: PropTypes.string
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     getInitialState() {
@@ -62,7 +65,7 @@ const form = React.createClass({
                         style={{ marginLeft: 8 }}
                         disabled={body.invalid}
                         type="submit"
-                        label={this.props.translations.t("actions.post")}
+                        label={this.context.translation.t("actions.post")}
                         secondary
                         onClick={handleSubmit(this.post)}
                     />

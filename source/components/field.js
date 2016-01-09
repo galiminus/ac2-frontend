@@ -23,8 +23,11 @@ const Field = React.createClass({
         type: PropTypes.string.isRequired,
         error: PropTypes.string,
         label: PropTypes.string.isRequired,
-        translations: PropTypes.object.isRequired,
         onChange: PropTypes.func.isRequired
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     getInitialState() {
@@ -73,7 +76,7 @@ const Field = React.createClass({
                             {...value}
                             onBlur={this.switchToValueMode}
                             fullWidth
-                            hintText={this.props.translations.t(this.props.label)}
+                            hintText={this.context.translation.t(this.props.label)}
                         />
                     </form>
                 }
@@ -101,13 +104,13 @@ const Field = React.createClass({
                 secondaryText = <div />;
             }
         } else {
-            secondaryText = <p>{this.props.translations.t("texts.emptyField")}</p>;
+            secondaryText = <p>{this.context.translation.t("texts.emptyField")}</p>;
         }
 
         return (
             <ListItem
                 style={{ maxHeight: 80, minHeight: 80 }}
-                primaryText={this.props.translations.t(this.props.label)}
+                primaryText={this.context.translation.t(this.props.label)}
                 secondaryText={secondaryText}
                 onTouchTap={this.switchToEditMode}
             />

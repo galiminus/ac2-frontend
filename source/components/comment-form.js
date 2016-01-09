@@ -21,10 +21,13 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
         error: PropTypes.string,
-        postId: PropTypes.string.isRequired,
-        translations: PropTypes.object.isRequired
+        postId: PropTypes.string.isRequired
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired
     },
 
     post(fields, dispatch) {
@@ -53,7 +56,7 @@ const form = React.createClass({
                     labelStyle={{ padding: "0 8px" }}
                     disabled={body.invalid}
                     type="submit"
-                    label={this.props.translations.t("actions.comment")}
+                    label={this.context.translation.t("actions.comment")}
                     secondary
                     onClick={handleSubmit(this.post)}
                 />
@@ -64,14 +67,14 @@ const form = React.createClass({
             <form onSubmit={handleSubmit(this.post)} {...this.props} >
                 <div className="row middle-xs">
                     <div>
-                        <UserAvatar page={this.props.currentUserPage} />
+                        <UserAvatar page={this.context.currentUserPage} />
                     </div>
                     <div className="col-xs">
                         <TextField
                             style={{ fontSize: "1em" }}
                             fullWidth
                             type="text"
-                            hintText={this.props.translations.t("labels.comment")}
+                            hintText={this.context.translation.t("labels.comment")}
                             {...body}
                         />
                     </div>

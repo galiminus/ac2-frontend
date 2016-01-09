@@ -8,8 +8,8 @@ import { dispatch } from "store";
 import { updatePath } from "redux-simple-router";
 
 const Navigation = React.createClass({
-    propTypes: {
-        translations: PropTypes.object.isRequired
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     goToMainFeed(e) {
@@ -20,7 +20,7 @@ const Navigation = React.createClass({
     render() {
         return (
             <List {...this.props}>
-                <ListItem index={0} primaryText={this.props.translations.t("links.mainFeed")} href="/" onClick={this.goToMainFeed} />
+                <ListItem index={0} primaryText={this.context.translation.t("links.mainFeed")} href="/" onClick={this.goToMainFeed} />
             </List>
         );
     }

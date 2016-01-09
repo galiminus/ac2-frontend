@@ -31,8 +31,11 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        translations: PropTypes.object.isRequired,
         error: PropTypes.string
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     render() {
@@ -44,12 +47,12 @@ const form = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={this.props.translations.t("labels.recover.email")} />
+                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t("labels.recover.email")} />
                 <div className="row center-xs" style={{ marginTop: "1em" }}>
                     <RaisedButton
                         disabled={email.invalid}
                         type="submit"
-                        label={this.props.translations.t("actions.continue")}
+                        label={this.context.translation.t("actions.continue")}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />

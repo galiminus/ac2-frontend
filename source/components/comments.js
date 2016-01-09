@@ -41,10 +41,12 @@ const Comments = React.createClass({
         addComment: PropTypes.func.isRequired,
         postId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
-        translations: PropTypes.object.isRequired,
         parentId: PropTypes.string,
         load: PropTypes.bool
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     getInitialState() {
@@ -78,7 +80,7 @@ const Comments = React.createClass({
         if (this.state.hasMore) {
             return (
                 <FlatButton
-                    label={this.props.translations.t("actions.loadPreviousComments")}
+                    label={this.context.translation.t("actions.loadPreviousComments")}
                     style={{ width: "100%", fontSize: "0.8em" }}
                     onClick={this.loadMoreComments}
                 />
@@ -111,8 +113,6 @@ const Comments = React.createClass({
                     style={{ padding: "0 18px" }}
                     postId={this.props.postId}
                     formKey={this.props.postId}
-                    currentUserPage={this.props.currentUserPage}
-                    translations={this.props.translations}
                 />
             </ActionCable>
         );

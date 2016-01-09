@@ -35,8 +35,11 @@ const InfoBanner = React.createClass({
     propTypes: {
         owner: PropTypes.object,
         page: PropTypes.object,
-        translations: PropTypes.object.isRequired,
         main: PropTypes.bool
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
     },
 
     render() {
@@ -51,7 +54,7 @@ const InfoBanner = React.createClass({
                 break;
             }
         } else if (this.props.main) {
-            ownerInfos = <h1>{this.props.translations.t("links.mainFeed")}</h1>;
+            ownerInfos = <h1>{this.context.translation.t("links.mainFeed")}</h1>;
         }
 
         return (

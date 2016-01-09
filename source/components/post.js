@@ -21,9 +21,7 @@ function mapStateToProps(state, props) {
 const Post = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
-        post: PropTypes.object.isRequired,
-        translations: PropTypes.object.isRequired
+        post: PropTypes.object.isRequired
     },
 
     render() {
@@ -60,8 +58,6 @@ const Post = React.createClass({
                     <Comments
                         postId={this.props.post.id}
                         parentId={null}
-                        currentUserPage={this.props.currentUserPage}
-                        translations={this.props.translations}
                     />
                 </div>
             </Paper>

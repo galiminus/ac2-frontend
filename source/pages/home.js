@@ -32,7 +32,6 @@ function mapStateToProps(state) {
     return {
         currentUserPage: currentUserPageProp,
         currentToken: state.tokens.get(state.currentToken),
-        translations: state.translations.get("fr-FR"),
         leftNav: state.leftNav
     };
 }
@@ -51,8 +50,11 @@ const Home = React.createClass({
         currentUserPage: PropTypes.object.isRequired,
         currentToken: PropTypes.object.isRequired,
         leftNav: PropTypes.bool.isRequired,
-        children: PropTypes.object.isRequired,
-        translations: PropTypes.object.isRequired
+        children: PropTypes.object.isRequired
+    },
+
+    childContextTypes: {
+        currentUserPage: PropTypes.object
     },
 
     getDefaultProps() {
@@ -65,6 +67,12 @@ const Home = React.createClass({
                 }
             }
         };
+    },
+
+    getChildContext() {
+        return ({
+            currentUserPage: this.props.currentUserPage
+        })
     },
 
     componentDidMount() {
@@ -83,28 +91,22 @@ const Home = React.createClass({
                         <ToolbarLogo />
                     </ToolbarGroup>
                     <ToolbarGroup key={2} float="right">
-                        <CurrentUserMenu currentUserPage={this.props.currentUserPage} translations={this.props.translations} />
+                        <CurrentUserMenu />
                     </ToolbarGroup>
-                    {/* <ToolbarGroup key={1} float="right">
-                        <AutoComplete hintText="search" className="hide-sm hide-xs" />
-                    </ToolbarGroup> */}
                 </AcToolbar>
                 <LeftNav docked={false} open={this.props.leftNav} onRequestChange={this.props.toggleLeftNav}>
-                    <Navigation translations={this.props.translations} />
+                    <Navigation />
                 </LeftNav>
                 <div className="row" style={{ minHeight: "100%" }}>
                     <Paper className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 220, zIndex: 1 }}>
-                        <Navigation style={{ width: 220, position: "fixed" }} translations={this.props.translations} />
+                        <Navigation style={{ width: 220, position: "fixed" }} />
                     </Paper>
                     <section className="col-md col-xs-12" style={{ paddingLeft: 0, paddingRight: 0, marginTop: 56 }}>
-                        {React.cloneElement(this.props.children, {
-                            currentUserPage: this.props.currentUserPage,
-                            translations: this.props.translations
-                        })}
+                        {this.props.children}
                     </section>
                 </div>
-                <Notifier translations={this.props.translations} />
-                <DisconnectedModal isDisconnected={!this.props.currentToken} translations={this.props.translations} />
+                <Notifier />
+                <DisconnectedModal isDisconnected={!this.props.currentToken} />
             </div>
         );
     }
