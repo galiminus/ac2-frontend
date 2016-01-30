@@ -1,3 +1,3 @@
 export default {
-    clear: () => ({ type: "POSTS_CLEAR" })
+    clearPosts: () => ({ type: "POSTS_CLEAR" })
 };

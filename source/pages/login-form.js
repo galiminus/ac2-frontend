@@ -10,13 +10,15 @@ import {
 } from "material-ui";
 
 import { tokens } from "api";
-import actions from "action-creators";
+import { setCurrentToken } from "action-creators";
 import { validateEmail, validatePassword } from "validators";
 
 const authenticate = (fields) =>
     tokens.create(fields, dispatch).then((data) => {
-        dispatch(actions.currentToken.set(data.access_token));
-        dispatch(updatePath("/"));
+        dispatch([
+            setCurrentToken(data.access_token),
+            updatePath("/")
+        ]);
     });
 
 const validate = values => {

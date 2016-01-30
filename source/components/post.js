@@ -50,11 +50,11 @@ const Post = React.createClass({
                         {senderInfos}
                     </ToolbarGroup>
                 </Toolbar>
-                <div style={{ padding: "2em 1em" }}>
+                <div style={{ padding: "1em 16px" }}>
                     {this.props.post.data.body}
                 </div>
                 <Divider />
-                <div style={{ padding: "0.5em 1em" }}>
+                <div style={{ padding: "0.5em 8px 0.5em 8px" }}>
                     <Comments
                         postId={this.props.post.id}
                         parentId={null}

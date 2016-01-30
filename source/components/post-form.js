@@ -6,7 +6,8 @@ import {
     RaisedButton
 } from "material-ui";
 
-import { posts } from "api";
+import api from "api";
+import { addResource } from "action-creators";
 import { validateText } from "validators";
 
 const validate = values => {
@@ -34,12 +35,14 @@ const form = React.createClass({
     },
 
     post(fields, dispatch) {
-        posts.create({
+        api.posts.create({
             type: "text",
             data: {
                 body: fields.body
             }
-        }).then(() => dispatch(reset("post")));
+        }).then((response) => {
+            dispatch([reset("post"), addResource(response)]);
+        });
     },
 
     render() {

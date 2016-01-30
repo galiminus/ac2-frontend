@@ -7,7 +7,8 @@ import {
     List
 } from "material-ui";
 
-import { pages } from "api";
+import api from "api";
+import actionCreators from "action-creators";
 import Field from "components/field";
 
 function mapStateToProps(state, props) {
@@ -47,7 +48,7 @@ const Profile = React.createClass({
                 const data = Object.assign({}, this.props.page.data);
                 data[category][field] = value;
 
-                pages.update(this.props.page.id, { data });
+                api.pages.update(this.props.page.id, { data }).then(this.props.addResource);
             };
         };
 
@@ -84,4 +85,4 @@ const Profile = React.createClass({
     }
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, actionCreators)(Profile);

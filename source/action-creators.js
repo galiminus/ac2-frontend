@@ -8,12 +8,12 @@ import translations from "action-creators/translations";
 import posts from "action-creators/posts";
 
 export default {
-    currentUser,
-    currentToken,
-    tokens,
-    leftNav,
+    ...currentUser,
+    ...currentToken,
+    ...tokens,
+    ...leftNav,
     notifications,
-    resources,
     translations,
-    posts
+    ...resources,
+    ...posts
 };

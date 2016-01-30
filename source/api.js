@@ -1,15 +1,17 @@
+
 import createToken from "api/createToken";
 import createUser from "api/createUser";
 import findUsers from "api/findUsers";
 import getMe from "api/getMe";
-import createPost from "api/createPost";
-import findPosts from "api/findPosts";
-import updatePost from "api/updatePost";
 import getPage from "api/getPage";
 import updatePage from "api/updatePage";
 import createComment from "api/createComment";
 import findComments from "api/findComments";
 import findPageTypes from "api/findPageTypes";
+import createPost from "api/createPost";
+import findPosts from "api/findPosts";
+import updatePost from "api/updatePost";
+import createLike from "api/createLike";
 
 export default {
     tokens: {
@@ -40,5 +42,9 @@ export default {
 
     pageTypes: {
         find: findPageTypes
+    },
+
+    likes: {
+        create: createLike
     }
 };

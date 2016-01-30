@@ -1,82 +1,85 @@
 {
-    "name": "ac2-frontend",
-    "version": "0.0.1",
-    "description": "Frontend for ac2",
-    "main": "src/app.js",
-    "scripts": {
-        "test": "jest --verbose"
-    },
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "babel-core": "^5.8.23",
-        "babel-loader": "^5.3.2",
-        "babel-jest": "^5.3.0",
-        "chai": "^3.2.0",
-        "css-loader": "^0.23.0",
-        "envify": "^3.4.0",
-        "file-loader": "^0.8.4",
-        "image-webpack-loader": "^1.6.1",
-        "imagemin": "^3.2.0",
-        "imports-loader": "^0.6.5",
-        "style-loader": "^0.13.0",
-        "transform-loader": "^0.2.3",
-        "jest-cli": "^0.5.8",
-        "jest-webpack-alias": "^2.0.0",
-        "mocha": "^2.3.0",
-        "react-addons-test-utils": "~0.14.6",
-        "sinon": "^1.16.1",
-        "webpack": "^1.12.3"
-    },
-    "dependencies": {
-        "babel-eslint": "^4.1.6",
-        "es6-actioncable": "0.0.1",
-        "eslint": "^1.0.0",
-        "eslint-config-airbnb": "^2.0.0",
-        "eslint-loader": "^1.1.1",
-        "eslint-plugin-react": "^3.11.3",
-        "exports-loader": "^0.6.2",
-        "flexboxgrid-with-hide": "6.3.0 ",
-        "history": "^1.13.0",
-        "immutable": "^3.7.5",
-        "material-ui": "^0.14.1",
-        "node-polyglot": "^1.0.0",
-        "query-string": "^3.0.0",
-        "react": "^0.14.6",
-        "react-dom": "^0.14.6",
-        "react-redux": "^4.0.0",
-        "react-router": "^1.0.0-rc4",
-        "react-tap-event-plugin": "^0.2.1",
-        "redux": "^3.0.4",
-        "redux-form": "^3.0.11",
-        "redux-immutablejs": "0.0.7",
-        "redux-localstorage": "^1.0.0-rc4",
-        "redux-localstorage-filter": "^0.1.1",
-        "redux-logger": "^2.0.4",
-        "redux-multi": "^0.1.10",
-        "redux-simple-router": "0.0.8",
-        "redux-thunk": "^1.0.0",
-        "whatwg-fetch": "^0.10.1"
-    },
-    "jest": {
-        "scriptPreprocessor": "<rootDir>/tests/unit/conf/jest-preprocessor.js",
-        "setupEnvScriptFile": "<rootDir>/tests/unit/conf/jest-setup.js",
-        "unmockedModulePathPatterns": [
-            "/node_modules/material-ui",
-            "/node_modules",
-            "<rootDir>/node_modules"
-        ],
-        "moduleFileExtensions": [
-            "js",
-            "json",
-            "jsx"
-        ],
-        "testFileExtensions": [
-            "js"
-        ],
-        "testDirectoryName": "__tests__",
-        "testPathDirs": [
-            "<rootDir>/tests/unit"
-        ]
-    }
+  "name": "ac2-frontend",
+  "version": "0.0.1",
+  "description": "Frontend for ac2",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^5.8.23",
+    "babel-loader": "^5.3.2",
+    "babel-jest": "^5.3.0",
+    "chai": "^3.2.0",
+    "css-loader": "^0.23.0",
+    "envify": "^3.4.0",
+    "file-loader": "^0.8.4",
+    "image-webpack-loader": "^1.6.1",
+    "imagemin": "^3.2.0",
+    "imports-loader": "^0.6.5",
+    "style-loader": "^0.13.0",
+    "transform-loader": "^0.2.3",
+    "jest-cli": "^0.5.8",
+    "jest-webpack-alias": "^2.0.0",
+    "webpack-babel-jest": "*",
+    "mocha": "^2.3.0",
+    "react-addons-test-utils": "~0.14.6",
+    "sinon": "^1.16.1",
+    "webpack": "^1.12.3"
+  },
+  "dependencies": {
+    "babel-eslint": "^4.1.6",
+    "es6-actioncable": "0.0.1",
+    "eslint": "^1.0.0",
+    "eslint-config-airbnb": "^2.0.0",
+    "eslint-loader": "^1.1.1",
+    "eslint-plugin-react": "^3.11.3",
+    "exports-loader": "^0.6.2",
+    "flexboxgrid-with-hide": "6.3.0 ",
+    "history": "^1.13.0",
+    "immutable": "^3.7.5",
+    "material-ui": "^0.14.1",
+    "node-polyglot": "^1.0.0",
+    "query-string": "^3.0.0",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.0.0",
+    "react-router": "^1.0.0-rc4",
+    "react-tap-event-plugin": "^0.2.1",
+    "redux": "^3.0.4",
+    "redux-form": "^3.0.11",
+    "redux-immutablejs": "0.0.7",
+    "redux-localstorage": "^1.0.0-rc4",
+    "redux-localstorage-filter": "^0.1.1",
+    "redux-logger": "^2.0.4",
+    "redux-multi": "^0.1.10",
+    "redux-simple-router": "0.0.8",
+    "redux-thunk": "^1.0.0",
+    "reselect": "^2.0.2",
+    "url-parse": "^1.0.5",
+    "whatwg-fetch": "^0.10.1"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/webpack-babel-jest",
+    "setupEnvScriptFile": "<rootDir>/tests/unit/conf/jest-setup.js",
+    "unmockedModulePathPatterns": [
+      "/node_modules/material-ui",
+      "/node_modules",
+      "<rootDir>/node_modules"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ],
+    "testFileExtensions": [
+      "js"
+    ],
+    "testDirectoryName": "__tests__",
+    "testPathDirs": [
+      "<rootDir>/tests/unit"
+    ]
+  }
 }

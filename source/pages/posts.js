@@ -8,7 +8,7 @@ import {
 
 import PostForm from "components/post-form";
 
-import actions from "action-creators";
+import actionCreators from "action-creators";
 import api from "api";
 import { Post, ActionCable } from "components";
 
@@ -28,17 +28,12 @@ function mapStateToProps(state, props) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        clear: () => dispatch(actions.posts.clear())
-    };
-}
-
 const Posts = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         posts: PropTypes.object.isRequired,
-        clear: PropTypes.func.isRequired
+        clearPosts: PropTypes.func.isRequired,
+        addResource: PropTypes.func.isRequired
     },
 
     contextTypes: {
@@ -51,13 +46,13 @@ const Posts = React.createClass({
     },
 
     componentDidMount() {
-        this.props.clear();
+        this.props.clearPosts();
         this.loadPosts(this.props.params.pageId, 1);
     },
 
     componentWillReceiveProps(newProps) {
         if (this.props.params.pageId !== newProps.params.pageId) {
-            this.props.clear();
+            this.props.clearPosts();
             this.loadPosts(newProps.params.pageId, 1);
         }
     },
@@ -70,10 +65,12 @@ const Posts = React.createClass({
         }
 
         query["page[number]"] = pageNum;
-        query["page[size]"] = 2;
+        query["page[size]"] = 20;
         query.sort = "-updated_at";
 
         api.posts.find(query).then((response) => {
+            this.props.addResource(response);
+
             if (response.data.length > 0) {
                 this.setState({ lastPostDate: response.data[0].updated_at });
             }
@@ -83,7 +80,7 @@ const Posts = React.createClass({
 
     loadUpdates() {
         this.setState({ updateCount: 0 });
-        this.props.clear();
+        this.props.clearPosts();
         this.loadPosts(this.props.params.pageId, 1);
     },
 
@@ -150,4 +147,4 @@ const Posts = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps, actionCreators)(Posts);

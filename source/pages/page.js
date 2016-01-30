@@ -1,7 +1,8 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
+import actionCreators from "action-creators";
 
-import { pages } from "api";
+import api from "api";
 import { InfoBanner } from "components";
 
 function mapStateToProps(state, props) {
@@ -10,16 +11,10 @@ function mapStateToProps(state, props) {
     };
 }
 
-function mapDispatchToProps() {
-    return {
-        getPage: (id, query) => pages.get(id, query)
-    };
-}
-
 const Page = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
-        getPage: PropTypes.func.isRequired,
+        addResource: PropTypes.func.isRequired,
         page: PropTypes.object,
         children: PropTypes.node.isRequired
     },
@@ -36,7 +31,7 @@ const Page = React.createClass({
 
     loadPage(pageId) {
         if (pageId) {
-            this.props.getPage(pageId, { include: "owner" });
+            api.pages.get(pageId, { include: "owner" }).then(this.props.addResource);
         }
     },
 
@@ -52,4 +47,4 @@ const Page = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Page);
+export default connect(mapStateToProps, actionCreators)(Page);

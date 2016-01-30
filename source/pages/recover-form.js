@@ -7,17 +7,19 @@ import {
     RaisedButton
 } from "material-ui";
 
-import { tokens, users } from "api";
-import actions from "action-creators";
+import api from "api";
+import { setCurrentToken, setCurrentUser } from "action-creators";
 import { validateEmail } from "validators";
 
 const authenticate = (fields, dispatch) =>
 tokens.create(fields, dispatch).then((accessTokenData) => {
-    dispatch(actions.currentToken.set(accessTokenData.access_token));
+    dispatch(currentToken.set(accessTokenData.access_token));
 
-    users.me({}, dispatch).then((userData) => {
-        dispatch(actions.currentUser.set(userData.id));
-        dispatch(updatePath("/"));
+    api.users.me({}, dispatch).then((userData) => {
+        dispatch([
+            currentUser.set(userData.id),
+            updatePath("/")
+        ]);
     });
 });
 

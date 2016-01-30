@@ -6,7 +6,7 @@ import {
     FlatButton
 } from "material-ui";
 
-import { comments } from "api";
+import api from "api";
 import { validateText } from "validators";
 
 import UserAvatar from "components/user-avatar";
@@ -31,12 +31,14 @@ const form = React.createClass({
     },
 
     post(fields, dispatch) {
-        comments.create(this.props.postId, {
+        api.comments.create(this.props.postId, {
             type: "text",
             data: {
                 body: fields.body
             }
-        }).then(() => dispatch(reset("comment")));
+        }).then((response) => {
+            dispatch([reset("comment"), this.props.addResource(response)]);
+        });
     },
 
     render() {

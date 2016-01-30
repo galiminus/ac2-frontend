@@ -17,9 +17,9 @@ import {
     Notifier
 } from "components";
 
-import actions from "action-creators";
+import actionCreators from "action-creators";
 
-import { users, pageTypes } from "api";
+import api from "api";
 
 function mapStateToProps(state) {
     const currentUserProp = state.users.get(state.currentUser);
@@ -36,17 +36,11 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        toggleLeftNav: () => dispatch(actions.leftNav.toggle()),
-        setCurrentUser: (id) => dispatch(actions.currentUser.set(id))
-    };
-}
-
 const Home = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
         setCurrentUser: PropTypes.func.isRequired,
+        addResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
         currentToken: PropTypes.object.isRequired,
         leftNav: PropTypes.bool.isRequired,
@@ -76,10 +70,11 @@ const Home = React.createClass({
     },
 
     componentDidMount() {
-        users.me({ include: "page" }).then((response) => {
+        api.users.me({ include: "page" }).then((response) => {
             this.props.setCurrentUser(response.data.id);
+            this.props.addResource(response);
         });
-        pageTypes.find("user");
+        api.pageTypes.find("user").then(this.props.addResource);
     },
 
     render() {
@@ -112,4 +107,4 @@ const Home = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, actionCreators)(Home);

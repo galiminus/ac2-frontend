@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react";
+import { connect } from "react-redux";
 
 import {
     Avatar,
@@ -8,11 +9,13 @@ import {
 import MenuItem from "material-ui/lib/menus/menu-item";
 
 import { updatePath } from "redux-simple-router";
+import { clearTokens } from "action-creators";
 
 import randomColor from "utils/random-color";
 
-import { dispatch } from "store";
-import actions from "action-creators";
+function mapStateToProps(state, props) {
+    return {};
+}
 
 const CurrentUserMenu = React.createClass({
     contextTypes: {
@@ -21,22 +24,22 @@ const CurrentUserMenu = React.createClass({
     },
 
     goToPage(e) {
-        dispatch(updatePath(`/${this.context.currentUserPage.id}`));
+        this.props.updatePath(`/${this.context.currentUserPage.id}`);
         e.preventDefault();
     },
 
     goToProfile(e) {
-        dispatch(updatePath(`/${this.context.currentUserPage.id}/profile`));
+        this.props.updatePath(`/${this.context.currentUserPage.id}/profile`);
         e.preventDefault();
     },
 
     goToAccount(e) {
-        dispatch(updatePath("/account"));
+        this.props.updatePath("/account");
         e.preventDefault();
     },
 
     disconnect() {
-        dispatch(actions.tokens.clear());
+        this.props.clearTokens();
     },
 
     render() {
@@ -59,4 +62,4 @@ const CurrentUserMenu = React.createClass({
     }
 });
 
-export default CurrentUserMenu;
+export default connect(mapStateToProps, { updatePath, clearTokens })(CurrentUserMenu);

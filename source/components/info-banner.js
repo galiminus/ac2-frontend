@@ -7,8 +7,9 @@ const style = {
     classic: {
         infos: {
             fontFamily: DefaultRawTheme.fontFamily,
-            width: "100%",
             position: "fixed",
+            width: "100%",
+            paddingRight: 16,
             zIndex: 2,
             background: DefaultRawTheme.palette.textColor,
             color: DefaultRawTheme.palette.alternateTextColor
@@ -58,11 +59,10 @@ const InfoBanner = React.createClass({
         }
 
         return (
-            <div className="col-xs-12">
-                <aside style={style.classic.infos}>
-                    <div style={{ padding: "16px 32px" }}>{ownerInfos}</div>
-                </aside>
-            </div>
+
+            <aside style={style.classic.infos}>
+                <div style={{ padding: "16px 32px" }}>{ownerInfos}</div>
+            </aside>
         );
     }
 });

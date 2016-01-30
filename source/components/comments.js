@@ -6,9 +6,9 @@ import {
     FlatButton
 } from "material-ui";
 
-import { comments } from "api";
+import api from "api";
 
-import actions from "action-creators";
+import actionCreators from "action-creators";
 
 import CommentForm from "components/comment-form";
 import Comment from "components/comment";
@@ -30,17 +30,11 @@ function mapStateToProps(state, props) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return ({
-        addComment: (comment) => dispatch(actions.resources.add(comment))
-    });
-}
-
 const Comments = React.createClass({
     propTypes: {
-        addComment: PropTypes.func.isRequired,
         postId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
+        addResource: PropTypes.func.isRequired,
         parentId: PropTypes.string,
         load: PropTypes.bool
     },
@@ -58,14 +52,15 @@ const Comments = React.createClass({
     },
 
     loadComments(postId, pageNum) {
-        const query = { include: "sender" };
+        const query = { include: "sender,received_likes" };
 
         query["page[number]"] = pageNum;
         query["page[size]"] = 10;
         query.sort = "-updated_at";
 
-        comments.find(postId, query).then((response) => {
+        api.comments.find(postId, query).then((response) => {
             this.setState({ hasMore: !!(response.links && response.links.next) && response.data.length > 0 });
+            this.props.addResource(response);
         });
     },
 
@@ -91,7 +86,7 @@ const Comments = React.createClass({
 
     handleMessage(comment) {
         if (comment) {
-            this.props.addComment(comment);
+            this.props.addResource(comment);
         }
     },
 
@@ -99,7 +94,7 @@ const Comments = React.createClass({
         let commentNodes = null;
         if (this.props.comments.count() > 0) {
             commentNodes = (
-                <List style={{ padding: 18, paddingBottom: 18 }}>
+                <List style={{ padding: 18, paddingBottom: 18, paddingRight: 0 }}>
                     {this.props.comments.valueSeq().map(comment => <Comment key={comment.id} comment={comment} />)}
                 </List>
             );
@@ -110,7 +105,7 @@ const Comments = React.createClass({
                 {this.loadMoreButton()}
                 {commentNodes}
                 <CommentForm
-                    style={{ padding: "0 18px" }}
+                    style={{ padding: "0 26px" }}
                     postId={this.props.postId}
                     formKey={this.props.postId}
                 />
@@ -119,4 +114,4 @@ const Comments = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments);
+export default connect(mapStateToProps, actionCreators)(Comments);

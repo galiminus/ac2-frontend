@@ -10,16 +10,17 @@ import {
 } from "material-ui";
 
 import { tokens, users } from "api";
-import actions from "action-creators";
+import { setCurrentUser, setCurrentToken } from "action-creators";
 import { validateEmail, validatePassword, validateFullName, validateUserName } from "validators";
 
 const authenticate = (userId, fields) =>
     tokens.create({ email: fields.email, password: fields.password }, dispatch)
     .then((data) => {
-        dispatch(actions.currentUser.set(userId));
-        dispatch(actions.currentToken.set(data.access_token));
-
-        dispatch(updatePath("/"));
+        dispatch([
+            setCurrentUser.set(userId),
+            setCurrentToken.set(data.access_token),
+            updatePath("/")
+        ]);
     });
 
 const signup = (fields) =>

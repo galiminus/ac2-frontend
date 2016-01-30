@@ -2,7 +2,7 @@ import queryString from "query-string";
 
 import { baseUrl } from "config";
 import store from "store";
-import actions from "action-creators";
+import { clearTokens } from "action-creators";
 
 function headers() {
     const base = {
@@ -22,7 +22,7 @@ function handleDisconnect(response) {
     if (response.status === 401) {
         const unauthorizedError = response.headers.get("www-authenticate");
         if (unauthorizedError && unauthorizedError.match("error=\"invalid_token\"")) {
-            store.dispatch(actions.tokens.clear());
+            store.dispatch(clearTokens());
         }
     }
     return response;
@@ -42,18 +42,11 @@ function handleJSON(response) {
     return response.json();
 }
 
-function handleJSONAPI(response) {
-    store.dispatch(actions.resources.add(response));
-
-    return (response);
-}
-
 function fetchJSON(path, params) {
     return fetch(path, params)
         .then(handleDisconnect)
         .then(handleError)
         .then(handleJSON)
-        .then(handleJSONAPI)
         .catch((error) => {
             if (error.name === "TypeError") {
                 setTimeout(() => fetchJSON(path, params), 5000);
@@ -63,11 +56,7 @@ function fetchJSON(path, params) {
 }
 
 export default {
-    create: (path, record, query, optimistic = false) => {
-        if (optimistic) {
-            store.dispatch(actions.resources.add(record, { commited: false, error: false }));
-        }
-
+    create: (path, record, query) => {
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
             method: "POST",
             body: JSON.stringify(record),
@@ -78,11 +67,7 @@ export default {
         });
     },
 
-    update: (path, record, query, optimistic = false) => {
-        if (optimistic) {
-            store.dispatch(actions.resources.add(record, { commited: false, error: false }));
-        }
-
+    update: (path, record, query) => {
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
             method: "PUT",
             body: JSON.stringify(record),
