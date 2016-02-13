@@ -48,17 +48,6 @@ export default {
             actions.push(addRecord(resource.data, options));
         }
 
-        if (resource.links) {
-            for (const name in resource.links) {
-                if (Object.prototype.hasOwnProperty.call(resource.links, name)) {
-                    actions.push({
-                        type: "LINKS_ADD",
-                        data: { link: resource.links[name] }
-                    });
-                }
-            }
-        }
-
         return (actions);
     }
 };

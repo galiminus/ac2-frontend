@@ -13,11 +13,16 @@ import { clearTokens } from "action-creators";
 
 import randomColor from "utils/random-color";
 
-function mapStateToProps(state, props) {
+function mapStateToProps(_state, _props) {
     return {};
 }
 
 const CurrentUserMenu = React.createClass({
+    propTypes: {
+        updatePath: PropTypes.object.func,
+        clearTokens: PropTypes.object.func
+    },
+
     contextTypes: {
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired

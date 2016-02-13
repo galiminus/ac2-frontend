@@ -12,12 +12,12 @@ import { setCurrentToken, setCurrentUser } from "action-creators";
 import { validateEmail } from "validators";
 
 const authenticate = (fields, dispatch) =>
-tokens.create(fields, dispatch).then((accessTokenData) => {
-    dispatch(currentToken.set(accessTokenData.access_token));
+api.tokens.create(fields, dispatch).then((accessTokenData) => {
+    dispatch(setCurrentToken(accessTokenData.access_token));
 
     api.users.me({}, dispatch).then((userData) => {
         dispatch([
-            currentUser.set(userData.id),
+            setCurrentUser(userData.id),
             updatePath("/")
         ]);
     });

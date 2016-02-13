@@ -21,7 +21,8 @@ function mapStateToProps(state, props) {
 const Profile = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        pageType: PropTypes.object.isRequired
+        pageType: PropTypes.object.isRequired,
+        addResource: PropTypes.func.isRequired
     },
 
     contextTypes: {

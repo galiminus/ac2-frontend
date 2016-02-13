@@ -66,7 +66,7 @@ const Home = React.createClass({
     getChildContext() {
         return ({
             currentUserPage: this.props.currentUserPage
-        })
+        });
     },
 
     componentDidMount() {

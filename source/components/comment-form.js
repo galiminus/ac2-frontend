@@ -7,6 +7,7 @@ import {
 } from "material-ui";
 
 import api from "api";
+import { addResource } from "action-creators";
 import { validateText } from "validators";
 
 import UserAvatar from "components/user-avatar";
@@ -33,11 +34,15 @@ const form = React.createClass({
     post(fields, dispatch) {
         api.comments.create(this.props.postId, {
             type: "text",
+            access_controls_attributes: [{ authorized_party_type: "All" }],
             data: {
                 body: fields.body
             }
         }).then((response) => {
-            dispatch([reset("comment"), this.props.addResource(response)]);
+            dispatch([
+                reset("comment"),
+                addResource(response)
+            ]);
         });
     },
 

@@ -7,11 +7,13 @@ import Immutable from "immutable";
 import { Checkbox } from "material-ui";
 import ThumbUpIcon from "material-ui/lib/svg-icons/action/thumb-up";
 
+import api from "api";
 import UserAvatar from "components/user-avatar";
 
 function mapStateToProps(state, props) {
     return {
-        sender: state.pages.get(props.comment.sender_id)
+        sender: state.pages.get(props.comment.sender_id),
+        likes: state.likes.filter((like) => like.liked_id === props.comment.id)
     };
 }
 
@@ -30,7 +32,10 @@ const Comment = React.createClass({
     },
 
     handleLike() {
-
+        api.likes.create({
+            liked_id: this.props.comment.id,
+            liked_type: "Comment"
+        });
     },
 
     render() {
@@ -59,7 +64,10 @@ const Comment = React.createClass({
                                 {this.props.comment.data.body}
                             </p>
                         </div>
-                        <div>
+                    </div>
+                    <div className="row">
+                        <div className="col-xs-1"></div>
+                        <div className="col-xs">
                             <Checkbox
                                 name="checkboxName4"
                                 value="checkboxValue4"
@@ -70,6 +78,7 @@ const Comment = React.createClass({
                                 unCheckedIcon={<ThumbUpIcon />}
                                 onCheck={this.handleLike}
                             />
+
                         </div>
                     </div>
                 </div>

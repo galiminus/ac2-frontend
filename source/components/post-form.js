@@ -37,6 +37,7 @@ const form = React.createClass({
     post(fields, dispatch) {
         api.posts.create({
             type: "text",
+            access_controls_attributes: [{ authorized_party_type: "All" }],
             data: {
                 body: fields.body
             }

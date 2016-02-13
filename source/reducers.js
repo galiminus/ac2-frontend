@@ -12,6 +12,7 @@ import pages from "reducers/pages";
 import pageTypes from "reducers/page_types";
 import posts from "reducers/posts";
 import comments from "reducers/comments";
+import likes from "reducers/likes";
 
 import notifications from "reducers/notifications";
 
@@ -28,6 +29,7 @@ const reducers = combineReducers({
     pages,
     pageTypes,
     comments,
+    likes,
     leftNav,
     form,
     notifications,
