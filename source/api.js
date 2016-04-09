@@ -1,17 +1,17 @@
 
-import createToken from "api/createToken";
-import createUser from "api/createUser";
-import findUsers from "api/findUsers";
-import getMe from "api/getMe";
-import getPage from "api/getPage";
-import updatePage from "api/updatePage";
-import createComment from "api/createComment";
-import findComments from "api/findComments";
-import findPageTypes from "api/findPageTypes";
-import createPost from "api/createPost";
-import findPosts from "api/findPosts";
-import updatePost from "api/updatePost";
-import createLike from "api/createLike";
+import createToken from "api/create-token";
+import createUser from "api/create-user";
+import findUsers from "api/find-users";
+import getMe from "api/get-me";
+import getPage from "api/get-page";
+import updatePage from "api/update-page";
+import createComment from "api/create-comment";
+import findComments from "api/find-comments";
+import findPageTypes from "api/find-page-type";
+import createPost from "api/create-post";
+import findPosts from "api/find-posts";
+import updatePost from "api/update-post";
+import createLike from "api/create-like";
 
 export default {
     tokens: {

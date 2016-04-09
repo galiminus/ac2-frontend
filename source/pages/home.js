@@ -14,7 +14,9 @@ import {
     ToolbarLogo,
     CurrentUserMenu,
     AcToolbar,
-    Notifier
+    Notifier,
+    Roster,
+    ActionCable
 } from "components";
 
 import actionCreators from "action-creators";
@@ -22,15 +24,16 @@ import actionCreators from "action-creators";
 import api from "api";
 
 function mapStateToProps(state) {
-    const currentUserProp = state.users.get(state.currentUser);
+    const currentUser = state.users.get(state.currentUser);
 
-    let currentUserPageProp;
-    if (currentUserProp) {
-        currentUserPageProp = state.pages.get(currentUserProp.page_id);
+    let currentUserPage;
+    if (currentUser) {
+        currentUserPage = state.pages.get(currentUser.page_id);
     }
 
     return {
-        currentUserPage: currentUserPageProp,
+        currentUser,
+        currentUserPage,
         currentToken: state.tokens.get(state.currentToken),
         leftNav: state.leftNav
     };
@@ -54,6 +57,7 @@ const Home = React.createClass({
     getDefaultProps() {
         return {
             currentUserPage: {
+                presence: "connected",
                 data: {
                     personal_informations: {
                         full_name: ""
@@ -77,9 +81,20 @@ const Home = React.createClass({
         api.pageTypes.find("user").then(this.props.addResource);
     },
 
+    componentWillReceiveProps(props) {
+        if (props.currentUser) {
+            api.pages.update(props.currentUser.page_id, { presence: "available" });
+        }
+    },
+
+    handleMessage(message) {
+        console.log(message);
+    },
+
     render() {
         return (
             <div style={{ height: "100%" }}>
+                <ActionCable channel="PagesChannel" onMessage={this.handleMessage} />
                 <AcToolbar>
                     <ToolbarGroup key={0} float="left">
                         <FontIcon className="material-icons hide-md hide-lg" style={{ paddingLeft: 0, paddingRight: 24 }} onClick={this.props.toggleLeftNav}>menu</FontIcon>
@@ -99,7 +114,13 @@ const Home = React.createClass({
                     <section className="col-md col-xs-12" style={{ paddingLeft: 0, paddingRight: 0, marginTop: 56 }}>
                         {this.props.children}
                     </section>
+                    <Paper className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 220, zIndex: 2 }}>
+                        <Roster style={{ width: 220, position: "fixed" }} />
+                    </Paper>
                 </div>
+                <LeftNav docked={false} open={this.props.leftNav} onRequestChange={this.props.toggleLeftNav} openRight>
+                    <Navigation />
+                </LeftNav>
                 <Notifier />
                 <DisconnectedModal isDisconnected={!this.props.currentToken} />
             </div>

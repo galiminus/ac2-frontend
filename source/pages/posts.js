@@ -133,7 +133,7 @@ const Posts = React.createClass({
         return (
             <ActionCable channel="PostsChannel" onMessage={this.handleMessage}>
                 <div className="container-fluid" style={{ paddingTop: 12 }}>
-                    <div className="col-md-6 col-md-offset-3 col-sm-8 col-xs-12">
+                    <div className="col-md-10 col-md-offset-1 col-sm-10 col-xs-12">
                         <PostForm className="col-xs-12" />
                         {this.loadUpdatesButton()}
                         <List>

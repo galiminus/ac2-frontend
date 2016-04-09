@@ -14,13 +14,14 @@ import { clearTokens } from "action-creators";
 import randomColor from "utils/random-color";
 
 function mapStateToProps(_state, _props) {
+    console.log(_state, _props);
     return {};
 }
 
 const CurrentUserMenu = React.createClass({
     propTypes: {
-        updatePath: PropTypes.object.func,
-        clearTokens: PropTypes.object.func
+        updatePath: PropTypes.func.isRequired,
+        clearTokens: PropTypes.func.isRequired
     },
 
     contextTypes: {
@@ -61,7 +62,7 @@ const CurrentUserMenu = React.createClass({
             <IconMenu iconButtonElement={<Avatar style={style}>{this.context.currentUserPage.data.personal_informations.full_name[0]}</Avatar>}>
                 <MenuItem index={1} primaryText={this.context.translation.t("links.currentUserPage")} href={`/${this.context.currentUserPage.id}`} onClick={this.goToPage} />
                 <MenuItem index={1} primaryText={this.context.translation.t("links.currentUserProfile")} href={`/${this.context.currentUserPage.id}/profile`} onClick={this.goToProfile} />
-                <MenuItem index={4} primaryText={this.context.translation.t("actions.disconnect")} onClick={this.disconnect} />
+                <MenuItem index={3} primaryText={this.context.translation.t("actions.disconnect")} onClick={this.disconnect} />
             </IconMenu>
         );
     }

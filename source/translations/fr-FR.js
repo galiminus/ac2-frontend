@@ -47,6 +47,7 @@ export default {
     "links.currentUserProfile": "Mon profil",
     "links.accountSettings": "Paramètres de compte",
     "links.mainFeed": "Mur principal",
+    "links.messages": "Messagerie",
 
     ...(locales["fr-FR"])
 };

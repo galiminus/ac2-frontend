@@ -8,7 +8,12 @@ import {
 
 import { updatePath } from "redux-simple-router";
 
-const Navigation = React.createClass({
+function mapStateToProps(_state, _props) {
+    return {
+    };
+}
+
+const Roster = React.createClass({
     propTypes: {
         updatePath: PropTypes.func.isRequired
     },
@@ -17,12 +22,7 @@ const Navigation = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
-    goToMainFeed(e) {
-        this.props.updatePath("/");
-        e.preventDefault();
-    },
-
-    goToMessages(e) {
+    goToChat(e) {
         this.props.updatePath("/messages");
         e.preventDefault();
     },
@@ -30,11 +30,10 @@ const Navigation = React.createClass({
     render() {
         return (
             <List {...this.props}>
-                <ListItem index={0} primaryText={this.context.translation.t("links.messages")} href="/messages" onClick={this.goToMessages} />
-                <ListItem index={1} primaryText={this.context.translation.t("links.mainFeed")} href="/" onClick={this.goToMainFeed} />
+                <ListItem index={0} primaryText={this.context.translation.t("links.messages")} href="/messages" onClick={this.goToChat} />
             </List>
         );
     }
 });
 
-export default connect(undefined, { updatePath })(Navigation);
+export default connect(mapStateToProps, { updatePath })(Roster);

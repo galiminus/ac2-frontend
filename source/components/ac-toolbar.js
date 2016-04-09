@@ -8,7 +8,7 @@ export default React.createClass({
 
     render() {
         return (
-            <Toolbar style={{ position: "fixed", zIndex: 2 }}>
+            <Toolbar style={{ position: "fixed", zIndex: 3 }}>
                 {this.props.children}
             </Toolbar>
         );

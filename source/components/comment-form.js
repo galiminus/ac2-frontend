@@ -22,8 +22,8 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        error: PropTypes.string,
-        postId: PropTypes.string.isRequired
+        postId: PropTypes.string.isRequired,
+        error: PropTypes.string
     },
 
     contextTypes: {

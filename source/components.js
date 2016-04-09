@@ -9,6 +9,7 @@ import InfoBanner from "components/info-banner";
 import Post from "components/post";
 import Notifier from "components/notifier";
 import ActionCable from "components/action-cable";
+import Roster from "components/roster";
 
 export default {
     AcToolbar,
@@ -21,5 +22,6 @@ export default {
     InfoBanner,
     Post,
     Notifier,
-    ActionCable
+    ActionCable,
+    Roster
 };

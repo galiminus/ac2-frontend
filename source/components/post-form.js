@@ -27,13 +27,6 @@ const form = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
-    getInitialState() {
-        return {
-            imagesModalOpen: false,
-            pollModalOpen: false
-        };
-    },
-
     post(fields, dispatch) {
         api.posts.create({
             type: "text",

@@ -4,14 +4,13 @@ injectTapEventPlugin();
 
 import ReactDOM from "react-dom";
 
-import { Router, Route, IndexRoute } from "react-router";
+import { Router, Route, IndexRoute, browserHistory } from "react-router";
 
 import ThemeManager from "material-ui/lib/styles/theme-manager";
 import Colors from "material-ui/lib/styles/colors";
 import ColorManipulator from "material-ui/lib/utils/color-manipulator";
 import Spacing from "material-ui/lib/styles/spacing";
 
-import createBrowserHistory from "history/lib/createBrowserHistory";
 import { syncReduxAndRouter } from "redux-simple-router";
 
 import HomePage from "pages/home";
@@ -23,6 +22,7 @@ import Page from "pages/page";
 import Profile from "pages/profile";
 import Posts from "pages/posts";
 import Account from "pages/account";
+import Messages from "pages/messages";
 
 import _FlexBoxGrid from "flexboxgrid-with-hide";
 
@@ -34,8 +34,7 @@ import actions from "action-creators";
 
 import { frFR } from "translations";
 
-const history = createBrowserHistory();
-syncReduxAndRouter(history, store);
+syncReduxAndRouter(browserHistory, store);
 
 function redirectToHomePage(_nextState, replaceState) {
     if (store.getState().currentToken) {
@@ -82,7 +81,7 @@ const Application = React.createClass({
 
     render() {
         return (
-            <Router history={history}>
+            <Router history={browserHistory}>
                 <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
                     <Route path="login" component={LoginForm} />
                     <Route path="recover" component={RecoverForm} />
@@ -95,6 +94,7 @@ const Application = React.createClass({
                     </Route>
 
                     <Route path="/account" component={Account} />
+                    <Route path="/messages" component={Messages} />
                     <Route path=":pageId" component={Page}>
                         <IndexRoute component={Posts} />
 

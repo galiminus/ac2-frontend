@@ -1,4 +1,3 @@
-envify = require('envify/custom')
 webpack = require("webpack")
 const path = require('path');
 
