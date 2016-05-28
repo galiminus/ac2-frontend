@@ -6,10 +6,20 @@ import ReactDOM from "react-dom";
 
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
 
-import ThemeManager from "material-ui/lib/styles/theme-manager";
-import Colors from "material-ui/lib/styles/colors";
-import ColorManipulator from "material-ui/lib/utils/color-manipulator";
-import Spacing from "material-ui/lib/styles/spacing";
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {
+    indigo400,
+    cyan700,
+    grey400,
+    orangeA700,
+    grey100,
+    grey500,
+    darkBlack,
+    white,
+    grey300
+} from "material-ui/styles/colors";
+import { fade } from "material-ui/utils/colorManipulator";
+import Spacing from "material-ui/styles/spacing";
 
 import { syncReduxAndRouter } from "redux-simple-router";
 
@@ -58,21 +68,21 @@ const Application = React.createClass({
 
     getChildContext() {
         return {
-            muiTheme: ThemeManager.getMuiTheme({
+            muiTheme: getMuiTheme({
                 spacing: Spacing,
                 fontFamily: "Roboto, sans-serif",
                 palette: {
-                    primary1Color: Colors.indigo400,
-                    primary2Color: Colors.cyan700,
-                    primary3Color: Colors.grey400,
-                    accent1Color: Colors.orangeA700,
-                    accent2Color: Colors.grey100,
-                    accent3Color: Colors.grey500,
-                    textColor: Colors.darkBlack,
-                    alternateTextColor: Colors.white,
-                    canvasColor: Colors.white,
-                    borderColor: Colors.grey300,
-                    disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3)
+                    primary1Color: indigo400,
+                    primary2Color: cyan700,
+                    primary3Color: grey400,
+                    accent1Color: orangeA700,
+                    accent2Color: grey100,
+                    accent3Color: grey500,
+                    textColor: darkBlack,
+                    alternateTextColor: white,
+                    canvasColor: white,
+                    borderColor: grey300,
+                    disabledColor: fade(darkBlack, 0.3)
                 }
             }),
             translation: store.getState().translations.get("fr-FR")

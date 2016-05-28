@@ -3,8 +3,12 @@ import { connect } from "react-redux";
 
 import {
     List,
-    FlatButton
+    FlatButton,
+    Card
 } from "material-ui";
+
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import PostForm from "components/post-form";
 
@@ -131,18 +135,19 @@ const Posts = React.createClass({
         );
 
         return (
-            <ActionCable channel="PostsChannel" onMessage={this.handleMessage}>
-                <div className="container-fluid" style={{ paddingTop: 12 }}>
-                    <div className="col-md-10 col-md-offset-1 col-sm-10 col-xs-12">
-                        <PostForm className="col-xs-12" />
-                        {this.loadUpdatesButton()}
-                        <List>
-                            {postNodes}
-                        </List>
-                        {this.loadMoreButton()}
-                    </div>
+            <div className="container-fluid" style={{ paddingTop: 12, position: "relative", minHeight: "100%", height: "100%" }}>
+                <ActionCable channel="PostsChannel" onMessage={this.handleMessage} />
+                <div className="col-md-10 col-md-offset-1 col-sm-10 col-xs-12">
+                    {this.loadUpdatesButton()}
+                    <List>
+                        {postNodes}
+                    </List>
+                    {this.loadMoreButton()}
                 </div>
-            </ActionCable>
+                <FloatingActionButton style={{ position: "absolute", right: 24 }}>
+                    <ContentAdd />
+                </FloatingActionButton>
+            </div>
         );
     }
 });

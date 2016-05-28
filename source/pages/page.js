@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import actionCreators from "action-creators";
 
 import api from "api";
-import { InfoBanner } from "components";
 
 function mapStateToProps(state, props) {
     return {
@@ -36,14 +35,7 @@ const Page = React.createClass({
     },
 
     render() {
-        return (
-            <div>
-                <InfoBanner page={this.props.page} main={this.props.params.pageId === undefined} />
-                <div style={{ paddingTop: 90 }}>
-                    {this.props.children}
-                </div>
-            </div>
-        );
+        return (this.props.children);
     }
 });
 

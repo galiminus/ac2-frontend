@@ -6,6 +6,9 @@ import {
     ListItem
 } from "material-ui";
 
+import HomeIcon from "material-ui/svg-icons/action/home";
+import AccountCircleIcon from "material-ui/svg-icons/action/account-circle";
+
 import { updatePath } from "redux-simple-router";
 
 const Navigation = React.createClass({
@@ -14,7 +17,8 @@ const Navigation = React.createClass({
     },
 
     contextTypes: {
-        translation: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired
     },
 
     goToMainFeed(e) {
@@ -22,16 +26,28 @@ const Navigation = React.createClass({
         e.preventDefault();
     },
 
-    goToMessages(e) {
-        this.props.updatePath("/messages");
+    goToPage(e) {
+        this.props.updatePath(`/${this.context.currentUserPage.id}`);
         e.preventDefault();
     },
 
     render() {
         return (
-            <List {...this.props}>
-                <ListItem index={0} primaryText={this.context.translation.t("links.messages")} href="/messages" onClick={this.goToMessages} />
-                <ListItem index={1} primaryText={this.context.translation.t("links.mainFeed")} href="/" onClick={this.goToMainFeed} />
+            <List style={{ paddingLeft: 12 }}>
+                <ListItem
+                    index={0}
+                    primaryText={this.context.translation.t("links.mainFeed")}
+                    leftIcon={<HomeIcon />}
+                    href="/"
+                    onClick={this.goToMainFeed}
+                />
+                <ListItem
+                    index={1}
+                    primaryText={this.context.translation.t("links.currentUserPage")}
+                    leftIcon={<AccountCircleIcon />}
+                    href={`/${this.context.currentUserPage.id}`}
+                    onClick={this.goToPage}
+                />
             </List>
         );
     }

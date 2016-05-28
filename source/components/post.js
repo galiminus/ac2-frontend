@@ -2,7 +2,9 @@ import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
 import {
-    Paper,
+    Card,
+    CardHeader,
+    CardText,
     Toolbar,
     ToolbarGroup,
     ToolbarTitle,
@@ -30,10 +32,10 @@ const Post = React.createClass({
             switch (this.props.sender.data_type) {
             case "user":
                 senderInfos = (
-                    <div>
-                        <UserAvatar page={this.props.sender} />
-                        <ToolbarTitle style={{ fontWeight: 200 }} text={this.props.sender.data.personal_informations.full_name} />
-                    </div>
+                    <CardHeader
+                      title={this.props.sender.data.personal_informations.full_name}
+                      avatar={<UserAvatar page={this.props.sender} />}
+                    />
                 );
                 break;
 
@@ -44,15 +46,11 @@ const Post = React.createClass({
         }
 
         return (
-            <Paper style={{ marginTop: 24, fontSize: "0.9em", lineHeight: "1.4em" }}>
-                <Toolbar>
-                    <ToolbarGroup key={1} float="left">
-                        {senderInfos}
-                    </ToolbarGroup>
-                </Toolbar>
-                <div style={{ padding: "1em 16px" }}>
+            <Card style={{ marginTop: 24, fontSize: "0.9em", lineHeight: "1.4em" }}>
+                {senderInfos}
+                <CardText>
                     {this.props.post.data.body}
-                </div>
+                </CardText>
                 <Divider />
                 <div style={{ padding: "0.5em 8px 0.5em 8px" }}>
                     <Comments
@@ -60,7 +58,7 @@ const Post = React.createClass({
                         parentId={null}
                     />
                 </div>
-            </Paper>
+            </Card>
         );
     }
 });

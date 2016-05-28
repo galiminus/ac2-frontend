@@ -1,11 +1,11 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router";
-import Colors from "material-ui/lib/styles/colors";
+import Colors from "material-ui/styles/colors";
 import Immutable from "immutable";
 
 import { Checkbox } from "material-ui";
-import ThumbUpIcon from "material-ui/lib/svg-icons/action/thumb-up";
+import ThumbUpIcon from "material-ui/svg-icons/action/thumb-up";
 
 import api from "api";
 import UserAvatar from "components/user-avatar";
