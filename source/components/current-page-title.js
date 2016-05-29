@@ -21,7 +21,6 @@ const style = {
     fontFamily: "Roboto, sans-serif",
     fontWeight: 400,
     letterSpacing: 3,
-    marginLeft: 24,
     color: '#ffffff'
 };
 

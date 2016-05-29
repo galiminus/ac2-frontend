@@ -10,8 +10,22 @@
     padding-right: 8px;
 }
 
+.separator {
+    background-color: #ffffff !important;
+    margin-right: 24px;
+}
+
 @media (min-width: 1010px) {
     .leftNavTrigger {
         display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .logo {
+        display: none;
+    }
+    .separator {
+        display: none !important;
     }
 }

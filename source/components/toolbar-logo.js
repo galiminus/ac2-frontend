@@ -14,7 +14,7 @@ const style = {
 export default React.createClass({
     render() {
         return (
-            <ToolbarTitle text={title} style={style} />
+            <ToolbarTitle text={title} style={style} {...this.props} />
         );
     }
 });

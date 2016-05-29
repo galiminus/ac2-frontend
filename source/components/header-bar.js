@@ -31,8 +31,8 @@ const HeaderBar = React.createClass({
                             onClick={this.props.toggleLeftNav}
                         />
                     </div>
-                    <ToolbarLogo />
-                    <ToolbarSeparator style={{ backgroundColor: "white" }}/>
+                    <ToolbarLogo styleName="logo" />
+                    <ToolbarSeparator styleName="separator" />
 
                     <CurrentPageTitle />
                 </ToolbarGroup>
