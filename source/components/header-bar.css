@@ -1,0 +1,17 @@
+.root {
+    position: fixed;
+    z-index: 3;
+    background-color: #333333 !important;
+    width: 100%;
+}
+
+.leftNavTrigger {
+    padding-left: 0;
+    padding-right: 8px;
+}
+
+@media (min-width: 1010px) {
+    .leftNavTrigger {
+        display: none;
+    }
+}

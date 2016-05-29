@@ -49,6 +49,7 @@ const Post = React.createClass({
         return (
             <Card style={{ marginTop: 24, fontSize: "0.9em", lineHeight: "1.4em" }}>
                 {senderInfos}
+                <Divider inset />
                 <CardText>
                     {this.props.post.data.body}
                 </CardText>

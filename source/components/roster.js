@@ -29,7 +29,7 @@ const Roster = React.createClass({
 
     render() {
         return (
-            <List {...this.props}>
+            <List>
                 <ListItem index={0} primaryText={this.context.translation.t("links.messages")} href="/messages" onClick={this.goToChat} />
             </List>
         );

@@ -1,6 +1,9 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
+import CSSModules from 'react-css-modules';
+import styles from './home.css';
+
 import {
     Drawer,
     Paper,
@@ -9,9 +12,10 @@ import {
 import {
     DisconnectedModal,
     Navigation,
-    AcToolbar,
+    HeaderBar,
     Notifier,
     Roster,
+    AdditionalLinks,
     ActionCable
 } from "components";
 
@@ -88,34 +92,33 @@ const Home = React.createClass({
     },
 
     render() {
-        console.log(this.props.leftNav);
         return (
-            <div style={{ height: "100%" }}>
-                <ActionCable channel="PagesChannel" onMessage={this.handleMessage} />
-                <AcToolbar />
+            <div styleName="home">
+                <HeaderBar />
 
                 <Drawer docked={false} open={this.props.leftNav} onRequestChange={this.props.toggleLeftNav}>
                     <Navigation />
                 </Drawer>
 
-                <div className="row" style={{ minHeight: "100%" }}>
-                    <div className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 220, zIndex: 1 }}>
-                        <Navigation style={{ width: 220, position: "fixed" }} />
+                <div styleName="flexLayout">
+                    <div styleName="leftNav">
+                        <Navigation />
+                        <AdditionalLinks />
                     </div>
-                    <section className="col-md col-xs-12" style={{ paddingLeft: 0, paddingRight: 0, marginTop: 56 }}>
+                    <main styleName="mainContent">
                         {this.props.children}
-                    </section>
-                    <Paper className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 300, zIndex: 2 }}>
-                        <Roster style={{ width: 220, position: "fixed" }} />
-                    </Paper>
+                    </main>
+                <Paper styleName="messagePanel">
+                    <Roster />
+                </Paper>
                 </div>
 
                 <Notifier />
 
-            <DisconnectedModal isDisconnected={!this.props.currentToken} />
+                <DisconnectedModal isDisconnected={!this.props.currentToken} />
             </div>
         );
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(Home);
+export default connect(mapStateToProps, actionCreators)(CSSModules(Home, styles));

@@ -35,7 +35,7 @@ const Page = React.createClass({
     },
 
     render() {
-        return (<div style={{ maxWidth: 680, marginLeft: "auto", marginRight: "auto" }}>{this.props.children}</div>);
+        return (<div>{this.props.children}</div>);
     }
 });
 

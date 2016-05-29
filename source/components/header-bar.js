@@ -1,4 +1,8 @@
 import React, { PropTypes } from "react";
+import { connect } from "react-redux";
+
+import CSSModules from 'react-css-modules';
+import styles from './header-bar.css';
 
 import FontIcon from 'material-ui/FontIcon';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
@@ -7,21 +11,26 @@ import ToolbarLogo from "components/toolbar-logo";
 import CurrentPageTitle from "components/current-page-title";
 import CurrentUserMenu from "components/current-user-menu";
 
-export default React.createClass({
+import { toggleLeftNav } from "action-creators";
+
+const HeaderBar = React.createClass({
     propTypes: {
-        children: PropTypes.node
+        toggleLeftNav: PropTypes.func.isRequired
     },
 
     render() {
         return (
-            <Toolbar style={{ position: "fixed", zIndex: 3, background: "#333", width: "100%" }}>
+            <Toolbar styleName="root">
                 <ToolbarGroup key={0} float="left">
-                    <MenuIcon
-                        style={{ paddingLeft: 0, paddingRight: 16, height: "auto" }}
-                        color="#ffffff"
-                        hoverColor="#ffffff"
-                        onClick={this.props.toggleLeftNav}
-                    />
+                    <div styleName="leftNavTrigger">
+                        <MenuIcon
+                            styleName="leftNavTrigger"
+                            style={{ height: 56 }}
+                            color="#ffffff"
+                            hoverColor="#ffffff"
+                            onClick={this.props.toggleLeftNav}
+                        />
+                    </div>
                     <ToolbarLogo />
                     <ToolbarSeparator style={{ backgroundColor: "white" }}/>
 
@@ -35,4 +44,4 @@ export default React.createClass({
     }
 });
 
-// <InfoBanner page={this.props.page} main={this.props.params.pageId === undefined} />
+export default connect(undefined, { toggleLeftNav })(CSSModules(HeaderBar, styles));

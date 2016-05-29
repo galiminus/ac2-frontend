@@ -43,11 +43,17 @@ export default {
 
     "texts.emptyField": "Ce champ n'est pas renseigné",
 
-    "links.currentUserPage": "Ma page",
-    "links.currentUserProfile": "Mon profil",
+    "links.currentUserPage": "Profil",
+    "links.friends": "Amis",
+    "links.messages": "Messagerie",
+    "links.settings": "Configuration",
+
     "links.accountSettings": "Paramètres de compte",
     "links.mainFeed": "Mur principal",
-    "links.messages": "Messagerie",
+    "links.events": "Évènements",
+    "links.quizz": "Quizz",
+    "links.polls": "Sondages",
+    "links.groups": "Groupes",
 
     ...(locales["fr-FR"])
 };
