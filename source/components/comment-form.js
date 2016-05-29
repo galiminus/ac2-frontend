@@ -2,9 +2,12 @@ import React, { PropTypes } from "react";
 import { reduxForm, reset } from "redux-form";
 
 import {
-    TextField,
-    FlatButton
+    TextField
 } from "material-ui";
+
+import { List, ListItem } from "material-ui/List";
+import IconButton from "material-ui/IconButton"
+import SendIcon from "material-ui/svg-icons/content/send";
 
 import api from "api";
 import { addResource } from "action-creators";
@@ -58,25 +61,28 @@ const form = React.createClass({
 
         let commentButton = null;
         if (body.active || body.value.length > 0) {
-            commentButton = (
-                <FlatButton
-                    labelStyle={{ padding: "0 8px" }}
-                    disabled={body.invalid}
-                    type="submit"
-                    label={this.context.translation.t("actions.comment")}
-                    secondary
-                    onClick={handleSubmit(this.post)}
-                />
-            );
+            // commentButton = (
+            //     <FlatButton
+            //         labelStyle={{ padding: "0 8px" }}
+            //         disabled={body.invalid}
+            //         type="submit"
+            //         label={this.context.translation.t("actions.comment")}
+            //         secondary
+            //         onClick={handleSubmit(this.post)}
+            //     />
+            // );
         }
 
         return (
-            <form onSubmit={handleSubmit(this.post)} {...this.props} >
-                <div className="row middle-xs">
-                    <div>
-                        <UserAvatar page={this.context.currentUserPage} />
-                    </div>
-                    <div className="col-xs">
+            <List>
+                <ListItem
+                    leftAvatar={<UserAvatar page={this.context.currentUserPage} />}
+                    disabled
+                    innerDivStyle={{
+                        paddingTop: 0,
+                        paddingBottom: 0
+                    }}
+                    primaryText={
                         <TextField
                             style={{ fontSize: "1em" }}
                             fullWidth
@@ -84,12 +90,15 @@ const form = React.createClass({
                             hintText={this.context.translation.t("labels.comment")}
                             {...body}
                         />
-                    </div>
-                </div>
-                <div className="row middle-xs end-xs">
-                    {commentButton}
-                </div>
-            </form>
+                    }
+                    rightIconButton={
+                        <IconButton>
+                            <SendIcon />
+                        </IconButton>
+                    }
+                />
+            </List>
+
         );
     }
 });
@@ -99,3 +108,23 @@ export default reduxForm({
     fields: ["body"],
     validate
 })(form);
+
+// <form onSubmit={handleSubmit(this.post)} {...this.props} >
+//     <div className="row middle-xs">
+//         <div>
+//             <UserAvatar page={this.context.currentUserPage} />
+//         </div>
+//         <div className="col-xs">
+//             <TextField
+//                 style={{ fontSize: "1em" }}
+//                 fullWidth
+//                 type="text"
+//                 hintText={this.context.translation.t("labels.comment")}
+//                 {...body}
+//             />
+//         </div>
+//     </div>
+//     <div className="row middle-xs end-xs">
+//         {commentButton}
+//     </div>
+// </form>

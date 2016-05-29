@@ -12,6 +12,7 @@ import {
 } from "material-ui";
 
 import UserAvatar from "components/user-avatar";
+import UserLink from "components/user-link";
 import Comments from "components/comments";
 
 function mapStateToProps(state, props) {
@@ -33,7 +34,7 @@ const Post = React.createClass({
             case "user":
                 senderInfos = (
                     <CardHeader
-                      title={this.props.sender.data.personal_informations.full_name}
+                      title={<UserLink page={this.props.sender} />}
                       avatar={<UserAvatar page={this.props.sender} />}
                     />
                 );
@@ -51,13 +52,10 @@ const Post = React.createClass({
                 <CardText>
                     {this.props.post.data.body}
                 </CardText>
-                <Divider />
-                <div style={{ padding: "0.5em 8px 0.5em 8px" }}>
-                    <Comments
-                        postId={this.props.post.id}
-                        parentId={null}
-                    />
-                </div>
+                <Comments
+                    postId={this.props.post.id}
+                    parentId={null}
+                />
             </Card>
         );
     }

@@ -30,7 +30,7 @@ const CurrentUserMenu = React.createClass({
             fontFamily: "Roboto, sans-serif",
             textTransform: "uppercase",
             cursor: "pointer",
-            backgroundColor: randomColor(this.context.currentUserPage.data.personal_informations.full_name, "black")
+            backgroundColor: randomColor(this.context.currentUserPage.data.personal_informations.full_name)
         };
 
         return (

@@ -8,7 +8,7 @@ import {
 } from "material-ui";
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import CreateContentIcon from 'material-ui/svg-icons/content/create';
 
 import PostForm from "components/post-form";
 
@@ -135,17 +135,17 @@ const Posts = React.createClass({
         );
 
         return (
-            <div className="container-fluid" style={{ paddingTop: 12, position: "relative", minHeight: "100%", height: "100%" }}>
+            <div className="container-fluid">
                 <ActionCable channel="PostsChannel" onMessage={this.handleMessage} />
-                <div className="col-md-10 col-md-offset-1 col-sm-10 col-xs-12">
+                <div className="col-md-12 col-sm-10 col-xs-12">
                     {this.loadUpdatesButton()}
                     <List>
                         {postNodes}
                     </List>
                     {this.loadMoreButton()}
                 </div>
-                <FloatingActionButton style={{ position: "absolute", right: 24 }}>
-                    <ContentAdd />
+                <FloatingActionButton style={{ position: "absolute", bottom: 24, right: 308 }}>
+                    <CreateContentIcon />
                 </FloatingActionButton>
             </div>
         );

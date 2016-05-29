@@ -38,12 +38,6 @@ const LoginPage = React.createClass({
     render() {
         return (
             <div style={{ background: loginPageBackground, height: "100%", width: "100%", position: "fixed" }}>
-                <AcToolbar style={{ backgroundColor: toolbarBackgroundColor }}>
-                    <ToolbarGroup key={1} float="left">
-                        <ToolbarLogo />
-                    </ToolbarGroup>
-                </AcToolbar>
-
                 <div className="row middle-xs center-xs" style={{ height: "100%" }}>
                     <Paper className="col-md-4 col-sm-8 col-xs-11" style={{ padding: "16px 32px 32px 32px" }}>
                         <h3 style={{ marginBottom: 32, fontWeight: 200, fontSize: 14, textTransform: "uppercase" }}>

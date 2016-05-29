@@ -102,10 +102,10 @@ const Home = React.createClass({
                     <div className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 220, zIndex: 1 }}>
                         <Navigation style={{ width: 220, position: "fixed" }} />
                     </div>
-                    <section className="col-md col-xs-12" style={{ paddingLeft: 0, paddingRight: 0, marginTop: 56, minHeight: "100%" }}>
+                    <section className="col-md col-xs-12" style={{ paddingLeft: 0, paddingRight: 0, marginTop: 56 }}>
                         {this.props.children}
                     </section>
-                    <Paper className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 220, zIndex: 2 }}>
+                    <Paper className="hide-sm hide-xs" style={{ paddingRight: 0, marginTop: 56, width: 300, zIndex: 2 }}>
                         <Roster style={{ width: 220, position: "fixed" }} />
                     </Paper>
                 </div>

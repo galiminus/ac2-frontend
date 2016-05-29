@@ -6,6 +6,8 @@ import {
     FlatButton
 } from "material-ui";
 
+import Divider from "material-ui/Divider";
+
 import api from "api";
 
 import actionCreators from "action-creators";
@@ -94,22 +96,24 @@ const Comments = React.createClass({
         let commentNodes = null;
         if (this.props.comments.count() > 0) {
             commentNodes = (
-                <List style={{ padding: 18, paddingBottom: 18, paddingRight: 0 }}>
+                <List style={{ background: "#f5f5f5" }}>
                     {this.props.comments.valueSeq().map(comment => <Comment key={comment.id} comment={comment} />)}
                 </List>
             );
         }
 
         return (
-            <ActionCable channel="CommentsChannel" onMessage={this.handleMessage}>
+            <aside>
+                <ActionCable channel="CommentsChannel" onMessage={this.handleMessage} />
                 {this.loadMoreButton()}
                 {commentNodes}
+                <Divider />
                 <CommentForm
                     style={{ padding: "0 26px" }}
                     postId={this.props.postId}
                     formKey={this.props.postId}
                 />
-            </ActionCable>
+            </aside>
         );
     }
 });
