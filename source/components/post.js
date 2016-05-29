@@ -5,9 +5,6 @@ import {
     Card,
     CardHeader,
     CardText,
-    Toolbar,
-    ToolbarGroup,
-    ToolbarTitle,
     Divider
 } from "material-ui";
 
@@ -34,8 +31,8 @@ const Post = React.createClass({
             case "user":
                 senderInfos = (
                     <CardHeader
-                      title={<UserLink page={this.props.sender} />}
-                      avatar={<UserAvatar page={this.props.sender} />}
+                        title={<UserLink page={this.props.sender} />}
+                        avatar={<UserAvatar page={this.props.sender} />}
                     />
                 );
                 break;

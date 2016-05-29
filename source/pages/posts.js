@@ -3,12 +3,11 @@ import { connect } from "react-redux";
 
 import {
     List,
-    FlatButton,
-    Card
+    FlatButton
 } from "material-ui";
 
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import CreateContentIcon from 'material-ui/svg-icons/content/create';
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import CreateContentIcon from "material-ui/svg-icons/content/create";
 
 import PostForm from "components/post-form";
 

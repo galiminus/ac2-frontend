@@ -7,7 +7,7 @@ const style = {
     fontFamily: "Roboto, sans-serif",
     fontWeight: 400,
     letterSpacing: 3,
-    color: 'rgb(204, 150, 116)',
+    color: "rgb(204, 150, 116)",
     paddingRight: 0
 };
 

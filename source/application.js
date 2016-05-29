@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import getMuiTheme from "material-ui/styles/getMuiTheme";
 import {
     indigo400,
     cyan700,
@@ -33,8 +33,6 @@ import Profile from "pages/profile";
 import Posts from "pages/posts";
 import Account from "pages/account";
 import Messages from "pages/messages";
-
-import _FlexBoxGrid from "flexboxgrid-with-hide";
 
 import { Provider } from "react-redux";
 

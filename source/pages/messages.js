@@ -1,8 +1,6 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
-import { Paper, ListItem } from "material-ui";
-
 import actionCreators from "action-creators";
 import { ActionCable } from "components";
 

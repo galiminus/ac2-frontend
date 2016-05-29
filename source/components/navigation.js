@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
-import CSSModules from 'react-css-modules';
-import styles from './navigation.css';
+import CSSModules from "react-css-modules";
+import styles from "./navigation.css";
 
 import { List, ListItem } from "material-ui/List";
 import Divider from "material-ui/Divider";

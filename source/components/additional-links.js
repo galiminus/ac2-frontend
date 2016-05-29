@@ -1,10 +1,7 @@
 import React, { PropTypes } from "react";
 
-import { ToolbarTitle } from "material-ui";
-import { title } from "config";
-
-import CSSModules from 'react-css-modules';
-import styles from './additional-links.css';
+import CSSModules from "react-css-modules";
+import styles from "./additional-links.css";
 
 import { additionalLinks } from "config";
 

@@ -1,11 +1,10 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
-import CSSModules from 'react-css-modules';
-import styles from './header-bar.css';
+import CSSModules from "react-css-modules";
+import styles from "./header-bar.css";
 
-import FontIcon from 'material-ui/FontIcon';
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
+import { Toolbar, ToolbarGroup, ToolbarSeparator } from "material-ui/Toolbar";
 import MenuIcon from "material-ui/svg-icons/navigation/menu";
 import ToolbarLogo from "components/toolbar-logo";
 import CurrentPageTitle from "components/current-page-title";

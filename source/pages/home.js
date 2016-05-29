@@ -1,12 +1,12 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
-import CSSModules from 'react-css-modules';
-import styles from './home.css';
+import CSSModules from "react-css-modules";
+import styles from "./home.css";
 
 import {
     Drawer,
-    Paper,
+    Paper
 } from "material-ui";
 
 import {

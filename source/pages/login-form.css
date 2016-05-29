@@ -1,0 +1,10 @@
+.actionButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.passwordRecoverButton {
+    margin-top: 16px;
+    text-align: center;
+}

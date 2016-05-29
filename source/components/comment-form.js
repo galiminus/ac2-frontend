@@ -6,7 +6,7 @@ import {
 } from "material-ui";
 
 import { List, ListItem } from "material-ui/List";
-import IconButton from "material-ui/IconButton"
+import IconButton from "material-ui/IconButton";
 import SendIcon from "material-ui/svg-icons/content/send";
 
 import api from "api";

@@ -2,11 +2,9 @@ import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import Immutable from "immutable";
 
-import { Checkbox } from "material-ui";
-import ThumbUpIcon from "material-ui/svg-icons/action/thumb-up";
 import { ListItem } from "material-ui/List";
-import IconButton from 'material-ui/IconButton';
-import PlusOneIcon from 'material-ui/svg-icons/social/plus-one';
+import IconButton from "material-ui/IconButton";
+import PlusOneIcon from "material-ui/svg-icons/social/plus-one";
 
 import api from "api";
 import UserAvatar from "components/user-avatar";
@@ -43,7 +41,7 @@ const Comment = React.createClass({
 
     render() {
         switch (this.props.sender.data_type) {
-            case "user":
+        case "user":
             return (
                 <ListItem
                     leftAvatar={<UserAvatar page={this.props.sender} />}
@@ -70,14 +68,12 @@ const Comment = React.createClass({
                 />
             );
 
-            default:
+        default:
             return (<div />);
         }
     }
 });
 // leftAvatar={<UserAvatar page={this.props.sender} />}
-
-
 
 // <div className="row">
 //     <div className="col-xs-1"></div>

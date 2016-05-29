@@ -3,6 +3,9 @@ import { reduxForm } from "redux-form";
 import { dispatch } from "store";
 import { updatePath } from "redux-simple-router";
 
+import CSSModules from "react-css-modules";
+import styles from "./login-form.css";
+
 import {
     TextField,
     FlatButton,
@@ -59,7 +62,7 @@ const LoginForm = React.createClass({
             <form onSubmit={handleSubmit(authenticate)}>
                 <TextField fullWidth type="email" {...email} hintText={this.context.translation.t("labels.login.email")} />
                 <TextField fullWidth type="password" {...password} hintText={this.context.translation.t("labels.login.password")} />
-                <div className="row between-md between-xs center-xs" style={{ marginTop: 32 }}>
+                <div styleName="actionButtons">
                     <RaisedButton
                         disabled={email.invalid || password.invalid}
                         type="submit"
@@ -67,11 +70,16 @@ const LoginForm = React.createClass({
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
-                <FlatButton label={this.context.translation.t("labels.signup.signup")} linkButton href="/welcome/signup" onClick={this.goToSignupForm} />
-                </div>
-                <div className="row center-xs">
                     <FlatButton
-                        style={{ fontSize: "0.7em", marginTop: 32 }}
+                        label={this.context.translation.t("labels.signup.signup")}
+                        linkButton href="/welcome/signup"
+                        onClick={this.goToSignupForm}
+                    />
+                </div>
+
+                <div styleName="passwordRecoverButton">
+                    <FlatButton
+                        labelStyle={{ fontSize: 12, color: "#999" }}
                         label={this.context.translation.t("labels.recover")}
                         secondary={false}
                         linkButton
@@ -88,4 +96,4 @@ export default reduxForm({
     form: "login",
     fields: ["email", "password"],
     validate
-})(LoginForm);
+})(CSSModules(LoginForm, styles));

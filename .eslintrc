@@ -12,7 +12,7 @@
     "vars-on-top": 2, // requires to declare all vars on top of their containing scope (off by default)
 
     "react/jsx-indent-props": [2, 4],
-    "new-cap": [2, { "capIsNewExceptions": ["List", "Map", "OrderedMap"] }],
+    "new-cap": [2, { "capIsNewExceptions": ["List", "Map", "OrderedMap", "CSSModules"] }],
     "no-unused-vars": [2, {"vars": "all", "args": "all", "varsIgnorePattern": "^_", "argsIgnorePattern": "^_"}]
   }
 

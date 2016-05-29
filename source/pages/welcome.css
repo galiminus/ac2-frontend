@@ -1,0 +1,32 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.illustration {
+    flex: 2;
+}
+
+.formContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.formPaper {
+    padding: 32px;
+}
+
+.headerBar {
+    position: fixed;
+    z-index: 3;
+    background-color: #333333 !important;
+    width: 100%;
+}
