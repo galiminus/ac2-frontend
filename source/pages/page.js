@@ -14,6 +14,7 @@ const Page = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
+        setCurrentPage: PropTypes.func.isRequired,
         page: PropTypes.object,
         children: PropTypes.node.isRequired
     },

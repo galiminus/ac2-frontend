@@ -8,7 +8,7 @@ function mapStateToProps(state) {
     } else if (state.currentPage) {
         return ({ page: state.pages.get(state.currentPage) });
     }
-    return ({})
+    return ({});
 }
 
 const style = {

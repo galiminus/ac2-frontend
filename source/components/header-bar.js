@@ -37,13 +37,13 @@ const HeaderBar = React.createClass({
                     <CurrentPageTitle />
 
                     <AutoComplete
-                      hintText="Search"
-                      dataSource={[]}
-                      fullWidth
-                      styleName="searchField"
-                      style={{ width: "40%", margin: "5px 0px 5px 16px", background: "#444", padding: "0 12px" }}
-                      hintStyle={{ color: "rgba(255, 255, 255, 0.8)" }}
-                      underlineStyle={{ width: "100%" }}
+                        hintText="Search"
+                        dataSource={[]}
+                        fullWidth
+                        styleName="searchField"
+                        style={{ width: "40%", margin: "5px 0px 5px 16px", background: "#444", padding: "0 12px" }}
+                        hintStyle={{ color: "rgba(255, 255, 255, 0.8)" }}
+                        underlineStyle={{ width: "100%" }}
                     />
 
                 </ToolbarGroup>

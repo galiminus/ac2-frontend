@@ -2,10 +2,8 @@ import React, { PropTypes } from "react";
 import { reduxForm, reset } from "redux-form";
 
 import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 import Dialog from "material-ui/Dialog";
-import { CardHeader } from "material-ui/Card";
 
 import api from "api";
 import { addResource } from "action-creators";
@@ -24,6 +22,7 @@ const form = React.createClass({
         sender: PropTypes.object.isRequired,
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
+        onRequestClose: PropTypes.func.isRequired,
         error: PropTypes.string
     },
 

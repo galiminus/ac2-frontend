@@ -8,13 +8,14 @@ import { List, ListItem } from "material-ui/List";
 import Divider from "material-ui/Divider";
 
 import HomeIcon from "material-ui/svg-icons/action/home";
-import AccountCircleIcon from "material-ui/svg-icons/action/account-circle";
-import EventIcon from "material-ui/svg-icons/action/event";
+import AccountIcon from "material-ui/svg-icons/action/account-circle";
+import EventsIcon from "material-ui/svg-icons/action/event";
 import QuizzIcon from "material-ui/svg-icons/toggle/check-box";
-import PollIcon from "material-ui/svg-icons/social/poll";
-import GroupIcon from "material-ui/svg-icons/social/group";
-import FriendIcon from "material-ui/svg-icons/action/favorite";
-import MessageIcon from "material-ui/svg-icons/communication/email";
+import PollsIcon from "material-ui/svg-icons/social/poll";
+import GroupsIcon from "material-ui/svg-icons/social/group";
+import MembersIcon from "material-ui/svg-icons/action/language";
+import FriendsIcon from "material-ui/svg-icons/action/favorite";
+import MessagesIcon from "material-ui/svg-icons/communication/email";
 import SettingsIcon from "material-ui/svg-icons/action/settings";
 
 import { updatePath } from "redux-simple-router";
@@ -53,7 +54,7 @@ const Navigation = React.createClass({
                     <ListItem
                         index={0}
                         primaryText={this.context.translation.t("links.events")}
-                        leftIcon={<EventIcon />}
+                        leftIcon={<EventsIcon />}
                         href="/events"
                         onClick={this.goToMainFeed}
                     />
@@ -67,36 +68,43 @@ const Navigation = React.createClass({
                     <ListItem
                         index={0}
                         primaryText={this.context.translation.t("links.polls")}
-                        leftIcon={<PollIcon />}
+                        leftIcon={<PollsIcon />}
                         href="/polls"
                         onClick={this.goToMainPolls}
                     />
                     <ListItem
                         index={0}
                         primaryText={this.context.translation.t("links.groups")}
-                        leftIcon={<GroupIcon />}
+                        leftIcon={<GroupsIcon />}
                         href="/groups"
+                        onClick={this.goToMainGroups}
+                    />
+                    <ListItem
+                        index={0}
+                        primaryText={this.context.translation.t("links.members")}
+                        leftIcon={<MembersIcon />}
+                        href="/members"
                         onClick={this.goToMainGroups}
                     />
                     <Divider />
                     <ListItem
                         index={1}
                         primaryText={this.context.translation.t("links.currentUserPage")}
-                        leftIcon={<AccountCircleIcon />}
+                        leftIcon={<AccountIcon />}
                         href={`/${this.context.currentUserPage.id}`}
                         onClick={this.goToPage}
                     />
                     <ListItem
                         index={1}
                         primaryText={this.context.translation.t("links.friends")}
-                        leftIcon={<FriendIcon />}
+                        leftIcon={<FriendsIcon />}
                         href={`/${this.context.currentUserPage.id}/friends`}
                         onClick={this.goToPage}
                     />
                     <ListItem
                         index={1}
                         primaryText={this.context.translation.t("links.messages")}
-                        leftIcon={<MessageIcon />}
+                        leftIcon={<MessagesIcon />}
                         href={`/${this.context.currentUserPage.id}/messages`}
                         onClick={this.goToPage}
                     />

@@ -54,6 +54,7 @@ export default {
     "links.quizz": "Quizz",
     "links.polls": "Sondages",
     "links.groups": "Groupes",
+    "links.members": "Membres",
 
     ...(locales["fr-FR"])
 };

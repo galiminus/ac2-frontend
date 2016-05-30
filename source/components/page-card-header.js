@@ -16,14 +16,14 @@ const PageCardHeader = React.createClass({
             title = (
                 <div>
                     <PageLink page={this.props.sender} />
-                    <span style={{fontSize: 10, marginLeft: 4, marginRight: 4}}>►</span>
+                    <span style={{ fontSize: 10, marginLeft: 4, marginRight: 4 }}>►</span>
                     <PageLink page={this.props.recipient} />
                 </div>
-            )
+            );
         } else {
             title = (
                 <PageLink page={this.props.sender} />
-            )
+            );
         }
 
         return (

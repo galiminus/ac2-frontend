@@ -27,11 +27,11 @@ const UserAvatar = React.createClass({
 
         let name;
         switch (this.props.page.data_type) {
-            case "user":
-                name = this.props.page.data.personal_informations.full_name;
-                break;
-            default:
-                name = "?"
+        case "user":
+            name = this.props.page.data.personal_informations.full_name;
+            break;
+        default:
+            name = "?";
         }
 
         return (
