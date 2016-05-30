@@ -30,7 +30,12 @@ const Page = React.createClass({
 
     loadPage(pageId) {
         if (pageId) {
-            api.pages.get(pageId, { include: "owner" }).then(this.props.addResource);
+            api.pages.get(pageId, { include: "page_type" }).then((response) => {
+                this.props.setCurrentPage(response.data.id);
+                this.props.addResource(response);
+            });
+        } else {
+            this.props.setCurrentPage("main");
         }
     },
 

@@ -8,6 +8,8 @@ import currentUser from "reducers/current-user";
 import tokens from "reducers/tokens";
 import currentToken from "reducers/current-token";
 
+import currentPage from "reducers/current-page";
+
 import pages from "reducers/pages";
 import pageTypes from "reducers/page_types";
 import posts from "reducers/posts";
@@ -25,6 +27,7 @@ const reducers = combineReducers({
     currentToken,
     users,
     currentUser,
+    currentPage,
     posts,
     pages,
     pageTypes,

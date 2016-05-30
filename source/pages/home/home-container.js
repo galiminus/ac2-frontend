@@ -68,10 +68,6 @@ const HomeContainer = React.createClass({
         }
     },
 
-    handleMessage(message) {
-        console.log(message);
-    },
-
     render() {
         return (
             <Home

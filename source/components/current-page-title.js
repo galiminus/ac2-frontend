@@ -2,19 +2,12 @@ import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import { ToolbarTitle } from "material-ui";
 
-function mapStateToProps(state, props) {
-    if (props.main || !props.page) return {};
-
-    let owner;
-    switch (props.page.owner_type) {
-    case "users":
-        owner = state.users.get(props.page.owner_id);
-        break;
-    default:
-        break;
+function mapStateToProps(state) {
+    if (state.currentPage === "main") {
+        return ({ page: { data_type: "main" } });
+    } else if (state.currentPage) {
+        return ({ page: state.pages.get(state.currentPage) });
     }
-
-    return { owner };
 }
 
 const style = {
@@ -26,8 +19,7 @@ const style = {
 
 const CurrentPageTitle = React.createClass({
     propTypes: {
-        owner: PropTypes.object,
-        main: PropTypes.bool
+        page: PropTypes.object
     },
 
     contextTypes: {
@@ -36,23 +28,25 @@ const CurrentPageTitle = React.createClass({
     },
 
     render() {
-        let ownerInfos;
+        let title;
 
-        // if (this.props.owner) {
-        //     switch (this.props.owner.type) {
-        //     case "users":
-        //         ownerInfos = <h1>{this.props.page.data.personal_informations.full_name}</h1>;
-        //         break;
-        //     default:
-        //         break;
-        //     }
-        // } else if (this.props.main) {
-        //     ownerInfos = <h1>{this.context.translation.t("links.mainFeed")}</h1>;
-        // }
+        if (!this.props.page) {
+            return (<span />);
+        }
 
-        ownerInfos = this.context.translation.t("links.mainFeed");
+        switch (this.props.page.data_type) {
+        case "main":
+            title = this.context.translation.t("links.mainFeed");
+            break;
+        case "user":
+            title = this.props.page.data.personal_informations.full_name;
+            break;
+        default:
+            title = "";
+        }
+
         return (
-            <ToolbarTitle style={style} text={ownerInfos} />
+            <ToolbarTitle style={style} text={title} />
         );
     }
 });
