@@ -12,7 +12,7 @@ import {
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import CreateContentIcon from "material-ui/svg-icons/content/create";
 
-import PostForm from "components/post-form";
+import PostDialog from "components/post-dialog";
 
 import actionCreators from "action-creators";
 import api from "api";
@@ -48,7 +48,7 @@ const Posts = React.createClass({
     },
 
     getInitialState() {
-        return { page: 1, hasMore: false, lastPostDate: null, updateCount: 0 };
+        return { page: 1, hasMore: false, lastPostDate: null, updateCount: 0, postCreationModalOpen: false };
     },
 
     componentDidMount() {
@@ -64,7 +64,7 @@ const Posts = React.createClass({
     },
 
     loadPosts(pageId, pageNum) {
-        const query = { include: "sender,recipient" };
+        const query = { include: "sender,recipient,comments,comments.likes" };
 
         if (pageId) {
             query["filter[participant_id]"] = pageId;
@@ -123,6 +123,14 @@ const Posts = React.createClass({
         return (null);
     },
 
+    handleOpenPostCreationModal() {
+        this.setState({ postCreationModalOpen: true });
+    },
+
+    handleClosePostCreationModal() {
+        this.setState({ postCreationModalOpen: false });
+    },
+
     handleMessage(message) {
         if (message &&
             message.data.attributes.created_at === message.data.attributes.updated_at &&
@@ -146,9 +154,16 @@ const Posts = React.createClass({
                     </List>
                     {this.loadMoreButton()}
                 </div>
-                <FloatingActionButton styleName="addPostButton">
+                <FloatingActionButton styleName="addPostButton" onMouseUp={this.handleOpenPostCreationModal}>
                     <CreateContentIcon />
                 </FloatingActionButton>
+                <PostDialog
+                    contentStyle={{ width: 500 }}
+                    modal={false}
+                    open={this.state.postCreationModalOpen}
+                    onRequestClose={this.handleClosePostCreationModal}
+                    sender={this.context.currentUserPage}
+                />
             </div>
         );
     }

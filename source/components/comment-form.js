@@ -13,7 +13,7 @@ import api from "api";
 import { addResource } from "action-creators";
 import { validateText } from "validators";
 
-import UserAvatar from "components/user-avatar";
+import PageAvatar from "components/page-avatar";
 
 const validate = values => {
     return {
@@ -59,24 +59,10 @@ const form = React.createClass({
             body.value = "";
         }
 
-        let commentButton = null;
-        if (body.active || body.value.length > 0) {
-            // commentButton = (
-            //     <FlatButton
-            //         labelStyle={{ padding: "0 8px" }}
-            //         disabled={body.invalid}
-            //         type="submit"
-            //         label={this.context.translation.t("actions.comment")}
-            //         secondary
-            //         onClick={handleSubmit(this.post)}
-            //     />
-            // );
-        }
-
         return (
             <List>
                 <ListItem
-                    leftAvatar={<UserAvatar page={this.context.currentUserPage} />}
+                    leftAvatar={<PageAvatar page={this.context.currentUserPage} />}
                     disabled
                     innerDivStyle={{
                         paddingTop: 0,
@@ -92,7 +78,7 @@ const form = React.createClass({
                         />
                     }
                     rightIconButton={
-                        <IconButton>
+                        <IconButton onClick={handleSubmit(this.post)} disabled={body.invalid}>
                             <SendIcon />
                         </IconButton>
                     }
@@ -108,23 +94,3 @@ export default reduxForm({
     fields: ["body"],
     validate
 })(form);
-
-// <form onSubmit={handleSubmit(this.post)} {...this.props} >
-//     <div className="row middle-xs">
-//         <div>
-//             <UserAvatar page={this.context.currentUserPage} />
-//         </div>
-//         <div className="col-xs">
-//             <TextField
-//                 style={{ fontSize: "1em" }}
-//                 fullWidth
-//                 type="text"
-//                 hintText={this.context.translation.t("labels.comment")}
-//                 {...body}
-//             />
-//         </div>
-//     </div>
-//     <div className="row middle-xs end-xs">
-//         {commentButton}
-//     </div>
-// </form>

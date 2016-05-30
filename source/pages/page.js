@@ -23,14 +23,14 @@ const Page = React.createClass({
     },
 
     componentWillReceiveProps(newProps) {
-        if (this.props.params.pageId !== newProps.params.pageId) {
+        if (newProps.params.pageId !== this.props.params.pageId) {
             this.loadPage(newProps.params.pageId);
         }
     },
 
     loadPage(pageId) {
         if (pageId) {
-            api.pages.get(pageId, { include: "page_type" }).then((response) => {
+            api.pages.get(pageId).then((response) => {
                 this.props.setCurrentPage(response.data.id);
                 this.props.addResource(response);
             });

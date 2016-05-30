@@ -7,8 +7,8 @@ import IconButton from "material-ui/IconButton";
 import PlusOneIcon from "material-ui/svg-icons/social/plus-one";
 
 import api from "api";
-import UserAvatar from "components/user-avatar";
-import UserLink from "components/user-link";
+import PageAvatar from "components/page-avatar";
+import PageLink from "components/page-link";
 import PlusCounter from "components/plus-counter";
 
 function mapStateToProps(state, props) {
@@ -44,10 +44,10 @@ const Comment = React.createClass({
         case "user":
             return (
                 <ListItem
-                    leftAvatar={<UserAvatar page={this.props.sender} />}
+                    leftAvatar={<PageAvatar page={this.props.sender} />}
                     primaryText={
                         <div>
-                            <UserLink page={this.props.sender} />
+                            <PageLink page={this.props.sender} />
                             <PlusCounter count={this.props.likes.size} />
                         </div>
                     }

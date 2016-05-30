@@ -15,7 +15,7 @@ function getStyles() {
     return (styles);
 }
 
-const UserLink = React.createClass({
+const PageLink = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
         style: PropTypes.object
@@ -24,12 +24,21 @@ const UserLink = React.createClass({
     render() {
         const styles = getStyles();
 
+        let name;
+        switch (this.props.page.data_type) {
+            case "user":
+                name = this.props.page.data.personal_informations.full_name;
+                break;
+            default:
+                name = "?"
+        }
+
         return (
             <Link to={`/${this.props.page.id}`} style={Object.assign(styles.root, this.props.style)}>
-                {this.props.page.data.personal_informations.full_name}
+                {name}
             </Link>
         );
     }
 });
 
-export default UserLink;
+export default PageLink;

@@ -25,12 +25,21 @@ const UserAvatar = React.createClass({
     render() {
         const styles = getStyles();
 
+        let name;
+        switch (this.props.page.data_type) {
+            case "user":
+                name = this.props.page.data.personal_informations.full_name;
+                break;
+            default:
+                name = "?"
+        }
+
         return (
             <Avatar
-                backgroundColor={randomColor(this.props.page.data.personal_informations.full_name)}
+                backgroundColor={randomColor(name)}
                 style={Object.assign(styles.root, this.props.style)}
             >
-                {this.props.page.data.personal_informations.full_name[0]}
+                {name[0]}
             </Avatar>
         );
     }
