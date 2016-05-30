@@ -1,6 +1,9 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
+import CSSModules from "react-css-modules";
+import styles from "./posts.css";
+
 import {
     List,
     FlatButton
@@ -134,16 +137,16 @@ const Posts = React.createClass({
         );
 
         return (
-            <div className="container-fluid">
+            <div>
                 <ActionCable channel="PostsChannel" onMessage={this.handleMessage} />
-                <div className="col-md-12 col-sm-10 col-xs-12">
+                <div>
                     {this.loadUpdatesButton()}
                     <List>
                         {postNodes}
                     </List>
                     {this.loadMoreButton()}
                 </div>
-                <FloatingActionButton style={{ position: "absolute", bottom: 24, right: 308 }}>
+                <FloatingActionButton styleName="addPostButton">
                     <CreateContentIcon />
                 </FloatingActionButton>
             </div>
@@ -151,4 +154,4 @@ const Posts = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(Posts);
+export default connect(mapStateToProps, actionCreators)(CSSModules(Posts, styles));

@@ -14,8 +14,9 @@
 
 .leftNav {
     padding-right: 0;
-    z-index: 1;
+    z-index: 2;
     position: fixed;
+    width: 240px;
     max-width: 240px;
     height: 100%;
     margin-top: 56px;
@@ -24,12 +25,12 @@
 }
 
 .mainContent {
-    padding-left: 0px;
-    padding-right: 0px;
     margin-top: 40px;
-    margin-left: 260px;
-    max-width: 660px;
-
+    width: 660px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 240px;
+    padding-right: 300px;
 }
 
 .messagePanel {
@@ -37,6 +38,9 @@
     margin-top: 56px;
     width: 300px;
     z-index: 2;
+    position: fixed;
+    height: 100%;
+    right: 0;
 }
 
 @media (max-width: 1230px) {
@@ -45,8 +49,9 @@
     }
 
     .mainContent {
-        margin-left: 220px;
-        max-width: 480px;
+        max-width: none;
+        width: 480px;
+        padding-left: 210px;
     }
 }
 
@@ -58,11 +63,16 @@
     .mainContent {
         margin-left: auto;
         margin-right: auto;
+        padding-left: 0px;
     }
 }
 
 @media (max-width: 800px) {
     .messagePanel {
         display: none;
+    }
+
+    .mainContent {
+        padding-right: 0px;
     }
 }

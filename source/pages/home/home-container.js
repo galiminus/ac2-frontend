@@ -1,27 +1,9 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-
-import CSSModules from "react-css-modules";
-import styles from "./home.css";
-
-import {
-    Drawer,
-    Paper
-} from "material-ui";
-
-import {
-    DisconnectedModal,
-    Navigation,
-    HeaderBar,
-    Notifier,
-    Roster,
-    AdditionalLinks,
-    ActionCable
-} from "components";
-
 import actionCreators from "action-creators";
-
 import api from "api";
+
+import Home from "./home";
 
 function mapStateToProps(state) {
     const currentUser = state.users.get(state.currentUser);
@@ -39,7 +21,7 @@ function mapStateToProps(state) {
     };
 }
 
-const Home = React.createClass({
+const HomeContainer = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
         setCurrentUser: PropTypes.func.isRequired,
@@ -74,11 +56,10 @@ const Home = React.createClass({
     },
 
     componentDidMount() {
-        api.users.me({ include: "page" }).then((response) => {
+        api.users.me({ include: "page,page.page_type" }).then((response) => {
             this.props.setCurrentUser(response.data.id);
             this.props.addResource(response);
         });
-        api.pageTypes.find("user").then(this.props.addResource);
     },
 
     componentWillReceiveProps(props) {
@@ -93,32 +74,14 @@ const Home = React.createClass({
 
     render() {
         return (
-            <div styleName="home">
-                <HeaderBar />
-
-                <Drawer docked={false} open={this.props.leftNav} onRequestChange={this.props.toggleLeftNav}>
-                    <Navigation />
-                </Drawer>
-
-                <div styleName="flexLayout">
-                    <div styleName="leftNav">
-                        <Navigation />
-                        <AdditionalLinks />
-                    </div>
-                    <main styleName="mainContent">
-                        {this.props.children}
-                    </main>
-                <Paper styleName="messagePanel">
-                    <Roster />
-                </Paper>
-                </div>
-
-                <Notifier />
-
-                <DisconnectedModal isDisconnected={!this.props.currentToken} />
-            </div>
+            <Home
+                toggleLeftNav={this.props.toggleLeftNav}
+                children={this.props.children}
+                leftNav={this.props.leftNav}
+                isDisconnected={!this.props.currentToken}
+            />
         );
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(CSSModules(Home, styles));
+export default connect(mapStateToProps, actionCreators)(HomeContainer);

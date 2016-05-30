@@ -35,7 +35,7 @@ const Page = React.createClass({
     },
 
     render() {
-        return (<div>{this.props.children}</div>);
+        return (this.props.children);
     }
 });
 

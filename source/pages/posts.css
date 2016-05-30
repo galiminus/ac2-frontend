@@ -1,0 +1,11 @@
+.addPostButton {
+    position: absolute;
+    bottom: 24px;
+    right: 328px;
+}
+
+@media (max-width: 800px) {
+    .addPostButton {
+        right: 28px;
+    }
+}

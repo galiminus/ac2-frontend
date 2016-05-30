@@ -3,6 +3,17 @@
     z-index: 3;
     background-color: #333333 !important;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.left {
+    flex: 2;
+    justify-content: flex-start !important;
+}
+
+.right {
 }
 
 .leftNavTrigger {
@@ -15,13 +26,16 @@
     margin-right: 24px;
 }
 
+.searchField {
+}
+
 @media (min-width: 1010px) {
     .leftNavTrigger {
         display: none;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1010px) {
     .logo {
         display: none;
     }

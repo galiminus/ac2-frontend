@@ -23,7 +23,7 @@ import Spacing from "material-ui/styles/spacing";
 
 import { syncReduxAndRouter } from "redux-simple-router";
 
-import HomePage from "pages/home";
+import HomeContainer from "pages/home/home-container";
 import WelcomePage from "pages/welcome";
 import LoginForm from "pages/login-form";
 import SignupForm from "pages/signup-form";
@@ -96,7 +96,7 @@ const Application = React.createClass({
                     <Route path="signup" component={SignupForm} />
                 </Route>
 
-                <Route path="/" component={HomePage} onEnter={redirectToLoginPage}>
+                <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
                     <Route component={Page}>
                         <IndexRoute component={Posts} />
                     </Route>
@@ -118,4 +118,4 @@ ReactDOM.render(
     <Provider store={store}>
         <Application />
     </Provider>
-, document.getElementsByTagName("main")[0]);
+, document.getElementById("application"));
