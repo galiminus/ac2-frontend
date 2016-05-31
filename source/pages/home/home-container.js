@@ -6,6 +6,7 @@ import api from "api";
 import Home from "./home";
 
 function mapStateToProps(state) {
+    console.log("MAP");
     const currentUser = state.users.get(state.currentUser);
 
     let currentUserPage;
@@ -41,8 +42,8 @@ const HomeContainer = React.createClass({
             currentUserPage: {
                 presence: "connected",
                 data: {
-                    personal_informations: {
-                        full_name: ""
+                    "personal-informations": {
+                        "full-name": ""
                     }
                 }
             }
@@ -56,14 +57,14 @@ const HomeContainer = React.createClass({
     },
 
     componentDidMount() {
-        api.users.me({ include: "page,page.page_type" }).then((response) => {
+        api.users.me({ include: "page" }).then((response) => {
             this.props.setCurrentUser(response.data.id);
             this.props.addResource(response);
         });
     },
 
     componentWillReceiveProps(props) {
-        if (props.currentUser) {
+        if (props.currentUser != this.props.currentUser) {
             api.pages.update(props.currentUser.page_id, { presence: "available" });
         }
     },

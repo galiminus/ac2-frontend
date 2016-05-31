@@ -36,7 +36,7 @@ const Navigation = React.createClass({
     },
 
     goToPage(e) {
-        this.props.updatePath(`/${this.context.currentUserPage.id}`);
+        this.props.updatePath(`/${this.context.currentUserPage.id}/profile`);
         e.preventDefault();
     },
 
@@ -91,7 +91,7 @@ const Navigation = React.createClass({
                         index={1}
                         primaryText={this.context.translation.t("links.currentUserPage")}
                         leftIcon={<AccountIcon />}
-                        href={`/${this.context.currentUserPage.id}`}
+                        href={`/${this.context.currentUserPage.id}/profile`}
                         onClick={this.goToPage}
                     />
                     <ListItem

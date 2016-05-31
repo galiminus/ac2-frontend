@@ -21,7 +21,7 @@ function addRecord(record, options = { commited: true, error: false }) {
     }
 
     return ({
-        type: `${record.type.toUpperCase()}_ADD`,
+        type: `${record.type.replace("-", "_").toUpperCase()}_ADD`,
         data: { ...record, ...options }
     });
 }

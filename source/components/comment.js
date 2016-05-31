@@ -40,8 +40,8 @@ const Comment = React.createClass({
     },
 
     render() {
-        switch (this.props.sender.data_type) {
-        case "user":
+        switch (this.props.sender.type) {
+        case "user-pages":
             return (
                 <ListItem
                     leftAvatar={<PageAvatar page={this.props.sender} />}
@@ -54,6 +54,7 @@ const Comment = React.createClass({
                     secondaryText={this.props.comment.data.body}
                     rightIconButton={
                         <IconButton
+                            onClick={this.handleLike}
                             iconStyle={{
                                 width: 16,
                                 height: 16,
@@ -73,23 +74,5 @@ const Comment = React.createClass({
         }
     }
 });
-// leftAvatar={<UserAvatar page={this.props.sender} />}
-
-// <div className="row">
-//     <div className="col-xs-1"></div>
-//     <div className="col-xs">
-//         <Checkbox
-//             name="checkboxName4"
-//             value="checkboxValue4"
-//             label={this.props.likes.size.toString()}
-//             labelPosition="left"
-//             labelStyle={{ marginRight: 8, paddingTop: 3 }}
-//             checkedIcon={<ThumbUpIcon />}
-//             uncheckedIcon={<ThumbUpIcon />}
-//             onCheck={this.handleLike}
-//         />
-//
-//     </div>
-// </div>
 
 export default connect(mapStateToProps)(Comment);

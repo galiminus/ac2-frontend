@@ -78,7 +78,7 @@ const Posts = React.createClass({
             this.props.addResource(response);
 
             if (response.data.length > 0) {
-                this.setState({ lastPostDate: response.data[0].updated_at });
+                this.setState({ lastPostDate: response.data[0]['updated-at'] });
             }
             this.setState({ hasMore: !!(response.links && response.links.next), loadDate: null });
         });

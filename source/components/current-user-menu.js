@@ -30,11 +30,11 @@ const CurrentUserMenu = React.createClass({
             fontFamily: "Roboto, sans-serif",
             textTransform: "uppercase",
             cursor: "pointer",
-            backgroundColor: randomColor(this.context.currentUserPage.data.personal_informations.full_name)
+            backgroundColor: randomColor(this.context.currentUserPage.data['personal-informations']['full-name'])
         };
 
         return (
-            <Avatar style={style}>{this.context.currentUserPage.data.personal_informations.full_name[0]}</Avatar>
+            <Avatar style={style}>{this.context.currentUserPage.data['personal-informations']['full-name'][0]}</Avatar>
         );
     }
 });

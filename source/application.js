@@ -44,15 +44,15 @@ import { frFR } from "translations";
 
 syncReduxAndRouter(browserHistory, store);
 
-function redirectToHomePage(_nextState, replaceState) {
+function redirectToHomePage(_nextState, replace) {
     if (store.getState().currentToken) {
-        replaceState(null, "/");
+        replace("/");
     }
 }
 
-function redirectToLoginPage(_nextState, replaceState) {
+function redirectToLoginPage(_nextState, replace) {
     if (!store.getState().currentToken) {
-        replaceState(null, "/welcome/login");
+        replace("/welcome/login");
     }
 }
 

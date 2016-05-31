@@ -25,9 +25,9 @@ const PageLink = React.createClass({
         const styles = getStyles();
 
         let name;
-        switch (this.props.page.data_type) {
-        case "user":
-            name = this.props.page.data.personal_informations.full_name;
+        switch (this.props.page.type) {
+        case "user-pages":
+            name = this.props.page.data['personal-informations']['full-name'];
             break;
         default:
             name = "?";

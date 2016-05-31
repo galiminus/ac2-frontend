@@ -39,6 +39,7 @@ const form = React.createClass({
             }
         }).then((response) => {
             dispatch([reset("post"), addResource(response)]);
+            this.props.onRequestClose();
         });
     },
 

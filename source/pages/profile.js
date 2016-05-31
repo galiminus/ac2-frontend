@@ -7,6 +7,9 @@ import {
     List
 } from "material-ui";
 
+import { Card, CardHeader } from "material-ui/Card";
+import Divider from "material-ui/Divider";
+
 import api from "api";
 import actionCreators from "action-creators";
 import Field from "components/field";
@@ -39,7 +42,6 @@ const Profile = React.createClass({
     render() {
         const style = {
             fontFamily: "Roboto, sans-serif",
-            zIndex: 2,
             background: "white",
             height: "100%"
         };
@@ -53,7 +55,7 @@ const Profile = React.createClass({
             };
         };
 
-        const tabs = [];
+        const cards = [];
         for (const category of Object.keys(this.props.pageType.data_schema.properties)) {
             const fields = [];
 
@@ -70,17 +72,24 @@ const Profile = React.createClass({
                 );
             }
 
-            tabs.push(
-                <Tab key={`titles.userPageFields.${category}`} label={this.context.translation.t(`titles.userPageFields.${category}`)}>
+            cards.push(
+                <Card
+                    style={{ marginTop: 24, fontSize: "0.9em", lineHeight: "1.4em" }}
+                    key={`titles.userPageFields.${category}`}
+                >
+                    <CardHeader
+                        title={this.context.translation.t(`titles.userPageFields.${category}`)}
+                    />
+                    <Divider inset />
                     <List>
                         {fields}
                     </List>
-                </Tab>
+                </Card>
             );
         }
         return (
             <div style={style}>
-                <Tabs className="col-xs-12 col-sm-12 col-md-6 col-md-offset-3" style={{ padding: 0 }}>{tabs}</Tabs>
+                {cards}
             </div>
         );
     }

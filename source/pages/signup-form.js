@@ -29,8 +29,8 @@ const signup = (fields) =>
         password: fields.password,
         page_attributes: {
             data: {
-                full_name: fields.full_name,
-                user_name: fields.user_name
+                "full-name": fields.fullName,
+                "user-name": fields.userName
             }
         }
     }, dispatch)
@@ -38,8 +38,8 @@ const signup = (fields) =>
 
 const validate = values => {
     return {
-        full_name: validateFullName(values.fullName),
-        user_name: validateUserName(values.userName),
+        fullName: validateFullName(values.fullName),
+        userName: validateUserName(values.userName),
         email: validateEmail(values.email),
         password: validatePassword(values.password)
     };
