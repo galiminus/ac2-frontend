@@ -1,15 +1,8 @@
-import { create } from "api/http";
-import generateUUID from "utils/uuid";
+import { destroy } from "api/http";
 
-export default (attributes) => {
+export default (id) => {
     return new Promise((resolve, reject) => {
-        create("/likes", {
-            data: {
-                type: "likes",
-                id: generateUUID(),
-                attributes
-            }
-        })
+        destroy(`/likes/${id}`)
         .then(resolve)
         .catch((error) => {
             if (error.response) {

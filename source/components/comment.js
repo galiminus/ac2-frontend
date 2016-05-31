@@ -1,6 +1,9 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import Immutable from "immutable";
+import { dispatch } from "store";
+
+import actionCreators from "action-creators";
 
 import { ListItem } from "material-ui/List";
 import IconButton from "material-ui/IconButton";
@@ -25,6 +28,11 @@ const Comment = React.createClass({
         likes: PropTypes.object
     },
 
+    contextTypes: {
+        translation: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired
+    },
+
     getDefaultProps() {
         return {
             sender: { id: null },
@@ -32,14 +40,29 @@ const Comment = React.createClass({
         };
     },
 
-    handleLike() {
+    myLike() {
+        return (this.props.likes.find((like) => like.page_id === this.context.currentUserPage.id))
+    },
+
+    handleLikeCreate() {
         api.likes.create({
             liked_id: this.props.comment.id,
             liked_type: "Comment"
+        }).then((response) => {
+            this.props.addResource(response);
+        });
+    },
+
+    handleLikeDestroy() {
+        const id = this.myLike().id;
+        api.likes.destroy(id).then((response) => {
+            this.props.removeResource(id)
         });
     },
 
     render() {
+        const isLiked = !!this.myLike();
+
         switch (this.props.sender.type) {
         case "user-pages":
             return (
@@ -48,17 +71,17 @@ const Comment = React.createClass({
                     primaryText={
                         <div>
                             <PageLink page={this.props.sender} />
-                            <PlusCounter count={this.props.likes.size} />
+                            <PlusCounter likes={this.props.likes} />
                         </div>
                     }
                     secondaryText={this.props.comment.data.body}
                     rightIconButton={
                         <IconButton
-                            onClick={this.handleLike}
+                            onClick={isLiked ? this.handleLikeDestroy : this.handleLikeCreate}
                             iconStyle={{
                                 width: 16,
                                 height: 16,
-                                background: "#cacaca",
+                                background: (isLiked ? "#999" : "#cacaca"),
                                 borderRadius: 24,
                                 padding: 4
                             }}
@@ -75,4 +98,4 @@ const Comment = React.createClass({
     }
 });
 
-export default connect(mapStateToProps)(Comment);
+export default connect(mapStateToProps, actionCreators)(Comment);

@@ -12,7 +12,7 @@ export default (attributes) => {
         })
         .then(resolve)
         .catch((error) => {
-            if (error.reponse) {
+            if (error.response) {
                 error.response.json().then(() => {
                     reject({ _error: "unknown" });
                 });

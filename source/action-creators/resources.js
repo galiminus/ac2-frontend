@@ -49,5 +49,12 @@ export default {
         }
 
         return (actions);
+    },
+
+    removeResource: (id) => {
+        return ({
+            type: "RESOURCE_REMOVE",
+            data: { id }
+        });
     }
 };

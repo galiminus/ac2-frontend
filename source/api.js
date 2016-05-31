@@ -12,6 +12,7 @@ import createPost from "api/create-post";
 import findPosts from "api/find-posts";
 import updatePost from "api/update-post";
 import createLike from "api/create-like";
+import destroyLike from "api/destroy-like";
 
 export default {
     tokens: {
@@ -45,6 +46,7 @@ export default {
     },
 
     likes: {
-        create: createLike
+        create: createLike,
+        destroy: destroyLike
     }
 };

@@ -55,6 +55,18 @@ function fetchJSON(path, params) {
         });
 }
 
+function fetchNoResponse(path, params) {
+    return fetch(path, params)
+        .then(handleDisconnect)
+        .then(handleError)
+        .catch((error) => {
+            if (error.name === "TypeError") {
+                setTimeout(() => fetchNoResponse(path, params), 5000);
+            }
+            throw (error);
+        });
+}
+
 export default {
     create: (path, record, query) => {
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
@@ -78,9 +90,19 @@ export default {
         });
     },
 
-    find: (path, query) => {
+    find: (path, query = {}) => {
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
             method: "GET",
+            mode: "cors",
+            headers: {
+                ...headers()
+            }
+        });
+    },
+
+    destroy: (path, query = {}) => {
+        return fetchNoResponse(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+            method: "DELETE",
             mode: "cors",
             headers: {
                 ...headers()

@@ -6,7 +6,6 @@ import api from "api";
 import Home from "./home";
 
 function mapStateToProps(state) {
-    console.log("MAP");
     const currentUser = state.users.get(state.currentUser);
 
     let currentUserPage;
