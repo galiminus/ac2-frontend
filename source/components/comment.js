@@ -1,4 +1,6 @@
 import React, { PropTypes } from "react";
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from "react-redux";
 import Immutable from "immutable";
 import { dispatch } from "store";
@@ -38,6 +40,10 @@ const Comment = React.createClass({
             sender: { id: null },
             likes: Immutable.Map({})
         };
+    },
+
+    shouldComponentUpdate(props) {
+        return (this.props.likes.size != props.likes.size);
     },
 
     myLike() {

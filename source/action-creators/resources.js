@@ -1,3 +1,5 @@
+import { batchActions } from "redux-batched-actions";
+
 function addRecord(record, options = { commited: true, error: false }) {
     record.attributes = { ...(record.attributes || {}), id: record.id, type: record.type };
 
@@ -48,7 +50,7 @@ export default {
             actions.push(addRecord(resource.data, options));
         }
 
-        return (actions);
+        return (batchActions(actions));
     },
 
     removeResource: (id) => {

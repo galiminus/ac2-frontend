@@ -30,7 +30,7 @@ import SignupForm from "pages/signup-form";
 import RecoverForm from "pages/recover-form";
 import Page from "pages/page";
 import Profile from "pages/profile";
-import Posts from "pages/posts";
+import PostsContainer from "pages/posts/posts-container";
 import Account from "pages/account";
 import Messages from "pages/messages";
 
@@ -98,13 +98,13 @@ const Application = React.createClass({
 
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
                     <Route component={Page}>
-                        <IndexRoute component={Posts} />
+                        <IndexRoute component={PostsContainer} />
                     </Route>
 
                     <Route path="/account" component={Account} />
                     <Route path="/messages" component={Messages} />
                     <Route path=":pageId" component={Page}>
-                        <IndexRoute component={Posts} />
+                        <IndexRoute component={PostsContainer} />
 
                         <Route path="profile" component={Profile} />
                     </Route>

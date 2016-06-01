@@ -1,10 +1,8 @@
 import React, { PropTypes } from "react";
 import { reduxForm, reset } from "redux-form";
+import { batchActions } from "redux-batched-actions";
 
-import {
-    TextField
-} from "material-ui";
-
+import TextField from "material-ui/TextField";
 import { List, ListItem } from "material-ui/List";
 import IconButton from "material-ui/IconButton";
 import SendIcon from "material-ui/svg-icons/content/send";
@@ -42,10 +40,10 @@ const form = React.createClass({
                 body: fields.body
             }
         }).then((response) => {
-            dispatch([
+            dispatch(batchActions([
                 reset("comment"),
                 addResource(response)
-            ]);
+            ]));
         });
     },
 
@@ -70,6 +68,7 @@ const form = React.createClass({
                     }}
                     primaryText={
                         <TextField
+                            multiLine
                             style={{ fontSize: "1em" }}
                             fullWidth
                             type="text"

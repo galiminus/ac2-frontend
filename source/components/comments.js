@@ -14,21 +14,19 @@ import actionCreators from "action-creators";
 
 import CommentForm from "components/comment-form";
 import Comment from "components/comment";
+import connectToCable from "components/action-cable";
 
 function mapStateToProps(state, props) {
-    let commentProps;
-
+    let comments;
     if (!props.postId) {
-        commentProps = state.comments;
+        comments = state.comments;
     } else {
-        commentProps = state.comments.filter((comment) => {
+        comments = state.comments.filter((comment) => {
             return (comment.post_id === props.postId && comment.parent_id === props.parentId);
         });
     }
 
-    return {
-        comments: commentProps.sort((comment1, comment2) => (comment1["updated-at"] > comment2["updated-at"] ? 1 : -1))
-    };
+    return { comments };
 }
 
 const Comments = React.createClass({
@@ -50,6 +48,10 @@ const Comments = React.createClass({
 
     componentDidMount() {
         this.loadComments(this.props.postId, 1);
+    },
+
+    shouldComponentUpdate(props) {
+        return (props.comments.size != this.props.comments.size);
     },
 
     getChannels() {
@@ -96,11 +98,13 @@ const Comments = React.createClass({
     },
 
     render() {
+        const comments = this.props.comments.sort((comment1, comment2) => (comment1["updated-at"] > comment2["updated-at"] ? 1 : -1));
+
         let commentNodes = null;
-        if (this.props.comments.count() > 0) {
+        if (comments.size > 0) {
             commentNodes = (
                 <List style={{ background: "#f5f5f5" }}>
-                    {this.props.comments.valueSeq().map(comment => <Comment key={comment.id} comment={comment} />)}
+                    {comments.valueSeq().map(comment => <Comment key={comment.id} comment={comment} />)}
                 </List>
             );
         }
@@ -120,4 +124,4 @@ const Comments = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(Comments);
+export default connect(mapStateToProps, actionCreators)(connectToCable(Comments));
