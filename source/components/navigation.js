@@ -1,24 +1,24 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-import CSSModules from "react-css-modules";
-import styles from "./navigation.css";
+import CSSModules from 'react-css-modules';
+import styles from './navigation.css';
 
-import { List, ListItem } from "material-ui/List";
-import Divider from "material-ui/Divider";
+import { List, ListItem } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 
-import HomeIcon from "material-ui/svg-icons/action/home";
-import AccountIcon from "material-ui/svg-icons/action/account-circle";
-import EventsIcon from "material-ui/svg-icons/action/event";
-import QuizzIcon from "material-ui/svg-icons/toggle/check-box";
-import PollsIcon from "material-ui/svg-icons/social/poll";
-import GroupsIcon from "material-ui/svg-icons/social/group";
-import MembersIcon from "material-ui/svg-icons/action/language";
-import FriendsIcon from "material-ui/svg-icons/action/favorite";
-import MessagesIcon from "material-ui/svg-icons/communication/email";
-import SettingsIcon from "material-ui/svg-icons/action/settings";
+import HomeIcon from 'material-ui/svg-icons/action/home';
+import AccountIcon from 'material-ui/svg-icons/action/account-circle';
+import EventsIcon from 'material-ui/svg-icons/action/event';
+import QuizzIcon from 'material-ui/svg-icons/toggle/check-box';
+import PollsIcon from 'material-ui/svg-icons/social/poll';
+import GroupsIcon from 'material-ui/svg-icons/social/group';
+import MembersIcon from 'material-ui/svg-icons/action/language';
+import FriendsIcon from 'material-ui/svg-icons/action/favorite';
+import MessagesIcon from 'material-ui/svg-icons/communication/email';
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
-import { updatePath } from "redux-simple-router";
+import { updatePath } from 'redux-simple-router';
 
 const Navigation = React.createClass({
     propTypes: {
@@ -31,7 +31,7 @@ const Navigation = React.createClass({
     },
 
     goToMainFeed(e) {
-        this.props.updatePath("/");
+        this.props.updatePath('/');
         e.preventDefault();
     },
 
@@ -46,42 +46,42 @@ const Navigation = React.createClass({
                 <List>
                     <ListItem
                         index={0}
-                        primaryText={this.context.translation.t("links.mainFeed")}
+                        primaryText={this.context.translation.t('links.mainFeed')}
                         leftIcon={<HomeIcon />}
                         href="/"
                         onClick={this.goToMainFeed}
                     />
                     <ListItem
                         index={0}
-                        primaryText={this.context.translation.t("links.events")}
+                        primaryText={this.context.translation.t('links.events')}
                         leftIcon={<EventsIcon />}
                         href="/events"
                         onClick={this.goToMainFeed}
                     />
                     <ListItem
                         index={0}
-                        primaryText={this.context.translation.t("links.quizz")}
+                        primaryText={this.context.translation.t('links.quizz')}
                         leftIcon={<QuizzIcon />}
                         href="/quizz"
                         onClick={this.goToQuizz}
                     />
                     <ListItem
                         index={0}
-                        primaryText={this.context.translation.t("links.polls")}
+                        primaryText={this.context.translation.t('links.polls')}
                         leftIcon={<PollsIcon />}
                         href="/polls"
                         onClick={this.goToMainPolls}
                     />
                     <ListItem
                         index={0}
-                        primaryText={this.context.translation.t("links.groups")}
+                        primaryText={this.context.translation.t('links.groups')}
                         leftIcon={<GroupsIcon />}
                         href="/groups"
                         onClick={this.goToMainGroups}
                     />
                     <ListItem
                         index={0}
-                        primaryText={this.context.translation.t("links.members")}
+                        primaryText={this.context.translation.t('links.members')}
                         leftIcon={<MembersIcon />}
                         href="/members"
                         onClick={this.goToMainGroups}
@@ -89,28 +89,28 @@ const Navigation = React.createClass({
                     <Divider />
                     <ListItem
                         index={1}
-                        primaryText={this.context.translation.t("links.currentUserPage")}
+                        primaryText={this.context.translation.t('links.currentUserPage')}
                         leftIcon={<AccountIcon />}
                         href={`/${this.context.currentUserPage.id}/profile`}
                         onClick={this.goToPage}
                     />
                     <ListItem
                         index={1}
-                        primaryText={this.context.translation.t("links.friends")}
+                        primaryText={this.context.translation.t('links.friends')}
                         leftIcon={<FriendsIcon />}
                         href={`/${this.context.currentUserPage.id}/friends`}
                         onClick={this.goToPage}
                     />
                     <ListItem
                         index={1}
-                        primaryText={this.context.translation.t("links.messages")}
+                        primaryText={this.context.translation.t('links.messages')}
                         leftIcon={<MessagesIcon />}
                         href={`/${this.context.currentUserPage.id}/messages`}
                         onClick={this.goToPage}
                     />
                     <ListItem
                         index={1}
-                        primaryText={this.context.translation.t("links.settings")}
+                        primaryText={this.context.translation.t('links.settings')}
                         leftIcon={<SettingsIcon />}
                         href={`/${this.context.currentUserPage.id}/settings`}
                         onClick={this.goToPage}

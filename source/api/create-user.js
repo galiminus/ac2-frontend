@@ -1,10 +1,10 @@
-import { create } from "api/http";
+import { create } from 'api/http';
 
 export default (attributes, query) => {
     return new Promise((resolve, reject) => {
-        create("/users", {
+        create('/users', {
             data: {
-                type: "users",
+                type: 'users',
                 attributes
             }
         }, query)
@@ -12,10 +12,10 @@ export default (attributes, query) => {
         .catch((error) => {
             if (error.response) {
                 error.response.json().then((response) => {
-                    if (response.email === "has already been taken") {
-                        reject({ _error: "email_already_in_use" });
+                    if (response.email === 'has already been taken') {
+                        reject({ _error: 'email_already_in_use' });
                     } else {
-                        reject({ _error: "unknown" });
+                        reject({ _error: 'unknown' });
                     }
                 });
             }

@@ -172,7 +172,7 @@ import {
     grey100,
     grey200,
     grey300
-} from "material-ui/styles/colors";
+} from 'material-ui/styles/colors';
 
 const underWhite = [
     red800,
@@ -366,9 +366,9 @@ function hashString(seed) {
     return hash;
 }
 
-function randomColor(seed, textColor = "white") {
+function randomColor(seed, textColor = 'white') {
     if (seed.length === 0) {
-        return "transparent";
+        return 'transparent';
     }
 
     const colors = colorsByTextColor[textColor];

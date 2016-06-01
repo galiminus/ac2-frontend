@@ -1,21 +1,19 @@
-import React, { PropTypes } from "react";
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import React, { PropTypes } from 'react';
 
-import { connect } from "react-redux";
-import Immutable from "immutable";
-import { dispatch } from "store";
+import { connect } from 'react-redux';
+import Immutable from 'immutable';
 
-import actionCreators from "action-creators";
+import actionCreators from 'action-creators';
 
-import { ListItem } from "material-ui/List";
-import IconButton from "material-ui/IconButton";
-import PlusOneIcon from "material-ui/svg-icons/social/plus-one";
+import { ListItem } from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
+import PlusOneIcon from 'material-ui/svg-icons/social/plus-one';
 
-import api from "api";
-import PageAvatar from "components/page-avatar";
-import PageLink from "components/page-link";
-import PlusCounter from "components/plus-counter";
-import Marked from "components/marked";
+import api from 'api';
+import PageAvatar from 'components/page-avatar';
+import PageLink from 'components/page-link';
+import PlusCounter from 'components/plus-counter';
+import Marked from 'components/marked';
 
 function mapStateToProps(state, props) {
     return {
@@ -28,6 +26,8 @@ const Comment = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
         comment: PropTypes.object.isRequired,
+        addResource: PropTypes.func.isRequired,
+        removeResource: PropTypes.func.isRequired,
         likes: PropTypes.object
     },
 
@@ -44,17 +44,17 @@ const Comment = React.createClass({
     },
 
     shouldComponentUpdate(props) {
-        return (this.props.likes.size != props.likes.size);
+        return (this.props.likes.size !== props.likes.size);
     },
 
     myLike() {
-        return (this.props.likes.find((like) => like.page_id === this.context.currentUserPage.id))
+        return (this.props.likes.find((like) => like.page_id === this.context.currentUserPage.id));
     },
 
     handleLikeCreate() {
         api.likes.create({
             liked_id: this.props.comment.id,
-            liked_type: "Comment"
+            liked_type: 'Comment'
         }).then((response) => {
             this.props.addResource(response);
         });
@@ -62,8 +62,8 @@ const Comment = React.createClass({
 
     handleLikeDestroy() {
         const id = this.myLike().id;
-        api.likes.destroy(id).then((response) => {
-            this.props.removeResource(id)
+        api.likes.destroy(id).then(() => {
+            this.props.removeResource(id);
         });
     },
 
@@ -71,7 +71,7 @@ const Comment = React.createClass({
         const isLiked = !!this.myLike();
 
         switch (this.props.sender.type) {
-        case "user-pages":
+        case 'user-pages':
             return (
                 <ListItem
                     leftAvatar={<PageAvatar page={this.props.sender} />}
@@ -88,7 +88,7 @@ const Comment = React.createClass({
                             iconStyle={{
                                 width: 16,
                                 height: 16,
-                                background: (isLiked ? "#999" : "#cacaca"),
+                                background: (isLiked ? '#999' : '#cacaca'),
                                 borderRadius: 24,
                                 padding: 4
                             }}

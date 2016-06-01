@@ -1,17 +1,17 @@
-import React, { PropTypes } from "react";
-import { reduxForm } from "redux-form";
-import { updatePath } from "redux-simple-router";
-import { dispatch } from "store";
+import React, { PropTypes } from 'react';
+import { reduxForm } from 'redux-form';
+import { updatePath } from 'redux-simple-router';
+import { dispatch } from 'store';
 
 import {
     TextField,
     FlatButton,
     RaisedButton
-} from "material-ui";
+} from 'material-ui';
 
-import { tokens, users } from "api";
-import { setCurrentUser, setCurrentToken } from "action-creators";
-import { validateEmail, validatePassword, validateFullName, validateUserName } from "validators";
+import { tokens, users } from 'api';
+import { setCurrentUser, setCurrentToken } from 'action-creators';
+import { validateEmail, validatePassword, validateFullName, validateUserName } from 'validators';
 
 const authenticate = (userId, fields) =>
     tokens.create({ email: fields.email, password: fields.password }, dispatch)
@@ -19,7 +19,7 @@ const authenticate = (userId, fields) =>
         dispatch([
             setCurrentUser.set(userId),
             setCurrentToken.set(data.access_token),
-            updatePath("/")
+            updatePath('/')
         ]);
     });
 
@@ -29,8 +29,8 @@ const signup = (fields) =>
         password: fields.password,
         page_attributes: {
             data: {
-                "full-name": fields.fullName,
-                "user-name": fields.userName
+                'full-name': fields.fullName,
+                'user-name': fields.userName
             }
         }
     }, dispatch)
@@ -57,7 +57,7 @@ const form = React.createClass({
     },
 
     goToLoginForm(e) {
-        dispatch(updatePath("/welcome/login"));
+        dispatch(updatePath('/welcome/login'));
         e.preventDefault();
     },
 
@@ -69,19 +69,19 @@ const form = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(signup)}>
-                <TextField fullWidth type="text" {...fullName} hintText={this.context.translation.t("labels.signup.fullName")} />
-                <TextField fullWidth type="text" {...userName} hintText={this.context.translation.t("labels.signup.userName")} />
-                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t("labels.signup.email")} />
-                <TextField fullWidth type="password" {...password} hintText={this.context.translation.t("labels.signup.password")} />
+                <TextField fullWidth type="text" {...fullName} hintText={this.context.translation.t('labels.signup.fullName')} />
+                <TextField fullWidth type="text" {...userName} hintText={this.context.translation.t('labels.signup.userName')} />
+                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t('labels.signup.email')} />
+                <TextField fullWidth type="password" {...password} hintText={this.context.translation.t('labels.signup.password')} />
                 <div className="row between-xs center-xs" style={{ marginTop: 32 }}>
                     <RaisedButton
                         disabled={fullName.invalid || userName.invalid || email.invalid || password.invalid}
                         type="submit"
-                        label={this.context.translation.t("actions.signup")}
+                        label={this.context.translation.t('actions.signup')}
                         secondary
                         onClick={handleSubmit(signup)}
                     />
-                    <FlatButton label={this.context.translation.t("labels.have_account")} linkButton href="/welcome/login" onClick={this.goToLoginForm} />
+                    <FlatButton label={this.context.translation.t('labels.have_account')} linkButton href="/welcome/login" onClick={this.goToLoginForm} />
                 </div>
             </form>
         );
@@ -89,7 +89,7 @@ const form = React.createClass({
 });
 
 export default reduxForm({
-    form: "signup",
-    fields: ["fullName", "userName", "email", "password"],
+    form: 'signup',
+    fields: ['fullName', 'userName', 'email', 'password'],
     validate
 })(form);

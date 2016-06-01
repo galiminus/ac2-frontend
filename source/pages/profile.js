@@ -1,22 +1,17 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-import {
-    Tabs,
-    Tab,
-    List
-} from "material-ui";
+import List from 'material-ui/List';
+import { Card, CardHeader } from 'material-ui/Card';
+import Divider from 'material-ui/Divider';
 
-import { Card, CardHeader } from "material-ui/Card";
-import Divider from "material-ui/Divider";
-
-import api from "api";
-import actionCreators from "action-creators";
-import Field from "components/field";
+import api from 'api';
+import actionCreators from 'action-creators';
+import Field from 'components/field';
 
 function mapStateToProps(state, props) {
     return {
-        pageType: state.pageTypes.get("user"),
+        pageType: state.pageTypes.get('user'),
         page: state.pages.get(props.params.pageId)
     };
 }
@@ -41,9 +36,9 @@ const Profile = React.createClass({
 
     render() {
         const style = {
-            fontFamily: "Roboto, sans-serif",
-            background: "white",
-            height: "100%"
+            fontFamily: 'Roboto, sans-serif',
+            background: 'white',
+            height: '100%'
         };
 
         const generateChangeHandler = (category, field) => {
@@ -74,7 +69,7 @@ const Profile = React.createClass({
 
             cards.push(
                 <Card
-                    style={{ marginTop: 24, fontSize: "0.9em", lineHeight: "1.4em" }}
+                    style={{ marginTop: 24, fontSize: '0.9em', lineHeight: '1.4em' }}
                     key={`titles.userPageFields.${category}`}
                 >
                     <CardHeader

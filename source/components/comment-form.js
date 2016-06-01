@@ -1,17 +1,17 @@
-import React, { PropTypes } from "react";
-import { reduxForm, reset } from "redux-form";
-import { batchActions } from "redux-batched-actions";
+import React, { PropTypes } from 'react';
+import { reduxForm, reset } from 'redux-form';
+import { batchActions } from 'redux-batched-actions';
 
-import TextField from "material-ui/TextField";
-import { List, ListItem } from "material-ui/List";
-import IconButton from "material-ui/IconButton";
-import SendIcon from "material-ui/svg-icons/content/send";
+import TextField from 'material-ui/TextField';
+import { List, ListItem } from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
+import SendIcon from 'material-ui/svg-icons/content/send';
 
-import api from "api";
-import { addResource } from "action-creators";
-import { validateText } from "validators";
+import api from 'api';
+import { addResource } from 'action-creators';
+import { validateText } from 'validators';
 
-import PageAvatar from "components/page-avatar";
+import PageAvatar from 'components/page-avatar';
 
 const validate = values => {
     return {
@@ -34,14 +34,14 @@ const form = React.createClass({
 
     post(fields, dispatch) {
         api.comments.create(this.props.postId, {
-            type: "text",
-            access_controls_attributes: [{ authorized_party_type: "All" }],
+            type: 'text',
+            access_controls_attributes: [{ authorized_party_type: 'All' }],
             data: {
                 body: fields.body
             }
         }).then((response) => {
             dispatch(batchActions([
-                reset("comment"),
+                reset('comment'),
                 addResource(response)
             ]));
         });
@@ -54,7 +54,7 @@ const form = React.createClass({
         } = this.props;
 
         if (!body.value) {
-            body.value = "";
+            body.value = '';
         }
 
         return (
@@ -69,10 +69,10 @@ const form = React.createClass({
                     primaryText={
                         <TextField
                             multiLine
-                            style={{ fontSize: "1em" }}
+                            style={{ fontSize: '1em' }}
                             fullWidth
                             type="text"
-                            hintText={this.context.translation.t("labels.comment")}
+                            hintText={this.context.translation.t('labels.comment')}
                             {...body}
                         />
                     }
@@ -89,7 +89,7 @@ const form = React.createClass({
 });
 
 export default reduxForm({
-    form: "comment",
-    fields: ["body"],
+    form: 'comment',
+    fields: ['body'],
     validate
 })(form);

@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import marked from "marked";
+import marked from 'marked';
 
 const renderer = new marked.Renderer();
 
-const Marked = function(props) {
+const Marked = (props) => {
     marked.setOptions({
-        renderer: new marked.Renderer(),
+        renderer,
         gfm: true,
         tables: false,
         breaks: false,
@@ -16,7 +16,7 @@ const Marked = function(props) {
         smartypants: false,
         ...(props.options || {})
     });
-    return (<div dangerouslySetInnerHTML={{__html: marked(props.body)}} />);
-}
+    return (<div dangerouslySetInnerHTML={{ __html: marked(props.body) }} />);
+};
 
 export default Marked;

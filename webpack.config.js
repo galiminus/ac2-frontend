@@ -1,15 +1,15 @@
-webpack = require("webpack")
+webpack = require('webpack')
 const path = require('path');
 
 module.exports = {
-    context: __dirname + "/source",
+    context: __dirname + '/source',
     entry: {
-        javascript: "./application.js",
-        html: "./index.html"
+        javascript: './application.js',
+        html: './index.html'
     },
     output: {
-        path: __dirname + "/build",
-        filename: "/application.js"
+        path: __dirname + '/build',
+        filename: '/application.js'
     },
     resolve: {
         root: __dirname,
@@ -33,7 +33,7 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                loader: "file?name=[name].[ext]",
+                loader: 'file?name=[name].[ext]',
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,

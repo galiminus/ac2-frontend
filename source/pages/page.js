@@ -1,8 +1,8 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
-import actionCreators from "action-creators";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import actionCreators from 'action-creators';
 
-import api from "api";
+import api from 'api';
 
 function mapStateToProps(state, props) {
     return {
@@ -36,7 +36,7 @@ const Page = React.createClass({
                 this.props.addResource(response);
             });
         } else {
-            this.props.setCurrentPage("main");
+            this.props.setCurrentPage('main');
         }
     },
 

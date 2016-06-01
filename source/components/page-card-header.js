@@ -1,8 +1,8 @@
-import React, { PropTypes } from "react";
-import { CardHeader } from "material-ui/Card";
+import React, { PropTypes } from 'react';
+import { CardHeader } from 'material-ui/Card';
 
-import PageAvatar from "components/page-avatar";
-import PageLink from "components/page-link";
+import PageAvatar from 'components/page-avatar';
+import PageLink from 'components/page-link';
 
 const PageCardHeader = React.createClass({
     propTypes: {

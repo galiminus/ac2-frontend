@@ -1,10 +1,10 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
-import { ToolbarTitle } from "material-ui";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { ToolbarTitle } from 'material-ui';
 
 function mapStateToProps(state) {
-    if (state.currentPage === "main") {
-        return ({ page: { type: "main-pages" } });
+    if (state.currentPage === 'main') {
+        return ({ page: { type: 'main-pages' } });
     } else if (state.currentPage) {
         return ({ page: state.pages.get(state.currentPage) });
     }
@@ -12,10 +12,10 @@ function mapStateToProps(state) {
 }
 
 const style = {
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: 'Roboto, sans-serif',
     fontWeight: 400,
     letterSpacing: 3,
-    color: "#ffffff"
+    color: '#ffffff'
 };
 
 const CurrentPageTitle = React.createClass({
@@ -36,14 +36,14 @@ const CurrentPageTitle = React.createClass({
         }
 
         switch (this.props.page.type) {
-        case "main-pages":
-            title = this.context.translation.t("links.mainFeed");
+        case 'main-pages':
+            title = this.context.translation.t('links.mainFeed');
             break;
-        case "user-pages":
+        case 'user-pages':
             title = this.props.page.data['personal-informations']['full-name'];
             break;
         default:
-            title = "";
+            title = '';
         }
 
         return (

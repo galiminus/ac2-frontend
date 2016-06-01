@@ -1,4 +1,4 @@
-import { batchActions } from "redux-batched-actions";
+import { batchActions } from 'redux-batched-actions';
 
 function addRecord(record, options = { commited: true, error: false }) {
     record.attributes = { ...(record.attributes || {}), id: record.id, type: record.type };
@@ -7,8 +7,8 @@ function addRecord(record, options = { commited: true, error: false }) {
         record.attributes.created_at = new Date(record.attributes.created_at);
     }
 
-    if (record.attributes["updated-at"]) {
-        record.attributes["updated-at"] = new Date(record.attributes["updated-at"]);
+    if (record.attributes['updated-at']) {
+        record.attributes['updated-at'] = new Date(record.attributes['updated-at']);
     }
 
     if (record.relationships) {
@@ -23,7 +23,7 @@ function addRecord(record, options = { commited: true, error: false }) {
     }
 
     return ({
-        type: `${record.type.replace("-", "_").toUpperCase()}_ADD`,
+        type: `${record.type.replace('-', '_').toUpperCase()}_ADD`,
         data: { ...record, ...options }
     });
 }
@@ -41,7 +41,7 @@ export default {
             for (const record of resource.data) {
                 actions.push(addRecord(record, options));
             }
-        } else if (typeof(resource.data) === "object") {
+        } else if (typeof(resource.data) === 'object') {
             if (resource.included) {
                 for (const record of resource.included) {
                     actions.push(addRecord(record, options));
@@ -55,7 +55,7 @@ export default {
 
     removeResource: (id) => {
         return ({
-            type: "RESOURCE_REMOVE",
+            type: 'RESOURCE_REMOVE',
             data: { id }
         });
     }

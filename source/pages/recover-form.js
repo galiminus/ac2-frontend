@@ -1,15 +1,15 @@
-import React, { PropTypes } from "react";
-import { reduxForm } from "redux-form";
-import { updatePath } from "redux-simple-router";
+import React, { PropTypes } from 'react';
+import { reduxForm } from 'redux-form';
+import { updatePath } from 'redux-simple-router';
 
 import {
     TextField,
     RaisedButton
-} from "material-ui";
+} from 'material-ui';
 
-import api from "api";
-import { setCurrentToken, setCurrentUser } from "action-creators";
-import { validateEmail } from "validators";
+import api from 'api';
+import { setCurrentToken, setCurrentUser } from 'action-creators';
+import { validateEmail } from 'validators';
 
 const authenticate = (fields, dispatch) =>
 api.tokens.create(fields, dispatch).then((accessTokenData) => {
@@ -18,7 +18,7 @@ api.tokens.create(fields, dispatch).then((accessTokenData) => {
     api.users.me({}, dispatch).then((userData) => {
         dispatch([
             setCurrentUser(userData.id),
-            updatePath("/")
+            updatePath('/')
         ]);
     });
 });
@@ -49,12 +49,12 @@ const form = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t("labels.recover.email")} />
-                <div className="row center-xs" style={{ marginTop: "1em" }}>
+                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t('labels.recover.email')} />
+                <div className="row center-xs" style={{ marginTop: '1em' }}>
                     <RaisedButton
                         disabled={email.invalid}
                         type="submit"
-                        label={this.context.translation.t("actions.continue")}
+                        label={this.context.translation.t('actions.continue')}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
@@ -65,7 +65,7 @@ const form = React.createClass({
 });
 
 export default reduxForm({
-    form: "login",
-    fields: ["email"],
+    form: 'login',
+    fields: ['email'],
     validate
 })(form);

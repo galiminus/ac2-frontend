@@ -1,12 +1,12 @@
-import React, { PropTypes } from "react";
-import { reduxForm } from "redux-form";
+import React, { PropTypes } from 'react';
+import { reduxForm } from 'redux-form';
 
 import {
     ListItem,
     TextField
-} from "material-ui";
+} from 'material-ui';
 
-import { validateText } from "validators";
+import { validateText } from 'validators';
 
 const validate = (values) => {
     return {
@@ -92,8 +92,8 @@ const Field = React.createClass({
 
         if (this.props.values.value) {
             switch (this.props.type) {
-            case "string":
-            case "country":
+            case 'string':
+            case 'country':
                 secondaryText = (
                     <p>
                         {this.props.values.value}
@@ -104,7 +104,7 @@ const Field = React.createClass({
                 secondaryText = <div />;
             }
         } else {
-            secondaryText = <p>{this.context.translation.t("texts.emptyField")}</p>;
+            secondaryText = <p>{this.context.translation.t('texts.emptyField')}</p>;
         }
 
         return (
@@ -123,7 +123,7 @@ const Field = React.createClass({
 });
 
 export default reduxForm({
-    form: "field",
-    fields: ["value"],
+    form: 'field',
+    fields: ['value'],
     validate
 })(Field);

@@ -1,6 +1,6 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
-import Cable from "es6-actioncable";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import Cable from 'es6-actioncable';
 
 function mapStateToProps(state) {
     return {

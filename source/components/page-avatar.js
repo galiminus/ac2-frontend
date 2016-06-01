@@ -1,16 +1,16 @@
-import React, { PropTypes } from "react";
+import React, { PropTypes } from 'react';
 
-import randomColor from "utils/random-color";
+import randomColor from 'utils/random-color';
 
-import Avatar from "material-ui/Avatar";
+import Avatar from 'material-ui/Avatar';
 
 function getStyles() {
     const styles = {
         root: {
             marginRight: 8,
-            fontFamily: "Roboto, sans-serif",
-            textTransform: "uppercase",
-            cursor: "pointer"
+            fontFamily: 'Roboto, sans-serif',
+            textTransform: 'uppercase',
+            cursor: 'pointer'
         }
     };
     return (styles);
@@ -27,11 +27,11 @@ const UserAvatar = React.createClass({
 
         let name;
         switch (this.props.page.type) {
-        case "user-pages":
+        case 'user-pages':
             name = this.props.page.data['personal-informations']['full-name'];
             break;
         default:
-            name = "?";
+            name = '?';
         }
 
         return (

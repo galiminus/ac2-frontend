@@ -1,10 +1,10 @@
-import { update } from "api/http";
+import { update } from 'api/http';
 
 export default (id, attributes) =>
     new Promise((resolve, reject) =>
         update(`/posts/${id}`, {
             data: {
-                type: "posts",
+                type: 'posts',
                 attributes
             }
         })

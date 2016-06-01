@@ -1,5 +1,5 @@
-import React, { PropTypes } from "react";
-import { FlatButton, Dialog } from "material-ui";
+import React, { PropTypes } from 'react';
+import { FlatButton, Dialog } from 'material-ui';
 
 const DisconnectedModal = React.createClass({
     propTypes: {
@@ -15,8 +15,8 @@ const DisconnectedModal = React.createClass({
             <Dialog
                 actions={[
                     <FlatButton
-                        key={"goToLoginPage"}
-                        label={this.context.translation.t("actions.goToLoginPage")}
+                        key={'goToLoginPage'}
+                        label={this.context.translation.t('actions.goToLoginPage')}
                         primary
                         linkButton
                         href="/welcome/login"
@@ -24,7 +24,7 @@ const DisconnectedModal = React.createClass({
                 ]}
                 open={this.props.isDisconnected}
             >
-                {this.context.translation.t("errors.disconnected")}
+                {this.context.translation.t('errors.disconnected')}
             </Dialog>
         );
     }

@@ -1,13 +1,13 @@
-import React, { PropTypes } from "react";
-import Dialog from "material-ui/Dialog";
-import { List, ListItem } from "material-ui/List";
+import React, { PropTypes } from 'react';
+import Dialog from 'material-ui/Dialog';
+import { List, ListItem } from 'material-ui/List';
 
 function getStyles() {
     const styles = {
         root: {
             fontSize: 12,
             marginLeft: 8,
-            color: "#666",
+            color: '#666',
             fontWeight: 500
         }
     };
@@ -23,15 +23,15 @@ const PlusCounter = React.createClass({
     getInitialState() {
         return ({
             plusListOpen: false
-        })
+        });
     },
 
     handleOpenPlusList() {
-        this.setState({ plusListOpen: true })
+        this.setState({ plusListOpen: true });
     },
 
     handleClosePlusList() {
-        this.setState({ plusListOpen: false })
+        this.setState({ plusListOpen: false });
     },
 
     render() {
@@ -49,7 +49,7 @@ const PlusCounter = React.createClass({
                     <List>
                         {
                             this.props.likes.map((like) => {
-                                return (<ListItem key={like.id} primaryText={like.page_id} />)
+                                return (<ListItem key={like.id} primaryText={like.page_id} />);
                             })
                         }
                     </List>

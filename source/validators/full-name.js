@@ -1,7 +1,7 @@
 export default (value) => {
     if (!value) {
-        return "required";
+        return 'required';
     } else if (value.length < 2) {
-        return "invalid";
+        return 'invalid';
     }
 };

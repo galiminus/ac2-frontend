@@ -6,7 +6,7 @@
   "quiet": true,
 
   "rules": {
-    "quotes": [2, "double"], // specify whether double or single quotes should be used
+    "quotes": [1, "single"], // specify whether double or single quotes should be used
     "indent": [2, 4], // this option sets a specific tab width for your code (off by default)
     "comma-dangle": [2, "never"], // disallow or enforce trailing commas
     "vars-on-top": 2, // requires to declare all vars on top of their containing scope (off by default)

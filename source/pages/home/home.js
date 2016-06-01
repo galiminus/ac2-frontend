@@ -1,16 +1,16 @@
-import React, { PropTypes } from "react";
-import CSSModules from "react-css-modules";
-import styles from "./home.css";
+import React, { PropTypes } from 'react';
+import CSSModules from 'react-css-modules';
+import styles from './home.css';
 
-import Drawer from "material-ui/Drawer";
-import Paper from "material-ui/Paper";
+import Drawer from 'material-ui/Drawer';
+import Paper from 'material-ui/Paper';
 
-import DisconnectedModal from "components/disconnected-modal";
-import Navigation from "components/navigation";
-import HeaderBar from "components/header-bar";
-import Notifier from "components/notifier";
-import Roster from "components/roster";
-import AdditionalLinks from "components/additional-links";
+import DisconnectedModal from 'components/disconnected-modal';
+import Navigation from 'components/navigation';
+import HeaderBar from 'components/header-bar';
+import Notifier from 'components/notifier';
+import Roster from 'components/roster';
+import AdditionalLinks from 'components/additional-links';
 
 const Home = React.createClass({
     propTypes: {

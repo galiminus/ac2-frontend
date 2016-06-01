@@ -1,3 +1,3 @@
 export default {
-    setCurrentToken: (accessToken) => ({ type: "CURRENT_TOKEN_SET", accessToken })
+    setCurrentToken: (accessToken) => ({ type: 'CURRENT_TOKEN_SET', accessToken })
 };

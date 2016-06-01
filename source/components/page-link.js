@@ -1,12 +1,12 @@
-import React, { PropTypes } from "react";
-import { indigo600 } from "material-ui/styles/colors";
+import React, { PropTypes } from 'react';
+import { indigo600 } from 'material-ui/styles/colors';
 
-import { Link } from "react-router";
+import { Link } from 'react-router';
 
 function getStyles() {
     const styles = {
         root: {
-            textDecoration: "none",
+            textDecoration: 'none',
             color: indigo600,
             padding: 0,
             marginBottom: 2
@@ -26,11 +26,11 @@ const PageLink = React.createClass({
 
         let name;
         switch (this.props.page.type) {
-        case "user-pages":
+        case 'user-pages':
             name = this.props.page.data['personal-informations']['full-name'];
             break;
         default:
-            name = "?";
+            name = '?';
         }
 
         return (

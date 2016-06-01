@@ -1,6 +1,6 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
-import { Snackbar } from "material-ui";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Snackbar } from 'material-ui';
 
 function mapStateToProps(state) {
     return {
@@ -27,12 +27,12 @@ const Notifier = React.createClass({
 
     render() {
         const style = {
-            fontFamily: "Roboto, sans-serif"
+            fontFamily: 'Roboto, sans-serif'
         };
 
-        const message = this.props.notification.message ? this.context.translation.t(`errors.${this.props.notification.message}`) : "";
+        const message = this.props.notification.message ? this.context.translation.t(`errors.${this.props.notification.message}`) : '';
         return (
-            <Snackbar message={message} style={style} open={message !== ""} onRequestClose={this.handleRequestClose} />
+            <Snackbar message={message} style={style} open={message !== ''} onRequestClose={this.handleRequestClose} />
         );
     }
 });

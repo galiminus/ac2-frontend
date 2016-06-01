@@ -1,4 +1,4 @@
-import { find } from "api/http";
+import { find } from 'api/http';
 
 export default (id, query) => {
     return new Promise((resolve, reject) => {

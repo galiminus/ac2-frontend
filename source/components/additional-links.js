@@ -1,9 +1,9 @@
-import React, { PropTypes } from "react";
+import React, { PropTypes } from 'react';
 
-import CSSModules from "react-css-modules";
-import styles from "./additional-links.css";
+import CSSModules from 'react-css-modules';
+import styles from './additional-links.css';
 
-import { additionalLinks } from "config";
+import { additionalLinks } from 'config';
 
 const AdditionalLinks = React.createClass({
     contextTypes: {

@@ -1,12 +1,12 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import {
     List,
     ListItem
-} from "material-ui";
+} from 'material-ui';
 
-import { updatePath } from "redux-simple-router";
+import { updatePath } from 'redux-simple-router';
 
 function mapStateToProps(_state, _props) {
     return {
@@ -23,7 +23,7 @@ const Roster = React.createClass({
     },
 
     goToChat(e) {
-        this.props.updatePath("/messages");
+        this.props.updatePath('/messages');
         e.preventDefault();
     },
 

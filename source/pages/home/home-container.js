@@ -1,9 +1,9 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
-import actionCreators from "action-creators";
-import api from "api";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import actionCreators from 'action-creators';
+import api from 'api';
 
-import Home from "./home";
+import Home from './home';
 
 function mapStateToProps(state) {
     const currentUser = state.users.get(state.currentUser);
@@ -29,7 +29,8 @@ const HomeContainer = React.createClass({
         currentUserPage: PropTypes.object.isRequired,
         currentToken: PropTypes.object.isRequired,
         leftNav: PropTypes.bool.isRequired,
-        children: PropTypes.object.isRequired
+        children: PropTypes.object.isRequired,
+        currentUser: PropTypes.object.isRequired
     },
 
     childContextTypes: {
@@ -39,10 +40,10 @@ const HomeContainer = React.createClass({
     getDefaultProps() {
         return {
             currentUserPage: {
-                presence: "connected",
+                presence: 'connected',
                 data: {
-                    "personal-informations": {
-                        "full-name": ""
+                    'personal-informations': {
+                        'full-name': ''
                     }
                 }
             }
@@ -56,15 +57,15 @@ const HomeContainer = React.createClass({
     },
 
     componentDidMount() {
-        api.users.me({ include: "page" }).then((response) => {
+        api.users.me({ include: 'page' }).then((response) => {
             this.props.setCurrentUser(response.data.id);
             this.props.addResource(response);
         });
     },
 
     componentWillReceiveProps(props) {
-        if (props.currentUser != this.props.currentUser) {
-            api.pages.update(props.currentUser.page_id, { presence: "available" });
+        if (props.currentUser !== this.props.currentUser) {
+            api.pages.update(props.currentUser.page_id, { presence: 'available' });
         }
     },
 

@@ -1,3 +1,3 @@
 export default {
-    toggleLeftNav: () => ({ type: "LEFTNAV_TOGGLE" })
+    toggleLeftNav: () => ({ type: 'LEFTNAV_TOGGLE' })
 };

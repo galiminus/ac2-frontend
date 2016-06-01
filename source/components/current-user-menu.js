@@ -1,12 +1,12 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-import Avatar from "material-ui/Avatar";
+import Avatar from 'material-ui/Avatar';
 
-import { updatePath } from "redux-simple-router";
-import { clearTokens } from "action-creators";
+import { updatePath } from 'redux-simple-router';
+import { clearTokens } from 'action-creators';
 
-import randomColor from "utils/random-color";
+import randomColor from 'utils/random-color';
 
 function mapStateToProps(_state, _props) {
     return {};
@@ -27,9 +27,9 @@ const CurrentUserMenu = React.createClass({
         const style = {
             marginTop: 8,
             marginLeft: 24,
-            fontFamily: "Roboto, sans-serif",
-            textTransform: "uppercase",
-            cursor: "pointer",
+            fontFamily: 'Roboto, sans-serif',
+            textTransform: 'uppercase',
+            cursor: 'pointer',
             backgroundColor: randomColor(this.context.currentUserPage.data['personal-informations']['full-name'])
         };
 

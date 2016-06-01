@@ -1,11 +1,11 @@
-import { create } from "api/http";
-import generateUUID from "utils/uuid";
+import { create } from 'api/http';
+import generateUUID from 'utils/uuid';
 
 export default (attributes) => {
     return new Promise((resolve, reject) => {
-        create("/posts", {
+        create('/posts', {
             data: {
-                type: "posts",
+                type: 'posts',
                 id: generateUUID(),
                 attributes
             }
@@ -14,7 +14,7 @@ export default (attributes) => {
         .catch((error) => {
             if (error.response) {
                 error.response.json().then(() => {
-                    reject({ _error: "unknown" });
+                    reject({ _error: 'unknown' });
                 });
             }
         });

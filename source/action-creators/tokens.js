@@ -1,3 +1,3 @@
 export default {
-    clearTokens: () => ({ type: "TOKENS_CLEAR" })
+    clearTokens: () => ({ type: 'TOKENS_CLEAR' })
 };

@@ -1,12 +1,12 @@
-import React from "react";
-import injectTapEventPlugin from "react-tap-event-plugin";
+import React from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 
-import { Router, Route, IndexRoute, browserHistory } from "react-router";
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import getMuiTheme from "material-ui/styles/getMuiTheme";
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {
     indigo400,
     cyan700,
@@ -17,46 +17,46 @@ import {
     darkBlack,
     white,
     grey300
-} from "material-ui/styles/colors";
-import { fade } from "material-ui/utils/colorManipulator";
-import Spacing from "material-ui/styles/spacing";
+} from 'material-ui/styles/colors';
+import { fade } from 'material-ui/utils/colorManipulator';
+import Spacing from 'material-ui/styles/spacing';
 
-import { syncReduxAndRouter } from "redux-simple-router";
+import { syncReduxAndRouter } from 'redux-simple-router';
 
-import HomeContainer from "pages/home/home-container";
-import WelcomePage from "pages/welcome";
-import LoginForm from "pages/login-form";
-import SignupForm from "pages/signup-form";
-import RecoverForm from "pages/recover-form";
-import Page from "pages/page";
-import Profile from "pages/profile";
-import PostsContainer from "pages/posts/posts-container";
-import Account from "pages/account";
-import Messages from "pages/messages";
+import HomeContainer from 'pages/home/home-container';
+import WelcomePage from 'pages/welcome';
+import LoginForm from 'pages/login-form';
+import SignupForm from 'pages/signup-form';
+import RecoverForm from 'pages/recover-form';
+import Page from 'pages/page';
+import Profile from 'pages/profile';
+import PostsContainer from 'pages/posts/posts-container';
+import Account from 'pages/account';
+import Messages from 'pages/messages';
 
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
 
-import store from "store";
+import store from 'store';
 
-import actions from "action-creators";
+import actions from 'action-creators';
 
-import { frFR } from "translations";
+import { frFR } from 'translations';
 
 syncReduxAndRouter(browserHistory, store);
 
 function redirectToHomePage(_nextState, replace) {
     if (store.getState().currentToken) {
-        replace("/");
+        replace('/');
     }
 }
 
 function redirectToLoginPage(_nextState, replace) {
     if (!store.getState().currentToken) {
-        replace("/welcome/login");
+        replace('/welcome/login');
     }
 }
 
-store.dispatch(actions.translations.add("fr-FR", frFR));
+store.dispatch(actions.translations.add('fr-FR', frFR));
 
 const Application = React.createClass({
     childContextTypes: {
@@ -68,7 +68,7 @@ const Application = React.createClass({
         return {
             muiTheme: getMuiTheme({
                 spacing: Spacing,
-                fontFamily: "Roboto, sans-serif",
+                fontFamily: 'Roboto, sans-serif',
                 palette: {
                     primary1Color: indigo400,
                     primary2Color: cyan700,
@@ -83,7 +83,7 @@ const Application = React.createClass({
                     disabledColor: fade(darkBlack, 0.3)
                 }
             }),
-            translation: store.getState().translations.get("fr-FR")
+            translation: store.getState().translations.get('fr-FR')
         };
     },
 
@@ -118,4 +118,4 @@ ReactDOM.render(
     <Provider store={store}>
         <Application />
     </Provider>
-, document.getElementById("application"));
+, document.getElementById('application'));

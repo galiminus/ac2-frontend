@@ -1,16 +1,16 @@
-import React, { PropTypes } from "react";
-import { reduxForm, reset } from "redux-form";
-import { batchActions } from "redux-batched-actions";
+import React, { PropTypes } from 'react';
+import { reduxForm, reset } from 'redux-form';
+import { batchActions } from 'redux-batched-actions';
 
-import TextField from "material-ui/TextField";
-import FlatButton from "material-ui/FlatButton";
-import Dialog from "material-ui/Dialog";
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
-import api from "api";
-import { addResource } from "action-creators";
-import { validateText } from "validators";
+import api from 'api';
+import { addResource } from 'action-creators';
+import { validateText } from 'validators';
 
-import PageCardHeader from "components/page-card-header";
+import PageCardHeader from 'components/page-card-header';
 
 const validate = values => {
     return {
@@ -33,14 +33,14 @@ const form = React.createClass({
 
     post(fields, dispatch) {
         api.posts.create({
-            type: "text",
-            access_controls_attributes: [{ authorized_party_type: "All" }],
+            type: 'text',
+            access_controls_attributes: [{ authorized_party_type: 'All' }],
             data: {
                 body: fields.body
             }
         }).then((response) => {
             dispatch(batchActions([
-                reset("post"),
+                reset('post'),
                 addResource(response)
             ]));
             this.props.onRequestClose();
@@ -54,7 +54,7 @@ const form = React.createClass({
         } = this.props;
 
         if (!body.value) {
-            body.value = "";
+            body.value = '';
         }
         return (
             <Dialog
@@ -64,13 +64,13 @@ const form = React.createClass({
                 }
                 actions={[
                     <FlatButton
-                        label={this.context.translation.t("actions.cancel")}
+                        label={this.context.translation.t('actions.cancel')}
                         onClick={this.props.onRequestClose}
                     />,
                     <FlatButton
                         disabled={body.invalid}
                         type="submit"
-                        label={this.context.translation.t("actions.post")}
+                        label={this.context.translation.t('actions.post')}
                         secondary
                         onClick={handleSubmit(this.post)}
                     />
@@ -89,7 +89,7 @@ const form = React.createClass({
 });
 
 export default reduxForm({
-    form: "post",
-    fields: ["body"],
+    form: 'post',
+    fields: ['body'],
     validate
 })(form);

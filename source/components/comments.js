@@ -1,20 +1,20 @@
-import React, { PropTypes } from "react";
-import { connect } from "react-redux";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import {
     List,
     FlatButton
-} from "material-ui";
+} from 'material-ui';
 
-import Divider from "material-ui/Divider";
+import Divider from 'material-ui/Divider';
 
-import api from "api";
+import api from 'api';
 
-import actionCreators from "action-creators";
+import actionCreators from 'action-creators';
 
-import CommentForm from "components/comment-form";
-import Comment from "components/comment";
-import connectToCable from "components/action-cable";
+import CommentForm from 'components/comment-form';
+import Comment from 'components/comment';
+import connectToCable from 'components/action-cable';
 
 function mapStateToProps(state, props) {
     let comments;
@@ -51,19 +51,19 @@ const Comments = React.createClass({
     },
 
     shouldComponentUpdate(props) {
-        return (props.comments.size != this.props.comments.size);
+        return (props.comments.size !== this.props.comments.size);
     },
 
     getChannels() {
-        return (["CommentsChannel"]);
+        return (['CommentsChannel']);
     },
 
     loadComments(postId, pageNum) {
-        const query = { include: "sender,received_likes" };
+        const query = { include: 'sender,received_likes' };
 
-        query["page[number]"] = pageNum;
-        query["page[size]"] = 10;
-        query.sort = "-updated_at";
+        query['page[number]'] = pageNum;
+        query['page[size]'] = 10;
+        query.sort = '-updated_at';
 
         api.comments.find(postId, query).then((response) => {
             this.setState({ hasMore: !!(response.links && response.links.next) && response.data.length > 0 });
@@ -82,8 +82,8 @@ const Comments = React.createClass({
         if (this.state.hasMore) {
             return (
                 <FlatButton
-                    label={this.context.translation.t("actions.loadPreviousComments")}
-                    style={{ width: "100%", fontSize: "0.8em" }}
+                    label={this.context.translation.t('actions.loadPreviousComments')}
+                    style={{ width: '100%', fontSize: '0.8em' }}
                     onClick={this.loadMoreComments}
                 />
             );
@@ -98,12 +98,12 @@ const Comments = React.createClass({
     },
 
     render() {
-        const comments = this.props.comments.sort((comment1, comment2) => (comment1["updated-at"] > comment2["updated-at"] ? 1 : -1));
+        const comments = this.props.comments.sort((comment1, comment2) => (comment1['updated-at'] > comment2['updated-at'] ? 1 : -1));
 
         let commentNodes = null;
         if (comments.size > 0) {
             commentNodes = (
-                <List style={{ background: "#f5f5f5" }}>
+                <List style={{ background: '#f5f5f5' }}>
                     {comments.valueSeq().map(comment => <Comment key={comment.id} comment={comment} />)}
                 </List>
             );
@@ -115,7 +115,7 @@ const Comments = React.createClass({
                 {commentNodes}
                 <Divider />
                 <CommentForm
-                    style={{ padding: "0 26px" }}
+                    style={{ padding: '0 26px' }}
                     postId={this.props.postId}
                     formKey={this.props.postId}
                 />

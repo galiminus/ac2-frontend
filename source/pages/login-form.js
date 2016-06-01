@@ -1,26 +1,26 @@
-import React, { PropTypes } from "react";
-import { reduxForm } from "redux-form";
-import { dispatch } from "store";
-import { updatePath } from "redux-simple-router";
+import React, { PropTypes } from 'react';
+import { reduxForm } from 'redux-form';
+import { dispatch } from 'store';
+import { updatePath } from 'redux-simple-router';
 
-import CSSModules from "react-css-modules";
-import styles from "./login-form.css";
+import CSSModules from 'react-css-modules';
+import styles from './login-form.css';
 
 import {
     TextField,
     FlatButton,
     RaisedButton
-} from "material-ui";
+} from 'material-ui';
 
-import { tokens } from "api";
-import { setCurrentToken } from "action-creators";
-import { validateEmail, validatePassword } from "validators";
+import { tokens } from 'api';
+import { setCurrentToken } from 'action-creators';
+import { validateEmail, validatePassword } from 'validators';
 
 const authenticate = (fields) =>
     tokens.create(fields, dispatch).then((data) => {
         dispatch([
             setCurrentToken(data.access_token),
-            updatePath("/")
+            updatePath('/')
         ]);
     });
 
@@ -43,12 +43,12 @@ const LoginForm = React.createClass({
     },
 
     goToSignupForm(e) {
-        dispatch(updatePath("/welcome/signup"));
+        dispatch(updatePath('/welcome/signup'));
         e.preventDefault();
     },
 
     goToRecoverForm(e) {
-        dispatch(updatePath("/welcome/recover"));
+        dispatch(updatePath('/welcome/recover'));
         e.preventDefault();
     },
 
@@ -60,27 +60,28 @@ const LoginForm = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t("labels.login.email")} />
-                <TextField fullWidth type="password" {...password} hintText={this.context.translation.t("labels.login.password")} />
+                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t('labels.login.email')} />
+                <TextField fullWidth type="password" {...password} hintText={this.context.translation.t('labels.login.password')} />
                 <div styleName="actionButtons">
                     <RaisedButton
                         disabled={email.invalid || password.invalid}
                         type="submit"
-                        label={this.context.translation.t("actions.login")}
+                        label={this.context.translation.t('actions.login')}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
                     <FlatButton
-                        label={this.context.translation.t("labels.signup.signup")}
-                        linkButton href="/welcome/signup"
+                        label={this.context.translation.t('labels.signup.signup')}
+                        linkButton
+                        href="/welcome/signup"
                         onClick={this.goToSignupForm}
                     />
                 </div>
 
                 <div styleName="passwordRecoverButton">
                     <FlatButton
-                        labelStyle={{ fontSize: 12, color: "#999" }}
-                        label={this.context.translation.t("labels.recover")}
+                        labelStyle={{ fontSize: 12, color: '#999' }}
+                        label={this.context.translation.t('labels.recover')}
                         secondary={false}
                         linkButton
                         href="/welcome/recover"
@@ -93,7 +94,7 @@ const LoginForm = React.createClass({
 });
 
 export default reduxForm({
-    form: "login",
-    fields: ["email", "password"],
+    form: 'login',
+    fields: ['email', 'password'],
     validate
 })(CSSModules(LoginForm, styles));

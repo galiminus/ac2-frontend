@@ -1,18 +1,18 @@
-import queryString from "query-string";
+import queryString from 'query-string';
 
-import { baseUrl } from "config";
-import store from "store";
-import { clearTokens } from "action-creators";
+import { baseUrl } from 'config';
+import store from 'store';
+import { clearTokens } from 'action-creators';
 
 function headers() {
     const base = {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
     };
 
     const state = store.getState();
     if (state.tokens.get(state.currentToken)) {
-        base.Authorization = "Bearer " + state.tokens.get(state.currentToken).access_token;
+        base.Authorization = 'Bearer ' + state.tokens.get(state.currentToken).access_token;
     }
 
     return (base);
@@ -20,8 +20,8 @@ function headers() {
 
 function handleDisconnect(response) {
     if (response.status === 401) {
-        const unauthorizedError = response.headers.get("www-authenticate");
-        if (unauthorizedError && unauthorizedError.match("error=\"invalid_token\"")) {
+        const unauthorizedError = response.headers.get('www-authenticate');
+        if (unauthorizedError && unauthorizedError.match('error=\'invalid_token\'')) {
             store.dispatch(clearTokens());
         }
     }
@@ -48,7 +48,7 @@ function fetchJSON(path, params) {
         .then(handleError)
         .then(handleJSON)
         .catch((error) => {
-            if (error.name === "TypeError") {
+            if (error.name === 'TypeError') {
                 setTimeout(() => fetchJSON(path, params), 5000);
             }
             throw (error);
@@ -60,7 +60,7 @@ function fetchNoResponse(path, params) {
         .then(handleDisconnect)
         .then(handleError)
         .catch((error) => {
-            if (error.name === "TypeError") {
+            if (error.name === 'TypeError') {
                 setTimeout(() => fetchNoResponse(path, params), 5000);
             }
             throw (error);
@@ -70,9 +70,9 @@ function fetchNoResponse(path, params) {
 export default {
     create: (path, record, query) => {
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify(record),
-            mode: "cors",
+            mode: 'cors',
             headers: {
                 ...headers()
             }
@@ -81,9 +81,9 @@ export default {
 
     update: (path, record, query) => {
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
-            method: "PUT",
+            method: 'PUT',
             body: JSON.stringify(record),
-            mode: "cors",
+            mode: 'cors',
             headers: {
                 ...headers()
             }
@@ -92,8 +92,8 @@ export default {
 
     find: (path, query = {}) => {
         return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
-            method: "GET",
-            mode: "cors",
+            method: 'GET',
+            mode: 'cors',
             headers: {
                 ...headers()
             }
@@ -102,8 +102,8 @@ export default {
 
     destroy: (path, query = {}) => {
         return fetchNoResponse(`${baseUrl}${path}?${queryString.stringify(query)}`, {
-            method: "DELETE",
-            mode: "cors",
+            method: 'DELETE',
+            mode: 'cors',
             headers: {
                 ...headers()
             }

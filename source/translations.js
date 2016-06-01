@@ -1,4 +1,4 @@
-import frFR from "translations/fr-FR";
+import frFR from 'translations/fr-FR';
 
 export default {
     frFR
