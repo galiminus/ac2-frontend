@@ -31,6 +31,7 @@
     "flexboxgrid-with-hide": "^6.3.0",
     "history": "^1.17.0",
     "immutable": "^3.7.5",
+    "marked": "^0.3.5",
     "material-ui": "^0.15.0",
     "node-polyglot": "^1.0.0",
     "numeral": "^1.5.3",

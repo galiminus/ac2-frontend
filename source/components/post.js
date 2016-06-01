@@ -1,14 +1,11 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
-import {
-    Card,
-    CardText,
-    Divider
-} from "material-ui";
-
+import { Card, CardText } from "material-ui/Card";
+import Divider from "material-ui/Divider";
 import PageCardHeader from "components/page-card-header";
 import Comments from "components/comments";
+import Marked from "components/marked";
 
 function mapStateToProps(state, props) {
     return {
@@ -30,7 +27,7 @@ const Post = React.createClass({
                 <PageCardHeader sender={this.props.sender} recipient={this.props.recipient} />
                 <Divider inset />
                 <CardText>
-                    {this.props.post.data.body}
+                    <Marked body={this.props.post.data.body} />
                 </CardText>
                 <Comments
                     postId={this.props.post.id}

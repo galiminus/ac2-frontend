@@ -15,6 +15,7 @@ import api from "api";
 import PageAvatar from "components/page-avatar";
 import PageLink from "components/page-link";
 import PlusCounter from "components/plus-counter";
+import Marked from "components/marked";
 
 function mapStateToProps(state, props) {
     return {
@@ -80,7 +81,7 @@ const Comment = React.createClass({
                             <PlusCounter likes={this.props.likes} />
                         </div>
                     }
-                    secondaryText={this.props.comment.data.body}
+                    secondaryText={<Marked body={this.props.comment.data.body} />}
                     rightIconButton={
                         <IconButton
                             onClick={isLiked ? this.handleLikeDestroy : this.handleLikeCreate}

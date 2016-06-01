@@ -1,5 +1,6 @@
 import React, { PropTypes } from "react";
 import { reduxForm, reset } from "redux-form";
+import { batchActions } from "redux-batched-actions";
 
 import TextField from "material-ui/TextField";
 import FlatButton from "material-ui/FlatButton";
@@ -38,7 +39,10 @@ const form = React.createClass({
                 body: fields.body
             }
         }).then((response) => {
-            dispatch([reset("post"), addResource(response)]);
+            dispatch(batchActions([
+                reset("post"),
+                addResource(response)
+            ]));
             this.props.onRequestClose();
         });
     },
