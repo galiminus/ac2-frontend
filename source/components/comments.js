@@ -14,7 +14,6 @@ import actionCreators from "action-creators";
 
 import CommentForm from "components/comment-form";
 import Comment from "components/comment";
-import ActionCable from "components/action-cable";
 
 function mapStateToProps(state, props) {
     let commentProps;
@@ -28,7 +27,7 @@ function mapStateToProps(state, props) {
     }
 
     return {
-        comments: commentProps.sort((comment1, comment2) => (comment1.updated_at > comment2.updated_at ? 1 : -1))
+        comments: commentProps.sort((comment1, comment2) => (comment1["updated-at"] > comment2["updated-at"] ? 1 : -1))
     };
 }
 
@@ -51,6 +50,10 @@ const Comments = React.createClass({
 
     componentDidMount() {
         this.loadComments(this.props.postId, 1);
+    },
+
+    getChannels() {
+        return (["CommentsChannel"]);
     },
 
     loadComments(postId, pageNum) {
@@ -104,7 +107,6 @@ const Comments = React.createClass({
 
         return (
             <aside>
-                <ActionCable channel="CommentsChannel" onMessage={this.handleMessage} />
                 {this.loadMoreButton()}
                 {commentNodes}
                 <Divider />

@@ -15,8 +15,9 @@ import CreateContentIcon from "material-ui/svg-icons/content/create";
 import PostDialog from "components/post-dialog";
 
 import actionCreators from "action-creators";
+import connectToCable from "components/action-cable";
 import api from "api";
-import { Post, ActionCable } from "components";
+import { Post } from "components";
 
 function mapStateToProps(state, props) {
     let posts;
@@ -30,7 +31,7 @@ function mapStateToProps(state, props) {
     }
 
     return {
-        posts: posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1))
+        posts: posts.sort((post1, post2) => (post1["updated-at"] > post2["updated-at"] ? -1 : 1))
     };
 }
 
@@ -61,6 +62,10 @@ const Posts = React.createClass({
             this.props.clearPosts();
             this.loadPosts(newProps.params.pageId, 1);
         }
+    },
+
+    getChannels() {
+        return (["PostsChannel"]);
     },
 
     loadPosts(pageId, pageNum) {
@@ -132,8 +137,9 @@ const Posts = React.createClass({
     },
 
     handleMessage(message) {
+        console.log(message);
         if (message &&
-            message.data.attributes.created_at === message.data.attributes.updated_at &&
+            message.data.attributes.created_at === message.data.attributes["updated-at"] &&
             message.data.relationships.sender.data.id !== this.context.currentUserPage.id) {
             this.setState({ updateCount: this.state.updateCount + 1 });
         }
@@ -146,7 +152,6 @@ const Posts = React.createClass({
 
         return (
             <div>
-                <ActionCable channel="PostsChannel" onMessage={this.handleMessage} />
                 <div>
                     {this.loadUpdatesButton()}
                     <List>
@@ -169,4 +174,4 @@ const Posts = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(CSSModules(Posts, styles));
+export default connect(mapStateToProps, actionCreators)(connectToCable(CSSModules(Posts, styles)));

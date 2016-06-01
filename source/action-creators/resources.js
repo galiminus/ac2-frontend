@@ -5,8 +5,8 @@ function addRecord(record, options = { commited: true, error: false }) {
         record.attributes.created_at = new Date(record.attributes.created_at);
     }
 
-    if (record.attributes.updated_at) {
-        record.attributes.updated_at = new Date(record.attributes.updated_at);
+    if (record.attributes["updated-at"]) {
+        record.attributes["updated-at"] = new Date(record.attributes["updated-at"]);
     }
 
     if (record.relationships) {
