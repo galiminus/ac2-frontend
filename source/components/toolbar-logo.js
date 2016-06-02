@@ -12,7 +12,7 @@ const style = {
     letterSpacing: 3,
     color: 'rgb(204, 150, 116)',
     paddingRight: 0,
-    textDecoration: "none"
+    textDecoration: 'none'
 };
 
 export default React.createClass({

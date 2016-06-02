@@ -10,6 +10,12 @@ const Marked = React.createClass({
         options: PropTypes.object
     },
 
+    getDefaultProps() {
+        return ({
+            body: ''
+        });
+    },
+
     render() {
         marked.setOptions({
             renderer,

@@ -97,9 +97,7 @@ const Application = React.createClass({
                 </Route>
 
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
-                    <Route component={Page}>
-                        <IndexRoute component={PostsContainer} />
-                    </Route>
+                    <IndexRoute component={Page} />
 
                     <Route path="/account" component={Account} />
                     <Route path="/messages" component={Messages} />

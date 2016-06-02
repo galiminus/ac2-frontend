@@ -42,6 +42,9 @@ const CurrentPageTitle = React.createClass({
         case 'user-pages':
             title = this.props.page.data['personal-informations']['full-name'];
             break;
+        case 'static-pages':
+            title = this.props.page.data.title;
+            break;
         default:
             title = '';
         }

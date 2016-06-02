@@ -80,6 +80,7 @@ const Posts = React.createClass({
                     <List>
                         {postNodes}
                     </List>
+
                     {this.moreButton()}
                 </div>
                 <FloatingActionButton styleName="addPostButton" onMouseUp={this.handleOpenPostCreationModal}>

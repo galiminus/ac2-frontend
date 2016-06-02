@@ -4,6 +4,9 @@ import actionCreators from 'action-creators';
 
 import api from 'api';
 
+import PostsContainer from 'pages/posts/posts-container';
+import Static from 'pages/static';
+
 function mapStateToProps(state, props) {
     return {
         page: state.pages.get(props.params.pageId)
@@ -15,8 +18,13 @@ const Page = React.createClass({
         params: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         setCurrentPage: PropTypes.func.isRequired,
-        page: PropTypes.object,
-        children: PropTypes.node.isRequired
+        page: PropTypes.object
+    },
+
+    getDefaultProps() {
+        return ({
+            page: { type: 'main-pages' }
+        });
     },
 
     componentDidMount() {
@@ -41,7 +49,17 @@ const Page = React.createClass({
     },
 
     render() {
-        return (this.props.children);
+        switch (this.props.page.type) {
+        case 'main-pages':
+        case 'user-pages':
+            return (<PostsContainer {...this.props} />);
+
+        case 'static-pages':
+            return (<Static { ...this.props} />);
+
+        default:
+            return (<div />);
+        }
     }
 });
 

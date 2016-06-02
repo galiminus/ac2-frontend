@@ -18,10 +18,8 @@ import { validateEmail, validatePassword } from 'validators';
 
 const authenticate = (fields) =>
     tokens.create(fields, dispatch).then((data) => {
-        dispatch([
-            setCurrentToken(data.access_token),
-            updatePath('/')
-        ]);
+        dispatch(setCurrentToken(data.access_token));
+        dispatch(updatePath('/'));
     });
 
 const validate = values => {
