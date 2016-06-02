@@ -30,10 +30,11 @@ const PageCardHeader = React.createClass({
         return (
             <CardHeader
                 title={title}
-                avatar={<PageAvatar page={this.props.sender} />}
-            >
-                {this.props.children}
-            </CardHeader>
+                avatar={
+                    <PageAvatar page={this.props.sender} />
+                }
+                {...this.props}
+            />
         );
     }
 });

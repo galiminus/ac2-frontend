@@ -15,6 +15,7 @@ import PageCardHeader from 'components/page-card-header';
 import Comments from 'components/comments';
 import Marked from 'components/marked';
 import PostDialog from 'components/post-dialog';
+import CreationDate from 'components/creation-date';
 
 function mapStateToProps(state, props) {
     return {
@@ -57,9 +58,16 @@ const Post = React.createClass({
     render() {
         return (
             <Card style={{ marginTop: 24, fontSize: '0.9em', lineHeight: '1.4em' }}>
-                <PageCardHeader sender={this.props.sender} recipient={this.props.recipient}>
+                <PageCardHeader
+                    sender={this.props.sender}
+                    recipient={this.props.recipient}
+                    subtitle={<CreationDate date={this.props.post['created-at']} />}
+                >
                     <IconMenu
-                        iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                        iconButtonElement={
+                            <IconButton>
+                                <MoreVertIcon />
+                            </IconButton>}
                         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                         style={{ float: 'right', margin: -10 }}
