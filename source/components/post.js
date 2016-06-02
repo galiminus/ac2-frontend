@@ -8,6 +8,9 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
+import api from "api";
+import actionCreators from 'action-creators';
+
 import PageCardHeader from 'components/page-card-header';
 import Comments from 'components/comments';
 import Marked from 'components/marked';
@@ -24,7 +27,8 @@ const Post = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
         recipient: PropTypes.object,
-        post: PropTypes.object.isRequired
+        post: PropTypes.object.isRequired,
+        removeResource: PropTypes.func.isRequired
     },
 
     contextTypes: {
@@ -44,6 +48,12 @@ const Post = React.createClass({
         this.setState({ postEditModalOpen: false });
     },
 
+    handlePostDestroy() {
+        api.posts.destroy(this.props.post.id).then(() => {
+            this.props.removeResource(this.props.post.id);
+        });
+    },
+
     render() {
         return (
             <Card style={{ marginTop: 24, fontSize: '0.9em', lineHeight: '1.4em' }}>
@@ -60,6 +70,7 @@ const Post = React.createClass({
                         />
                         <MenuItem
                             primaryText={this.context.translation.t('actions.destroy')}
+                            onClick={this.handlePostDestroy}
                         />
                     </IconMenu>
                     <PostDialog
@@ -85,4 +96,4 @@ const Post = React.createClass({
     }
 });
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, actionCreators)(Post);

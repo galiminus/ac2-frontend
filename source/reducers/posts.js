@@ -5,6 +5,9 @@ export default function (state = Immutable.Map({}), action) {
     case 'POSTS_ADD':
         return state.set(action.data.id, action.data.attributes);
 
+    case 'RESOURCE_REMOVE':
+        return state.delete(action.data.id);
+
     case 'POSTS_CLEAR':
         return state.clear();
 

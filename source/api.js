@@ -11,6 +11,7 @@ import findPageTypes from 'api/find-page-type';
 import createPost from 'api/create-post';
 import findPosts from 'api/find-posts';
 import updatePost from 'api/update-post';
+import destroyPost from 'api/destroy-post';
 import createLike from 'api/create-like';
 import destroyLike from 'api/destroy-like';
 
@@ -28,7 +29,8 @@ export default {
     posts: {
         create: createPost,
         find: findPosts,
-        update: updatePost
+        update: updatePost,
+        destroy: destroyPost
     },
 
     pages: {
