@@ -50,7 +50,7 @@ const form = React.createClass({
         return (
             <form onSubmit={handleSubmit(authenticate)}>
                 <TextField fullWidth type="email" {...email} hintText={this.context.translation.t('labels.recover.email')} />
-                <div className="row center-xs" style={{ marginTop: '1em' }}>
+                <div style={{ marginTop: '1em' }}>
                     <RaisedButton
                         disabled={email.invalid}
                         type="submit"

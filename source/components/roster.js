@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import {
-    List,
-    ListItem
-} from 'material-ui';
+import List from 'material-ui/List';
 
 import { updatePath } from 'redux-simple-router';
 

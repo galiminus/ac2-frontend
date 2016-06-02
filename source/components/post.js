@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-import api from "api";
+import api from 'api';
 import actionCreators from 'action-creators';
 
 import PageCardHeader from 'components/page-card-header';
@@ -60,9 +60,9 @@ const Post = React.createClass({
                 <PageCardHeader sender={this.props.sender} recipient={this.props.recipient}>
                     <IconMenu
                         iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-                        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                        targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                        style={{ float: "right", margin: -10 }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        style={{ float: 'right', margin: -10 }}
                     >
                         <MenuItem
                             primaryText={this.context.translation.t('actions.edit')}

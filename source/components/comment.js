@@ -9,11 +9,16 @@ import { ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import PlusOneIcon from 'material-ui/svg-icons/social/plus-one';
 
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+
 import api from 'api';
 import PageAvatar from 'components/page-avatar';
 import PageLink from 'components/page-link';
 import PlusCounter from 'components/plus-counter';
 import Marked from 'components/marked';
+import CreationDate from 'components/creation-date';
 
 function mapStateToProps(state, props) {
     return {
@@ -67,6 +72,12 @@ const Comment = React.createClass({
         });
     },
 
+    handleCommentDestroy() {
+        api.comments.destroy(this.props.comment.id).then(() => {
+            this.props.removeResource(this.props.comment.id);
+        });
+    },
+
     render() {
         const isLiked = !!this.myLike();
 
@@ -74,7 +85,21 @@ const Comment = React.createClass({
         case 'user-pages':
             return (
                 <ListItem
-                    leftAvatar={<PageAvatar page={this.props.sender} />}
+                    leftAvatar={
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <PageAvatar page={this.props.sender} />
+                            <CreationDate
+                                date={this.props.comment['created-at']}
+                                style={{
+                                    lineHeight: '26px',
+                                    fontSize: 12,
+                                    color: '#999',
+                                    textAlign: 'center',
+                                    marginLeft: -8
+                                }}
+                            />
+                        </div>
+                    }
                     primaryText={
                         <div>
                             <PageLink page={this.props.sender} />
@@ -83,18 +108,39 @@ const Comment = React.createClass({
                     }
                     secondaryText={<Marked body={this.props.comment.data.body} />}
                     rightIconButton={
-                        <IconButton
-                            onClick={isLiked ? this.handleLikeDestroy : this.handleLikeCreate}
-                            iconStyle={{
-                                width: 16,
-                                height: 16,
-                                background: (isLiked ? '#999' : '#cacaca'),
-                                borderRadius: 24,
-                                padding: 4
-                            }}
-                        >
-                            <PlusOneIcon />
-                        </IconButton>
+                        <div style={{ display: 'flex' }}>
+                            <IconButton
+                                onClick={isLiked ? this.handleLikeDestroy : this.handleLikeCreate}
+                                iconStyle={{
+                                    width: 16,
+                                    height: 16,
+                                    background: (isLiked ? '#999' : '#cacaca'),
+                                    borderRadius: 24,
+                                    padding: 4
+                                }}
+                            >
+                                <PlusOneIcon />
+                            </IconButton>
+                            <IconMenu
+                                iconButtonElement={
+                                    <IconButton>
+                                        <MoreVertIcon color="#999" />
+                                    </IconButton>
+                                }
+                                anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                style={{ margin: '0px 0px 0px -10px' }}
+                            >
+                                <MenuItem
+                                    primaryText={this.context.translation.t('actions.edit')}
+                                    onClick={this.handleOpenCommentEditModal}
+                                />
+                                <MenuItem
+                                    primaryText={this.context.translation.t('actions.destroy')}
+                                    onClick={this.handleCommentDestroy}
+                                />
+                            </IconMenu>
+                        </div>
                     }
                 />
             );

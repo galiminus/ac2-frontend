@@ -33,6 +33,8 @@
     "immutable": "^3.7.5",
     "marked": "^0.3.5",
     "material-ui": "^0.15.0",
+    "moment": "^2.13.0",
+    "moment-twitter": "^0.2.0",
     "node-polyglot": "^1.0.0",
     "numeral": "^1.5.3",
     "query-string": "^3.0.3",
