@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import CSSModules from 'react-css-modules';
+import styles from './marked.css';
 
 import marked from 'marked';
 
@@ -32,4 +34,4 @@ const Marked = React.createClass({
     }
 });
 
-export default Marked;
+export default CSSModules(Marked, styles);
