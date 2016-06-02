@@ -24,21 +24,46 @@ const form = React.createClass({
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         onRequestClose: PropTypes.func.isRequired,
-        error: PropTypes.string
+        error: PropTypes.string,
+        id: PropTypes.string
     },
 
     contextTypes: {
         translation: PropTypes.object.isRequired
     },
 
+    createPost(fields) {
+        return (
+            api.posts.create({
+                type: 'text',
+                access_controls_attributes: [{ authorized_party_type: 'All' }],
+                data: {
+                    body: fields.body
+                }
+            })
+        );
+    },
+
+    updatePost(id, fields) {
+        return (
+            api.posts.update(id, {
+                type: 'text',
+                data: {
+                    body: fields.body
+                }
+            })
+        );
+    },
+
     post(fields, dispatch) {
-        api.posts.create({
-            type: 'text',
-            access_controls_attributes: [{ authorized_party_type: 'All' }],
-            data: {
-                body: fields.body
-            }
-        }).then((response) => {
+        let promise;
+        if (this.props.id) {
+            promise = this.updatePost(this.props.id, fields);
+        } else {
+            promise = this.createPost(fields);
+        }
+
+        promise.then((response) => {
             dispatch(batchActions([
                 reset('post'),
                 addResource(response)
@@ -56,6 +81,7 @@ const form = React.createClass({
         if (!body.value) {
             body.value = '';
         }
+
         return (
             <Dialog
                 {...this.props}
@@ -80,7 +106,7 @@ const form = React.createClass({
                     fullWidth
                     type="text"
                     multiLine
-                    rows={3}
+                    rows={5}
                     {...body}
                 />
             </Dialog>

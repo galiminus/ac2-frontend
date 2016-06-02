@@ -13,7 +13,7 @@ import CreateContentIcon from 'material-ui/svg-icons/content/create';
 
 import PostDialog from 'components/post-dialog';
 
-import Post from 'components/Post';
+import Post from 'components/post';
 
 const Posts = React.createClass({
     propTypes: {

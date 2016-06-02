@@ -7,7 +7,8 @@ import PageLink from 'components/page-link';
 const PageCardHeader = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
-        recipient: PropTypes.object
+        recipient: PropTypes.object,
+        children: PropTypes.node
     },
 
     render() {
@@ -30,7 +31,9 @@ const PageCardHeader = React.createClass({
             <CardHeader
                 title={title}
                 avatar={<PageAvatar page={this.props.sender} />}
-            />
+            >
+                {this.props.children}
+            </CardHeader>
         );
     }
 });
