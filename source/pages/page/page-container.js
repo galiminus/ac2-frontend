@@ -4,8 +4,7 @@ import actionCreators from 'action-creators';
 
 import api from 'api';
 
-import PostsContainer from 'pages/posts/posts-container';
-import Static from 'pages/static';
+import PageRouter from "./page-router";
 
 function mapStateToProps(state, props) {
     return {
@@ -13,7 +12,7 @@ function mapStateToProps(state, props) {
     };
 }
 
-const Page = React.createClass({
+const PageContainer = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
@@ -49,18 +48,8 @@ const Page = React.createClass({
     },
 
     render() {
-        switch (this.props.page.type) {
-        case 'main-pages':
-        case 'user-pages':
-            return (<PostsContainer {...this.props} />);
-
-        case 'static-pages':
-            return (<Static { ...this.props} />);
-
-        default:
-            return (<div />);
-        }
+        return (<PageRouter {...this.props} />)
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(Page);
+export default connect(mapStateToProps, actionCreators)(PageContainer);

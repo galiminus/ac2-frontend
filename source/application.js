@@ -24,11 +24,13 @@ import Spacing from 'material-ui/styles/spacing';
 import { syncReduxAndRouter } from 'redux-simple-router';
 
 import HomeContainer from 'pages/home/home-container';
-import WelcomePage from 'pages/welcome';
-import LoginForm from 'pages/login-form';
-import SignupForm from 'pages/signup-form';
-import RecoverForm from 'pages/recover-form';
-import Page from 'pages/page';
+
+import WelcomePage from 'pages/welcome/welcome';
+import LoginForm from 'pages/welcome/login-form';
+import SignupForm from 'pages/welcome/signup-form';
+import RecoverForm from 'pages/welcome/recover-form';
+
+import PageContainer from 'pages/page/page-container';
 import Profile from 'pages/profile';
 import PostsContainer from 'pages/posts/posts-container';
 import Account from 'pages/account';
@@ -97,11 +99,11 @@ const Application = React.createClass({
                 </Route>
 
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
-                    <IndexRoute component={Page} />
+                    <IndexRoute component={PageContainer} />
 
                     <Route path="/account" component={Account} />
                     <Route path="/messages" component={Messages} />
-                    <Route path=":pageId" component={Page}>
+                    <Route path=":pageId" component={PageContainer}>
                         <IndexRoute component={PostsContainer} />
 
                         <Route path="profile" component={Profile} />
