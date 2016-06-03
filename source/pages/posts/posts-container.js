@@ -47,7 +47,7 @@ const PostsContainer = React.createClass({
     },
 
     loadPosts(pageId, pageNum) {
-        const query = { include: 'sender,recipient,comments,comments.likes' };
+        const query = { include: 'sender,recipient,comments,comments.received_likes' };
 
         if (pageId) {
             query['filter[participant_id]'] = pageId;

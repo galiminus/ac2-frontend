@@ -6,6 +6,8 @@ import { dispatch } from 'store';
 import { ToolbarTitle } from 'material-ui';
 import { title } from 'config';
 
+import { Link } from 'react-router';
+
 const style = {
     fontFamily: 'Roboto, sans-serif',
     fontWeight: 400,
@@ -25,7 +27,7 @@ export default React.createClass({
         return (
             <ToolbarTitle
                 text={
-                    <a style={style} href="/" onClick={this.goToMainFeed}>{title}</a>
+                    <Link style={style} to="/">{title}</Link>
                 }
                 {...this.props}
             />

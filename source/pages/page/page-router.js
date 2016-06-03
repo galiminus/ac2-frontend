@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 
-import api from 'api';
-
 import UserPage from './user-page';
 import StaticPage from './static-page';
 

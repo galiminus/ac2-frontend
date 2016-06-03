@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import PostsContainer from 'pages/posts/posts-container';
 

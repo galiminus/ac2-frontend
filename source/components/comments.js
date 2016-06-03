@@ -47,7 +47,7 @@ const Comments = React.createClass({
     },
 
     componentDidMount() {
-        this.loadComments(this.props.postId, 1);
+    //    this.loadComments(this.props.postId, 1);
     },
 
     shouldComponentUpdate(props) {

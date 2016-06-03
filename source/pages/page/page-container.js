@@ -4,7 +4,7 @@ import actionCreators from 'action-creators';
 
 import api from 'api';
 
-import PageRouter from "./page-router";
+import PageRouter from './page-router';
 
 function mapStateToProps(state, props) {
     return {
@@ -48,7 +48,7 @@ const PageContainer = React.createClass({
     },
 
     render() {
-        return (<PageRouter {...this.props} />)
+        return (<PageRouter {...this.props} />);
     }
 });
 

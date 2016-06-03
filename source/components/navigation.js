@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 
 import CSSModules from 'react-css-modules';
 import styles from './navigation.css';
@@ -18,107 +17,83 @@ import FriendsIcon from 'material-ui/svg-icons/action/favorite';
 import MessagesIcon from 'material-ui/svg-icons/communication/email';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
-import { updatePath } from 'redux-simple-router';
+import { Link } from 'react-router';
 
 const Navigation = React.createClass({
-    propTypes: {
-        updatePath: PropTypes.func.isRequired
-    },
-
     contextTypes: {
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired
-    },
-
-    goToMainFeed(e) {
-        this.props.updatePath('/');
-        e.preventDefault();
-    },
-
-    goToPage(e) {
-        this.props.updatePath(`/${this.context.currentUserPage.id}/profile`);
-        e.preventDefault();
     },
 
     render() {
         return (
             <nav styleName="root">
                 <List>
-                    <ListItem
-                        index={0}
-                        primaryText={this.context.translation.t('links.mainFeed')}
-                        leftIcon={<HomeIcon />}
-                        href="/"
-                        onClick={this.goToMainFeed}
-                    />
-                    <ListItem
-                        index={0}
-                        primaryText={this.context.translation.t('links.events')}
-                        leftIcon={<EventsIcon />}
-                        href="/events"
-                        onClick={this.goToMainFeed}
-                    />
-                    <ListItem
-                        index={0}
-                        primaryText={this.context.translation.t('links.quizz')}
-                        leftIcon={<QuizzIcon />}
-                        href="/quizz"
-                        onClick={this.goToQuizz}
-                    />
-                    <ListItem
-                        index={0}
-                        primaryText={this.context.translation.t('links.polls')}
-                        leftIcon={<PollsIcon />}
-                        href="/polls"
-                        onClick={this.goToMainPolls}
-                    />
-                    <ListItem
-                        index={0}
-                        primaryText={this.context.translation.t('links.groups')}
-                        leftIcon={<GroupsIcon />}
-                        href="/groups"
-                        onClick={this.goToMainGroups}
-                    />
-                    <ListItem
-                        index={0}
-                        primaryText={this.context.translation.t('links.members')}
-                        leftIcon={<MembersIcon />}
-                        href="/members"
-                        onClick={this.goToMainGroups}
-                    />
+                    <Link to="/">
+                        <ListItem
+                            primaryText={this.context.translation.t('links.mainFeed')}
+                            leftIcon={<HomeIcon />}
+                        />
+                    </Link>
+                    <Link to="/events">
+                        <ListItem
+                            primaryText={this.context.translation.t('links.events')}
+                            leftIcon={<EventsIcon />}
+                        />
+                    </Link>
+                    <Link to="quizz">
+                        <ListItem
+                            primaryText={this.context.translation.t('links.quizz')}
+                            leftIcon={<QuizzIcon />}
+                        />
+                    </Link>
+                    <Link to="polls">
+                        <ListItem
+                            primaryText={this.context.translation.t('links.polls')}
+                            leftIcon={<PollsIcon />}
+                        />
+                    </Link>
+                    <Link to="/groups">
+                        <ListItem
+                            primaryText={this.context.translation.t('links.groups')}
+                            leftIcon={<GroupsIcon />}
+                        />
+                    </Link>
+                    <Link to="/members">
+                        <ListItem
+                            primaryText={this.context.translation.t('links.members')}
+                            leftIcon={<MembersIcon />}
+                        />
+                    </Link>
                     <Divider />
-                    <ListItem
-                        index={1}
-                        primaryText={this.context.translation.t('links.currentUserPage')}
-                        leftIcon={<AccountIcon />}
-                        href={`/${this.context.currentUserPage.id}/profile`}
-                        onClick={this.goToPage}
-                    />
-                    <ListItem
-                        index={1}
-                        primaryText={this.context.translation.t('links.friends')}
-                        leftIcon={<FriendsIcon />}
-                        href={`/${this.context.currentUserPage.id}/friends`}
-                        onClick={this.goToPage}
-                    />
-                    <ListItem
-                        index={1}
-                        primaryText={this.context.translation.t('links.messages')}
-                        leftIcon={<MessagesIcon />}
-                        href={`/${this.context.currentUserPage.id}/messages`}
-                        onClick={this.goToPage}
-                    />
-                    <ListItem
-                        index={1}
-                        primaryText={this.context.translation.t('links.settings')}
-                        leftIcon={<SettingsIcon />}
-                        href={`/${this.context.currentUserPage.id}/settings`}
-                        onClick={this.goToPage}
-                    />
+                    <Link to={`/${this.context.currentUserPage.id}/profile`}>
+                        <ListItem
+                            primaryText={this.context.translation.t('links.currentUserPage')}
+                            leftIcon={<AccountIcon />}
+                        />
+                    </Link>
+                    <Link to={`/${this.context.currentUserPage.id}/friends`}>
+                        <ListItem
+                            primaryText={this.context.translation.t('links.friends')}
+                            leftIcon={<FriendsIcon />}
+                        />
+                    </Link>
+                    <Link to="/messages">
+                        <ListItem
+                            primaryText={this.context.translation.t('links.messages')}
+                            leftIcon={<MessagesIcon />}
+                        />
+                    </Link>
+                    <Link to="/settings">
+                        <ListItem
+                            primaryText={this.context.translation.t('links.settings')}
+                            leftIcon={<SettingsIcon />}
+                        />
+                    </Link>
                 </List>
             </nav>
         );
     }
 });
 
-export default connect(undefined, { updatePath })(CSSModules(Navigation, styles));
+export default CSSModules(Navigation, styles);

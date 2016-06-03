@@ -23,12 +23,12 @@
     "imports-loader": "^0.6.5",
     "style-loader": "^0.13.0",
     "transform-loader": "^0.2.3",
+    "uglify-loader": "^1.3.0",
     "webpack": "^1.12.3"
   },
   "dependencies": {
     "es6-actioncable": "0.0.1",
     "exports-loader": "^0.6.3",
-    "flexboxgrid-with-hide": "^6.3.0",
     "history": "^1.17.0",
     "immutable": "^3.7.5",
     "marked": "^0.3.5",
