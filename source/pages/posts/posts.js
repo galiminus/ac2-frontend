@@ -3,17 +3,18 @@ import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './posts.css';
 
-import {
-    List,
-    FlatButton
-} from 'material-ui';
+import List from 'material-ui/List';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CreateContentIcon from 'material-ui/svg-icons/content/create';
+import RefreshIcon from 'material-ui/svg-icons/navigation/arrow-upward';
 
 import PostDialog from 'components/post-dialog';
 
 import Post from 'components/post';
+
 
 const Posts = React.createClass({
     propTypes: {
@@ -25,6 +26,7 @@ const Posts = React.createClass({
     },
 
     contextTypes: {
+        translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired
     },
 
@@ -41,16 +43,35 @@ const Posts = React.createClass({
     },
 
     updatesButton() {
-        if (this.props.updateCount > 0) {
-            return (
-                <FlatButton
-                    label={this.context.translation.t('actions.loadPostUpdates')}
-                    style={{ width: '100%', padding: 8 }}
-                    onClick={this.props.onLoadUpdates}
-                />
-            );
-        }
-        return (null);
+        return (
+            <RaisedButton
+                style={{
+                    marginTop: 16,
+                    position: 'absolute',
+                    width: 300,
+                    marginLeft: -150,
+                    zIndex: 2
+                }}
+                rippleStyle={{ borderRadius: 24 }}
+                primary
+                styleName="loadMoreButton"
+                onClick={this.props.onLoadUpdates}
+            >
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                        color: '#fff'
+                    }}
+                >
+                    <RefreshIcon style={{ height: 34 }} color="#fff" />
+                    <div>
+                        {this.context.translation.t('actions.loadPostUpdates')}
+                    </div>
+                </div>
+            </RaisedButton>
+        );
     },
 
     moreButton() {
@@ -58,7 +79,9 @@ const Posts = React.createClass({
             return (
                 <FlatButton
                     label={this.context.translation.t('actions.loadMorePosts')}
-                    style={{ width: '100%', padding: 8 }}
+                    style={{
+                        width: 300, padding: 8
+                    }}
                     onClick={this.props.onLoadMore}
                 />
             );
@@ -76,7 +99,15 @@ const Posts = React.createClass({
         return (
             <div>
                 <div>
-                    {this.updatesButton()}
+                    <div style={{ textAlign: 'center' }}>
+                        {
+                            () => {
+                                if (this.props.updateCount > 0) {
+                                    return (this.updatesButton());
+                                }
+                            }()
+                        }
+                    </div>
                     <List>
                         {postNodes}
                     </List>

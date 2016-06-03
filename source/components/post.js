@@ -93,6 +93,7 @@ const Post = React.createClass({
                         sender={this.context.currentUserPage}
                         initialValues={this.props.post.data}
                         id={this.props.post.id}
+                        formKey={this.props.post.id}
                     />
                 </PageCardHeader>
                 <Divider inset />

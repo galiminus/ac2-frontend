@@ -80,7 +80,6 @@ const PostsContainer = React.createClass({
 
     handleLoadUpdates() {
         this.setState({ updateCount: 0 });
-        this.props.clearPosts();
         this.loadPosts(this.props.params.pageId, 1);
     },
 
@@ -94,7 +93,7 @@ const PostsContainer = React.createClass({
 
     handleMessage(message) {
         if (message &&
-            message.data.attributes.created_at === message.data.attributes['updated-at'] &&
+            message.data.attributes['created-at'] === message.data.attributes['updated-at'] &&
             message.data.relationships.sender.data.id !== this.context.currentUserPage.id) {
             this.setState({ updateCount: this.state.updateCount + 1 });
         }

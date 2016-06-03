@@ -4,6 +4,10 @@
     right: 328px;
 }
 
+.loadMoreButton, .loadMoreButton button, .loadMoreButton button > div > div  {
+    border-radius: 24px !important;
+}
+
 @media (max-width: 800px) {
     .addPostButton {
         right: 28px;
