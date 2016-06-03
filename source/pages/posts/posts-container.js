@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
 import actionCreators from 'action-creators';
 import connectToCable from 'components/action-cable';
 import api from 'api';
@@ -27,7 +29,14 @@ const PostsContainer = React.createClass({
     },
 
     getInitialState() {
-        return { page: 1, hasMore: false, lastPostDate: null, updateCount: 0, postCreationModalOpen: false };
+        return {
+            page: 1,
+            loading: false,
+            hasMore: false,
+            lastPostDate: null,
+            updateCount: 0,
+            postCreationModalOpen: false
+        };
     },
 
     componentDidMount() {
@@ -57,13 +66,15 @@ const PostsContainer = React.createClass({
         query['page[size]'] = 20;
         query.sort = '-updated_at';
 
+        this.setState({ loading: true });
+
         api.posts.find(query).then((response) => {
             this.props.addResource(response);
 
             if (response.data.length > 0) {
                 this.setState({ lastPostDate: response.data[0]['updated-at'] });
             }
-            this.setState({ hasMore: !!(response.links && response.links.next), loadDate: null });
+            this.setState({ hasMore: !!(response.links && response.links.next), loading: false });
         });
     },
 
@@ -90,6 +101,30 @@ const PostsContainer = React.createClass({
     },
 
     render() {
+        if (this.state.loading) {
+            return (
+                <div
+                    style={{
+                        position: 'relative',
+                        margin: '120px auto 0 auto',
+                        width: 50
+                    }}
+                >
+                    <RefreshIndicator
+                        size={50}
+                        top={0}
+                        left={0}
+                        loadingColor="#ff9800"
+                        status="loading"
+                        style={{
+                            position: 'relative',
+                            display: 'inline-block'
+                        }}
+                    />
+                </div>
+            );
+        }
+
         return (
             <Posts
                 posts={this.props.posts}

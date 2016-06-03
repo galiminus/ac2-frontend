@@ -7,6 +7,8 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import DeleteIcon from "material-ui/svg-icons/action/delete-forever";
+import EditIcon from "material-ui/svg-icons/editor/mode-edit";
 
 import api from 'api';
 import actionCreators from 'action-creators';
@@ -73,10 +75,12 @@ const Post = React.createClass({
                         style={{ float: 'right', margin: -10 }}
                     >
                         <MenuItem
+                            leftIcon={<EditIcon />}
                             primaryText={this.context.translation.t('actions.edit')}
                             onClick={this.handleOpenPostEditModal}
                         />
                         <MenuItem
+                            leftIcon={<DeleteIcon />}
                             primaryText={this.context.translation.t('actions.destroy')}
                             onClick={this.handlePostDestroy}
                         />

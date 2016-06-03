@@ -8,6 +8,8 @@ import actionCreators from 'action-creators';
 import { ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import PlusOneIcon from 'material-ui/svg-icons/social/plus-one';
+import DeleteIcon from "material-ui/svg-icons/action/delete-forever";
+import EditIcon from "material-ui/svg-icons/editor/mode-edit";
 
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -132,10 +134,13 @@ const Comment = React.createClass({
                                 style={{ margin: '0px 0px 0px -10px' }}
                             >
                                 <MenuItem
+                                    leftIcon={<EditIcon />}
                                     primaryText={this.context.translation.t('actions.edit')}
                                     onClick={this.handleOpenCommentEditModal}
+
                                 />
                                 <MenuItem
+                                    leftIcon={<DeleteIcon />}
                                     primaryText={this.context.translation.t('actions.destroy')}
                                     onClick={this.handleCommentDestroy}
                                 />
