@@ -3,33 +3,44 @@ import { connect } from 'react-redux';
 
 import List from 'material-ui/List';
 
-import { updatePath } from 'redux-simple-router';
+import RosterItem from 'components/roster-item';
 
-function mapStateToProps(_state, _props) {
+function mapStateToProps(state) {
     return {
+        pages: state.pages
     };
 }
 
 const Roster = React.createClass({
     propTypes: {
-        updatePath: PropTypes.func.isRequired
+        pages: PropTypes.object.isRequired
     },
 
     contextTypes: {
         translation: PropTypes.object.isRequired
     },
 
-    goToChat(e) {
-        this.props.updatePath('/messages');
-        e.preventDefault();
+    pagesByPresence(presence) {
+        return (
+            this.props.pages.filter((page) => {
+                return (page.type === 'profile_pages' && page.presence === presence);
+            })
+        );
     },
 
     render() {
         return (
             <List>
+                {
+                    this.pagesByPresence('available').valueSeq().map((page) => {
+                        return (
+                            <RosterItem key={page.id} recipient={page} />
+                        );
+                    })
+                }
             </List>
         );
     }
 });
 
-export default connect(mapStateToProps, { updatePath })(Roster);
+export default connect(mapStateToProps)(Roster);

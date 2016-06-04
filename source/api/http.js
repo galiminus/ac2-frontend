@@ -21,7 +21,7 @@ function headers() {
 function handleDisconnect(response) {
     if (response.status === 401) {
         const unauthorizedError = response.headers.get('www-authenticate');
-        if (unauthorizedError && unauthorizedError.match('error=\'invalid_token\'')) {
+        if (unauthorizedError && unauthorizedError.match('invalid_token')) {
             store.dispatch(clearTokens());
         }
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import CSSModules from 'react-css-modules';
 import styles from './welcome.css';
@@ -8,6 +8,10 @@ import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import ToolbarLogo from 'components/toolbar-logo';
 
 const WelcomePage = React.createClass({
+    propTypes: {
+        children: PropTypes.object.isRequired
+    },
+
     render() {
         return (
             <div styleName="root">

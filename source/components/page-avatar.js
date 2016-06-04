@@ -25,7 +25,6 @@ const UserAvatar = React.createClass({
     render() {
         const styles = getStyles();
 
-        console.log(this.props.page.type);
         let name;
         switch (this.props.page.type) {
         case 'profile_pages':

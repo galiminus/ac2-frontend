@@ -2,11 +2,15 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import actionCreators from 'action-creators';
 import api from 'api';
+import connectToCable from 'components/action-cable';
 
 import Home from './home';
 
 function mapStateToProps(state) {
-    const currentUser = state.users.get(state.currentUser);
+    let currentUser;
+    if (state.currentUser) {
+        currentUser = state.users.get(state.currentUser);
+    }
 
     let currentUserPage;
     if (currentUser) {
@@ -27,10 +31,10 @@ const HomeContainer = React.createClass({
         setCurrentUser: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        currentToken: PropTypes.object.isRequired,
         leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
-        currentUser: PropTypes.object.isRequired
+        currentToken: PropTypes.object,
+        currentUser: PropTypes.object
     },
 
     childContextTypes: {
@@ -66,7 +70,17 @@ const HomeContainer = React.createClass({
 
     componentWillReceiveProps(props) {
         if (props.currentUser !== this.props.currentUser) {
-            // api.pages.update(props.currentUser.page_id, { presence: 'available' });
+            api.pages.update(props.currentUser.page_id, { presence: 'available' });
+        }
+    },
+
+    getChannels() {
+        return (['PagesChannel']);
+    },
+
+    handleMessage(message) {
+        if (message) {
+            this.props.addResource(message);
         }
     },
 
@@ -82,4 +96,4 @@ const HomeContainer = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(HomeContainer);
+export default connect(mapStateToProps, actionCreators)(connectToCable(HomeContainer));

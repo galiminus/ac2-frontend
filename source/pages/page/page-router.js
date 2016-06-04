@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 
-import RefreshIndicator from 'material-ui/RefreshIndicator';
-
 import UserPage from './user-page';
 import StaticPage from './static-page';
 
