@@ -4,7 +4,7 @@ import { ToolbarTitle } from 'material-ui';
 
 function mapStateToProps(state) {
     if (state.currentPage === 'main') {
-        return ({ page: { type: 'main-pages' } });
+        return ({ page: { type: 'main_pages' } });
     } else if (state.currentPage) {
         return ({ page: state.pages.get(state.currentPage) });
     }
@@ -36,13 +36,13 @@ const CurrentPageTitle = React.createClass({
         }
 
         switch (this.props.page.type) {
-        case 'main-pages':
+        case 'main_pages':
             title = this.context.translation.t('links.mainFeed');
             break;
-        case 'user-pages':
-            title = this.props.page.data['personal-informations']['full-name'];
+        case 'profile_pages':
+            title = this.props.page.data.personal_informations.full_name;
             break;
-        case 'static-pages':
+        case 'static_pages':
             title = this.props.page.data.title;
             break;
         default:

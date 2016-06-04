@@ -98,7 +98,7 @@ const Comments = React.createClass({
     },
 
     render() {
-        const comments = this.props.comments.sort((comment1, comment2) => (comment1['updated-at'] > comment2['updated-at'] ? 1 : -1));
+        const comments = this.props.comments.sort((comment1, comment2) => (comment1.updated_at > comment2.updated_at ? 1 : -1));
 
         let commentNodes = null;
         if (comments.size > 0) {

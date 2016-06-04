@@ -22,7 +22,7 @@ const PageContainer = React.createClass({
 
     getDefaultProps() {
         return ({
-            page: { type: 'main-pages' }
+            page: { type: 'main_pages' }
         });
     },
 

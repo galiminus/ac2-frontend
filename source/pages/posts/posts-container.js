@@ -72,7 +72,7 @@ const PostsContainer = React.createClass({
             this.props.addResource(response);
 
             if (response.data.length > 0) {
-                this.setState({ lastPostDate: response.data[0]['updated-at'] });
+                this.setState({ lastPostDate: response.data[0].updated_at });
             }
             this.setState({ hasMore: !!(response.links && response.links.next), loading: false });
         });
@@ -93,7 +93,7 @@ const PostsContainer = React.createClass({
 
     handleMessage(message) {
         if (message &&
-            message.data.attributes['created-at'] === message.data.attributes['updated-at'] &&
+            message.data.attributes.created_at === message.data.attributes.updated_at &&
             message.data.relationships.sender.data.id !== this.context.currentUserPage.id) {
             this.setState({ updateCount: this.state.updateCount + 1 });
         }

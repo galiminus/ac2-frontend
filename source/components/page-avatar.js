@@ -25,10 +25,11 @@ const UserAvatar = React.createClass({
     render() {
         const styles = getStyles();
 
+        console.log(this.props.page.type);
         let name;
         switch (this.props.page.type) {
-        case 'user-pages':
-            name = this.props.page.data['personal-informations']['full-name'];
+        case 'profile_pages':
+            name = this.props.page.data.personal_informations.full_name;
             break;
         default:
             name = '?';

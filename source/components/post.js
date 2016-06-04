@@ -63,7 +63,7 @@ const Post = React.createClass({
                 <PageCardHeader
                     sender={this.props.sender}
                     recipient={this.props.recipient}
-                    subtitle={<CreationDate date={this.props.post['created-at']} />}
+                    subtitle={<CreationDate date={this.props.post.created_at} />}
                 >
                     <IconMenu
                         iconButtonElement={

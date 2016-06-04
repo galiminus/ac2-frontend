@@ -42,8 +42,9 @@ const HomeContainer = React.createClass({
             currentUserPage: {
                 presence: 'connected',
                 data: {
-                    'personal-informations': {
-                        'full-name': ''
+                    personal_informations: {
+                        full_name: '',
+                        user_name: ''
                     }
                 }
             }
@@ -65,7 +66,7 @@ const HomeContainer = React.createClass({
 
     componentWillReceiveProps(props) {
         if (props.currentUser !== this.props.currentUser) {
-            api.pages.update(props.currentUser.page_id, { presence: 'available' });
+            // api.pages.update(props.currentUser.page_id, { presence: 'available' });
         }
     },
 

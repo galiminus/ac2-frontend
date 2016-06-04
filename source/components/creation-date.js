@@ -4,7 +4,7 @@ import moment from 'moment-twitter';
 
 const CreationDate = React.createClass({
     propTypes: {
-        date: PropTypes.string.isRequired
+        date: PropTypes.object.isRequired
     },
 
     render() {

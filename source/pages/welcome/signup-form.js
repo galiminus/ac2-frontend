@@ -29,8 +29,8 @@ const signup = (fields) =>
         password: fields.password,
         page_attributes: {
             data: {
-                'full-name': fields.fullName,
-                'user-name': fields.userName
+                full_name: fields.fullName,
+                user_name: fields.userName
             }
         }
     }, dispatch)

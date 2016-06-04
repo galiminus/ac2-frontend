@@ -84,14 +84,14 @@ const Comment = React.createClass({
         const isLiked = !!this.myLike();
 
         switch (this.props.sender.type) {
-        case 'user-pages':
+        case 'profile_pages':
             return (
                 <ListItem
                     leftAvatar={
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <PageAvatar page={this.props.sender} />
                             <CreationDate
-                                date={this.props.comment['created-at']}
+                                date={this.props.comment.created_at}
                                 style={{
                                     lineHeight: '26px',
                                     fontSize: 12,

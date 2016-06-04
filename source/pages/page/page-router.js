@@ -12,17 +12,17 @@ const PageRouter = React.createClass({
 
     getDefaultProps() {
         return ({
-            page: { type: 'main-pages' }
+            page: { type: 'main_pages' }
         });
     },
 
     render() {
         switch (this.props.page.type) {
-        case 'main-pages':
-        case 'user-pages':
+        case 'main_pages':
+        case 'profile_pages':
             return (<UserPage {...this.props} />);
 
-        case 'static-pages':
+        case 'static_pages':
             return (<StaticPage { ...this.props} />);
 
         default:
