@@ -69,7 +69,7 @@ const HomeContainer = React.createClass({
     },
 
     componentWillReceiveProps(props) {
-        if (props.currentUser !== this.props.currentUser) {
+        if (props.currentUser && (props.currentUser !== this.props.currentUser)) {
             api.pages.update(props.currentUser.page_id, { presence: 'available' });
         }
     },

@@ -41,13 +41,13 @@ const Navigation = React.createClass({
                             leftIcon={<EventsIcon />}
                         />
                     </Link>
-                    <Link to="quizz">
+                    <Link to="/quizz">
                         <ListItem
                             primaryText={this.context.translation.t('links.quizz')}
                             leftIcon={<QuizzIcon />}
                         />
                     </Link>
-                    <Link to="polls">
+                    <Link to="/polls">
                         <ListItem
                             primaryText={this.context.translation.t('links.polls')}
                             leftIcon={<PollsIcon />}
