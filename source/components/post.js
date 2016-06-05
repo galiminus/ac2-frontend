@@ -74,16 +74,34 @@ const Post = React.createClass({
                         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                         style={{ float: 'right', margin: -10 }}
                     >
-                        <MenuItem
-                            leftIcon={<EditIcon />}
-                            primaryText={this.context.translation.t('actions.edit')}
-                            onClick={this.handleOpenPostEditModal}
-                        />
-                        <MenuItem
-                            leftIcon={<DeleteIcon />}
-                            primaryText={this.context.translation.t('actions.destroy')}
-                            onClick={this.handlePostDestroy}
-                        />
+                        {
+                            () => {
+                                if (this.props.post.permissions.update) {
+                                    return (
+                                        <MenuItem
+                                            leftIcon={<EditIcon />}
+                                            primaryText={this.context.translation.t('actions.edit')}
+                                            onClick={this.handleOpenPostEditModal}
+                                        />
+                                    );
+                                }
+                            }()
+                        }
+
+                        {
+                            () => {
+                                if (this.props.post.permissions.destroy) {
+                                    return (
+                                        <MenuItem
+                                            leftIcon={<DeleteIcon />}
+                                            primaryText={this.context.translation.t('actions.destroy')}
+                                            onClick={this.handlePostDestroy}
+                                        />
+                                    );
+                                }
+                            }()
+                        }
+
                     </IconMenu>
                     <PostDialog
                         contentStyle={{ width: 500 }}
