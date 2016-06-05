@@ -86,7 +86,7 @@ const form = React.createClass({
             <Dialog
                 {...this.props}
                 title={
-                    <PageCardHeader sender={this.props} />
+                    <PageCardHeader sender={this.props.sender} />
                 }
                 actions={[
                     <FlatButton

@@ -15,7 +15,6 @@ import PostDialog from 'components/post-dialog';
 
 import Post from 'components/post';
 
-
 const Posts = React.createClass({
     propTypes: {
         posts: PropTypes.object.isRequired,

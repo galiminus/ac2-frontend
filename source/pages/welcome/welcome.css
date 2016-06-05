@@ -23,6 +23,10 @@
     padding: 32px;
 }
 
+.formPaper form {
+    width: 350px;
+}
+
 .headerBar {
     position: fixed;
     z-index: 3;

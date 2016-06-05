@@ -6,6 +6,7 @@ import styles from './welcome.css';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 
 import ToolbarLogo from 'components/toolbar-logo';
+import Notifier from "components/notifier";
 
 const WelcomePage = React.createClass({
     propTypes: {
@@ -28,6 +29,7 @@ const WelcomePage = React.createClass({
                         {this.props.children}
                     </div>
                 </div>
+                <Notifier />
             </div>
         );
     }

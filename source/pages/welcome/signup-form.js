@@ -2,12 +2,16 @@ import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { updatePath } from 'redux-simple-router';
 import { dispatch } from 'store';
+import { batchActions } from 'redux-batched-actions';
 
-import {
-    TextField,
-    FlatButton,
-    RaisedButton
-} from 'material-ui';
+import { Link } from 'react-router';
+
+import CSSModules from 'react-css-modules';
+import styles from './signup-form.css';
+
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { tokens, users } from 'api';
 import { setCurrentUser, setCurrentToken } from 'action-creators';
@@ -15,13 +19,22 @@ import { validateEmail, validatePassword, validateFullName, validateUserName } f
 
 const authenticate = (userId, fields) =>
     tokens.create({ email: fields.email, password: fields.password }, dispatch)
-    .then((data) => {
-        dispatch([
-            setCurrentUser.set(userId),
-            setCurrentToken.set(data.access_token),
-            updatePath('/')
-        ]);
-    });
+        .then((data) => {
+            dispatch(batchActions([
+                setCurrentUser.set(userId),
+                setCurrentToken.set(data.access_token),
+                updatePath('/')
+            ]))
+        })
+        .catch((error) => {
+            if (error.response !== undefined) {
+                const authError = error.response.headers.get('www-authenticate');
+
+                if (authError && authError.match('invalid_grant')) {
+                    dispatch(pushNotification('invalidGrant'));
+                }
+            }
+        });
 
 const signup = (fields) =>
     users.create({
@@ -29,12 +42,14 @@ const signup = (fields) =>
         password: fields.password,
         page_attributes: {
             data: {
-                full_name: fields.fullName,
-                user_name: fields.userName
+                personal_informations: {
+                    full_name: fields.fullName,
+                    user_name: fields.userName
+                }
             }
         }
     }, dispatch)
-    .then((userId) => authenticate(userId, fields, dispatch));
+        .then((userId) => authenticate(userId, fields, dispatch));
 
 const validate = values => {
     return {
@@ -56,11 +71,6 @@ const form = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
-    goToLoginForm(e) {
-        dispatch(updatePath('/welcome/login'));
-        e.preventDefault();
-    },
-
     render() {
         const {
             fields: { fullName, userName, email, password },
@@ -73,7 +83,7 @@ const form = React.createClass({
                 <TextField fullWidth type="text" {...userName} hintText={this.context.translation.t('labels.signup.userName')} />
                 <TextField fullWidth type="email" {...email} hintText={this.context.translation.t('labels.signup.email')} />
                 <TextField fullWidth type="password" {...password} hintText={this.context.translation.t('labels.signup.password')} />
-                <div className="row between-xs center-xs" style={{ marginTop: 32 }}>
+                <div styleName="actionButtons">
                     <RaisedButton
                         disabled={fullName.invalid || userName.invalid || email.invalid || password.invalid}
                         type="submit"
@@ -81,7 +91,11 @@ const form = React.createClass({
                         secondary
                         onClick={handleSubmit(signup)}
                     />
-                    <FlatButton label={this.context.translation.t('labels.have_account')} linkButton href="/welcome/login" onClick={this.goToLoginForm} />
+                    <Link to="/welcome/login">
+                        <FlatButton
+                            label={this.context.translation.t('labels.have_account')}
+                        />
+                    </Link>
                 </div>
             </form>
         );
@@ -92,4 +106,4 @@ export default reduxForm({
     form: 'signup',
     fields: ['fullName', 'userName', 'email', 'password'],
     validate
-})(form);
+})(CSSModules(form, styles));

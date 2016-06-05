@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import List from 'material-ui/List';
+import StatusIndicator from 'material-ui/svg-icons/image/brightness-1';
 
 import RosterItem from 'components/roster-item';
 
@@ -34,7 +35,11 @@ const Roster = React.createClass({
                 {
                     this.pagesByPresence('available').valueSeq().map((page) => {
                         return (
-                            <RosterItem key={page.id} recipient={page} />
+                            <RosterItem
+                                key={page.id}
+                                recipient={page}
+                                rightIcon={<StatusIndicator color="#33ff33" style={{ width: 8, height: 8, top: 12 }} />}
+                            />
                         );
                     })
                 }

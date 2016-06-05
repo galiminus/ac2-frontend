@@ -3,24 +3,37 @@ import { reduxForm } from 'redux-form';
 import { dispatch } from 'store';
 import { updatePath } from 'redux-simple-router';
 
+import { Link } from 'react-router';
+
 import CSSModules from 'react-css-modules';
 import styles from './login-form.css';
 
-import {
-    TextField,
-    FlatButton,
-    RaisedButton
-} from 'material-ui';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { tokens } from 'api';
-import { setCurrentToken } from 'action-creators';
+import { addToken, setCurrentToken, pushNotification } from 'action-creators';
 import { validateEmail, validatePassword } from 'validators';
 
 const authenticate = (fields) =>
-    tokens.create(fields, dispatch).then((data) => {
-        dispatch(setCurrentToken(data.access_token));
-        dispatch(updatePath('/'));
-    });
+    tokens.create(fields, dispatch)
+        .then((data) => {
+            dispatch(batchActions([
+                addToken(data),
+                setCurrentToken(data.access_token),
+                updatePath('/')
+            ]));
+        })
+        .catch((error) => {
+            if (error.response !== undefined) {
+                const authError = error.response.headers.get('www-authenticate');
+
+                if (authError && authError.match('invalid_grant')) {
+                    dispatch(pushNotification('invalidGrant'));
+                }
+            }
+        });
 
 const validate = values => {
     return {
@@ -38,16 +51,6 @@ const LoginForm = React.createClass({
 
     contextTypes: {
         translation: PropTypes.object.isRequired
-    },
-
-    goToSignupForm(e) {
-        dispatch(updatePath('/welcome/signup'));
-        e.preventDefault();
-    },
-
-    goToRecoverForm(e) {
-        dispatch(updatePath('/welcome/recover'));
-        e.preventDefault();
     },
 
     render() {
@@ -68,23 +71,21 @@ const LoginForm = React.createClass({
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
-                    <FlatButton
-                        label={this.context.translation.t('labels.signup.signup')}
-                        linkButton
-                        href="/welcome/signup"
-                        onClick={this.goToSignupForm}
-                    />
+                    <Link to="/welcome/signup">
+                        <FlatButton
+                            label={this.context.translation.t('labels.signup.signup')}
+                        />
+                    </Link>
                 </div>
 
                 <div styleName="passwordRecoverButton">
-                    <FlatButton
-                        labelStyle={{ fontSize: 12, color: '#999' }}
-                        label={this.context.translation.t('labels.recover')}
-                        secondary={false}
-                        linkButton
-                        href="/welcome/recover"
-                        onClick={this.goToRecoverForm}
-                    />
+                    <Link to="/welcome/recover">
+                        <FlatButton
+                            labelStyle={{ fontSize: 12, color: '#999' }}
+                            label={this.context.translation.t('labels.recover')}
+                            secondary={false}
+                        />
+                    </Link>
                 </div>
             </form>
         );

@@ -14,7 +14,7 @@ export default {
     ...currentPage,
     ...tokens,
     ...leftNav,
-    notifications,
+    ...notifications,
     translations,
     ...resources,
     ...posts
