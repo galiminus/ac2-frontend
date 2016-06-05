@@ -15,7 +15,8 @@ import { toggleLeftNav } from 'action-creators';
 
 const HeaderBar = React.createClass({
     propTypes: {
-        toggleLeftNav: PropTypes.func.isRequired
+        toggleLeftNav: PropTypes.func.isRequired,
+        currentUserPage: PropTypes.object
     },
 
     contextTypes: {
@@ -53,7 +54,7 @@ const HeaderBar = React.createClass({
 
                 </ToolbarGroup>
                 <ToolbarGroup key={2} float="right" styleName="right">
-                    <CurrentUserMenu />
+                    <CurrentUserMenu currentUserPage={this.props.currentUserPage} />
                 </ToolbarGroup>
             </Toolbar>
         );

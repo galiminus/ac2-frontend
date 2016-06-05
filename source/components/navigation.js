@@ -20,9 +20,18 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import { Link } from 'react-router';
 
 const Navigation = React.createClass({
-    contextTypes: {
-        translation: PropTypes.object.isRequired,
+    propTypes: {
         currentUserPage: PropTypes.object.isRequired
+    },
+
+    contextTypes: {
+        translation: PropTypes.object.isRequired
+    },
+
+    getDefaultProps() {
+        return ({
+            currentUserPage: {}
+        });
     },
 
     render() {
@@ -66,13 +75,13 @@ const Navigation = React.createClass({
                         />
                     </Link>
                     <Divider />
-                    <Link to={`/${this.context.currentUserPage.id}/profile`}>
+                    <Link to={`/${this.props.currentUserPage.id}/profile`}>
                         <ListItem
                             primaryText={this.context.translation.t('links.currentUserPage')}
                             leftIcon={<AccountIcon />}
                         />
                     </Link>
-                    <Link to={`/${this.context.currentUserPage.id}/friends`}>
+                    <Link to={`/${this.props.currentUserPage.id}/friends`}>
                         <ListItem
                             primaryText={this.context.translation.t('links.friends')}
                             leftIcon={<FriendsIcon />}

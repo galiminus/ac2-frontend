@@ -31,12 +31,12 @@ const Post = React.createClass({
         sender: PropTypes.object.isRequired,
         recipient: PropTypes.object,
         post: PropTypes.object.isRequired,
-        removeResource: PropTypes.func.isRequired
+        removeResource: PropTypes.func.isRequired,
+        currentUserPage: PropTypes.object
     },
 
     contextTypes: {
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired
     },
 
     getInitialState() {
@@ -90,7 +90,7 @@ const Post = React.createClass({
                         modal={false}
                         open={this.state.postEditModalOpen}
                         onRequestClose={this.handleClosePostEditModal}
-                        sender={this.context.currentUserPage}
+                        sender={this.props.currentUserPage}
                         initialValues={this.props.post.data}
                         id={this.props.post.id}
                         formKey={this.props.post.id}
@@ -103,6 +103,7 @@ const Post = React.createClass({
                 <Comments
                     postId={this.props.post.id}
                     parentId={null}
+                    currentUserPage={this.props.currentUserPage}
                 />
             </Card>
         );

@@ -7,7 +7,18 @@ import api from 'api';
 import PageRouter from './page-router';
 
 function mapStateToProps(state, props) {
+    let currentUser;
+    if (state.currentUser) {
+        currentUser = state.users.get(state.currentUser);
+    }
+
+    let currentUserPage;
+    if (currentUser) {
+        currentUserPage = state.pages.get(currentUser.page_id);
+    }
+
     return {
+        currentUserPage,
         page: state.pages.get(props.params.pageId)
     };
 }
@@ -17,6 +28,7 @@ const PageContainer = React.createClass({
         params: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         setCurrentPage: PropTypes.func.isRequired,
+        currentUserPage: PropTypes.object,
         page: PropTypes.object
     },
 

@@ -17,21 +17,22 @@ const Home = React.createClass({
         toggleLeftNav: PropTypes.func.isRequired,
         leftNav: PropTypes.bool.isRequired,
         isDisconnected: PropTypes.bool.isRequired,
-        children: PropTypes.object.isRequired
+        children: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object
     },
 
     render() {
         return (
             <div styleName="home">
-                <HeaderBar />
+                <HeaderBar currentUserPage={this.props.currentUserPage} />
 
                 <Drawer docked={false} open={this.props.leftNav} onRequestChange={this.props.toggleLeftNav}>
-                    <Navigation />
+                    <Navigation currentUserPage={this.props.currentUserPage} />
                 </Drawer>
 
                 <div styleName="flexLayout">
                     <div styleName="leftNav">
-                        <Navigation />
+                        <Navigation currentUserPage={this.props.currentUserPage} />
                         <AdditionalLinks />
                     </div>
                     <main styleName="mainContent">

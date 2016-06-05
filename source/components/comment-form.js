@@ -24,12 +24,12 @@ const form = React.createClass({
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         postId: PropTypes.string.isRequired,
+        currentUserPage: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
     contextTypes: {
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired
     },
 
     post(fields, dispatch) {
@@ -60,7 +60,7 @@ const form = React.createClass({
         return (
             <List>
                 <ListItem
-                    leftAvatar={<PageAvatar page={this.context.currentUserPage} />}
+                    leftAvatar={<PageAvatar page={this.props.currentUserPage} />}
                     disabled
                     innerDivStyle={{
                         paddingTop: 0,

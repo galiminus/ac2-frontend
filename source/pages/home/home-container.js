@@ -30,35 +30,11 @@ const HomeContainer = React.createClass({
         toggleLeftNav: PropTypes.func.isRequired,
         setCurrentUser: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object,
         leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
         currentToken: PropTypes.object,
         currentUser: PropTypes.object
-    },
-
-    childContextTypes: {
-        currentUserPage: PropTypes.object
-    },
-
-    getDefaultProps() {
-        return {
-            currentUserPage: {
-                presence: 'connected',
-                data: {
-                    personal_informations: {
-                        full_name: '',
-                        user_name: ''
-                    }
-                }
-            }
-        };
-    },
-
-    getChildContext() {
-        return ({
-            currentUserPage: this.props.currentUserPage
-        });
     },
 
     componentDidMount() {
@@ -91,6 +67,7 @@ const HomeContainer = React.createClass({
                 children={this.props.children}
                 leftNav={this.props.leftNav}
                 isDisconnected={!this.props.currentToken}
+                currentUserPage={this.props.currentUserPage}
             />
         );
     }

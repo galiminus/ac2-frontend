@@ -29,6 +29,7 @@
   "dependencies": {
     "es6-actioncable": "0.0.1",
     "exports-loader": "^0.6.3",
+    "fsevents": "^1.0.12",
     "history": "^1.17.0",
     "immutable": "^3.7.5",
     "marked": "^0.3.5",

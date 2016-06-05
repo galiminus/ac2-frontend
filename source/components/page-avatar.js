@@ -22,6 +22,12 @@ const UserAvatar = React.createClass({
         style: PropTypes.object
     },
 
+    getDefaultProps() {
+        return ({
+            page: { type: null }
+        })
+    },
+
     render() {
         const styles = getStyles();
 

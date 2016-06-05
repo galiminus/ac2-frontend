@@ -24,8 +24,15 @@ const CurrentPageTitle = React.createClass({
     },
 
     contextTypes: {
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired
+    },
+
+    getDefaultProps() {
+        return ({
+            page: {
+                type: null
+            }
+        });
     },
 
     render() {

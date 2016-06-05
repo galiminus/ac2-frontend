@@ -34,6 +34,7 @@ const Comments = React.createClass({
         postId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
+        currentUserPage: PropTypes.object.isRequired,
         parentId: PropTypes.string,
         load: PropTypes.bool
     },
@@ -51,7 +52,10 @@ const Comments = React.createClass({
     },
 
     shouldComponentUpdate(props) {
-        return (props.comments.size !== this.props.comments.size);
+        return (
+            props.comments.size !== this.props.comments.size ||
+            props.currentUserPage !== this.props.currentUserPage
+        );
     },
 
     getChannels() {
@@ -104,7 +108,15 @@ const Comments = React.createClass({
         if (comments.size > 0) {
             commentNodes = (
                 <List style={{ background: '#f5f5f5' }}>
-                    {comments.valueSeq().map(comment => <Comment key={comment.id} comment={comment} />)}
+                    {comments.valueSeq().map(comment => {
+                        return (
+                            <Comment
+                                key={comment.id}
+                                comment={comment}
+                                currentUserPage={this.props.currentUserPage}
+                            />
+                        );
+                    })}
                 </List>
             );
         }
@@ -118,6 +130,7 @@ const Comments = React.createClass({
                     style={{ padding: '0 26px' }}
                     postId={this.props.postId}
                     formKey={this.props.postId}
+                    currentUserPage={this.props.currentUserPage}
                 />
             </aside>
         );

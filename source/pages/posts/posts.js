@@ -22,12 +22,12 @@ const Posts = React.createClass({
         onLoadUpdates: PropTypes.func,
         onLoadMore: PropTypes.func,
         updateCount: PropTypes.number,
-        hasMore: PropTypes.bool.isRequired
+        hasMore: PropTypes.bool.isRequired,
+        currentUserPage: PropTypes.object
     },
 
     contextTypes: {
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired
     },
 
     getInitialState() {
@@ -93,7 +93,7 @@ const Posts = React.createClass({
         const orderedPosts = this.props.posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1));
 
         const postNodes = orderedPosts.valueSeq().map(post =>
-            <Post key={post.id} post={post} />
+            <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} />
         );
 
         return (
@@ -122,7 +122,7 @@ const Posts = React.createClass({
                     modal={false}
                     open={this.state.postCreationModalOpen}
                     onRequestClose={this.handleClosePostCreationModal}
-                    sender={this.context.currentUserPage}
+                    sender={this.props.currentUserPage}
                 />
             </div>
         );

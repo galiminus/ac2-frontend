@@ -15,12 +15,24 @@ function mapStateToProps(_state, _props) {
 const CurrentUserMenu = React.createClass({
     propTypes: {
         updatePath: PropTypes.func.isRequired,
-        clearTokens: PropTypes.func.isRequired
+        clearTokens: PropTypes.func.isRequired,
+        currentUserPage: PropTypes.object.isRequired
     },
 
     contextTypes: {
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired
+    },
+
+    getDefaultProps() {
+        return ({
+            currentUserPage: {
+                data: {
+                    personal_informations: {
+                        full_name: ''
+                    }
+                }
+            }
+        });
     },
 
     render() {
@@ -30,11 +42,11 @@ const CurrentUserMenu = React.createClass({
             fontFamily: 'Roboto, sans-serif',
             textTransform: 'uppercase',
             cursor: 'pointer',
-            backgroundColor: randomColor(this.context.currentUserPage.data.personal_informations.full_name)
+            backgroundColor: randomColor(this.props.currentUserPage.data.personal_informations.full_name)
         };
 
         return (
-            <Avatar style={style}>{this.context.currentUserPage.data.personal_informations.full_name[0]}</Avatar>
+            <Avatar style={style}>{this.props.currentUserPage.data.personal_informations.full_name[0]}</Avatar>
         );
     }
 });

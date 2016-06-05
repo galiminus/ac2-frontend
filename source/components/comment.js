@@ -35,12 +35,12 @@ const Comment = React.createClass({
         comment: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
+        currentUserPage: PropTypes.object.isRequired,
         likes: PropTypes.object
     },
 
     contextTypes: {
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired
     },
 
     getDefaultProps() {
@@ -55,7 +55,7 @@ const Comment = React.createClass({
     },
 
     myLike() {
-        return (this.props.likes.find((like) => like.page_id === this.context.currentUserPage.id));
+        return (this.props.likes.find((like) => like.page_id === this.props.currentUserPage.id));
     },
 
     handleLikeCreate() {

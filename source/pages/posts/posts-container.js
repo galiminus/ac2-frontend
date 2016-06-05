@@ -20,12 +20,12 @@ const PostsContainer = React.createClass({
         params: PropTypes.object.isRequired,
         posts: PropTypes.object.isRequired,
         clearPosts: PropTypes.func.isRequired,
-        addResource: PropTypes.func.isRequired
+        addResource: PropTypes.func.isRequired,
+        currentUserPage: PropTypes.object
     },
 
     contextTypes: {
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired
     },
 
     getInitialState() {
@@ -94,7 +94,7 @@ const PostsContainer = React.createClass({
     handleMessage(message) {
         if (message &&
             message.data.attributes.created_at === message.data.attributes.updated_at &&
-            message.data.relationships.sender.data.id !== this.context.currentUserPage.id) {
+            message.data.relationships.sender.data.id !== this.props.currentUserPage.id) {
             this.setState({ updateCount: this.state.updateCount + 1 });
         }
     },
@@ -131,6 +131,7 @@ const PostsContainer = React.createClass({
                 onLoadUpdates={this.handleLoadUpdates}
                 updateCount={this.state.updateCount}
                 hasMore={this.state.hasMore}
+                currentUserPage={this.props.currentUserPage}
             />
         );
     }

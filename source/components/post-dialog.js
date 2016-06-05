@@ -20,7 +20,7 @@ const validate = values => {
 
 const form = React.createClass({
     propTypes: {
-        sender: PropTypes.object.isRequired,
+        sender: PropTypes.object,
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         onRequestClose: PropTypes.func.isRequired,
@@ -86,7 +86,7 @@ const form = React.createClass({
             <Dialog
                 {...this.props}
                 title={
-                    <PageCardHeader sender={this.props.sender} />
+                    <PageCardHeader sender={this.props} />
                 }
                 actions={[
                     <FlatButton

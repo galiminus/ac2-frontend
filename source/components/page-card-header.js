@@ -6,7 +6,7 @@ import PageLink from 'components/page-link';
 
 const PageCardHeader = React.createClass({
     propTypes: {
-        sender: PropTypes.object.isRequired,
+        sender: PropTypes.object,
         recipient: PropTypes.object,
         children: PropTypes.node
     },
