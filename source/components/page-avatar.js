@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import randomColor from 'utils/random-color';
 
@@ -21,6 +22,8 @@ const UserAvatar = React.createClass({
         page: PropTypes.object.isRequired,
         style: PropTypes.object
     },
+
+    mixins: [PureRenderMixin],
 
     getDefaultProps() {
         return ({

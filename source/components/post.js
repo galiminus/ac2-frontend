@@ -115,6 +115,7 @@ const Post = React.createClass({
                         open={this.state.postEditModalOpen}
                         onRequestClose={this.handleClosePostEditModal}
                         sender={this.props.currentUserPage}
+                        recipient={this.props.recipient}
                         initialValues={this.props.post.data}
                         id={this.props.post.id}
                         formKey={this.props.post.id}

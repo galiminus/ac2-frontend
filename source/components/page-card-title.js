@@ -1,0 +1,49 @@
+import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
+import { CardTitle } from 'material-ui/Card';
+
+import PageAvatar from 'components/page-avatar';
+import PageLink from 'components/page-link';
+
+const PageCardTitle = React.createClass({
+    propTypes: {
+        page: PropTypes.object,
+        children: PropTypes.node
+    },
+
+    mixins: [PureRenderMixin],
+
+    render() {
+        switch (this.props.page.type) {
+            case 'profile_pages':
+                return (
+                    <CardTitle
+                        titleColor="#fff"
+                        style={{ padding: 8 }}
+                        title={
+                            <div>
+                                <PageAvatar
+                                    page={this.props.page}
+                                    style={{
+                                        width: 80,
+                                        height: 80,
+                                        lineHeight: "80px",
+                                        border: "2px solid #fff"
+                                    }}
+                                />
+                                {this.props.page.data.personal_informations.full_name}
+                            </div>
+                        }
+                        {...this.props}
+                    />
+                );
+
+            default:
+                return (<div />)
+        }
+
+    }
+});
+
+export default PageCardTitle;

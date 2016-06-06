@@ -21,7 +21,8 @@ const PostsContainer = React.createClass({
         posts: PropTypes.object.isRequired,
         clearPosts: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object
+        currentUserPage: PropTypes.object,
+        page: PropTypes.object
     },
 
     contextTypes: {
@@ -127,6 +128,7 @@ const PostsContainer = React.createClass({
         return (
             <Posts
                 posts={this.props.posts}
+                page={this.props.page}
                 onLoadMore={this.handleLoadMore}
                 onLoadUpdates={this.handleLoadUpdates}
                 updateCount={this.state.updateCount}

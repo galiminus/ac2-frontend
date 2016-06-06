@@ -39,9 +39,10 @@ export default {
     'labels.recover': 'Mot de passe oublié ?',
     'labels.textPost': 'Texte',
     'labels.pollPost': 'Sondage',
-    'labels.imageUploadDropZone': 'Glissez une image dans cette zone ou cliquez pour ouvrir la boite de sélection.',
     'labels.comment': 'Rédiger un commentaire...',
     'labels.search': 'Rechercher',
+    'labels.about': 'À propos',
+    'labels.editProfile': 'Modifier le profil',
 
     'texts.emptyField': 'Ce champ n\'est pas renseigné',
 

@@ -22,7 +22,8 @@ const Posts = React.createClass({
         onLoadMore: PropTypes.func,
         updateCount: PropTypes.number,
         hasMore: PropTypes.bool.isRequired,
-        currentUserPage: PropTypes.object
+        currentUserPage: PropTypes.object,
+        page: PropTypes.object
     },
 
     contextTypes: {
@@ -122,6 +123,7 @@ const Posts = React.createClass({
                     open={this.state.postCreationModalOpen}
                     onRequestClose={this.handleClosePostCreationModal}
                     sender={this.props.currentUserPage}
+                    recipient={this.props.page}
                 />
             </div>
         );

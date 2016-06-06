@@ -21,6 +21,7 @@ const validate = values => {
 const form = React.createClass({
     propTypes: {
         sender: PropTypes.object,
+        recipient: PropTypes.object,
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         onRequestClose: PropTypes.func.isRequired,
@@ -33,9 +34,15 @@ const form = React.createClass({
     },
 
     createPost(fields) {
+        let recipientParams = {};
+        if (this.props.recipient) {
+            recipientParams = { recipient_id: this.props.recipient.id }
+        }
+
         return (
             api.posts.create({
                 type: 'text',
+                ...recipientParams,
                 access_controls_attributes: [{ authorized_party_type: 'All' }],
                 data: {
                     body: fields.body
@@ -86,7 +93,7 @@ const form = React.createClass({
             <Dialog
                 {...this.props}
                 title={
-                    <PageCardHeader sender={this.props.sender} />
+                    <PageCardHeader sender={this.props.sender} recipient={this.props.recipient} />
                 }
                 actions={[
                     <FlatButton
