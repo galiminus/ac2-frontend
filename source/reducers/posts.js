@@ -3,9 +3,9 @@ import Immutable from 'immutable';
 export default function (state = Immutable.Map({}), action) {
     switch (action.type) {
     case 'POSTS_ADD':
-        return state.set(action.data.id, action.data.attributes);
+    return state.set(action.data.id, action.data);
 
-    case 'RESOURCE_REMOVE':
+    case 'POSTS_REMOVE':
         return state.delete(action.data.id);
 
     case 'POSTS_CLEAR':

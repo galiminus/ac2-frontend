@@ -6,6 +6,7 @@ import getMe from 'api/get-me';
 import getPage from 'api/get-page';
 import updatePage from 'api/update-page';
 import createComment from 'api/create-comment';
+import updateComment from 'api/update-comment';
 import destroyComment from 'api/destroy-comment';
 import findComments from 'api/find-comments';
 import findPageTypes from 'api/find-page-type';
@@ -41,6 +42,7 @@ export default {
 
     comments: {
         create: createComment,
+        update: updateComment,
         find: findComments,
         destroy: destroyComment
     },

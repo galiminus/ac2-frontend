@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from 'react-redux';
 
 import {
@@ -17,19 +19,12 @@ import Comment from 'components/comment';
 import connectToCable from 'components/action-cable';
 
 function mapStateToProps(state, props) {
-    let comments;
-    if (!props.postId) {
-        comments = state.comments;
-    } else {
-        comments = state.comments.filter((comment) => {
-            return (comment.post_id === props.postId && comment.parent_id === props.parentId);
-        });
-    }
-
-    return { comments };
+    return { comments: state.commentsByPost.get(props.postId) };
 }
 
 const Comments = React.createClass({
+    mixins: [PureRenderMixin],
+
     propTypes: {
         postId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
@@ -49,13 +44,6 @@ const Comments = React.createClass({
 
     componentDidMount() {
     //    this.loadComments(this.props.postId, 1);
-    },
-
-    shouldComponentUpdate(props) {
-        return (
-            props.comments.size !== this.props.comments.size ||
-            props.currentUserPage !== this.props.currentUserPage
-        );
     },
 
     getChannels() {
@@ -102,7 +90,7 @@ const Comments = React.createClass({
     },
 
     render() {
-        const comments = this.props.comments.sort((comment1, comment2) => (comment1.updated_at > comment2.updated_at ? 1 : -1));
+        const comments = this.props.comments.sort((comment1, comment2) => (comment1.created_at > comment2.created_at ? 1 : -1));
 
         let commentNodes = null;
         if (comments.size > 0) {

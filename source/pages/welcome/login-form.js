@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { dispatch } from 'store';
 import { updatePath } from 'redux-simple-router';
+import { batchActions } from 'redux-batched-actions';
 
 import { Link } from 'react-router';
 
@@ -19,13 +20,20 @@ import { validateEmail, validatePassword } from 'validators';
 const authenticate = (fields) =>
     tokens.create(fields, dispatch)
         .then((data) => {
-            dispatch(batchActions([
-                addToken(data),
-                setCurrentToken(data.access_token),
-                updatePath('/')
-            ]));
+
+            try {
+                dispatch(batchActions([
+                    addToken(data),
+                    setCurrentToken(data.access_token),
+                    updatePath('/')
+                ]));
+            }
+            catch (e) {
+                console.log(e);
+            }
         })
         .catch((error) => {
+            console.log(error);
             if (error.response !== undefined) {
                 const authError = error.response.headers.get('www-authenticate');
 

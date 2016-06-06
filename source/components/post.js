@@ -9,6 +9,7 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+import ReportIcon from 'material-ui/svg-icons/content/report';
 
 import api from 'api';
 import actionCreators from 'action-creators';
@@ -53,7 +54,7 @@ const Post = React.createClass({
 
     handlePostDestroy() {
         api.posts.destroy(this.props.post.id).then(() => {
-            this.props.removeResource(this.props.post.id);
+            this.props.removeResource(this.props.post);
         });
     },
 
@@ -101,6 +102,11 @@ const Post = React.createClass({
                                 }
                             }()
                         }
+                        <MenuItem
+                            leftIcon={<ReportIcon />}
+                            primaryText={this.context.translation.t('actions.report')}
+                            onClick={this.handlePostReport}
+                        />
 
                     </IconMenu>
                     <PostDialog

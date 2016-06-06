@@ -24,7 +24,7 @@ function addRecord(record, options = { commited: true, error: false }) {
 
     return ({
         type: `${record.type.replace('-', '_').toUpperCase()}_ADD`,
-        data: { ...record, ...options }
+        data: { ...record.attributes, ...options }
     });
 }
 
@@ -53,10 +53,10 @@ export default {
         return (batchActions(actions));
     },
 
-    removeResource: (id) => {
+    removeResource: (record) => {
         return ({
-            type: 'RESOURCE_REMOVE',
-            data: { id }
+            type: `${record.type.replace('-', '_').toUpperCase()}_REMOVE`,
+            data: record
         });
     }
 };

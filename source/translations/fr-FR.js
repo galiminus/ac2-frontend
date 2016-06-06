@@ -21,6 +21,7 @@ export default {
     'actions.loadPostUpdates': 'Afficher les mises à jours',
     'actions.edit': 'Modifier',
     'actions.destroy': 'Supprimer',
+    'actions.report': 'Signaler',
 
     'forms.login': 'Connectez-vous pour continuer',
     'forms.signup': 'Créez un nouveau compte',
