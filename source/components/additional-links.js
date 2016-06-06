@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 import styles from './additional-links.css';
 
-import actionCreators from "action-creators";
+import actionCreators from 'action-creators';
 
 import { additionalLinks } from 'config';
 

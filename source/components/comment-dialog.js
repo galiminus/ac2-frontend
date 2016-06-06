@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import { reduxForm, reset } from 'redux-form';
-import { batchActions } from 'redux-batched-actions';
+import { reduxForm } from 'redux-form';
 
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';

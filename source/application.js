@@ -39,6 +39,7 @@ import Messages from 'pages/messages';
 import { Provider } from 'react-redux';
 
 import store from 'store';
+import api from 'api';
 
 import actions from 'action-creators';
 
@@ -87,6 +88,12 @@ const Application = React.createClass({
             }),
             translation: store.getState().translations.get('fr-FR')
         };
+    },
+
+    componentDidMount() {
+        api.settings.getCurrent()
+            .then((configuration) => {
+            });
     },
 
     render() {

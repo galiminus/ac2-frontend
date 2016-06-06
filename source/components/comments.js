@@ -23,13 +23,11 @@ function mapStateToProps(state, props) {
 }
 
 const Comments = React.createClass({
-    mixins: [PureRenderMixin],
-
     propTypes: {
         postId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object,
         parentId: PropTypes.string,
         load: PropTypes.bool
     },
@@ -37,6 +35,8 @@ const Comments = React.createClass({
     contextTypes: {
         translation: PropTypes.object.isRequired
     },
+
+    mixins: [PureRenderMixin],
 
     getInitialState() {
         return { page: 1, hasMore: false };

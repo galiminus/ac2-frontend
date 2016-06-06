@@ -33,14 +33,12 @@ function mapStateToProps(state, props) {
 }
 
 const Comment = React.createClass({
-    mixins: [PureRenderMixin],
-
     propTypes: {
         sender: PropTypes.object.isRequired,
         comment: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object,
         likes: PropTypes.object
     },
 
@@ -48,10 +46,13 @@ const Comment = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
+    mixins: [PureRenderMixin],
+
     getDefaultProps() {
         return {
             sender: { id: null },
-            likes: Immutable.Map({})
+            likes: Immutable.Map({}),
+            currentUserPage: {}
         };
     },
 
@@ -95,7 +96,6 @@ const Comment = React.createClass({
 
     render() {
         const isLiked = !!this.myLike();
-        console.log("RERENDER", this.props.comment);
 
         switch (this.props.sender.type) {
         case 'profile_pages':

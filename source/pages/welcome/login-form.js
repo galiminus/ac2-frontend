@@ -20,20 +20,17 @@ import { validateEmail, validatePassword } from 'validators';
 const authenticate = (fields) =>
     tokens.create(fields, dispatch)
         .then((data) => {
-
             try {
                 dispatch(batchActions([
                     addToken(data),
                     setCurrentToken(data.access_token),
                     updatePath('/')
                 ]));
-            }
-            catch (e) {
-                console.log(e);
+            } catch (e) {
+                console.log(e.message, e.stack);
             }
         })
         .catch((error) => {
-            console.log(error);
             if (error.response !== undefined) {
                 const authError = error.response.headers.get('www-authenticate');
 

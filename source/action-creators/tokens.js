@@ -4,6 +4,6 @@ export default {
     },
 
     clearTokens: () => {
-        return ({ type: 'TOKENS_CLEAR' })
+        return ({ type: 'TOKENS_CLEAR' });
     }
 };

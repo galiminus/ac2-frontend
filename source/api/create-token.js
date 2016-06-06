@@ -1,6 +1,6 @@
 import { create } from 'api/http';
 
-export default (record, dispatch) => {
+export default (record) => {
     return new Promise((resolve, reject) => {
         create('/oauth/token', {
             username: record.email,

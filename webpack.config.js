@@ -17,6 +17,11 @@ module.exports = {
         modulesDirectories: ['node_modules', 'source', 'source/images'],
         fallback: __dirname
     },
+    watchOptions: {
+        ignored: /node_modules/,
+        aggregateTimeout: 300,
+       poll: 1000
+    },
     module: {
         loaders: [
             {

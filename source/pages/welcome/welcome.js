@@ -6,7 +6,7 @@ import styles from './welcome.css';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 
 import ToolbarLogo from 'components/toolbar-logo';
-import Notifier from "components/notifier";
+import Notifier from 'components/notifier';
 
 const WelcomePage = React.createClass({
     propTypes: {

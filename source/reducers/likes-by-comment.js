@@ -12,16 +12,18 @@ export default function (state = Immutable.Map({}), action) {
         return state.delete(action.data.id);
 
     case 'LIKES_ADD':
-    if (action.data.liked_type == "comments") {
+        if (action.data.liked_type === 'comments') {
             likes = state.get(action.data.liked_id) || Immutable.Map({});
             return state.set(action.data.liked_id, likes.set(action.data.id, action.data));
         }
+        break;
 
     case 'LIKES_REMOVE':
-        if (action.data.liked_type == "comments") {
+        if (action.data.liked_type === 'comments') {
             likes = state.get(action.data.liked_id) || Immutable.Map({});
             return state.set(action.data.liked_id, likes.delete(action.data.id));
         }
+        break;
 
     default:
         return state;

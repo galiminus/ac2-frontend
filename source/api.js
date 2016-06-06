@@ -1,4 +1,4 @@
-
+import getCurrentSettings from 'api/get-current-settings';
 import createToken from 'api/create-token';
 import createUser from 'api/create-user';
 import findUsers from 'api/find-users';
@@ -18,6 +18,10 @@ import createLike from 'api/create-like';
 import destroyLike from 'api/destroy-like';
 
 export default {
+    settings: {
+        getCurrent: getCurrentSettings
+    },
+
     tokens: {
         create: createToken
     },
