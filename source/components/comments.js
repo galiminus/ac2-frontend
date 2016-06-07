@@ -3,14 +3,9 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import { connect } from 'react-redux';
 
-import {
-    List,
-    FlatButton
-} from 'material-ui';
+import { List } from 'material-ui/List';
 
 import Divider from 'material-ui/Divider';
-
-import api from 'api';
 
 import actionCreators from 'action-creators';
 
@@ -38,49 +33,8 @@ const Comments = React.createClass({
 
     mixins: [PureRenderMixin],
 
-    getInitialState() {
-        return { page: 1, hasMore: false };
-    },
-
-    componentDidMount() {
-    //    this.loadComments(this.props.postId, 1);
-    },
-
     getChannels() {
         return (['CommentsChannel']);
-    },
-
-    loadComments(postId, pageNum) {
-        const query = { include: 'sender,received_likes' };
-
-        query['page[number]'] = pageNum;
-        query['page[size]'] = 10;
-        query.sort = '-updated_at';
-
-        api.comments.find(postId, query).then((response) => {
-            this.setState({ hasMore: !!(response.links && response.links.next) && response.data.length > 0 });
-            this.props.addResource(response);
-        });
-    },
-
-    loadMoreComments() {
-        const nextPage = this.state.page + 1;
-
-        this.setState({ page: nextPage });
-        this.loadComments(this.props.postId, nextPage);
-    },
-
-    loadMoreButton() {
-        if (this.state.hasMore) {
-            return (
-                <FlatButton
-                    label={this.context.translation.t('actions.loadPreviousComments')}
-                    style={{ width: '100%', fontSize: '0.8em' }}
-                    onClick={this.loadMoreComments}
-                />
-            );
-        }
-        return (<div />);
     },
 
     handleMessage(comment) {
@@ -111,7 +65,6 @@ const Comments = React.createClass({
 
         return (
             <aside>
-                {this.loadMoreButton()}
                 {commentNodes}
                 <Divider />
                 <CommentForm

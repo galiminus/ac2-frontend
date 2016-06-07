@@ -21,6 +21,7 @@ const PostsContainer = React.createClass({
         posts: PropTypes.object.isRequired,
         clearPosts: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
+        removeResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object,
         page: PropTypes.object
     },
@@ -93,10 +94,21 @@ const PostsContainer = React.createClass({
     },
 
     handleMessage(message) {
-        if (message &&
-            message.data.attributes.created_at === message.data.attributes.updated_at &&
-            message.data.relationships.sender.data.id !== this.props.currentUserPage.id) {
-            this.setState({ updateCount: this.state.updateCount + 1 });
+        if (message) {
+            switch (message.meta.action) {
+            case 'create':
+            case 'update':
+                if (message.data.attributes.created_at === message.data.attributes.updated_at &&
+                    message.data.relationships.sender.data.id !== this.props.currentUserPage.id) {
+                    this.setState({ updateCount: this.state.updateCount + 1 });
+                }
+                break;
+            case 'destroy':
+                this.props.removeResource(message.data);
+                break;
+            default:
+                break;
+            }
         }
     },
 
