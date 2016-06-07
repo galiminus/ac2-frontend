@@ -13,7 +13,7 @@ const PageCardHeader = React.createClass({
 
     render() {
         let title;
-        if (this.props.recipient) {
+        if (this.props.recipient && this.props.recipient.type !== 'main_pages') {
             title = (
                 <div>
                     <PageLink page={this.props.sender} />

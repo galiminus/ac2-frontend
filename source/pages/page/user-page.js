@@ -5,7 +5,8 @@ import PostsContainer from 'pages/posts/posts-container';
 
 const UserPage = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired
+        page: PropTypes.object.isRequired,
+        children: PropTypes.node
     },
 
     render() {
@@ -21,14 +22,13 @@ const UserPage = React.createClass({
             return (
                 <div>
                     <ProfileBanner page={this.props.page} />
-                    <PostsContainer {...this.props} />
+                    {React.cloneElement(this.props.children, this.props)}
                 </div>
             );
 
         default:
             return (<div />);
         }
-
     }
 });
 

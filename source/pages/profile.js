@@ -19,19 +19,11 @@ function mapStateToProps(state, props) {
 const Profile = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        pageType: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired
     },
 
     contextTypes: {
         translation: PropTypes.object.isRequired
-    },
-
-    getDefaultProps() {
-        return {
-            page: { data: {} },
-            pageType: { data_schema: { properties: {} } }
-        };
     },
 
     render() {
@@ -51,15 +43,15 @@ const Profile = React.createClass({
         };
 
         const cards = [];
-        for (const category of Object.keys(this.props.pageType.data_schema.properties)) {
+        for (const category of Object.keys(this.props.page.schema.properties)) {
             const fields = [];
 
-            for (const field of Object.keys(this.props.pageType.data_schema.properties[category].properties)) {
+            for (const field of Object.keys(this.props.page.schema.properties[category].properties)) {
                 fields.push(
                     <Field
                         label={`labels.userPageFields.${field}`}
                         initialValues={{ value: this.props.page.data[category][field] }}
-                        type={this.props.pageType.data_schema.properties[category].properties[field].type}
+                        type={this.props.page.schema.properties[category].properties[field].type}
                         key={field}
                         formKey={field}
                         onChange={generateChangeHandler(category, field)}

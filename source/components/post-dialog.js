@@ -36,7 +36,7 @@ const form = React.createClass({
     createPost(fields) {
         let recipientParams = {};
         if (this.props.recipient) {
-            recipientParams = { recipient_id: this.props.recipient.id }
+            recipientParams = { recipient_id: this.props.recipient.id };
         }
 
         return (

@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
+import { Link } from 'react-router';
+
 import { Card, CardActions, CardMedia } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 import PageCardTitle from 'components/page-card-title';
-import PageAvatar from 'components/page-avatar';
-import PageLink from 'components/page-link';
 
 const ProfileBanner = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired,
+        page: PropTypes.object.isRequired
     },
 
     contextTypes: {
@@ -23,7 +23,7 @@ const ProfileBanner = React.createClass({
         return (
             <Card style={{ marginTop: 32 }}>
                 <CardMedia
-                  overlay={<PageCardTitle page={this.props.page} />}
+                    overlay={<PageCardTitle page={this.props.page} />}
                 >
                     <img src="http://lorempixel.com/600/337/nature/" />
                 </CardMedia>
@@ -31,11 +31,15 @@ const ProfileBanner = React.createClass({
                     {
                         () => {
                             if (this.props.page.permissions.update) {
-                                return (<FlatButton label={this.context.translation.t('labels.editProfile')} />);
+                                return (
+                                    <FlatButton label={this.context.translation.t('labels.editProfile')} />
+                                );
                             }
                         }()
                     }
-                    <FlatButton label={this.context.translation.t('labels.about')} />
+                    <Link to={`/${this.props.page.id}/profile`}>
+                        <FlatButton label={this.context.translation.t('labels.about')} />
+                    </Link>
                 </CardActions>
             </Card>
         );

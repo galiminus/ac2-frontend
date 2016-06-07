@@ -110,10 +110,13 @@ const Application = React.createClass({
 
                     <Route path="/account" component={Account} />
                     <Route path="/messages" component={Messages} />
+
+                    <Route path=":pageId/profile" component={PageContainer}>
+                        <IndexRoute component={Profile} />
+                    </Route>
+
                     <Route path=":pageId" component={PageContainer}>
                         <IndexRoute component={PostsContainer} />
-
-                        <Route path="profile" component={Profile} />
                     </Route>
                 </Route>
             </Router>
