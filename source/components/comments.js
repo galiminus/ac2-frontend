@@ -11,7 +11,6 @@ import actionCreators from 'action-creators';
 
 import CommentForm from 'components/comment-form';
 import Comment from 'components/comment';
-import connectToCable from 'components/action-cable';
 
 function mapStateToProps(state, props) {
     return { comments: state.commentsByPost.get(props.postId) };
@@ -32,16 +31,6 @@ const Comments = React.createClass({
     },
 
     mixins: [PureRenderMixin],
-
-    getChannels() {
-        return (['CommentsChannel']);
-    },
-
-    handleMessage(comment) {
-        if (comment) {
-            this.props.addResource(comment);
-        }
-    },
 
     render() {
         const comments = this.props.comments.sort((comment1, comment2) => (comment1.created_at > comment2.created_at ? 1 : -1));
@@ -78,4 +67,4 @@ const Comments = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(connectToCable(Comments));
+export default connect(mapStateToProps, actionCreators)(Comments);

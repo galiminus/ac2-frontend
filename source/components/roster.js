@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from 'react-redux';
 
 import List from 'material-ui/List';
@@ -14,17 +16,30 @@ function mapStateToProps(state) {
 
 const Roster = React.createClass({
     propTypes: {
-        pages: PropTypes.object.isRequired
+        pages: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired
     },
 
     contextTypes: {
         translation: PropTypes.object.isRequired
     },
 
+    mixins: [PureRenderMixin],
+
+    getDefaultProps() {
+        return ({
+            currentUserPage: {}
+        });
+    },
+
     pagesByPresence(presence) {
         return (
             this.props.pages.filter((page) => {
-                return (page.type === 'profile_pages' && page.presence === presence);
+                return (
+                    page.type === 'profile_pages' &&
+                    page.presence === presence &&
+                    page.id !== this.props.currentUserPage.id
+                );
             })
         );
     },

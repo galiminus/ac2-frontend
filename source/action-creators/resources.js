@@ -1,6 +1,6 @@
 import { batchActions } from 'redux-batched-actions';
 
-function addRecord(record, options = { commited: true, error: false }) {
+function normalizeRecord(record) {
     record.attributes = { ...(record.attributes || {}), id: record.id, type: record.type };
 
     if (record.attributes.created_at) {
@@ -21,10 +21,15 @@ function addRecord(record, options = { commited: true, error: false }) {
             }
         }
     }
+    return (record);
+}
+
+function addRecord(record, options = { commited: true, error: false }) {
+    const normalizedRecord = normalizeRecord(record);
 
     return ({
-        type: `${record.type.replace('-', '_').toUpperCase()}_ADD`,
-        data: { ...record.attributes, ...options }
+        type: `${normalizedRecord.type.replace('-', '_').toUpperCase()}_ADD`,
+        data: { ...normalizedRecord.attributes, ...options }
     });
 }
 
@@ -51,6 +56,15 @@ export default {
         }
 
         return (batchActions(actions));
+    },
+
+    removeJSONAPIResource: (record) => {
+        const normalizedRecord = normalizeRecord(record);
+
+        return ({
+            type: `${normalizedRecord.type.replace('-', '_').toUpperCase()}_REMOVE`,
+            data: normalizedRecord.attributes
+        });
     },
 
     removeResource: (record) => {

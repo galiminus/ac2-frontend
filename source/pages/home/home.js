@@ -39,7 +39,7 @@ const Home = React.createClass({
                         {this.props.children}
                     </main>
                     <Paper styleName="messagePanel">
-                        <Roster />
+                        <Roster currentUserPage={this.props.currentUserPage} />
                     </Paper>
                 </div>
 

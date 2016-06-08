@@ -17,8 +17,6 @@ const reducer = compose(
         state.users = Immutable.Map(persistedState.users);
         state.currentUser = persistedState.currentUser;
 
-        state.pages = Immutable.Map(persistedState.pages);
-
         return state;
     })
 )(rootReducer);

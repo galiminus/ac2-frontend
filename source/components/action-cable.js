@@ -25,9 +25,12 @@ function connectToCable(Component) {
             const tokens = this.props.tokens.toJS();
             this.subscriptions = [];
 
-            for (const accessToken in tokens) {
-                if (tokens.hasOwnProperty(accessToken)) {
-                    this.subscriptions.push(this.subscribe(this.setupConsumer(accessToken), this.refs.child.getChannels()[0]));
+            const channels = this.refs.child.getChannels();
+            for (const channel of channels) {
+                for (const accessToken in tokens) {
+                    if (tokens.hasOwnProperty(accessToken)) {
+                        this.subscriptions.push(this.subscribe(this.setupConsumer(accessToken), channel));
+                    }
                 }
             }
         },

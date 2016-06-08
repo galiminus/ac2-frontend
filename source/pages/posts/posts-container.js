@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import actionCreators from 'action-creators';
-import connectToCable from 'components/action-cable';
 import api from 'api';
+import Immutable from 'immutable';
 
 import Posts from './posts';
 
-function mapStateToProps(state) {
-    return {
-        posts: state.posts
-    };
+const emptyPosts = Immutable.Map({});
+
+function mapStateToProps(state, props) {
+    if (props.page.type === 'main_pages') {
+        return ({ posts: state.posts });
+    }
+
+    return ({ posts: state.postsByPage.get(props.page.id) || emptyPosts });
 }
 
 const PostsContainer = React.createClass({
@@ -21,9 +25,8 @@ const PostsContainer = React.createClass({
         posts: PropTypes.object.isRequired,
         clearPosts: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
-        removeResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object,
-        page: PropTypes.object
+        page: PropTypes.object.isRequired
     },
 
     contextTypes: {
@@ -51,10 +54,6 @@ const PostsContainer = React.createClass({
             this.props.clearPosts();
             this.loadPosts(newProps.params.pageId, 1);
         }
-    },
-
-    getChannels() {
-        return (['PostsChannel']);
     },
 
     loadPosts(pageId, pageNum) {
@@ -85,32 +84,31 @@ const PostsContainer = React.createClass({
         this.loadPosts(this.props.params.pageId, 1);
     },
 
-
     handleLoadMore() {
         const nextPage = this.state.page + 1;
 
         this.setState({ page: nextPage });
         this.loadPosts(this.props.params.pageId, nextPage);
     },
-
-    handleMessage(message) {
-        if (message) {
-            switch (message.meta.action) {
-            case 'create':
-            case 'update':
-                if (message.data.attributes.created_at === message.data.attributes.updated_at &&
-                    message.data.relationships.sender.data.id !== this.props.currentUserPage.id) {
-                    this.setState({ updateCount: this.state.updateCount + 1 });
-                }
-                break;
-            case 'destroy':
-                this.props.removeResource(message.data);
-                break;
-            default:
-                break;
-            }
-        }
-    },
+    //
+    // handleMessage(message) {
+    //     if (message) {
+    //         switch (message.meta.action) {
+    //         case 'create':
+    //         case 'update':
+    //             if (message.data.attributes.created_at === message.data.attributes.updated_at &&
+    //                 message.data.relationships.sender.data.id !== this.props.currentUserPage.id) {
+    //                 this.setState({ updateCount: this.state.updateCount + 1 });
+    //             }
+    //             break;
+    //         case 'destroy':
+    //             this.props.removeResource(message.data);
+    //             break;
+    //         default:
+    //             break;
+    //         }
+    //     }
+    // },
 
     render() {
         if (this.state.loading) {
@@ -151,4 +149,4 @@ const PostsContainer = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(connectToCable(PostsContainer));
+export default connect(mapStateToProps, actionCreators)(PostsContainer);

@@ -30,6 +30,7 @@ const HomeContainer = React.createClass({
         toggleLeftNav: PropTypes.func.isRequired,
         setCurrentUser: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
+        removeJSONAPIResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object,
         leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
@@ -51,12 +52,22 @@ const HomeContainer = React.createClass({
     },
 
     getChannels() {
-        return (['PagesChannel']);
+        return (['PagesChannel', 'PostsChannel', 'CommentsChannel', 'LikesChannel']);
     },
 
     handleMessage(message) {
         if (message) {
-            this.props.addResource(message);
+            switch (message.meta.action) {
+            case 'create':
+            case 'update':
+                this.props.addResource(message);
+                break;
+            case 'destroy':
+                this.props.removeJSONAPIResource(message.data);
+                break;
+            default:
+                break;
+            }
         }
     },
 

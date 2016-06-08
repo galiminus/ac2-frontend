@@ -25,8 +25,6 @@ import Marked from 'components/marked';
 import CreationDate from 'components/creation-date';
 import CommentDialog from 'components/comment-dialog';
 
-import connectToCable from 'components/action-cable';
-
 function mapStateToProps(state, props) {
     return {
         sender: state.pages.get(props.comment.sender_id),
@@ -62,10 +60,6 @@ const Comment = React.createClass({
         return { commentEditModalOpen: false };
     },
 
-    getChannels() {
-        return (['LikesChannel']);
-    },
-
     myLike() {
         return (this.props.likes.find((like) => like.permissions.destroy));
     },
@@ -81,6 +75,7 @@ const Comment = React.createClass({
 
     handleLikeDestroy() {
         const myLike = this.myLike();
+
         api.likes.destroy(myLike.id).then(() => {
             this.props.removeResource(myLike);
         });
@@ -98,12 +93,6 @@ const Comment = React.createClass({
 
     handleCloseCommentEditModal() {
         this.setState({ commentEditModalOpen: false });
-    },
-
-    handleMessage(like) {
-        if (like) {
-            this.props.addResource(like);
-        }
     },
 
     render() {
@@ -216,4 +205,4 @@ const Comment = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(connectToCable(Comment));
+export default connect(mapStateToProps, actionCreators)(Comment);

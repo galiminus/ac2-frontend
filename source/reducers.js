@@ -16,6 +16,7 @@ import posts from 'reducers/posts';
 import comments from 'reducers/comments';
 import commentsByPost from 'reducers/comments-by-post';
 import likesByComment from 'reducers/likes-by-comment';
+import postsByPage from 'reducers/posts-by-page';
 import likes from 'reducers/likes';
 
 import notifications from 'reducers/notifications';
@@ -31,6 +32,7 @@ const reducers = combineReducers({
     currentUser,
     currentPage,
     posts,
+    postsByPage,
     pages,
     pageTypes,
     comments,
