@@ -1,5 +1,5 @@
 .home {
-    height: 100%;
+    min-height: 100%;
 }
 
 .flexLayout {
@@ -9,7 +9,7 @@
 }
 
 .mainLayout {
-    height: 100%;
+    min-height: 100%;
 }
 
 .leftNav {
@@ -18,7 +18,7 @@
     position: fixed;
     width: 240px;
     max-width: 240px;
-    height: 100%;
+    min-height: 100%;
     margin-top: 56px;
     display: flex;
     flex-direction: column;
@@ -39,7 +39,7 @@
     width: 300px;
     z-index: 2;
     position: fixed;
-    height: 100%;
+    min-height: 100%;
     right: 0;
 }
 

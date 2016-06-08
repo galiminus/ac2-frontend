@@ -1,4 +1,7 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
+import InfiniteScroll from 'redux-infinite-scroll';
 
 import CSSModules from 'react-css-modules';
 import styles from './posts.css';
@@ -10,6 +13,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CreateContentIcon from 'material-ui/svg-icons/content/create';
 import RefreshIcon from 'material-ui/svg-icons/navigation/arrow-upward';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import PostDialog from 'components/post-dialog';
 
@@ -22,6 +26,7 @@ const Posts = React.createClass({
         onLoadMore: PropTypes.func,
         updateCount: PropTypes.number,
         hasMore: PropTypes.bool.isRequired,
+        loadingMore: PropTypes.bool.isRequired,
         currentUserPage: PropTypes.object,
         page: PropTypes.object
     },
@@ -29,6 +34,8 @@ const Posts = React.createClass({
     contextTypes: {
         translation: PropTypes.object.isRequired
     },
+
+    mixins: [PureRenderMixin],
 
     getInitialState() {
         return { postCreationModalOpen: false };
@@ -74,46 +81,60 @@ const Posts = React.createClass({
         );
     },
 
-    moreButton() {
-        if (this.props.hasMore) {
-            return (
-                <FlatButton
-                    label={this.context.translation.t('actions.loadMorePosts')}
-                    style={{
-                        width: 300, padding: 8
-                    }}
-                    onClick={this.props.onLoadMore}
-                />
-            );
-        }
-        return (null);
+    renderPosts() {
+        const orderedPosts = this.props.posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1));
+
+        return(
+            orderedPosts.valueSeq().map(post =>
+                <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} />
+            ).toJS()
+        );
     },
 
     render() {
-        const orderedPosts = this.props.posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1));
-
-        const postNodes = orderedPosts.valueSeq().map(post =>
-            <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} />
-        );
-
+        console.log(this.renderPosts().length, this.props.loadingMore);
         return (
             <div>
-                <div>
-                    <div style={{ textAlign: 'center' }}>
-                        {
-                            () => {
-                                if (this.props.updateCount > 0) {
-                                    return (this.updatesButton());
-                                }
-                            }()
-                        }
-                    </div>
-                    <List>
-                        {postNodes}
-                    </List>
-
-                    {this.moreButton()}
+                <div style={{ textAlign: 'center' }}>
+                    {
+                        () => {
+                            if (this.props.updateCount > 0) {
+                                return (this.updatesButton());
+                            }
+                        }()
+                    }
                 </div>
+                <List>
+                    <InfiniteScroll
+                        elementIsScrollable={false}
+                        loadMore={this.props.onLoadMore}
+                        hasMore={this.props.hasMore}
+                        loadingMore={this.props.loadingMore}
+                        loader={
+                            <div
+                                style={{
+                                    position: 'relative',
+                                    margin: '60px auto 30px auto',
+                                    width: 50
+                                }}
+                            >
+                                <RefreshIndicator
+                                    size={50}
+                                    top={0}
+                                    left={0}
+                                    loadingColor="#ff9800"
+                                    status="loading"
+                                    style={{
+                                        position: 'relative',
+                                        display: 'inline-block'
+                                    }}
+                                />
+                            </div>
+                        }
+                    >
+                        {this.renderPosts()}
+                    </InfiniteScroll>
+                </List>
                 <FloatingActionButton styleName="addPostButton" onMouseUp={this.handleOpenPostCreationModal}>
                     <CreateContentIcon />
                 </FloatingActionButton>

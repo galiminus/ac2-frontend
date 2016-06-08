@@ -49,6 +49,7 @@
     "redux": "^3.5.2",
     "redux-batched-actions": "^0.1.2",
     "redux-form": "^5.2.5",
+    "redux-infinite-scroll": "^1.0.9",
     "redux-localstorage": "^1.0.0-rc4",
     "redux-localstorage-filter": "^0.1.1",
     "redux-logger": "^2.6.1",

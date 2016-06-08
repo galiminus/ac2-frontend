@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from 'react-redux';
 
 import RefreshIndicator from 'material-ui/RefreshIndicator';
@@ -33,10 +35,12 @@ const PostsContainer = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
+    mixins: [PureRenderMixin],
+
     getInitialState() {
         return {
             page: 1,
-            loading: false,
+            loadingMore: false,
             hasMore: false,
             lastPostDate: null,
             updateCount: 0,
@@ -64,10 +68,10 @@ const PostsContainer = React.createClass({
         }
 
         query['page[number]'] = pageNum;
-        query['page[size]'] = 20;
+        query['page[size]'] = 10;
         query.sort = '-updated_at';
 
-        this.setState({ loading: true });
+        this.setState({ loadingMore: true });
 
         api.posts.find(query).then((response) => {
             this.props.addResource(response);
@@ -75,7 +79,7 @@ const PostsContainer = React.createClass({
             if (response.data.length > 0) {
                 this.setState({ lastPostDate: response.data[0].updated_at });
             }
-            this.setState({ hasMore: !!(response.links && response.links.next), loading: false });
+            this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
         });
     },
 
@@ -86,6 +90,7 @@ const PostsContainer = React.createClass({
 
     handleLoadMore() {
         const nextPage = this.state.page + 1;
+        console.log(nextPage);
 
         this.setState({ page: nextPage });
         this.loadPosts(this.props.params.pageId, nextPage);
@@ -111,30 +116,6 @@ const PostsContainer = React.createClass({
     // },
 
     render() {
-        if (this.state.loading) {
-            return (
-                <div
-                    style={{
-                        position: 'relative',
-                        margin: '120px auto 0 auto',
-                        width: 50
-                    }}
-                >
-                    <RefreshIndicator
-                        size={50}
-                        top={0}
-                        left={0}
-                        loadingColor="#ff9800"
-                        status="loading"
-                        style={{
-                            position: 'relative',
-                            display: 'inline-block'
-                        }}
-                    />
-                </div>
-            );
-        }
-
         return (
             <Posts
                 posts={this.props.posts}
@@ -143,6 +124,7 @@ const PostsContainer = React.createClass({
                 onLoadUpdates={this.handleLoadUpdates}
                 updateCount={this.state.updateCount}
                 hasMore={this.state.hasMore}
+                loadingMore={this.state.loadingMore}
                 currentUserPage={this.props.currentUserPage}
             />
         );

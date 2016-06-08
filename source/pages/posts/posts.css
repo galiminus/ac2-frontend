@@ -1,5 +1,5 @@
 .addPostButton {
-    position: absolute;
+    position: fixed;
     bottom: 24px;
     right: 328px;
 }

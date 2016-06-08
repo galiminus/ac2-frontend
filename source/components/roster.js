@@ -4,6 +4,8 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 
 import List from 'material-ui/List';
+import { red500, yellow500, green500 } from 'material-ui/styles/colors';
+
 import StatusIndicator from 'material-ui/svg-icons/image/brightness-1';
 
 import RosterItem from 'components/roster-item';
@@ -53,7 +55,9 @@ const Roster = React.createClass({
                             <RosterItem
                                 key={page.id}
                                 recipient={page}
-                                rightIcon={<StatusIndicator color="#33ff33" style={{ width: 8, height: 8, top: 12 }} />}
+                                rightIcon={
+                                    <StatusIndicator style={{ fill: green500, width: 8, height: 8, top: 12 }} />
+                                }
                             />
                         );
                     })
