@@ -27,20 +27,24 @@ const UserAvatar = React.createClass({
 
     getDefaultProps() {
         return ({
-            page: { type: null }
+            page: {
+                id: null,
+                type: ''
+            }
         });
     },
 
     render() {
         const styles = getStyles();
 
+        if (!this.props.page.type) {
+            console.log(this.props.page);
+        }
         let name;
-        switch (this.props.page.type) {
-        case 'profile_pages':
+        if (this.props.page.type.match(/^pages.profile_pages/)) {
             name = this.props.page.data.personal_informations.full_name;
-            break;
-        default:
-            name = '?';
+        } else {
+            name = '';
         }
 
         return (

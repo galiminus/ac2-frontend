@@ -30,7 +30,8 @@ const CurrentPageTitle = React.createClass({
     getDefaultProps() {
         return ({
             page: {
-                type: null
+                id: null,
+                type: ''
             }
         });
     },
@@ -42,17 +43,13 @@ const CurrentPageTitle = React.createClass({
             return (<span />);
         }
 
-        switch (this.props.page.type) {
-        case 'main_pages':
+        if (this.props.page.type === 'main_pages') {
             title = this.context.translation.t('links.mainFeed');
-            break;
-        case 'profile_pages':
+        } else if (this.props.page.type.match(/^pages.profile_pages/)) {
             title = this.props.page.data.personal_informations.full_name;
-            break;
-        case 'static_pages':
+        } else if (this.props.page.type === 'static_pages') {
             title = this.props.page.data.title;
-            break;
-        default:
+        } else {
             title = '';
         }
 

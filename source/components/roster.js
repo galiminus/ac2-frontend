@@ -30,7 +30,10 @@ const Roster = React.createClass({
 
     getDefaultProps() {
         return ({
-            currentUserPage: {}
+            currentUserPage: {
+                id: null,
+                type: ''
+            }
         });
     },
 

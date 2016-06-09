@@ -50,9 +50,9 @@ const Comment = React.createClass({
 
     getDefaultProps() {
         return {
-            sender: { id: null },
+            sender: { id: null, type: '' },
             likes: Immutable.Map({}),
-            currentUserPage: {}
+            currentUserPage: { id: null, type: '' }
         };
     },
 
@@ -98,8 +98,7 @@ const Comment = React.createClass({
     render() {
         const isLiked = !!this.myLike();
 
-        switch (this.props.sender.type) {
-        case 'profile_pages':
+        if (this.props.sender.type.match(/^pages.profile_pages/)) {
             return (
                 <div>
                     <ListItem
@@ -196,12 +195,10 @@ const Comment = React.createClass({
                         id={this.props.comment.id}
                         formKey={this.props.comment.id}
                     />
-            </div>
+                </div>
             );
-
-        default:
-            return (<div />);
         }
+        return (<div />);
     }
 });
 

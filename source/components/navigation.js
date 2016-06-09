@@ -30,7 +30,10 @@ const Navigation = React.createClass({
 
     getDefaultProps() {
         return ({
-            currentUserPage: {}
+            currentUserPage: {
+                id: null,
+                type: ''
+            }
         });
     },
 

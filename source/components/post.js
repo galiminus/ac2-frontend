@@ -50,7 +50,10 @@ const Post = React.createClass({
     getDefaultProps() {
         return {
             likes: Immutable.Map({}),
-            currentUserPage: {}
+            currentUserPage: {
+                id: null,
+                type: ''
+            }
         };
     },
 

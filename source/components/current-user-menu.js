@@ -26,6 +26,8 @@ const CurrentUserMenu = React.createClass({
     getDefaultProps() {
         return ({
             currentUserPage: {
+                id: null,
+                type: '',
                 data: {
                     personal_informations: {
                         full_name: ''

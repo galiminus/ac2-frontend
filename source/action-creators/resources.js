@@ -27,50 +27,67 @@ function normalizeRecord(record) {
 function addRecord(record, options = { commited: true, error: false }) {
     const normalizedRecord = normalizeRecord(record);
 
-    return ({
-        type: `${normalizedRecord.type.replace('-', '_').toUpperCase()}_ADD`,
-        data: { ...normalizedRecord.attributes, ...options }
-    });
+    return (
+        normalizedRecord.type.split('.').map((type) => {
+            return (
+                {
+                    type: `${type.toUpperCase()}_ADD`,
+                    data: { ...normalizedRecord.attributes, ...options }
+                }
+            );
+        })
+    );
 }
 
 export default {
     addResource: (resource, options = { commited: true, error: false }) => {
-        const actions = [];
+        let actions = [];
 
         if (Array.isArray(resource.data)) {
             if (resource.included) {
                 for (const record of resource.included) {
-                    actions.push(addRecord(record, options));
+                    actions = actions.concat(addRecord(record, options));
                 }
             }
             for (const record of resource.data) {
-                actions.push(addRecord(record, options));
+                actions = actions.concat(addRecord(record, options));
             }
         } else if (typeof(resource.data) === 'object') {
             if (resource.included) {
                 for (const record of resource.included) {
-                    actions.push(addRecord(record, options));
+                    actions = actions.concat(addRecord(record, options));
                 }
             }
-            actions.push(addRecord(resource.data, options));
+            actions = actions.concat(addRecord(resource.data, options));
         }
-
         return (batchActions(actions));
     },
 
     removeJSONAPIResource: (record) => {
         const normalizedRecord = normalizeRecord(record);
 
-        return ({
-            type: `${normalizedRecord.type.replace('-', '_').toUpperCase()}_REMOVE`,
-            data: normalizedRecord.attributes
-        });
+        return (batchActions(
+            normalizedRecord.type.split('.').map((type) => {
+                return (
+                    {
+                        type: `${type.toUpperCase()}_REMOVE`,
+                        data: normalizedRecord.attributes
+                    }
+                );
+            })
+        ));
     },
 
     removeResource: (record) => {
-        return ({
-            type: `${record.type.replace('-', '_').toUpperCase()}_REMOVE`,
-            data: record
-        });
+        return (batchActions(
+            record.type.split('.').map((type) => {
+                return (
+                    {
+                        type: `${type.toUpperCase()}_REMOVE`,
+                        data: record
+                    }
+                );
+            })
+        ));
     }
 };

@@ -15,17 +15,14 @@ const PageRouter = React.createClass({
     },
 
     render() {
-        switch (this.props.page.type) {
-        case 'main_pages':
-        case 'profile_pages':
+        if (this.props.page.type === 'main_pages' ||
+            this.props.page.type.match(/^pages.profile_pages/)) {
             return (<UserPage {...this.props} />);
-
-        case 'static_pages':
+        } else if (this.props.page.type === 'static_pages') {
             return (<StaticPage { ...this.props} />);
-
-        default:
-            return (<div />);
         }
+
+        return (<div />);
     }
 });
 

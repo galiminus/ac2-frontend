@@ -10,25 +10,21 @@ const UserPage = React.createClass({
     },
 
     render() {
-        switch (this.props.page.type) {
-        case 'main_pages':
+        if (this.props.page.type) {
             return (
                 <div>
                     <PostsContainer {...this.props} />
                 </div>
             );
-
-        case 'profile_pages':
+        } else if (this.props.page.type.match(/^pages.profile_pages/)) {
             return (
                 <div>
                     <ProfileBanner page={this.props.page} />
                     {React.cloneElement(this.props.children, this.props)}
                 </div>
             );
-
-        default:
-            return (<div />);
         }
+        return (<div />);
     }
 });
 

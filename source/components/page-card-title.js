@@ -14,8 +14,7 @@ const PageCardTitle = React.createClass({
     mixins: [PureRenderMixin],
 
     render() {
-        switch (this.props.page.type) {
-        case 'profile_pages':
+        if (this.props.page.type.match(/^pages.profile_pages/)) {
             return (
                 <CardTitle
                     titleColor="#fff"
@@ -38,10 +37,8 @@ const PageCardTitle = React.createClass({
                     {...this.props}
                 />
             );
-
-        default:
-            return (<div />);
         }
+        return (<div />);
     }
 });
 
