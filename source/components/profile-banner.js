@@ -29,13 +29,13 @@ const ProfileBanner = React.createClass({
                 </CardMedia>
                 <CardActions style={{ textAlign: 'right' }}>
                     {
-                        () => {
+                        (() => {
                             if (this.props.page.permissions.update) {
                                 return (
                                     <FlatButton label={this.context.translation.t('labels.editProfile')} />
                                 );
                             }
-                        }()
+                        })()
                     }
                     <Link to={`/${this.props.page.id}/profile`}>
                         <FlatButton label={this.context.translation.t('labels.about')} />

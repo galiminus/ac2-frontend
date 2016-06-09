@@ -35,9 +35,9 @@ const Home = React.createClass({
                         <Navigation currentUserPage={this.props.currentUserPage} />
                         <AdditionalLinks />
                     </div>
-                    <main styleName="mainContent">
+                    <div styleName="mainContent">
                         {this.props.children}
-                    </main>
+                    </div>
                     <Paper styleName="messagePanel">
                         <Roster currentUserPage={this.props.currentUserPage} />
                     </Paper>

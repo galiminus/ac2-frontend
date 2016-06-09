@@ -3,8 +3,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import { connect } from 'react-redux';
 
-import RefreshIndicator from 'material-ui/RefreshIndicator';
-
 import actionCreators from 'action-creators';
 import api from 'api';
 import Immutable from 'immutable';
@@ -61,7 +59,7 @@ const PostsContainer = React.createClass({
     },
 
     loadPosts(pageId, pageNum) {
-        const query = { include: 'sender,recipient,comments,comments.received_likes' };
+        const query = { include: 'received_likes,sender,recipient,comments,comments.received_likes' };
 
         if (pageId) {
             query['filter[participant_id]'] = pageId;
@@ -90,7 +88,6 @@ const PostsContainer = React.createClass({
 
     handleLoadMore() {
         const nextPage = this.state.page + 1;
-        console.log(nextPage);
 
         this.setState({ page: nextPage });
         this.loadPosts(this.props.params.pageId, nextPage);

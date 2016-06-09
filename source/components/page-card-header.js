@@ -8,22 +8,28 @@ const PageCardHeader = React.createClass({
     propTypes: {
         sender: PropTypes.object,
         recipient: PropTypes.object,
-        children: PropTypes.node
+        children: PropTypes.node,
+        additionalInfos: PropTypes.node
     },
 
     render() {
         let title;
+
         if (this.props.recipient && this.props.recipient.type !== 'main_pages') {
             title = (
                 <div>
                     <PageLink page={this.props.sender} />
                     <span style={{ fontSize: 10, marginLeft: 4, marginRight: 4 }}>►</span>
                     <PageLink page={this.props.recipient} />
+                    {this.props.additionalInfos}
                 </div>
             );
         } else {
             title = (
-                <PageLink page={this.props.sender} />
+                <div>
+                    <PageLink page={this.props.sender} />
+                    {this.props.additionalInfos}
+                </div>
             );
         }
 

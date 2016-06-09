@@ -16,6 +16,7 @@ import posts from 'reducers/posts';
 import comments from 'reducers/comments';
 import commentsByPost from 'reducers/comments-by-post';
 import likesByComment from 'reducers/likes-by-comment';
+import likesByPost from 'reducers/likes-by-post';
 import postsByPage from 'reducers/posts-by-page';
 import likes from 'reducers/likes';
 
@@ -38,6 +39,7 @@ const reducers = combineReducers({
     comments,
     commentsByPost,
     likesByComment,
+    likesByPost,
     likes,
     leftNav,
     form,

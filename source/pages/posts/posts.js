@@ -7,7 +7,6 @@ import CSSModules from 'react-css-modules';
 import styles from './posts.css';
 
 import List from 'material-ui/List';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -84,7 +83,7 @@ const Posts = React.createClass({
     renderPosts() {
         const orderedPosts = this.props.posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1));
 
-        return(
+        return (
             orderedPosts.valueSeq().map(post =>
                 <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} />
             ).toJS()
@@ -92,16 +91,15 @@ const Posts = React.createClass({
     },
 
     render() {
-        console.log(this.renderPosts().length, this.props.loadingMore);
         return (
             <div>
                 <div style={{ textAlign: 'center' }}>
                     {
-                        () => {
+                        (() => {
                             if (this.props.updateCount > 0) {
                                 return (this.updatesButton());
                             }
-                        }()
+                        })()
                     }
                 </div>
                 <List>

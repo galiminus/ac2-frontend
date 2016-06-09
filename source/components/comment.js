@@ -38,8 +38,8 @@ const Comment = React.createClass({
         comment: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object,
-        likes: PropTypes.object
+        currentUserPage: PropTypes.object.isRequired,
+        likes: PropTypes.object.isRequired
     },
 
     contextTypes: {
@@ -152,7 +152,7 @@ const Comment = React.createClass({
                                     style={{ margin: '0px 0px 0px -10px' }}
                                 >
                                     {
-                                        () => {
+                                        (() => {
                                             if (this.props.comment.permissions.update) {
                                                 return (
                                                     <MenuItem
@@ -162,10 +162,10 @@ const Comment = React.createClass({
                                                     />
                                                 );
                                             }
-                                        }()
+                                        })()
                                     }
                                     {
-                                        () => {
+                                        (() => {
                                             if (this.props.comment.permissions.destroy) {
                                                 return (
                                                     <MenuItem
@@ -175,7 +175,7 @@ const Comment = React.createClass({
                                                     />
                                                 );
                                             }
-                                        }()
+                                        })()
                                     }
                                     <MenuItem
                                         leftIcon={<ReportIcon />}
