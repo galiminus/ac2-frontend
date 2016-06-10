@@ -34,7 +34,7 @@ const PageLink = React.createClass({
         const styles = getStyles();
 
         let name;
-        if (this.props.page.type.match(/^pages.profile_pages/)) {
+        if (this.props.page.type.match(/^pages.profiles/)) {
             name = this.props.page.data.personal_informations.full_name;
         } else {
             name = '';

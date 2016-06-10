@@ -41,7 +41,7 @@ const Roster = React.createClass({
         return (
             this.props.pages.filter((page) => {
                 return (
-                    page.type === 'profile_pages' &&
+                    page.type === 'profiles' &&
                     page.presence === presence &&
                     page.id !== this.props.currentUserPage.id
                 );

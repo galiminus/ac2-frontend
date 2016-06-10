@@ -37,11 +37,8 @@ const UserAvatar = React.createClass({
     render() {
         const styles = getStyles();
 
-        if (!this.props.page.type) {
-            console.log(this.props.page);
-        }
         let name;
-        if (this.props.page.type.match(/^pages.profile_pages/)) {
+        if (this.props.page.type.match(/^pages.profiles/)) {
             name = this.props.page.data.personal_informations.full_name;
         } else {
             name = '';

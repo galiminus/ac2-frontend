@@ -16,9 +16,9 @@ const PageRouter = React.createClass({
 
     render() {
         if (this.props.page.type === 'main_pages' ||
-            this.props.page.type.match(/^pages.profile_pages/)) {
+            this.props.page.type.match(/^pages.profiles/)) {
             return (<UserPage {...this.props} />);
-        } else if (this.props.page.type === 'static_pages') {
+        } else if (this.props.page.type === 'static.pages') {
             return (<StaticPage { ...this.props} />);
         }
 

@@ -1,11 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import { connect } from 'react-redux';
-import Immutable from 'immutable';
-
-import actionCreators from 'action-creators';
-
 import { ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import PlusOneIcon from 'material-ui/svg-icons/social/plus-one';
@@ -17,7 +12,6 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-import api from 'api';
 import PageAvatar from 'components/page-avatar';
 import PageLink from 'components/page-link';
 import PlusCounter from 'components/plus-counter';
@@ -25,80 +19,26 @@ import Marked from 'components/marked';
 import CreationDate from 'components/creation-date';
 import CommentDialog from 'components/comment-dialog';
 
-function mapStateToProps(state, props) {
-    return {
-        sender: state.pages.get(props.comment.sender_id),
-        likes: state.likesByComment.get(props.comment.id)
-    };
-}
-
 const Comment = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
         comment: PropTypes.object.isRequired,
-        addResource: PropTypes.func.isRequired,
-        removeResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        likes: PropTypes.object.isRequired
-    },
-
-    contextTypes: {
-        translation: PropTypes.object.isRequired
+        likes: PropTypes.object.isRequired,
+        commentEditModalOpen: PropTypes.bool.isRequired,
+        onLikeDestroy: PropTypes.func.isRequired,
+        onLikeCreate: PropTypes.func.isRequired,
+        onCommentDestroy: PropTypes.func.isRequired,
+        translation: PropTypes.object.isRequired,
+        myLike: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
 
-    getDefaultProps() {
-        return {
-            sender: { id: null, type: '' },
-            likes: Immutable.Map({}),
-            currentUserPage: { id: null, type: '' }
-        };
-    },
-
-    getInitialState() {
-        return { commentEditModalOpen: false };
-    },
-
-    myLike() {
-        return (this.props.likes.find((like) => like.permissions.destroy));
-    },
-
-    handleLikeCreate() {
-        api.likes.create({
-            liked_id: this.props.comment.id,
-            liked_type: 'Comment'
-        }).then((response) => {
-            this.props.addResource(response);
-        });
-    },
-
-    handleLikeDestroy() {
-        const myLike = this.myLike();
-
-        api.likes.destroy(myLike.id).then(() => {
-            this.props.removeResource(myLike);
-        });
-    },
-
-    handleCommentDestroy() {
-        api.comments.destroy(this.props.comment.id).then(() => {
-            this.props.removeResource(this.props.comment);
-        });
-    },
-
-    handleOpenCommentEditModal() {
-        this.setState({ commentEditModalOpen: true });
-    },
-
-    handleCloseCommentEditModal() {
-        this.setState({ commentEditModalOpen: false });
-    },
-
     render() {
-        const isLiked = !!this.myLike();
+        const isLiked = !!this.props.myLike;
 
-        if (this.props.sender.type.match(/^pages.profile_pages/)) {
+        if (this.props.sender.type.match(/^pages.profiles/)) {
             return (
                 <div>
                     <ListItem
@@ -129,7 +69,7 @@ const Comment = React.createClass({
                         rightIconButton={
                             <div style={{ display: 'flex' }}>
                                 <IconButton
-                                    onClick={isLiked ? this.handleLikeDestroy : this.handleLikeCreate}
+                                    onClick={isLiked ? this.props.onLikeDestroy : this.props.onLikeCreate}
                                     iconStyle={{
                                         width: 16,
                                         height: 16,
@@ -156,8 +96,8 @@ const Comment = React.createClass({
                                                 return (
                                                     <MenuItem
                                                         leftIcon={<EditIcon />}
-                                                        primaryText={this.context.translation.t('actions.edit')}
-                                                        onClick={this.handleOpenCommentEditModal}
+                                                        primaryText={this.props.translation.t('actions.edit')}
+                                                        onClick={this.props.onOpenCommentEditModal}
                                                     />
                                                 );
                                             }
@@ -169,8 +109,8 @@ const Comment = React.createClass({
                                                 return (
                                                     <MenuItem
                                                         leftIcon={<DeleteIcon />}
-                                                        primaryText={this.context.translation.t('actions.destroy')}
-                                                        onClick={this.handleCommentDestroy}
+                                                        primaryText={this.props.translation.t('actions.destroy')}
+                                                        onClick={this.props.onCommentDestroy}
                                                     />
                                                 );
                                             }
@@ -178,8 +118,8 @@ const Comment = React.createClass({
                                     }
                                     <MenuItem
                                         leftIcon={<ReportIcon />}
-                                        primaryText={this.context.translation.t('actions.report')}
-                                        onClick={this.handleCommentReport}
+                                        primaryText={this.props.translation.t('actions.report')}
+                                        onClick={this.props.onCommentReport}
                                     />
                                 </IconMenu>
                             </div>
@@ -188,8 +128,8 @@ const Comment = React.createClass({
                     <CommentDialog
                         contentStyle={{ width: 500 }}
                         modal={false}
-                        open={this.state.commentEditModalOpen}
-                        onRequestClose={this.handleCloseCommentEditModal}
+                        open={this.props.commentEditModalOpen}
+                        onRequestClose={this.props.onCloseCommentEditModal}
                         sender={this.props.sender}
                         initialValues={this.props.comment.data}
                         id={this.props.comment.id}
@@ -202,4 +142,4 @@ const Comment = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(Comment);
+export default Comment;

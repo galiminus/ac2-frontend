@@ -16,7 +16,7 @@ const UserPage = React.createClass({
                     <PostsContainer {...this.props} />
                 </div>
             );
-        } else if (this.props.page.type.match(/^pages.profile_pages/)) {
+        } else if (this.props.page.type.match(/^pages.profiles/)) {
             return (
                 <div>
                     <ProfileBanner page={this.props.page} />

@@ -5,12 +5,10 @@ export default function (state = Immutable.Map({}), action) {
     let newState;
 
     switch (action.type) {
-    case 'PROFILE_PAGES_ADD':
     case 'PAGES_ADD':
         posts = state.get(action.data.id) || Immutable.Map({});
         return state.set(action.data.id, posts);
 
-    case 'PROFILE_PAGES_REMOVE':
     case 'PAGES_REMOVE':
         return state.delete(action.data.id);
 

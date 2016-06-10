@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
+import actionCreators from 'action-creators';
+
 import { connect } from 'react-redux';
 
 import { List } from 'material-ui/List';
 
 import Divider from 'material-ui/Divider';
 
-import actionCreators from 'action-creators';
-
 import CommentForm from 'components/comment-form';
-import Comment from 'components/comment';
+import CommentContainer from 'components/comment/comment-container';
 
 function mapStateToProps(state, props) {
     return { comments: state.commentsByPost.get(props.postId) };
@@ -41,7 +41,7 @@ const Comments = React.createClass({
                 <List style={{ background: '#f5f5f5' }}>
                     {comments.valueSeq().map(comment => {
                         return (
-                            <Comment
+                            <CommentContainer
                                 key={comment.id}
                                 comment={comment}
                                 currentUserPage={this.props.currentUserPage}
