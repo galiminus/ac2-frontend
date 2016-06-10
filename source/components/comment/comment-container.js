@@ -10,8 +10,6 @@ import api from 'api';
 
 import Comment from "./comment";
 
-console.log(Comment);
-
 function mapStateToProps(state, props) {
     return {
         sender: state.pages.get(props.comment.sender_id),

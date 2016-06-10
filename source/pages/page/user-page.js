@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import ProfileBanner from 'components/profile-banner';
-import PostsContainer from 'pages/posts/posts-container';
+import MessagesContainer from 'pages/messages/messages-container';
 
 const UserPage = React.createClass({
     propTypes: {
@@ -13,7 +13,7 @@ const UserPage = React.createClass({
         if (this.props.page.type) {
             return (
                 <div>
-                    <PostsContainer {...this.props} />
+                    <MessagesContainer {...this.props} />
                 </div>
             );
         } else if (this.props.page.type.match(/^pages.profiles/)) {

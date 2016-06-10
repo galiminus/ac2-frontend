@@ -3,9 +3,9 @@ import generateUUID from 'utils/uuid';
 
 export default (attributes) => {
     return new Promise((resolve, reject) => {
-        create('/posts', {
+        create('/messages', {
             data: {
-                type: 'posts',
+                type: 'messages',
                 id: generateUUID(),
                 attributes
             }

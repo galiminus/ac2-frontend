@@ -1,29 +1,20 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import { connect } from 'react-redux';
-
 import List from 'material-ui/List';
 import { red500, yellow500, green500 } from 'material-ui/styles/colors';
 
 import StatusIndicator from 'material-ui/svg-icons/image/brightness-1';
 
 import RosterItem from 'components/roster-item';
-
-function mapStateToProps(state) {
-    return {
-        pages: state.pages
-    };
-}
+import CompactRosterItem from 'components/compact-roster-item';
 
 const Roster = React.createClass({
     propTypes: {
-        pages: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
-    },
-
-    contextTypes: {
-        translation: PropTypes.object.isRequired
+        recipients: PropTypes.object.isRequired,
+        currentUserPage: PropTypes.object.isRequired,
+        onSetCurrentRecipient: PropTypes.func.isRequired,
+        compact: PropTypes.bool
     },
 
     mixins: [PureRenderMixin],
@@ -37,27 +28,46 @@ const Roster = React.createClass({
         });
     },
 
-    pagesByPresence(presence) {
+    recipientsByPresence(presence) {
         return (
-            this.props.pages.filter((page) => {
+            this.props.recipients.filter((recipient) => {
                 return (
-                    page.type === 'profiles' &&
-                    page.presence === presence &&
-                    page.id !== this.props.currentUserPage.id
+                    recipient.type.match(/pages.profiles$/) &&
+                    recipient.presence === presence &&
+                    recipient.id !== this.props.currentUserPage.id
                 );
             })
         );
     },
 
-    render() {
+    renderCompact() {
         return (
             <List>
                 {
-                    this.pagesByPresence('available').valueSeq().map((page) => {
+                    this.recipientsByPresence('available').valueSeq().map((recipient) => {
+                        return (
+                            <CompactRosterItem
+                                key={recipient.id}
+                                recipient={recipient}
+                                onClick={() => this.props.onSetCurrentRecipient(recipient) }
+                            />
+                        );
+                    })
+                }
+            </List>
+        );
+    },
+
+    renderWide() {
+        return (
+            <List>
+                {
+                    this.recipientsByPresence('available').valueSeq().map((recipient) => {
                         return (
                             <RosterItem
-                                key={page.id}
-                                recipient={page}
+                                key={recipient.id}
+                                recipient={recipient}
+                                onClick={() => this.props.onSetCurrentRecipient(recipient) }
                                 rightIcon={
                                     <StatusIndicator style={{ fill: green500, width: 8, height: 8, top: 12 }} />
                                 }
@@ -67,7 +77,11 @@ const Roster = React.createClass({
                 }
             </List>
         );
+    },
+
+    render() {
+        return (this.props.compact ? this.renderCompact() : this.renderWide());
     }
 });
 
-export default connect(mapStateToProps)(Roster);
+export default Roster;

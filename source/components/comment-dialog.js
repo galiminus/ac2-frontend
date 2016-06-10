@@ -31,7 +31,7 @@ const form = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
-    post(fields, dispatch) {
+    message(fields, dispatch) {
         api.comments.update(this.props.id, {
             type: 'text',
             data: {
@@ -67,9 +67,9 @@ const form = React.createClass({
                     <FlatButton
                         disabled={body.invalid}
                         type="submit"
-                        label={this.context.translation.t('actions.post')}
+                        label={this.context.translation.t('actions.message')}
                         secondary
-                        onClick={handleSubmit(this.post)}
+                        onClick={handleSubmit(this.message)}
                     />
                 ]}
             >

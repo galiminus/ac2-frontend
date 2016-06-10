@@ -1,7 +1,7 @@
 import { find } from 'api/http';
 
-export default function (postId, query) {
+export default function (messageId, query) {
     return new Promise((resolve, reject) => {
-        find(`/posts/${postId}/relationships/comments`, query).then(resolve).catch(reject);
+        find(`/messages/${messageId}/relationships/comments`, query).then(resolve).catch(reject);
     });
 }

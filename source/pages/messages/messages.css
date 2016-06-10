@@ -1,4 +1,4 @@
-.addPostButton {
+.addMessageButton {
     position: fixed;
     bottom: 24px;
     right: 328px;
@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 800px) {
-    .addPostButton {
+    .addMessageButton {
         right: 28px;
     }
 }

@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import InfiniteScroll from 'redux-infinite-scroll';
 
 import CSSModules from 'react-css-modules';
-import styles from './posts.css';
+import styles from './messages.css';
 
 import List from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -14,13 +14,13 @@ import CreateContentIcon from 'material-ui/svg-icons/content/create';
 import RefreshIcon from 'material-ui/svg-icons/navigation/arrow-upward';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
-import PostDialog from 'components/post-dialog';
+import MessageDialog from 'components/message-dialog';
 
-import Post from 'components/post';
+import Message from 'components/message';
 
-const Posts = React.createClass({
+const Messages = React.createClass({
     propTypes: {
-        posts: PropTypes.object.isRequired,
+        messages: PropTypes.object.isRequired,
         onLoadUpdates: PropTypes.func,
         onLoadMore: PropTypes.func,
         updateCount: PropTypes.number,
@@ -37,15 +37,15 @@ const Posts = React.createClass({
     mixins: [PureRenderMixin],
 
     getInitialState() {
-        return { postCreationModalOpen: false };
+        return { messageCreationModalOpen: false };
     },
 
-    handleOpenPostCreationModal() {
-        this.setState({ postCreationModalOpen: true });
+    handleOpenMessageCreationModal() {
+        this.setState({ messageCreationModalOpen: true });
     },
 
-    handleClosePostCreationModal() {
-        this.setState({ postCreationModalOpen: false });
+    handleCloseMessageCreationModal() {
+        this.setState({ messageCreationModalOpen: false });
     },
 
     updatesButton() {
@@ -73,19 +73,19 @@ const Posts = React.createClass({
                 >
                     <RefreshIcon style={{ height: 34 }} color="#fff" />
                     <div>
-                        {this.context.translation.t('actions.loadPostUpdates')}
+                        {this.context.translation.t('actions.loadMessageUpdates')}
                     </div>
                 </div>
             </RaisedButton>
         );
     },
 
-    renderPosts() {
-        const orderedPosts = this.props.posts.sort((post1, post2) => (post1.updated_at > post2.updated_at ? -1 : 1));
+    renderMessages() {
+        const orderedMessages = this.props.messages.sort((message1, message2) => (message1.updated_at > message2.updated_at ? -1 : 1));
 
         return (
-            orderedPosts.valueSeq().map(post =>
-                <Post key={post.id} post={post} currentUserPage={this.props.currentUserPage} />
+            orderedMessages.valueSeq().map(message =>
+                <Message key={message.id} message={message} currentUserPage={this.props.currentUserPage} />
             ).toJS()
         );
     },
@@ -130,17 +130,17 @@ const Posts = React.createClass({
                             </div>
                         }
                     >
-                        {this.renderPosts()}
+                        {this.renderMessages()}
                     </InfiniteScroll>
                 </List>
-                <FloatingActionButton styleName="addPostButton" onMouseUp={this.handleOpenPostCreationModal}>
+                <FloatingActionButton styleName="addMessageButton" onMouseUp={this.handleOpenMessageCreationModal}>
                     <CreateContentIcon />
                 </FloatingActionButton>
-                <PostDialog
+                <MessageDialog
                     contentStyle={{ width: 500 }}
                     modal={false}
-                    open={this.state.postCreationModalOpen}
-                    onRequestClose={this.handleClosePostCreationModal}
+                    open={this.state.messageCreationModalOpen}
+                    onRequestClose={this.handleCloseMessageCreationModal}
                     sender={this.props.currentUserPage}
                     recipient={this.props.page}
                 />
@@ -149,4 +149,4 @@ const Posts = React.createClass({
     }
 });
 
-export default CSSModules(Posts, styles);
+export default CSSModules(Messages, styles);

@@ -22,7 +22,7 @@ const reducer = compose(
 )(rootReducer);
 
 const storage = compose(
-    filter(['tokens', 'currentUser', 'users', 'currentToken', 'pages', 'posts'])
+    filter(['tokens', 'currentUser', 'users', 'currentToken', 'pages', 'messages'])
 )(adapter(window.localStorage));
 
 const logger = createLogger();

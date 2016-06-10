@@ -32,7 +32,7 @@ import RecoverForm from 'pages/welcome/recover-form';
 
 import PageContainer from 'pages/page/page-container';
 import Profile from 'pages/profile';
-import PostsContainer from 'pages/posts/posts-container';
+import MessagesContainer from 'pages/messages/messages-container';
 import Account from 'pages/account';
 import Messages from 'pages/messages';
 
@@ -116,7 +116,7 @@ const Application = React.createClass({
                     </Route>
 
                     <Route path=":pageId" component={PageContainer}>
-                        <IndexRoute component={PostsContainer} />
+                        <IndexRoute component={MessagesContainer} />
                     </Route>
                 </Route>
             </Router>

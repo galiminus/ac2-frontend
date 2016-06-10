@@ -2,13 +2,13 @@ import Immutable from 'immutable';
 
 export default function (state = Immutable.Map({}), action) {
     switch (action.type) {
-    case 'POSTS_ADD':
+    case 'MESSAGES_ADD':
         return state.set(action.data.id, action.data);
 
-    case 'POSTS_REMOVE':
+    case 'MESSAGES_REMOVE':
         return state.delete(action.data.id);
 
-    case 'POSTS_CLEAR':
+    case 'MESSAGES_CLEAR':
         return state.clear();
 
     default:

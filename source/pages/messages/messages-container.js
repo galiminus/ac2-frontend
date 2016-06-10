@@ -7,23 +7,23 @@ import actionCreators from 'action-creators';
 import api from 'api';
 import Immutable from 'immutable';
 
-import Posts from './posts';
+import Messages from './messages';
 
-const emptyPosts = Immutable.Map({});
+const emptyMessages = Immutable.Map({});
 
 function mapStateToProps(state, props) {
     if (props.page.type === 'main_pages') {
-        return ({ posts: state.posts });
+        return ({ messages: state.messages });
     }
 
-    return ({ posts: state.postsByPage.get(props.page.id) || emptyPosts });
+    return ({ messages: state.messagesByPage.get(props.page.id) || emptyMessages });
 }
 
-const PostsContainer = React.createClass({
+const MessagesContainer = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
-        posts: PropTypes.object.isRequired,
-        clearPosts: PropTypes.func.isRequired,
+        messages: PropTypes.object.isRequired,
+        clearMessages: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object,
         page: PropTypes.object.isRequired
@@ -40,25 +40,25 @@ const PostsContainer = React.createClass({
             page: 1,
             loadingMore: false,
             hasMore: false,
-            lastPostDate: null,
+            lastMessageDate: null,
             updateCount: 0,
-            postCreationModalOpen: false
+            messageCreationModalOpen: false
         };
     },
 
     componentDidMount() {
-        this.props.clearPosts();
-        this.loadPosts(this.props.params.pageId, 1);
+        this.props.clearMessages();
+        this.loadMessages(this.props.params.pageId, 1);
     },
 
     componentWillReceiveProps(newProps) {
         if (this.props.params.pageId !== newProps.params.pageId) {
-            this.props.clearPosts();
-            this.loadPosts(newProps.params.pageId, 1);
+            this.props.clearMessages();
+            this.loadMessages(newProps.params.pageId, 1);
         }
     },
 
-    loadPosts(pageId, pageNum) {
+    loadMessages(pageId, pageNum) {
         const query = { include: 'received_likes,sender,recipient,comments,comments.received_likes' };
 
         if (pageId) {
@@ -71,11 +71,11 @@ const PostsContainer = React.createClass({
 
         this.setState({ loadingMore: true });
 
-        api.posts.find(query).then((response) => {
+        api.messages.find(query).then((response) => {
             this.props.addResource(response);
 
             if (response.data.length > 0) {
-                this.setState({ lastPostDate: response.data[0].updated_at });
+                this.setState({ lastMessageDate: response.data[0].updated_at });
             }
             this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
         });
@@ -83,14 +83,14 @@ const PostsContainer = React.createClass({
 
     handleLoadUpdates() {
         this.setState({ updateCount: 0 });
-        this.loadPosts(this.props.params.pageId, 1);
+        this.loadMessages(this.props.params.pageId, 1);
     },
 
     handleLoadMore() {
         const nextPage = this.state.page + 1;
 
         this.setState({ page: nextPage });
-        this.loadPosts(this.props.params.pageId, nextPage);
+        this.loadMessages(this.props.params.pageId, nextPage);
     },
     //
     // handleMessage(message) {
@@ -114,8 +114,8 @@ const PostsContainer = React.createClass({
 
     render() {
         return (
-            <Posts
-                posts={this.props.posts}
+            <Messages
+                messages={this.props.messages}
                 page={this.props.page}
                 onLoadMore={this.handleLoadMore}
                 onLoadUpdates={this.handleLoadUpdates}
@@ -128,4 +128,4 @@ const PostsContainer = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(PostsContainer);
+export default connect(mapStateToProps, actionCreators)(MessagesContainer);

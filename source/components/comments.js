@@ -13,12 +13,12 @@ import CommentForm from 'components/comment-form';
 import CommentContainer from 'components/comment/comment-container';
 
 function mapStateToProps(state, props) {
-    return { comments: state.commentsByPost.get(props.postId) };
+    return { comments: state.commentsByMessage.get(props.messageId) };
 }
 
 const Comments = React.createClass({
     propTypes: {
-        postId: PropTypes.string.isRequired,
+        messageId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object,
@@ -58,8 +58,8 @@ const Comments = React.createClass({
                 <Divider />
                 <CommentForm
                     style={{ padding: '0 26px' }}
-                    postId={this.props.postId}
-                    formKey={this.props.postId}
+                    messageId={this.props.messageId}
+                    formKey={this.props.messageId}
                     currentUserPage={this.props.currentUserPage}
                 />
             </aside>

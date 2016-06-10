@@ -1,9 +1,9 @@
 import { create } from 'api/http';
 import generateUUID from 'utils/uuid';
 
-export default (postId, attributes) => {
+export default (messageId, attributes) => {
     return new Promise((resolve, reject) => {
-        create(`/posts/${postId}/relationships/comments`, {
+        create(`/messages/${messageId}/relationships/comments`, {
             data: {
                 type: 'comments',
                 id: generateUUID(),

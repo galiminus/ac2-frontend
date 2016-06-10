@@ -23,7 +23,7 @@ const form = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        postId: PropTypes.string.isRequired,
+        messageId: PropTypes.string.isRequired,
         currentUserPage: PropTypes.object.isRequired,
         error: PropTypes.string
     },
@@ -32,8 +32,8 @@ const form = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
-    post(fields, dispatch) {
-        api.comments.create(this.props.postId, {
+    message(fields, dispatch) {
+        api.comments.create(this.props.messageId, {
             type: 'text',
             access_controls_attributes: [{ authorized_party_type: 'All' }],
             data: {
@@ -77,7 +77,7 @@ const form = React.createClass({
                         />
                     }
                     rightIconButton={
-                        <IconButton onClick={handleSubmit(this.post)} disabled={body.invalid}>
+                        <IconButton onClick={handleSubmit(this.message)} disabled={body.invalid}>
                             <SendIcon />
                         </IconButton>
                     }

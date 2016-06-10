@@ -20,23 +20,23 @@ import actionCreators from 'action-creators';
 import PageCardHeader from 'components/page-card-header';
 import Comments from 'components/comments';
 import Marked from 'components/marked';
-import PostDialog from 'components/post-dialog';
+import MessageDialog from 'components/message-dialog';
 import CreationDate from 'components/creation-date';
 import PlusCounter from 'components/plus-counter';
 
 function mapStateToProps(state, props) {
     return {
-        sender: state.pages.get(props.post.sender_id),
-        recipient: state.pages.get(props.post.recipient_id),
-        likes: state.likesByPost.get(props.post.id)
+        sender: state.pages.get(props.message.sender_id),
+        recipient: state.pages.get(props.message.recipient_id),
+        likes: state.likesByMessage.get(props.message.id)
     };
 }
 
-const Post = React.createClass({
+const Message = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
         recipient: PropTypes.object,
-        post: PropTypes.object.isRequired,
+        message: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
@@ -58,20 +58,20 @@ const Post = React.createClass({
     },
 
     getInitialState() {
-        return { postEditModalOpen: false };
+        return { messageEditModalOpen: false };
     },
 
-    handleOpenPostEditModal() {
-        this.setState({ postEditModalOpen: true });
+    handleOpenMessageEditModal() {
+        this.setState({ messageEditModalOpen: true });
     },
 
-    handleClosePostEditModal() {
-        this.setState({ postEditModalOpen: false });
+    handleCloseMessageEditModal() {
+        this.setState({ messageEditModalOpen: false });
     },
 
-    handlePostDestroy() {
-        api.posts.destroy(this.props.post.id).then(() => {
-            this.props.removeResource(this.props.post);
+    handleMessageDestroy() {
+        api.messages.destroy(this.props.message.id).then(() => {
+            this.props.removeResource(this.props.message);
         });
     },
 
@@ -81,8 +81,8 @@ const Post = React.createClass({
 
     handleLikeCreate() {
         api.likes.create({
-            liked_id: this.props.post.id,
-            liked_type: 'Post'
+            liked_id: this.props.message.id,
+            liked_type: 'Message'
         }).then((response) => {
             this.props.addResource(response);
         });
@@ -106,7 +106,7 @@ const Post = React.createClass({
                     recipient={this.props.recipient}
                     additionalInfos={<PlusCounter likes={this.props.likes} />}
                     subtitle={
-                        <CreationDate date={this.props.post.created_at} />
+                        <CreationDate date={this.props.message.created_at} />
                     }
                 >
                     <div style={{ float: 'right' }}>
@@ -134,12 +134,12 @@ const Post = React.createClass({
                         >
                             {
                                 (() => {
-                                    if (this.props.post.permissions.update) {
+                                    if (this.props.message.permissions.update) {
                                         return (
                                             <MenuItem
                                                 leftIcon={<EditIcon />}
                                                 primaryText={this.context.translation.t('actions.edit')}
-                                                onClick={this.handleOpenPostEditModal}
+                                                onClick={this.handleOpenMessageEditModal}
                                             />
                                         );
                                     }
@@ -148,12 +148,12 @@ const Post = React.createClass({
 
                             {
                                 (() => {
-                                    if (this.props.post.permissions.destroy) {
+                                    if (this.props.message.permissions.destroy) {
                                         return (
                                             <MenuItem
                                                 leftIcon={<DeleteIcon />}
                                                 primaryText={this.context.translation.t('actions.destroy')}
-                                                onClick={this.handlePostDestroy}
+                                                onClick={this.handleMessageDestroy}
                                             />
                                         );
                                     }
@@ -162,29 +162,29 @@ const Post = React.createClass({
                             <MenuItem
                                 leftIcon={<ReportIcon />}
                                 primaryText={this.context.translation.t('actions.report')}
-                                onClick={this.handlePostReport}
+                                onClick={this.handleMessageReport}
                             />
 
                         </IconMenu>
                     </div>
-                    <PostDialog
+                    <MessageDialog
                         contentStyle={{ width: 500 }}
                         modal={false}
-                        open={this.state.postEditModalOpen}
-                        onRequestClose={this.handleClosePostEditModal}
+                        open={this.state.messageEditModalOpen}
+                        onRequestClose={this.handleCloseMessageEditModal}
                         sender={this.props.currentUserPage}
                         recipient={this.props.recipient}
-                        initialValues={this.props.post.data}
-                        id={this.props.post.id}
-                        formKey={this.props.post.id}
+                        initialValues={this.props.message.data}
+                        id={this.props.message.id}
+                        formKey={this.props.message.id}
                     />
                 </PageCardHeader>
                 <Divider inset />
                 <CardText>
-                    <Marked body={this.props.post.data.body} />
+                    <Marked body={this.props.message.data.body} />
                 </CardText>
                 <Comments
-                    postId={this.props.post.id}
+                    messageId={this.props.message.id}
                     parentId={null}
                     currentUserPage={this.props.currentUserPage}
                 />
@@ -193,4 +193,4 @@ const Post = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(Post);
+export default connect(mapStateToProps, actionCreators)(Message);

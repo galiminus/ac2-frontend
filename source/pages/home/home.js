@@ -5,6 +5,7 @@ import styles from './home.css';
 import Drawer from 'material-ui/Drawer';
 import Paper from 'material-ui/Paper';
 
+import Chat from "components/chat/chat-container";
 import DisconnectedModal from 'components/disconnected-modal';
 import Navigation from 'components/navigation';
 import HeaderBar from 'components/header-bar';
@@ -39,7 +40,9 @@ const Home = React.createClass({
                         {this.props.children}
                     </div>
                     <Paper styleName="messagePanel">
-                        <Roster currentUserPage={this.props.currentUserPage} />
+                        <Chat
+                            currentUserPage={this.props.currentUserPage}
+                        />
                     </Paper>
                 </div>
 

@@ -12,12 +12,12 @@ import currentPage from 'reducers/current-page';
 
 import pages from 'reducers/pages';
 import pageTypes from 'reducers/page_types';
-import posts from 'reducers/posts';
+import messages from 'reducers/messages';
 import comments from 'reducers/comments';
-import commentsByPost from 'reducers/comments-by-post';
+import commentsByMessage from 'reducers/comments-by-message';
 import likesByComment from 'reducers/likes-by-comment';
-import likesByPost from 'reducers/likes-by-post';
-import postsByPage from 'reducers/posts-by-page';
+import likesByMessage from 'reducers/likes-by-message';
+import messagesByPage from 'reducers/messages-by-page';
 import likes from 'reducers/likes';
 
 import notifications from 'reducers/notifications';
@@ -32,14 +32,14 @@ const reducers = combineReducers({
     users,
     currentUser,
     currentPage,
-    posts,
-    postsByPage,
+    messages,
+    messagesByPage,
     pages,
     pageTypes,
     comments,
-    commentsByPost,
+    commentsByMessage,
     likesByComment,
-    likesByPost,
+    likesByMessage,
     likes,
     leftNav,
     form,

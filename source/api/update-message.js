@@ -2,9 +2,9 @@ import { update } from 'api/http';
 
 export default (id, attributes) =>
     new Promise((resolve, reject) =>
-        update(`/posts/${id}`, {
+        update(`/messages/${id}`, {
             data: {
-                type: 'posts',
+                type: 'messages',
                 attributes
             }
         })

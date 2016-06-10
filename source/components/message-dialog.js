@@ -33,14 +33,14 @@ const form = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
-    createPost(fields) {
+    createMessage(fields) {
         let recipientParams = {};
         if (this.props.recipient) {
             recipientParams = { recipient_id: this.props.recipient.id };
         }
 
         return (
-            api.posts.create({
+            api.messages.create({
                 type: 'text',
                 ...recipientParams,
                 access_controls_attributes: [{ authorized_party_type: 'All' }],
@@ -51,9 +51,9 @@ const form = React.createClass({
         );
     },
 
-    updatePost(id, fields) {
+    updateMessage(id, fields) {
         return (
-            api.posts.update(id, {
+            api.messages.update(id, {
                 type: 'text',
                 data: {
                     body: fields.body
@@ -62,17 +62,17 @@ const form = React.createClass({
         );
     },
 
-    post(fields, dispatch) {
+    message(fields, dispatch) {
         let promise;
         if (this.props.id) {
-            promise = this.updatePost(this.props.id, fields);
+            promise = this.updateMessage(this.props.id, fields);
         } else {
-            promise = this.createPost(fields);
+            promise = this.createMessage(fields);
         }
 
         promise.then((response) => {
             dispatch(batchActions([
-                reset('post'),
+                reset('message'),
                 addResource(response)
             ]));
             this.props.onRequestClose();
@@ -103,9 +103,9 @@ const form = React.createClass({
                     <FlatButton
                         disabled={body.invalid}
                         type="submit"
-                        label={this.context.translation.t('actions.post')}
+                        label={this.context.translation.t('actions.message')}
                         secondary
-                        onClick={handleSubmit(this.post)}
+                        onClick={handleSubmit(this.message)}
                     />
                 ]}
             >
@@ -122,7 +122,7 @@ const form = React.createClass({
 });
 
 export default reduxForm({
-    form: 'post',
+    form: 'message',
     fields: ['body'],
     validate
 })(form);
