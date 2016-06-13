@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 
-import {
-    ListItem,
-    TextField
-} from 'material-ui';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+import ListItem from 'material-ui/List/ListItem';
+import TextField from 'material-ui/TextField';
 
 import { validateText } from 'validators';
 
@@ -23,7 +22,8 @@ const Field = React.createClass({
         type: PropTypes.string.isRequired,
         error: PropTypes.string,
         label: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired
+        onChange: PropTypes.func.isRequired,
+        editable: PropTypes.bool.isRequired
     },
 
     contextTypes: {
@@ -43,7 +43,7 @@ const Field = React.createClass({
     },
 
     switchToEditMode() {
-        if (!this.state.mouseInside) {
+        if (!this.state.mouseInside && this.props.editable) {
             this.setState({ edit: true, mouseInside: true });
         }
     },
@@ -113,6 +113,7 @@ const Field = React.createClass({
                 primaryText={this.context.translation.t(this.props.label)}
                 secondaryText={secondaryText}
                 onTouchTap={this.switchToEditMode}
+                rightIcon={this.props.editable ? <EditIcon /> : undefined}
             />
         );
     },

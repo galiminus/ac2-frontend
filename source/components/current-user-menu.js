@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from 'react-redux';
 
 import Avatar from 'material-ui/Avatar';
@@ -22,6 +24,8 @@ const CurrentUserMenu = React.createClass({
     contextTypes: {
         translation: PropTypes.object.isRequired
     },
+
+    mixins: [PureRenderMixin],
 
     getDefaultProps() {
         return ({

@@ -2,10 +2,10 @@ import Immutable from 'immutable';
 
 export default function (state = Immutable.Map({}), action) {
     switch (action.type) {
-    case 'LIKES_ADD':
+    case 'LIKE_ADD':
         return state.set(action.data.id, action.data);
 
-    case 'LIKES_REMOVE':
+    case 'LIKE_REMOVE':
         return state.delete(action.data.id);
 
     default:

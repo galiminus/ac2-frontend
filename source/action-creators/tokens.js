@@ -1,6 +1,6 @@
 export default {
     addToken: (data) => {
-        return ({ type: 'TOKENS_ADD', data });
+        return ({ type: 'TOKEN_ADD', data });
     },
 
     clearTokens: () => {

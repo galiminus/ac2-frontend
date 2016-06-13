@@ -1,7 +1,10 @@
 export default function (state = { message: '' }, action) {
     switch (action.type) {
-    case 'NOTIFICATIONS_PUSH':
+    case 'NOTIFICATION_PUSH':
         return action.data;
+
+    case 'NOTIFICATIONS_CLEAR':
+        return ({ message: '' });
 
     default:
         return state;

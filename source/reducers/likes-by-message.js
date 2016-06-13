@@ -4,22 +4,22 @@ export default function (state = Immutable.Map({}), action) {
     let likes;
 
     switch (action.type) {
-    case 'MESSAGES_ADD':
+    case 'MESSAGE_ADD':
         likes = state.get(action.data.id) || Immutable.Map({});
         return state.set(action.data.id, likes);
 
-    case 'MESSAGES_REMOVE':
+    case 'MESSAGE_REMOVE':
         return state.delete(action.data.id);
 
-    case 'LIKES_ADD':
-        if (action.data.liked_type === 'messages') {
+    case 'LIKE_ADD':
+        if (action.data.liked_type.match(/^Message/)) {
             likes = state.get(action.data.liked_id) || Immutable.Map({});
             return (state.set(action.data.liked_id, likes.set(action.data.id, action.data)));
         }
         return (state);
 
-    case 'LIKES_REMOVE':
-        if (action.data.liked_type === 'messages') {
+    case 'LIKE_REMOVE':
+        if (action.data.liked_type.match(/^Message/)) {
             likes = state.get(action.data.liked_id) || Immutable.Map({});
             return (state.set(action.data.liked_id, likes.delete(action.data.id)));
         }

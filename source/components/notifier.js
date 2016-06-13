@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from 'react-redux';
 import { Snackbar } from 'material-ui';
+
+import actionCreators from "action-creators";
 
 function mapStateToProps(state) {
     return {
@@ -23,7 +27,11 @@ const Notifier = React.createClass({
         });
     },
 
-    handleRequestClose() {},
+    mixins: [PureRenderMixin],
+
+    handleRequestClose() {
+        this.props.clearNotifications()
+    },
 
     render() {
         const style = {
@@ -32,9 +40,14 @@ const Notifier = React.createClass({
 
         const message = this.props.notification.message ? this.context.translation.t(`errors.${this.props.notification.message}`) : '';
         return (
-            <Snackbar message={message} style={style} open={message !== ''} onRequestClose={this.handleRequestClose} />
+            <Snackbar
+                message={message}
+                style={style}
+                open={message !== ''}
+                onRequestClose={this.handleRequestClose}
+            />
         );
     }
 });
 
-export default connect(mapStateToProps)(Notifier);
+export default connect(mapStateToProps, actionCreators)(Notifier);

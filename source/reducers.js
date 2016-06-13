@@ -11,7 +11,6 @@ import currentToken from 'reducers/current-token';
 import currentPage from 'reducers/current-page';
 
 import pages from 'reducers/pages';
-import pageTypes from 'reducers/page_types';
 import messages from 'reducers/messages';
 import comments from 'reducers/comments';
 import commentsByMessage from 'reducers/comments-by-message';
@@ -35,7 +34,6 @@ const reducers = combineReducers({
     messages,
     messagesByPage,
     pages,
-    pageTypes,
     comments,
     commentsByMessage,
     likesByComment,

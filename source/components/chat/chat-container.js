@@ -8,7 +8,7 @@ import actionCreators from 'action-creators';
 
 import api from 'api';
 
-import Roster from "components/roster";
+import Roster from "components/roster/roster";
 
 function mapStateToProps(state) {
     return {

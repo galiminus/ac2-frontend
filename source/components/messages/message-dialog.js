@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
+import { batchActions } from 'redux-batched-actions';
 
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
@@ -20,6 +21,7 @@ const validate = values => {
 const form = React.createClass({
     propTypes: {
         sender: PropTypes.object,
+        recipient: PropTypes.object,
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         onRequestClose: PropTypes.func.isRequired,
@@ -31,14 +33,48 @@ const form = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
+    createMessage(fields) {
+        let recipientParams = {};
+        if (this.props.recipient) {
+            recipientParams = { recipient_id: this.props.recipient.id };
+        }
+
+        return (
+            api.messages.create({
+                type: 'text',
+                ...recipientParams,
+                access_controls_attributes: [{ authorized_party_type: 'All' }],
+                data: {
+                    body: fields.body
+                }
+            })
+        );
+    },
+
+    updateMessage(id, fields) {
+        return (
+            api.messages.update(id, {
+                type: 'text',
+                data: {
+                    body: fields.body
+                }
+            })
+        );
+    },
+
     message(fields, dispatch) {
-        api.comments.update(this.props.id, {
-            type: 'text',
-            data: {
-                body: fields.body
-            }
-        }).then((response) => {
-            dispatch(addResource(response));
+        let promise;
+        if (this.props.id) {
+            promise = this.updateMessage(this.props.id, fields);
+        } else {
+            promise = this.createMessage(fields);
+        }
+
+        promise.then((response) => {
+            dispatch(batchActions([
+                reset('message'),
+                addResource(response)
+            ]));
             this.props.onRequestClose();
         });
     },
@@ -57,7 +93,7 @@ const form = React.createClass({
             <Dialog
                 {...this.props}
                 title={
-                    <PageCardHeader sender={this.props.sender} />
+                    <PageCardHeader sender={this.props.sender} recipient={this.props.recipient} />
                 }
                 actions={[
                     <FlatButton
@@ -86,7 +122,7 @@ const form = React.createClass({
 });
 
 export default reduxForm({
-    form: 'comment',
+    form: 'message',
     fields: ['body'],
     validate
 })(form);

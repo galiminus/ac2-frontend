@@ -23,18 +23,19 @@ import Spacing from 'material-ui/styles/spacing';
 
 import { syncReduxAndRouter } from 'redux-simple-router';
 
-import HomeContainer from 'pages/home/home-container';
+import HomeContainer from 'components/home/home-container';
 
-import WelcomePage from 'pages/welcome/welcome';
-import LoginForm from 'pages/welcome/login-form';
-import SignupForm from 'pages/welcome/signup-form';
-import RecoverForm from 'pages/welcome/recover-form';
+import WelcomePage from 'components/welcome/welcome';
+import LoginForm from 'components/welcome/login-form';
+import SignupForm from 'components/welcome/signup-form';
+import RecoverForm from 'components/welcome/recover-form';
 
-import PageContainer from 'pages/page/page-container';
-import Profile from 'pages/profile';
-import MessagesContainer from 'pages/messages/messages-container';
-import Account from 'pages/account';
-import Messages from 'pages/messages';
+import PageContainer from 'components/pages/page-container';
+import Profile from 'components/profile/profile';
+import MessagesContainer from 'components/messages/messages-container';
+import ProfilePages from 'components/pages/profile-pages';
+import EventPages from 'components/pages/event-pages';
+import FriendPages from 'components/pages/friend-pages';
 
 import { Provider } from 'react-redux';
 
@@ -106,10 +107,12 @@ const Application = React.createClass({
                 </Route>
 
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
-                    <IndexRoute component={PageContainer} />
+                    <Route component={PageContainer}>
+                        <IndexRoute component={MessagesContainer} />
+                    </Route>
 
-                    <Route path="/account" component={Account} />
-                    <Route path="/messages" component={Messages} />
+                    <Route path="members" component={ProfilePages} />
+                    <Route path="events" component={EventPages} />
 
                     <Route path=":pageId/profile" component={PageContainer}>
                         <IndexRoute component={Profile} />
@@ -117,6 +120,7 @@ const Application = React.createClass({
 
                     <Route path=":pageId" component={PageContainer}>
                         <IndexRoute component={MessagesContainer} />
+                        <Route path="friends" component={FriendPages} />
                     </Route>
                 </Route>
             </Router>

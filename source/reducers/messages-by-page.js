@@ -5,14 +5,14 @@ export default function (state = Immutable.Map({}), action) {
     let newState;
 
     switch (action.type) {
-    case 'PAGES_ADD':
+    case 'PAGE_ADD':
         messages = state.get(action.data.id) || Immutable.Map({});
         return state.set(action.data.id, messages);
 
-    case 'PAGES_REMOVE':
+    case 'PAGE_REMOVE':
         return state.delete(action.data.id);
 
-    case 'MESSAGES_ADD':
+    case 'MESSAGE_ADD':
         messages = state.get(action.data.sender_id) || Immutable.Map({});
         newState = state.set(action.data.sender_id, messages.set(action.data.id, action.data));
 
@@ -23,7 +23,7 @@ export default function (state = Immutable.Map({}), action) {
 
         return (newState);
 
-    case 'MESSAGES_REMOVE':
+    case 'MESSAGE_REMOVE':
         messages = state.get(action.data.sender_id) || Immutable.Map({});
         newState = state.set(action.data.sender_id, messages.delete(action.data.id));
 
