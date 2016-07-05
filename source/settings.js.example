@@ -1,0 +1,37 @@
+const defaultSettings = {
+    title: 'pamplemoussecity',
+    additionalLinks: [
+        {
+            name: 'additionalLinks.tos',
+            href: '/tos'
+        },
+        {
+            name: 'additionalLinks.github',
+            href: 'https://github.com/phorque/ac2-frontend'
+        },
+        {
+            name: 'additionalLinks.contact',
+            href: '/contact'
+        }
+    ],
+    locales: {
+        'fr-FR': {
+            'additionalLinks.tos': 'Charte du site',
+            'additionalLinks.github': 'Github',
+            'additionalLinks.contact': 'Contacter l\'équipe',
+
+            'titles.userPageFields.personal_informations': 'À propos'
+        }
+    }
+};
+
+module.exports = {
+    development: {
+        ...defaultSettings,
+        api: 'http://localhost:3002'
+    },
+    production: {
+        ...defaultSettings,
+        api: 'https://api.example.org'
+    }
+};

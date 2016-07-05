@@ -6,7 +6,7 @@ npm install
 npm install webpack-dev-server -g
 
 # copy and edit the configuration file
-cp source/config.js.example source/config.js
+cp source/settings.js.example source/settings.js
 
 # run the sample server
 webpack-dev-server --history-api-fallback

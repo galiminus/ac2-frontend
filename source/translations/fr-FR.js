@@ -1,4 +1,4 @@
-import { locales } from 'config';
+import settings from 'webpack-env-loader!settings';
 
 export default {
     'titles.imageUploadDialog': 'Ajouter des images',
@@ -59,5 +59,5 @@ export default {
     'links.groups': 'Groupes',
     'links.members': 'Membres',
 
-    ...(locales['fr-FR'])
+    ...(settings.locales['fr-FR'])
 };

@@ -1,6 +1,7 @@
 import queryString from 'query-string';
 
-import { baseUrl } from 'config';
+import settings from 'webpack-env-loader!settings';
+
 import store from 'store';
 import { clearTokens } from 'action-creators';
 
@@ -69,7 +70,7 @@ function fetchNoResponse(path, params) {
 
 export default {
     create: (path, record, query) => {
-        return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+        return fetchJSON(`${settings.api}${path}?${queryString.stringify(query)}`, {
             method: 'POST',
             body: JSON.stringify(record),
             mode: 'cors',
@@ -80,7 +81,7 @@ export default {
     },
 
     update: (path, record, query) => {
-        return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+        return fetchJSON(`${settings.api}${path}?${queryString.stringify(query)}`, {
             method: 'PUT',
             body: JSON.stringify(record),
             mode: 'cors',
@@ -91,7 +92,7 @@ export default {
     },
 
     find: (path, query = {}) => {
-        return fetchJSON(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+        return fetchJSON(`${settings.api}${path}?${queryString.stringify(query)}`, {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -101,7 +102,7 @@ export default {
     },
 
     destroy: (path, query = {}) => {
-        return fetchNoResponse(`${baseUrl}${path}?${queryString.stringify(query)}`, {
+        return fetchNoResponse(`${settings.api}${path}?${queryString.stringify(query)}`, {
             method: 'DELETE',
             mode: 'cors',
             headers: {

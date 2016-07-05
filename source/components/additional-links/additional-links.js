@@ -6,7 +6,7 @@ import styles from './additional-links.css';
 
 import actionCreators from 'action-creators';
 
-import { additionalLinks } from 'config';
+import settings from 'webpack-env-loader!settings';
 
 const AdditionalLinks = React.createClass({
     propTypes: {
@@ -25,7 +25,7 @@ const AdditionalLinks = React.createClass({
         return (
             <ul styleName="additionalLinks">
                 {
-                    additionalLinks.map((additionalLink, index) => {
+                    settings.additionalLinks.map((additionalLink, index) => {
                         return (
                             <li key={index}>
                                 <a

@@ -4,9 +4,10 @@ import { updatePath } from 'redux-simple-router';
 import { dispatch } from 'store';
 
 import { ToolbarTitle } from 'material-ui';
-import { title } from 'config';
 
 import { Link } from 'react-router';
+
+import settings from 'webpack-env-loader!settings';
 
 const style = {
     fontFamily: 'Roboto, sans-serif',
@@ -27,7 +28,7 @@ export default React.createClass({
         return (
             <ToolbarTitle
                 text={
-                    <Link style={style} to="/">{title}</Link>
+                    <Link style={style} to="/">{settings.title}</Link>
                 }
                 {...this.props}
             />
