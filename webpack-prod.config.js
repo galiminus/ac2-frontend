@@ -1,5 +1,6 @@
 webpack = require('webpack')
 const path = require('path');
+var CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
     context: __dirname + '/source',
@@ -30,10 +31,6 @@ module.exports = {
                     'style?sourceMap',
                     'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
                 ]
-            },
-            {
-                test: /\.js$/,
-                loader: 'uglify'
             },
             {
                 test: /\.js$/,
@@ -72,6 +69,33 @@ module.exports = {
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
             }
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.AggressiveMergingPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            compress: {
+                sequences: true,
+                dead_code: true,
+                conditionals: true,
+                booleans: true,
+                unused: true,
+                if_return: true,
+                join_vars: true,
+                drop_console: true
+            },
+            mangle: {
+                except: ['$super', '$', 'exports', 'require']
+            },
+            output: {
+                comments: false
+            }
+        }),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.html$/,
+            minRatio: 0.8
         })
     ]
 };
