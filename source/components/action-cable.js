@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Cable from 'es6-actioncable';
 
+import settings from 'webpack-env-loader!settings';
+
 function mapStateToProps(state) {
     return {
         tokens: state.tokens
@@ -52,7 +54,7 @@ function connectToCable(Component) {
 
         setupConsumer(accessToken) {
             if (!consumers[accessToken]) {
-                consumers[accessToken] = Cable.createConsumer(`ws://localhost:28080/?token=${accessToken}`);
+                consumers[accessToken] = Cable.createConsumer(`${settings.cableEndpoint}/?token=${accessToken}`);
             }
 
             return (consumers[accessToken]);

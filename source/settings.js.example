@@ -28,10 +28,12 @@ const defaultSettings = {
 module.exports = {
     development: {
         ...defaultSettings,
-        api: 'http://localhost:3002'
+        api: 'http://localhost:3002',
+        cableEndpoint: 'ws://localhost:28080'
     },
     production: {
         ...defaultSettings,
-        api: 'https://api.example.org'
+        api: 'https://api.example.org',
+        cableEndpoint: 'wss://api.example.org:28080'
     }
 };
