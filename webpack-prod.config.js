@@ -7,6 +7,11 @@ module.exports = {
         javascript: './application.js',
         html: './index.html'
     },
+    loader: {
+        appSettings: {
+            env: "production"
+        },
+    },
     output: {
         path: __dirname + '/build',
         filename: '/application.js'
@@ -62,6 +67,11 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
             'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
         })
     ]
 };
