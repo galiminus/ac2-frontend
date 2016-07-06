@@ -1,12 +1,16 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import PagesContainer from "./pages-container";
+import PagesContainer from './pages-container';
 
-const ProfilePages = () => {
-  return (
-    <PagesContainer type="Page::Profile" />
-  );
-}
+const ProfilePages = React.createClass({
+    mixins: [PureRenderMixin],
+
+    render() {
+        return (
+            <PagesContainer filters={{ type: 'Page::Profile' }} />
+        );
+    }
+});
 
 export default ProfilePages;

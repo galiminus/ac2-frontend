@@ -30,3 +30,6 @@
 # config
 /source/settings.js
 dump.rdb
+
+# my deployment script
+/deploy.sh

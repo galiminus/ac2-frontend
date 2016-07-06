@@ -10,7 +10,8 @@ import PageCardTitle from 'components/pages/page-card-title';
 
 const ProfileBanner = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired
+        page: PropTypes.object.isRequired,
+        style: PropTypes.object
     },
 
     contextTypes: {

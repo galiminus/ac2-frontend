@@ -14,7 +14,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { tokens, users } from 'api';
-import { setCurrentUser, setCurrentToken } from 'action-creators';
+import { setCurrentUser, setCurrentToken, pushNotification } from 'action-creators';
 import { validateEmail, validatePassword, validateFullName, validateUserName } from 'validators';
 
 const authenticate = (userId, fields) =>
@@ -24,7 +24,7 @@ const authenticate = (userId, fields) =>
                 setCurrentUser.set(userId),
                 setCurrentToken.set(data.access_token),
                 updatePath('/')
-            ]))
+            ]));
         })
         .catch((error) => {
             if (error.response !== undefined) {
@@ -40,7 +40,7 @@ const signup = (fields) =>
     users.create({
         email: fields.email,
         password: fields.password,
-        type: "Page::Profile",
+        type: 'Page::Profile',
         page_attributes: {
             data: {
                 personal_informations: {

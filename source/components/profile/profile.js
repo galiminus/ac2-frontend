@@ -43,8 +43,6 @@ const Profile = React.createClass({
             const fields = [];
 
             for (const field of Object.keys(this.props.page.schema.properties[category].properties)) {
-                console.log(this.props.page.schema.properties[category].properties);
-
                 fields.push(
                     <Field
                         label={`labels.userPageFields.${field}`}
@@ -65,7 +63,7 @@ const Profile = React.createClass({
 
             cards.push(
                 <Card
-                    style={{ margin: "24px 0", fontSize: '0.9em', lineHeight: '1.4em' }}
+                    style={{ margin: '24px 0', fontSize: '0.9em', lineHeight: '1.4em' }}
                     key={`titles.userPageFields.${category}`}
                 >
                     <CardHeader

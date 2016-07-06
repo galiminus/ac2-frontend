@@ -64,7 +64,7 @@ const MessagesContainer = React.createClass({
         if (pageId) {
             query['filter[participant_id]'] = pageId;
         }
-        query['filter[type]'] = "Message::Post";
+        query['filter[type]'] = 'Message::Post';
 
         query['page[number]'] = pageNum;
         query['page[size]'] = 10;

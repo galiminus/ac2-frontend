@@ -17,12 +17,19 @@ const Pages = React.createClass({
 
     render() {
         return (
-            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent:
+                    'space-between'
+                }}
+            >
                 {
-                    this.props.pages.map((page) => {
+                    this.props.pages.valueSeq().map((page) => {
                         return (
-                            <PageBanner page={page} style={{ width: "48%" }} />
-                        )
+                            <PageBanner page={page} style={{ width: '48%' }} />
+                        );
                     })
                 }
             </div>

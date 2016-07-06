@@ -14,7 +14,7 @@ const MessagePage = React.createClass({
                 <PageBanner page={this.props.page} />
                 {React.cloneElement(this.props.children, this.props)}
             </div>
-        )
+        );
     }
 });
 

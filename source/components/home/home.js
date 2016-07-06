@@ -8,7 +8,7 @@ import Paper from 'material-ui/Paper';
 import DisconnectedModal from 'components/disconnected-modal';
 import Notifier from 'components/notifier';
 
-import Chat from "components/chat/chat-container";
+import Chat from 'components/chat/chat-container';
 import Navigation from 'components/navigation/navigation';
 import HeaderBar from 'components/header-bar/header-bar';
 import AdditionalLinks from 'components/additional-links/additional-links';

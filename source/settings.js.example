@@ -34,6 +34,6 @@ module.exports = {
     production: {
         ...defaultSettings,
         api: 'https://api.example.org',
-        cableEndpoint: 'wss://api.example.org:28080'
+        cableEndpoint: 'wss://api.example.org/live'
     }
 };

@@ -30,7 +30,10 @@ const Comment = React.createClass({
         onLikeCreate: PropTypes.func.isRequired,
         onCommentDestroy: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
-        myLike: PropTypes.object
+        myLike: PropTypes.object,
+        onOpenCommentEditModal: PropTypes.func,
+        onCommentReport: PropTypes.func,
+        onCloseCommentEditModal: PropTypes.func
     },
 
     mixins: [PureRenderMixin],

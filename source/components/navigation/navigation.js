@@ -29,6 +29,8 @@ const Navigation = React.createClass({
         translation: PropTypes.object.isRequired
     },
 
+    mixins: [PureRenderMixin],
+
     getDefaultProps() {
         return ({
             currentUserPage: {
@@ -37,8 +39,6 @@ const Navigation = React.createClass({
             }
         });
     },
-
-    mixins: [PureRenderMixin],
 
     render() {
         return (

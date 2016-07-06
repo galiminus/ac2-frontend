@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { Snackbar } from 'material-ui';
 
-import actionCreators from "action-creators";
+import actionCreators from 'action-creators';
 
 function mapStateToProps(state) {
     return {
@@ -14,12 +14,15 @@ function mapStateToProps(state) {
 
 const Notifier = React.createClass({
     propTypes: {
-        notification: PropTypes.object.isRequired
+        notification: PropTypes.object.isRequired,
+        clearNotifications: PropTypes.func.isRequired
     },
 
     contextTypes: {
         translation: PropTypes.object.isRequired
     },
+
+    mixins: [PureRenderMixin],
 
     getDefaultProps() {
         return ({
@@ -27,10 +30,8 @@ const Notifier = React.createClass({
         });
     },
 
-    mixins: [PureRenderMixin],
-
     handleRequestClose() {
-        this.props.clearNotifications()
+        this.props.clearNotifications();
     },
 
     render() {

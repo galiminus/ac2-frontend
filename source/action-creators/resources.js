@@ -1,15 +1,5 @@
 import { batchActions } from 'redux-batched-actions';
-
-function getActionsType(record, action) {
-    const classes = record.type.split('::').map((klass) => klass.toUpperCase());
-
-    const actionNames = [];
-    for (let i = 0; i < classes.length; i++) {
-        actionNames[i] = classes.slice(0, i + 1).join('_') + '_' + action;
-    }
-
-    return (actionNames);
-}
+import { typeToActions } from 'utils/types';
 
 function normalizeRecord(record) {
     record.attributes = { ...(record.attributes || {}), id: record.id, type: record.type };
@@ -39,7 +29,7 @@ function addRecord(record, options = { commited: true, error: false }) {
     const normalizedRecord = normalizeRecord(record);
 
     return (
-        getActionsType(normalizedRecord, 'ADD').map((type) => {
+        typeToActions(normalizedRecord.type, 'ADD').map((type) => {
             return (
                 {
                     type,
@@ -78,7 +68,7 @@ export default {
         const normalizedRecord = normalizeRecord(record);
 
         return (batchActions(
-            getActionsType(normalizedRecord, 'REMOVE').map((type) => {
+            typeToActions(normalizedRecord.type, 'REMOVE').map((type) => {
                 return (
                     {
                         type,
@@ -91,7 +81,7 @@ export default {
 
     removeResource: (record) => {
         return (batchActions(
-            getActionsType(record, 'REMOVE').map((type) => {
+            typeToActions(record.type, 'REMOVE').map((type) => {
                 return (
                     {
                         type,
