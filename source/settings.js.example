@@ -1,18 +1,4 @@
 const defaultSettings = {
-    additionalLinks: [
-        {
-            name: 'additionalLinks.tos',
-            href: '/tos'
-        },
-        {
-            name: 'additionalLinks.github',
-            href: 'https://github.com/phorque/ac2-frontend'
-        },
-        {
-            name: 'additionalLinks.contact',
-            href: '/contact'
-        }
-    ],
     locales: {
         'fr-FR': {
             'additionalLinks.tos': 'Charte du site',

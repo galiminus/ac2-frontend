@@ -12,7 +12,7 @@ const MessagePage = React.createClass({
         return (
             <div>
                 <PageBanner page={this.props.page} />
-                {React.cloneElement(this.props.children, this.props)}
+                {React.cloneElement(this.props.children, {...this.props, key: undefined} )}
             </div>
         );
     }
