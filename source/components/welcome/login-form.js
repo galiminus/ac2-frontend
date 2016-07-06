@@ -98,6 +98,7 @@ const LoginForm = React.createClass({
     }
 });
 
+
 export default reduxForm({
     form: 'login',
     fields: ['email', 'password'],

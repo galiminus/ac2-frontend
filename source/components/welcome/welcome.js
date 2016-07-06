@@ -37,10 +37,10 @@ const WelcomePage = React.createClass({
                         {React.cloneElement(this.props.children, { translation: this.props.translation })}
                     </div>
                 </div>
-                <Notifier />
+                <Notifier translation={this.props.translation} />
             </div>
         );
     }
 });
 
-export default connect(mapStateToProps, CSSModules(WelcomePage, styles));
+export default connect(mapStateToProps)(CSSModules(WelcomePage, styles));
