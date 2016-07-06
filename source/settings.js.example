@@ -1,5 +1,4 @@
 const defaultSettings = {
-    title: 'pamplemoussecity',
     additionalLinks: [
         {
             name: 'additionalLinks.tos',

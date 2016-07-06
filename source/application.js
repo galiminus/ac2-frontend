@@ -60,7 +60,7 @@ function redirectToLoginPage(_nextState, replace) {
     }
 }
 
-store.dispatch(actions.translations.add('fr-FR', frFR));
+store.dispatch(actions.addTranslation('fr-FR', frFR));
 
 const Application = React.createClass({
     childContextTypes: {
@@ -94,6 +94,7 @@ const Application = React.createClass({
     componentDidMount() {
         api.settings.getCurrent()
             .then((configuration) => {
+                store.dispatch(actions.addResource(configuration));
             });
     },
 

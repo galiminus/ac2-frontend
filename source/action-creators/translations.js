@@ -1,3 +1,3 @@
 export default {
-    add: (language, translations) => ({ type: 'TRANSLATIONS_ADD', data: { language, translations } })
+    addTranslation: (language, translations) => ({ type: 'TRANSLATION_ADD', data: { language, translations } })
 };

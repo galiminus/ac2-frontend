@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import { updatePath } from 'redux-simple-router';
-import { dispatch } from 'store';
+import { connect } from 'react-redux';
 
 import { ToolbarTitle } from 'material-ui';
 
 import { Link } from 'react-router';
-
-import settings from 'webpack-env-loader!settings';
 
 const style = {
     fontFamily: 'Roboto, sans-serif',
@@ -18,20 +16,38 @@ const style = {
     textDecoration: 'none'
 };
 
-export default React.createClass({
-    goToMainFeed(e) {
-        dispatch(updatePath('/'));
-        e.preventDefault();
+function mapStateToProps(state) {
+    if (state.settings && state.settings.data) {
+        return ({
+            title: state.settings.data.title
+        });
+    }
+    return ({});
+}
+
+const ToolbarLogo = React.createClass({
+    propTypes: {
+        title: PropTypes.string.isRequired
+    },
+
+    mixins: [PureRenderMixin],
+
+    getDefaultProps() {
+        return ({
+            title: ''
+        });
     },
 
     render() {
         return (
             <ToolbarTitle
                 text={
-                    <Link style={style} to="/">{settings.title}</Link>
+                    <Link style={style} to="/">{this.props.title}</Link>
                 }
                 {...this.props}
             />
         );
     }
 });
+
+export default connect(mapStateToProps)(ToolbarLogo);

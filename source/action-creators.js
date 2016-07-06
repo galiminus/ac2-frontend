@@ -8,6 +8,8 @@ import resources from 'action-creators/resources';
 import translations from 'action-creators/translations';
 import messages from 'action-creators/messages';
 
+import { updatePath } from 'redux-simple-router';
+
 export default {
     ...currentUser,
     ...currentToken,
@@ -15,7 +17,8 @@ export default {
     ...tokens,
     ...leftNav,
     ...notifications,
-    translations,
+    ...translations,
     ...resources,
-    ...messages
+    ...messages,
+    updatePath
 };

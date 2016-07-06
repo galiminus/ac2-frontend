@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from 'react-redux';
 import actionCreators from 'action-creators';
 
@@ -32,6 +34,8 @@ const PageContainer = React.createClass({
         currentUserPage: PropTypes.object,
         page: PropTypes.object
     },
+
+    mixins: [PureRenderMixin],
 
     getDefaultProps() {
         return ({

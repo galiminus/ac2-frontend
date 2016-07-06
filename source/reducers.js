@@ -24,6 +24,8 @@ import notifications from 'reducers/notifications';
 
 import translations from 'reducers/translations';
 
+import settings from 'reducers/settings';
+
 import leftNav from 'reducers/leftnav';
 
 const reducers = combineReducers({
@@ -45,6 +47,7 @@ const reducers = combineReducers({
     form,
     notifications,
     translations,
+    settings,
     routing: routeReducer
 });
 
