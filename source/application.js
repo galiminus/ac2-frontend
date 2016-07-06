@@ -104,8 +104,8 @@ const Application = React.createClass({
 
     componentDidMount() {
         api.settings.getCurrent()
-            .then((configuration) => {
-                store.dispatch(this.props.addResource(configuration));
+            .then((settings) => {
+                this.props.addResource(settings);
             });
     },
 

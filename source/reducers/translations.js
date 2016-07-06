@@ -1,12 +1,18 @@
 import Immutable from 'immutable';
 import Polyglot from 'node-polyglot';
 
-import { frFR } from 'translations';
-
-export default function (state = Immutable.Map({ 'fr-FR': new Polyglot({ phrases: frFR }) }), action) {
+export default function (state = Immutable.Map({ 'fr-FR': new Polyglot({ phrases: {} }) }), action) {
     switch (action.type) {
-    case 'TRANSLATION_ADD':
-        return state.set(action.data.language, new Polyglot({ phrases: action.data.translations }));
+    case 'SETTING_ADD':
+        const locales = {};
+
+        const settingsLocale = action.data.data.locales;
+        for (const locale in settingsLocale) {
+            if ({}.hasOwnProperty.call(settingsLocale, locale)) {
+                locales[locale] = new Polyglot({ phrases: settingsLocale[locale] });
+            }
+        }
+        return Immutable.Map(locales);
 
     default:
         return state;
