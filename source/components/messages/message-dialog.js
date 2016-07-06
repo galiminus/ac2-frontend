@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { batchActions } from 'redux-batched-actions';
 
 import TextField from 'material-ui/TextField';
@@ -18,20 +20,19 @@ const validate = values => {
     };
 };
 
-const form = React.createClass({
+const MessageDialog = React.createClass({
     propTypes: {
         sender: PropTypes.object,
         recipient: PropTypes.object,
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         onRequestClose: PropTypes.func.isRequired,
+        translation: PropTypes.object.isRequired,
         error: PropTypes.string,
         id: PropTypes.string
     },
 
-    contextTypes: {
-        translation: PropTypes.object.isRequired
-    },
+    mixins: [PureRenderMixin],
 
     createMessage(fields) {
         let recipientParams = {};
@@ -97,13 +98,13 @@ const form = React.createClass({
                 }
                 actions={[
                     <FlatButton
-                        label={this.context.translation.t('actions.cancel')}
+                        label={this.props.translation.t('actions.cancel')}
                         onClick={this.props.onRequestClose}
                     />,
                     <FlatButton
                         disabled={body.invalid}
                         type="submit"
-                        label={this.context.translation.t('actions.message')}
+                        label={this.props.translation.t('actions.message')}
                         secondary
                         onClick={handleSubmit(this.message)}
                     />
@@ -125,4 +126,4 @@ export default reduxForm({
     form: 'message',
     fields: ['body'],
     validate
-})(form);
+})(MessageDialog);

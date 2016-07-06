@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
+import { connect } from 'react-redux';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
@@ -42,9 +46,7 @@ import { Provider } from 'react-redux';
 import store from 'store';
 import api from 'api';
 
-import actions from 'action-creators';
-
-import { frFR } from 'translations';
+import actionCreators from 'action-creators';
 
 syncReduxAndRouter(browserHistory, store);
 
@@ -60,13 +62,23 @@ function redirectToLoginPage(_nextState, replace) {
     }
 }
 
-store.dispatch(actions.addTranslation('fr-FR', frFR));
+function mapStateToProps(state) {
+    return ({
+        settings: state.settings
+    });
+}
 
 const Application = React.createClass({
-    childContextTypes: {
-        muiTheme: React.PropTypes.object,
-        translation: React.PropTypes.object
+    propTypes: {
+        settings: PropTypes.object.isRequired,
+        addResource: PropTypes.func.isRequired
     },
+
+    childContextTypes: {
+        muiTheme: React.PropTypes.object
+    },
+
+    mixins: [PureRenderMixin],
 
     getChildContext() {
         return {
@@ -86,15 +98,14 @@ const Application = React.createClass({
                     borderColor: grey300,
                     disabledColor: fade(darkBlack, 0.3)
                 }
-            }),
-            translation: store.getState().translations.get('fr-FR')
+            })
         };
     },
 
     componentDidMount() {
         api.settings.getCurrent()
             .then((configuration) => {
-                store.dispatch(actions.addResource(configuration));
+                store.dispatch(this.props.addResource(configuration));
             });
     },
 
@@ -129,8 +140,10 @@ const Application = React.createClass({
     }
 });
 
+const ConnectedApplication = connect(mapStateToProps, actionCreators)(Application);
+
 ReactDOM.render(
     <Provider store={store}>
-        <Application />
+        <ConnectedApplication />
     </Provider>
 , document.getElementById('application'));

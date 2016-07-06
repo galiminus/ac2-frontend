@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { updatePath } from 'redux-simple-router';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import {
     TextField,
@@ -29,16 +30,15 @@ const validate = values => {
     };
 };
 
-const form = React.createClass({
+const RecoverForm = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
+        translation: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
-    contextTypes: {
-        translation: PropTypes.object.isRequired
-    },
+    mixins: [PureRenderMixin],
 
     render() {
         const {
@@ -49,12 +49,12 @@ const form = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t('labels.recover.email')} />
+                <TextField fullWidth type="email" {...email} hintText={this.props.translation.t('labels.recover.email')} />
                 <div style={{ marginTop: '1em' }}>
                     <RaisedButton
                         disabled={email.invalid}
                         type="submit"
-                        label={this.context.translation.t('actions.continue')}
+                        label={this.props.translation.t('actions.continue')}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
@@ -68,4 +68,4 @@ export default reduxForm({
     form: 'login',
     fields: ['email'],
     validate
-})(form);
+})(RecoverForm);

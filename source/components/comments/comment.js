@@ -17,7 +17,7 @@ import PageLink from 'components/pages/page-link';
 import PlusCounter from 'components/plus-counter';
 import Marked from 'components/marked/marked';
 import CreationDate from 'components/creation-date';
-import CommentDialog from 'components/comment-dialog';
+import CommentDialog from './comment-dialog';
 
 const Comment = React.createClass({
     propTypes: {
@@ -137,6 +137,7 @@ const Comment = React.createClass({
                         initialValues={this.props.comment.data}
                         id={this.props.comment.id}
                         formKey={this.props.comment.id}
+                        translation={this.props.translation}
                     />
                 </div>
             );

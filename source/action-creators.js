@@ -7,6 +7,7 @@ import notifications from 'action-creators/notifications';
 import resources from 'action-creators/resources';
 import translations from 'action-creators/translations';
 import messages from 'action-creators/messages';
+import currentLocale from 'action-creators/current-locale';
 
 import { updatePath } from 'redux-simple-router';
 
@@ -18,6 +19,7 @@ export default {
     ...leftNav,
     ...notifications,
     ...translations,
+    ...currentLocale,
     ...resources,
     ...messages,
     updatePath

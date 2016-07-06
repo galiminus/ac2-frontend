@@ -20,10 +20,7 @@ function mapStateToProps(state) {
 const AdditionalLinks = React.createClass({
     propTypes: {
         clearTokens: PropTypes.func.isRequired,
-        additionalLinks: PropTypes.array.isRequired
-    },
-
-    contextTypes: {
+        additionalLinks: PropTypes.array.isRequired,
         translation: PropTypes.object.isRequired
     },
 
@@ -50,7 +47,7 @@ const AdditionalLinks = React.createClass({
                                     target="_blank"
                                     href={additionalLink.href}
                                 >
-                                    {this.context.translation.t(additionalLink.name)}
+                                    {this.props.translation.t(additionalLink.name)}
                                 </a>
                             </li>
                         );

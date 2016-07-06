@@ -15,10 +15,7 @@ function mapStateToProps(state) {
 const Notifier = React.createClass({
     propTypes: {
         notification: PropTypes.object.isRequired,
-        clearNotifications: PropTypes.func.isRequired
-    },
-
-    contextTypes: {
+        clearNotifications: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired
     },
 
@@ -39,7 +36,7 @@ const Notifier = React.createClass({
             fontFamily: 'Roboto, sans-serif'
         };
 
-        const message = this.props.notification.message ? this.context.translation.t(`errors.${this.props.notification.message}`) : '';
+        const message = this.props.notification.message ? this.props.translation.t(`errors.${this.props.notification.message}`) : '';
         return (
             <Snackbar
                 message={message}

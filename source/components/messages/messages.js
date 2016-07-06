@@ -27,10 +27,7 @@ const Messages = React.createClass({
         hasMore: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired,
         currentUserPage: PropTypes.object,
-        page: PropTypes.object
-    },
-
-    contextTypes: {
+        page: PropTypes.object,
         translation: PropTypes.object.isRequired
     },
 
@@ -73,7 +70,7 @@ const Messages = React.createClass({
                 >
                     <RefreshIcon style={{ height: 34 }} color="#fff" />
                     <div>
-                        {this.context.translation.t('actions.loadMessageUpdates')}
+                        {this.props.translation.t('actions.loadMessageUpdates')}
                     </div>
                 </div>
             </RaisedButton>
@@ -85,7 +82,12 @@ const Messages = React.createClass({
 
         return (
             orderedMessages.valueSeq().map(message =>
-                <Message key={message.id} message={message} currentUserPage={this.props.currentUserPage} />
+                <Message
+                    key={message.id}
+                    message={message}
+                    currentUserPage={this.props.currentUserPage}
+                    translation={this.props.translation}
+                />
             ).toJS()
         );
     },
@@ -133,7 +135,10 @@ const Messages = React.createClass({
                         {this.renderMessages()}
                     </InfiniteScroll>
                 </List>
-                <FloatingActionButton styleName="addMessageButton" onMouseUp={this.handleOpenMessageCreationModal}>
+                <FloatingActionButton
+                    styleName="addMessageButton"
+                    onMouseUp={this.handleOpenMessageCreationModal}
+                >
                     <CreateContentIcon />
                 </FloatingActionButton>
                 <MessageDialog
@@ -143,6 +148,7 @@ const Messages = React.createClass({
                     onRequestClose={this.handleCloseMessageCreationModal}
                     sender={this.props.currentUserPage}
                     recipient={this.props.page}
+                    translation={this.props.translation}
                 />
             </div>
         );

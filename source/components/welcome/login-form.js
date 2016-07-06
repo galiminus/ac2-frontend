@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { dispatch } from 'store';
 import { updatePath } from 'redux-simple-router';
 import { batchActions } from 'redux-batched-actions';
@@ -51,12 +53,11 @@ const LoginForm = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
+        translation: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
-    contextTypes: {
-        translation: PropTypes.object.isRequired
-    },
+    mixins: [PureRenderMixin],
 
     render() {
         const {
@@ -66,19 +67,19 @@ const LoginForm = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={this.context.translation.t('labels.login.email')} />
-                <TextField fullWidth type="password" {...password} hintText={this.context.translation.t('labels.login.password')} />
+                <TextField fullWidth type="email" {...email} hintText={this.props.translation.t('labels.login.email')} />
+                <TextField fullWidth type="password" {...password} hintText={this.props.translation.t('labels.login.password')} />
                 <div styleName="actionButtons">
                     <RaisedButton
                         disabled={email.invalid || password.invalid}
                         type="submit"
-                        label={this.context.translation.t('actions.login')}
+                        label={this.props.translation.t('actions.login')}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
                     <Link to="/welcome/signup">
                         <FlatButton
-                            label={this.context.translation.t('labels.signup.signup')}
+                            label={this.props.translation.t('labels.signup.signup')}
                         />
                     </Link>
                 </div>
@@ -87,7 +88,7 @@ const LoginForm = React.createClass({
                     <Link to="/welcome/recover">
                         <FlatButton
                             labelStyle={{ fontSize: 12, color: '#999' }}
-                            label={this.context.translation.t('labels.recover')}
+                            label={this.props.translation.t('labels.recover')}
                             secondary={false}
                         />
                     </Link>

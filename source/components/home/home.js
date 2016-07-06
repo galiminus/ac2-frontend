@@ -19,36 +19,56 @@ const Home = React.createClass({
         leftNav: PropTypes.bool.isRequired,
         isDisconnected: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
+        translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object
     },
 
     render() {
         return (
             <div styleName="home">
-                <HeaderBar currentUserPage={this.props.currentUserPage} />
+                <HeaderBar
+                    currentUserPage={this.props.currentUserPage}
+                    translation={this.props.translation}
+                />
 
-                <Drawer docked={false} open={this.props.leftNav} onRequestChange={this.props.toggleLeftNav}>
-                    <Navigation currentUserPage={this.props.currentUserPage} />
+                <Drawer
+                    docked={false}
+                    open={this.props.leftNav}
+                    onRequestChange={this.props.toggleLeftNav}
+                >
+                    <Navigation
+                        currentUserPage={this.props.currentUserPage}
+                        translation={this.props.translation}
+                    />
                 </Drawer>
 
                 <div styleName="flexLayout">
                     <div styleName="leftNav">
-                        <Navigation currentUserPage={this.props.currentUserPage} />
-                        <AdditionalLinks />
+                        <Navigation
+                            currentUserPage={this.props.currentUserPage}
+                            translation={this.props.translation}
+                        />
+                        <AdditionalLinks
+                            translation={this.props.translation}
+                        />
                     </div>
                     <div styleName="mainContent">
-                        {this.props.children}
+                        {React.cloneElement(this.props.children, { translation: this.props.translation })}
                     </div>
                     <Paper styleName="messagePanel">
                         <Chat
                             currentUserPage={this.props.currentUserPage}
+                            translation={this.props.translation}
                         />
                     </Paper>
                 </div>
 
-                <Notifier />
+                <Notifier translation={this.props.translation} />
 
-                <DisconnectedModal isDisconnected={this.props.isDisconnected} />
+                <DisconnectedModal
+                    isDisconnected={this.props.isDisconnected}
+                    translation={this.props.translation}
+                />
             </div>
         );
     }

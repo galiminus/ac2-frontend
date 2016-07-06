@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 
 import CSSModules from 'react-css-modules';
@@ -16,12 +17,11 @@ import { toggleLeftNav } from 'action-creators';
 const HeaderBar = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
+        translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object
     },
 
-    contextTypes: {
-        translation: PropTypes.object.isRequired
-    },
+    mixins: [PureRenderMixin],
 
     render() {
         return (
@@ -39,10 +39,10 @@ const HeaderBar = React.createClass({
                     <ToolbarLogo styleName="logo" />
                     <ToolbarSeparator styleName="separator" />
 
-                    <CurrentPageTitle />
+                    <CurrentPageTitle translation={this.props.translation} />
 
                     <AutoComplete
-                        hintText={this.context.translation.t('labels.search')}
+                        hintText={this.props.translation.t('labels.search')}
                         dataSource={[]}
                         fullWidth
                         styleName="searchField"
@@ -54,7 +54,10 @@ const HeaderBar = React.createClass({
 
                 </ToolbarGroup>
                 <ToolbarGroup key={2} float="right" styleName="right">
-                    <CurrentUserMenu currentUserPage={this.props.currentUserPage} />
+                    <CurrentUserMenu
+                        currentUserPage={this.props.currentUserPage}
+                        translation={this.props.translation}
+                    />
                 </ToolbarGroup>
             </Toolbar>
         );

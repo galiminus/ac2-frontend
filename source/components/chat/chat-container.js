@@ -19,10 +19,7 @@ function mapStateToProps(state) {
 const ChatContainer = React.createClass({
     propTypes: {
         currentUserPage: PropTypes.object.isRequired,
-        recipients: PropTypes.object.isRequired
-    },
-
-    contextTypes: {
+        recipients: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired
     },
 

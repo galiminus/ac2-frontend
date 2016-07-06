@@ -4,11 +4,17 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { ToolbarTitle } from 'material-ui';
 
+const mainPage = { type: 'Page::Main' };
+
 function mapStateToProps(state) {
     if (state.currentPage === 'main') {
-        return ({ page: { type: 'Page::Main' } });
+        return ({
+            page: mainPage
+        });
     } else if (state.currentPage) {
-        return ({ page: state.pages.get(state.currentPage) });
+        return ({
+            page: state.pages.get(state.currentPage)
+        });
     }
     return ({});
 }
@@ -22,10 +28,7 @@ const style = {
 
 const CurrentPageTitle = React.createClass({
     propTypes: {
-        page: PropTypes.object
-    },
-
-    contextTypes: {
+        page: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired
     },
 
@@ -48,7 +51,7 @@ const CurrentPageTitle = React.createClass({
         }
 
         if (this.props.page.type === 'Page::Main') {
-            title = this.context.translation.t('links.mainFeed');
+            title = this.props.translation.t('links.mainFeed');
         } else if (this.props.page.type.match(/^Page::Profile/)) {
             title = this.props.page.data.personal_informations.full_name;
         } else if (this.props.page.type === 'Page::Static') {

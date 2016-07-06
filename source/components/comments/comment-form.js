@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { batchActions } from 'redux-batched-actions';
 
 import TextField from 'material-ui/TextField';
@@ -19,18 +20,17 @@ const validate = values => {
     };
 };
 
-const form = React.createClass({
+const CommentForm = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         messageId: PropTypes.string.isRequired,
         currentUserPage: PropTypes.object.isRequired,
+        translation: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
-    contextTypes: {
-        translation: PropTypes.object.isRequired
-    },
+    mixins: [PureRenderMixin],
 
     message(fields, dispatch) {
         api.comments.create(this.props.messageId, {
@@ -72,7 +72,7 @@ const form = React.createClass({
                             style={{ fontSize: '1em' }}
                             fullWidth
                             type="text"
-                            hintText={this.context.translation.t('labels.comment')}
+                            hintText={this.props.translation.t('labels.comment')}
                             {...body}
                         />
                     }
@@ -92,4 +92,4 @@ export default reduxForm({
     form: 'comment',
     fields: ['body'],
     validate
-})(form);
+})(CommentForm);

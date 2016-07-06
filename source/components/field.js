@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import ListItem from 'material-ui/List/ListItem';
@@ -23,12 +24,11 @@ const Field = React.createClass({
         error: PropTypes.string,
         label: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
-        editable: PropTypes.bool.isRequired
-    },
-
-    contextTypes: {
+        editable: PropTypes.bool.isRequired,
         translation: PropTypes.object.isRequired
     },
+
+    mixins: [PureRenderMixin],
 
     getInitialState() {
         return { edit: false, mouseInside: false };
@@ -76,7 +76,7 @@ const Field = React.createClass({
                             {...value}
                             onBlur={this.switchToValueMode}
                             fullWidth
-                            hintText={this.context.translation.t(this.props.label)}
+                            hintText={this.props.translation.t(this.props.label)}
                         />
                     </form>
                 }
@@ -104,13 +104,13 @@ const Field = React.createClass({
                 secondaryText = <div />;
             }
         } else {
-            secondaryText = <p>{this.context.translation.t('texts.emptyField')}</p>;
+            secondaryText = <p>{this.props.translation.t('texts.emptyField')}</p>;
         }
 
         return (
             <ListItem
                 style={{ maxHeight: 80, minHeight: 80 }}
-                primaryText={this.context.translation.t(this.props.label)}
+                primaryText={this.props.translation.t(this.props.label)}
                 secondaryText={secondaryText}
                 onTouchTap={this.switchToEditMode}
                 rightIcon={this.props.editable ? <EditIcon /> : undefined}

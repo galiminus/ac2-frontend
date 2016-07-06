@@ -16,7 +16,7 @@ function mapStateToProps(state, props) {
         return ({ messages: state.messages });
     }
 
-    return ({ messages: state.messagesByPage.get(props.page.id) || emptyMessages });
+    return ({ messages: state.messagesByPage.get(props.page.id) });
 }
 
 const MessagesContainer = React.createClass({
@@ -25,15 +25,18 @@ const MessagesContainer = React.createClass({
         messages: PropTypes.object.isRequired,
         clearMessages: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
+        translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object,
         page: PropTypes.object.isRequired
     },
 
-    contextTypes: {
-        translation: PropTypes.object.isRequired
-    },
-
     mixins: [PureRenderMixin],
+
+    getDefaultProps() {
+        return ({
+            messages: emptyMessages
+        });
+    },
 
     getInitialState() {
         return {
@@ -124,6 +127,7 @@ const MessagesContainer = React.createClass({
                 hasMore={this.state.hasMore}
                 loadingMore={this.state.loadingMore}
                 currentUserPage={this.props.currentUserPage}
+                translation={this.props.translation}
             />
         );
     }

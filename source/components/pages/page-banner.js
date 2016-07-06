@@ -5,6 +5,7 @@ import ProfileBanner from 'components/profile/profile-banner';
 const PageBanner = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
+        translation: PropTypes.object.isRequired,
         children: PropTypes.node
     },
 

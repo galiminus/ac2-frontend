@@ -9,11 +9,6 @@ const Messages = React.createClass({
         page: PropTypes.object.isRequired
     },
 
-    contextTypes: {
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
-    },
-
     render() {
         return (
             <Card style={{ minHeight: '100%', marginTop: 48 }}>

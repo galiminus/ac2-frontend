@@ -18,10 +18,7 @@ function mapStateToProps(state, props) {
 const Profile = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        addResource: PropTypes.func.isRequired
-    },
-
-    contextTypes: {
+        addResource: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired
     },
 
@@ -57,6 +54,7 @@ const Profile = React.createClass({
                         formKey={`${category}:${field}`}
                         onChange={generateChangeHandler(category, field)}
                         editable={this.props.page.permissions.update}
+                        translation={this.props.translation}
                     />
                 );
             }
@@ -67,7 +65,7 @@ const Profile = React.createClass({
                     key={`titles.userPageFields.${category}`}
                 >
                     <CardHeader
-                        title={this.context.translation.t(`titles.userPageFields.${category}`)}
+                        title={this.props.translation.t(`titles.userPageFields.${category}`)}
                     />
                     <Divider inset />
                     <List>

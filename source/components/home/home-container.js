@@ -21,7 +21,8 @@ function mapStateToProps(state) {
         currentUser,
         currentUserPage,
         currentToken: state.tokens.get(state.currentToken),
-        leftNav: state.leftNav
+        leftNav: state.leftNav,
+        translation: state.translations.get(state.currentLocale)
     };
 }
 
@@ -34,6 +35,7 @@ const HomeContainer = React.createClass({
         currentUserPage: PropTypes.object,
         leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
+        translation: PropTypes.object.isRequired,
         currentToken: PropTypes.object,
         currentUser: PropTypes.object
     },
@@ -81,6 +83,7 @@ const HomeContainer = React.createClass({
                 leftNav={this.props.leftNav}
                 isDisconnected={!this.props.currentToken}
                 currentUserPage={this.props.currentUserPage}
+                translation={this.props.translation}
             />
         );
     }

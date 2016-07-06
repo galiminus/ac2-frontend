@@ -23,6 +23,7 @@ import likes from 'reducers/likes';
 import notifications from 'reducers/notifications';
 
 import translations from 'reducers/translations';
+import currentLocale from 'reducers/current-locale';
 
 import settings from 'reducers/settings';
 
@@ -47,6 +48,7 @@ const reducers = combineReducers({
     form,
     notifications,
     translations,
+    currentLocale,
     settings,
     routing: routeReducer
 });

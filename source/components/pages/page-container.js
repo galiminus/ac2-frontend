@@ -31,6 +31,7 @@ const PageContainer = React.createClass({
         params: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         setCurrentPage: PropTypes.func.isRequired,
+        translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object,
         page: PropTypes.object
     },

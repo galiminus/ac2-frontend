@@ -11,11 +11,8 @@ import PageCardTitle from 'components/pages/page-card-title';
 const ProfileBanner = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
+        translation: PropTypes.object.isRequired,
         style: PropTypes.object
-    },
-
-    contextTypes: {
-        translation: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -30,7 +27,7 @@ const ProfileBanner = React.createClass({
                 </CardMedia>
                 <CardActions style={{ textAlign: 'right' }}>
                     <Link to={`/${this.props.page.id}/profile`}>
-                        <FlatButton label={this.context.translation.t('labels.about')} />
+                        <FlatButton label={this.props.translation.t('labels.about')} />
                     </Link>
                 </CardActions>
             </Card>

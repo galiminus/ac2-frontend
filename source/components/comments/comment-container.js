@@ -10,6 +10,12 @@ import api from 'api';
 
 import Comment from './comment';
 
+const defaultProps = {
+    sender: { id: null, type: '' },
+    likes: Immutable.Map({}),
+    currentUserPage: { id: null, type: '' }
+};
+
 function mapStateToProps(state, props) {
     return {
         sender: state.pages.get(props.comment.sender_id),
@@ -24,21 +30,14 @@ const CommentContainer = React.createClass({
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        likes: PropTypes.object.isRequired
-    },
-
-    contextTypes: {
+        likes: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return {
-            sender: { id: null, type: '' },
-            likes: Immutable.Map({}),
-            currentUserPage: { id: null, type: '' }
-        };
+        return (defaultProps);
     },
 
     getInitialState() {
@@ -94,7 +93,7 @@ const CommentContainer = React.createClass({
                 onLikeCreate={this.handleLikeCreate}
                 onCommentDestroy={this.handleCommentDestroy}
                 myLike={this.myLike()}
-                translation={this.context.translation}
+                translation={this.props.translation}
             />
         );
     }

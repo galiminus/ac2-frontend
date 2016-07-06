@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from 'react-redux';
 
 import Immutable from 'immutable';
@@ -33,6 +35,14 @@ function mapStateToProps(state, props) {
     };
 }
 
+const defaultProps = {
+    likes: Immutable.Map({}),
+    currentUserPage: {
+        id: null,
+        type: ''
+    }
+};
+
 const Message = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
@@ -41,21 +51,14 @@ const Message = React.createClass({
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        likes: PropTypes.object.isRequired
-    },
-
-    contextTypes: {
+        likes: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired
     },
 
+    mixins: [PureRenderMixin],
+
     getDefaultProps() {
-        return {
-            likes: Immutable.Map({}),
-            currentUserPage: {
-                id: null,
-                type: ''
-            }
-        };
+        return (defaultProps);
     },
 
     getInitialState() {
@@ -139,7 +142,7 @@ const Message = React.createClass({
                                         return (
                                             <MenuItem
                                                 leftIcon={<EditIcon />}
-                                                primaryText={this.context.translation.t('actions.edit')}
+                                                primaryText={this.props.translation.t('actions.edit')}
                                                 onClick={this.handleOpenMessageEditModal}
                                             />
                                         );
@@ -153,7 +156,7 @@ const Message = React.createClass({
                                         return (
                                             <MenuItem
                                                 leftIcon={<DeleteIcon />}
-                                                primaryText={this.context.translation.t('actions.destroy')}
+                                                primaryText={this.props.translation.t('actions.destroy')}
                                                 onClick={this.handleMessageDestroy}
                                             />
                                         );
@@ -162,7 +165,7 @@ const Message = React.createClass({
                             }
                             <MenuItem
                                 leftIcon={<ReportIcon />}
-                                primaryText={this.context.translation.t('actions.report')}
+                                primaryText={this.props.translation.t('actions.report')}
                                 onClick={this.handleMessageReport}
                             />
 
@@ -178,6 +181,7 @@ const Message = React.createClass({
                         initialValues={this.props.message.data}
                         id={this.props.message.id}
                         formKey={this.props.message.id}
+                        translation={this.props.translation}
                     />
                 </PageCardHeader>
                 <Divider inset />
@@ -188,6 +192,7 @@ const Message = React.createClass({
                     messageId={this.props.message.id}
                     parentId={null}
                     currentUserPage={this.props.currentUserPage}
+                    translation={this.props.translation}
                 />
             </Card>
         );

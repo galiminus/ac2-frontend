@@ -22,10 +22,7 @@ import { Link } from 'react-router';
 
 const Navigation = React.createClass({
     propTypes: {
-        currentUserPage: PropTypes.object.isRequired
-    },
-
-    contextTypes: {
+        currentUserPage: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired
     },
 
@@ -46,62 +43,62 @@ const Navigation = React.createClass({
                 <List>
                     <Link to="/">
                         <ListItem
-                            primaryText={this.context.translation.t('links.mainFeed')}
+                            primaryText={this.props.translation.t('links.mainFeed')}
                             leftIcon={<HomeIcon />}
                         />
                     </Link>
                     <Link to="/events">
                         <ListItem
-                            primaryText={this.context.translation.t('links.events')}
+                            primaryText={this.props.translation.t('links.events')}
                             leftIcon={<EventsIcon />}
                         />
                     </Link>
                     <Link to="/quizz">
                         <ListItem
-                            primaryText={this.context.translation.t('links.quizz')}
+                            primaryText={this.props.translation.t('links.quizz')}
                             leftIcon={<QuizzIcon />}
                         />
                     </Link>
                     <Link to="/polls">
                         <ListItem
-                            primaryText={this.context.translation.t('links.polls')}
+                            primaryText={this.props.translation.t('links.polls')}
                             leftIcon={<PollsIcon />}
                         />
                     </Link>
                     <Link to="/groups">
                         <ListItem
-                            primaryText={this.context.translation.t('links.groups')}
+                            primaryText={this.props.translation.t('links.groups')}
                             leftIcon={<GroupsIcon />}
                         />
                     </Link>
                     <Link to="/members">
                         <ListItem
-                            primaryText={this.context.translation.t('links.members')}
+                            primaryText={this.props.translation.t('links.members')}
                             leftIcon={<MembersIcon />}
                         />
                     </Link>
                     <Divider />
                     <Link to={`/${this.props.currentUserPage.id}/profile`}>
                         <ListItem
-                            primaryText={this.context.translation.t('links.currentUserPage')}
+                            primaryText={this.props.translation.t('links.currentUserPage')}
                             leftIcon={<AccountIcon />}
                         />
                     </Link>
                     <Link to={`/${this.props.currentUserPage.id}/friends`}>
                         <ListItem
-                            primaryText={this.context.translation.t('links.friends')}
+                            primaryText={this.props.translation.t('links.friends')}
                             leftIcon={<FriendsIcon />}
                         />
                     </Link>
                     <Link to="/messages">
                         <ListItem
-                            primaryText={this.context.translation.t('links.messages')}
+                            primaryText={this.props.translation.t('links.messages')}
                             leftIcon={<MessagesIcon />}
                         />
                     </Link>
                     <Link to="/settings">
                         <ListItem
-                            primaryText={this.context.translation.t('links.settings')}
+                            primaryText={this.props.translation.t('links.settings')}
                             leftIcon={<SettingsIcon />}
                         />
                     </Link>
