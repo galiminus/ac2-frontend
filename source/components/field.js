@@ -18,7 +18,6 @@ const Field = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        field: PropTypes.string.isRequired,
         values: PropTypes.object.isRequired,
         type: PropTypes.string.isRequired,
         error: PropTypes.string,

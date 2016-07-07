@@ -11,8 +11,17 @@ import Field from 'components/field';
 
 function mapStateToProps(state, props) {
     return {
-        page: state.pages.get(props.params.pageId)
+        page: state.pages.get(props.params.pageId),
+        translation: state.translations.get(state.currentLocale)
     };
+}
+
+const defaultProps = {
+    page: {
+        schema: {
+            properties: {}
+        }
+    }
 }
 
 const Profile = React.createClass({
@@ -20,6 +29,10 @@ const Profile = React.createClass({
         page: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired
+    },
+
+    getDefaultProps() {
+        return (defaultProps);
     },
 
     render() {

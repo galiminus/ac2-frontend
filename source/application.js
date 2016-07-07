@@ -111,11 +111,11 @@ const Application = React.createClass({
 
     render() {
         if (!this.props.settings.data) {
-            return (<div />)
+            return (<div />);
         }
 
         return (
-            <Router history={browserHistory}>
+            <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
                 <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
                     <Route path="login" component={LoginForm} />
                     <Route path="recover" component={RecoverForm} />

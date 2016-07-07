@@ -9,29 +9,36 @@ import Pages from './pages';
 import api from 'api';
 
 function mapStateToProps(state, props) {
+    const mappedProps = {};
+
     if (props.filters && props.filters.type) {
-        return {
-            pages: state.pagesByType.get(props.filters.type)
-        };
+        mappedProps.pages = state.pagesByType.get(props.filters.type);
+    } else {
+        mappedProps.pages = state.pages;
     }
 
-    return { pages: state.pages };
+    mappedProps.translation = state.translations.get(state.currentLocale);
+
+    return (mappedProps);
 }
+
+const defaultProps = {
+    pages: Immutable.Map({}),
+    filters: {}
+};
 
 const PagesContainer = React.createClass({
     propTypes: {
         pages: PropTypes.object.isRequired,
         filters: PropTypes.object.isRequired,
+        translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return ({
-            pages: Immutable.Map({}),
-            filters: {}
-        });
+        return (defaultProps);
     },
 
     getInitialState() {
@@ -78,7 +85,7 @@ const PagesContainer = React.createClass({
             if (this.props.filters.type) {
                 const typeRegexp = new RegExp(`${this.props.filters.type}$`);
 
-                if (!page.match(typeRegexp)) {
+                if (!page.type.match(typeRegexp)) {
                     match = false;
                 }
             }
@@ -87,7 +94,7 @@ const PagesContainer = React.createClass({
         });
 
         return (
-            <Pages pages={pages} />
+            <Pages pages={pages} translation={this.props.translation} />
         );
     }
 });
