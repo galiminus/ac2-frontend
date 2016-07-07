@@ -102,7 +102,7 @@ const Application = React.createClass({
         };
     },
 
-    componentDidMount() {
+    componentWillMount() {
         api.settings.getCurrent()
             .then((settings) => {
                 this.props.addResource(settings);
@@ -110,6 +110,10 @@ const Application = React.createClass({
     },
 
     render() {
+        if (!this.props.settings.data) {
+            return (<div />)
+        }
+
         return (
             <Router history={browserHistory}>
                 <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
