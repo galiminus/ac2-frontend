@@ -26,7 +26,7 @@ const HeaderBar = React.createClass({
     render() {
         return (
             <Toolbar styleName="root">
-                <ToolbarGroup key={0} float="left" styleName="left">
+                <ToolbarGroup key={0} styleName="left">
                     <div styleName="leftNavTrigger">
                         <MenuIcon
                             styleName="leftNavTrigger"
@@ -53,7 +53,7 @@ const HeaderBar = React.createClass({
                     />
 
                 </ToolbarGroup>
-                <ToolbarGroup key={2} float="right" styleName="right">
+                <ToolbarGroup key={2} styleName="right">
                     <CurrentUserMenu
                         currentUserPage={this.props.currentUserPage}
                         translation={this.props.translation}

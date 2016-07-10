@@ -22,6 +22,8 @@ import {
     white,
     grey300
 } from 'material-ui/styles/colors';
+import CircularProgress from 'material-ui/CircularProgress';
+
 import { fade } from 'material-ui/utils/colorManipulator';
 import Spacing from 'material-ui/styles/spacing';
 
@@ -111,7 +113,7 @@ const Application = React.createClass({
 
     render() {
         if (!this.props.settings.data) {
-            return (<div />);
+            return (<CircularProgress style={{position: "absolute", top: "40%", left: "50%", marginLeft: -25}} />);
         }
 
         return (

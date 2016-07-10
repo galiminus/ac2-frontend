@@ -48,24 +48,12 @@ function fetchJSON(path, params) {
         .then(handleDisconnect)
         .then(handleError)
         .then(handleJSON)
-        .catch((error) => {
-            if (error.name === 'TypeError') {
-                setTimeout(() => fetchJSON(path, params), 5000);
-            }
-            throw (error);
-        });
 }
 
 function fetchNoResponse(path, params) {
     return fetch(path, params)
         .then(handleDisconnect)
         .then(handleError)
-        .catch((error) => {
-            if (error.name === 'TypeError') {
-                setTimeout(() => fetchNoResponse(path, params), 5000);
-            }
-            throw (error);
-        });
 }
 
 export default {
