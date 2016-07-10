@@ -4,9 +4,11 @@ import rootReducer from 'reducers';
 import thunk from 'redux-thunk';
 import { enableBatching } from 'redux-batched-actions';
 
-import persistState, { mergePersistedState } from 'redux-localstorage';
+import persistState, { mergePersistedState, transformState } from 'redux-localstorage';
+import debounce from 'redux-localstorage-debounce';
 import adapter from 'redux-localstorage/lib/adapters/localStorage/adapter';
 import filter from 'redux-localstorage-filter';
+
 import createLogger from 'redux-logger';
 
 const reducer = compose(
@@ -22,7 +24,20 @@ const reducer = compose(
 )(rootReducer);
 
 const storage = compose(
-    filter(['tokens', 'currentUser', 'users', 'currentToken', 'pages', 'messages'])
+    filter(['tokens', 'currentToken', 'users', 'currentUser']),
+    debounce(1000),
+    (storage) => ({
+        ...storage,
+         put: (key, state, callback) => {
+            storage.put(key, {
+              tokens: state.tokens.toJS(),
+              users: state.tokens.toJS(),
+              currentToken: state.currentToken,
+              currentUser: state.currentUser
+            }, callback);
+         }
+    }),
+    transformState([JSON.stringify], [JSON.parse])
 )(adapter(window.localStorage));
 
 const logger = createLogger();
