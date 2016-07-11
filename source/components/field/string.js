@@ -14,12 +14,12 @@ const validate = (values) => {
     };
 };
 
-const Field = React.createClass({
+const StringField = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         values: PropTypes.object.isRequired,
-        type: PropTypes.string.isRequired,
+        schema: PropTypes.object.isRequired,
         error: PropTypes.string,
         label: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
@@ -58,25 +58,26 @@ const Field = React.createClass({
         this.setState({ edit: false, mouseInside: false });
     },
 
-    renderEdit() {
-        const {
-            fields: { value },
-            handleSubmit
-        } = this.props;
+    renderField() {
+        return (
+            <TextField
+                ref="valueField"
+                {...this.props.fields.value}
+                onBlur={this.switchToValueMode}
+                fullWidth
+                hintText={this.props.translation.t(this.props.label)}
+            />
+        );
+    },
 
+    renderEdit() {
         const valueField = (
             <ListItem
                 onMouseEnter={this.setMouseInside}
                 onMouseLeave={this.setMouseOutside}
                 primaryText={
-                    <form onSubmit={handleSubmit(this.update)}>
-                        <TextField
-                            ref="valueField"
-                            {...value}
-                            onBlur={this.switchToValueMode}
-                            fullWidth
-                            hintText={this.props.translation.t(this.props.label)}
-                        />
+                    <form onSubmit={this.props.handleSubmit(this.update)}>
+                        {this.renderField()}
                     </form>
                 }
             />
@@ -90,9 +91,8 @@ const Field = React.createClass({
         let secondaryText;
 
         if (this.props.values.value) {
-            switch (this.props.type) {
+            switch (this.props.schema.type) {
             case 'string':
-            case 'country':
                 secondaryText = (
                     <p>
                         {this.props.values.value}
@@ -126,4 +126,4 @@ export default reduxForm({
     form: 'field',
     fields: ['value'],
     validate
-})(Field);
+})(StringField);

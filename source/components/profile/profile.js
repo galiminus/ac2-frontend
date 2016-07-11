@@ -7,7 +7,7 @@ import Divider from 'material-ui/Divider';
 
 import api from 'api';
 import actionCreators from 'action-creators';
-import Field from 'components/field';
+import Field from 'components/field/field';
 
 function mapStateToProps(state, props) {
     return {
@@ -55,14 +55,14 @@ const Profile = React.createClass({
             for (const field of Object.keys(this.props.page.schema.properties[category].properties)) {
                 fields.push(
                     <Field
-                        label={`labels.userPageFields.${field}`}
+                        label={`labels.profilePageFields.${field}`}
                         initialValues={{ value: (
                                 this.props.page.data[category] ?
                                     this.props.page.data[category][field] :
                                     undefined
                             )
                         }}
-                        type={this.props.page.schema.properties[category].properties[field].type}
+                        schema={this.props.page.schema.properties[category].properties[field]}
                         key={`${category}:${field}`}
                         formKey={`${category}:${field}`}
                         onChange={generateChangeHandler(category, field)}
@@ -75,10 +75,10 @@ const Profile = React.createClass({
             cards.push(
                 <Card
                     style={{ margin: '24px 0', fontSize: '0.9em', lineHeight: '1.4em' }}
-                    key={`titles.userPageFields.${category}`}
+                    key={`titles.profilePageFields.${category}`}
                 >
                     <CardHeader
-                        title={this.props.translation.t(`titles.userPageFields.${category}`)}
+                        title={this.props.translation.t(`titles.profilePageFields.${category}`)}
                     />
                     <Divider inset />
                     <List>
