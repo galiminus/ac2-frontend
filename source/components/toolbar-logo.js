@@ -41,9 +41,8 @@ const ToolbarLogo = React.createClass({
     render() {
         return (
             <ToolbarTitle
-                text={
-                    <Link style={style} to="/">{this.props.title}</Link>
-                }
+                style={style}
+                text={this.props.title}
                 {...this.props}
             />
         );

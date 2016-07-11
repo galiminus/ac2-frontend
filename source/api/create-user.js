@@ -12,10 +12,10 @@ export default (attributes, query) => {
         .catch((error) => {
             if (error.response) {
                 error.response.json().then((response) => {
-                    if (response.email === 'has already been taken') {
-                        reject({ _error: 'email_already_in_use' });
+                    if (response.email[0] === 'has already been taken') {
+                        reject({ value: 'email_already_in_use' });
                     } else {
-                        reject({ _error: 'unknown' });
+                        reject({ value: 'unknown' });
                     }
                 });
             }

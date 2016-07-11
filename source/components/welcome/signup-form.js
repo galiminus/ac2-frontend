@@ -16,15 +16,16 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { tokens, users } from 'api';
-import { setCurrentUser, setCurrentToken, pushNotification } from 'action-creators';
+import { addToken, setCurrentUser, setCurrentToken, pushNotification } from 'action-creators';
 import { validateEmail, validatePassword, validateFullName, validateUserName } from 'validators';
 
 const authenticate = (userId, fields) =>
     tokens.create({ email: fields.email, password: fields.password }, dispatch)
         .then((data) => {
             dispatch(batchActions([
-                setCurrentUser.set(userId),
-                setCurrentToken.set(data.access_token),
+                addToken(data),
+                setCurrentUser(userId),
+                setCurrentToken(data.access_token),
                 updatePath('/')
             ]));
         })
@@ -52,7 +53,8 @@ const signup = (fields) =>
             }
         }
     }, dispatch)
-        .then((userId) => authenticate(userId, fields, dispatch));
+        .then((userId) => authenticate(userId, fields, dispatch))
+        .catch((error) => dispatch(pushNotification(error.value)))
 
 const validate = values => {
     return {

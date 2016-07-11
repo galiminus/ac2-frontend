@@ -40,20 +40,17 @@ function handleError(response) {
 }
 
 function handleJSON(response) {
-    return response.json();
+    if (response.headers.get('content-type').match('application/json')) {
+        return response.json();
+    }
+    return response;
 }
 
 function fetchJSON(path, params) {
     return fetch(path, params)
         .then(handleDisconnect)
         .then(handleError)
-        .then(handleJSON);
-}
-
-function fetchNoResponse(path, params) {
-    return fetch(path, params)
-        .then(handleDisconnect)
-        .then(handleError);
+        .then(handleJSON)
 }
 
 export default {
@@ -90,7 +87,7 @@ export default {
     },
 
     destroy: (path, query = {}) => {
-        return fetchNoResponse(`${settings.api}${path}?${queryString.stringify(query)}`, {
+        return fetchJSON(`${settings.api}${path}?${queryString.stringify(query)}`, {
             method: 'DELETE',
             mode: 'cors',
             headers: {

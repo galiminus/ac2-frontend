@@ -43,7 +43,7 @@ const WelcomePage = React.createClass({
         return (
             <div styleName="root">
                 <Toolbar styleName="headerBar">
-                    <ToolbarGroup key={0} float="left">
+                    <ToolbarGroup key={0}>
                         <ToolbarLogo />
                     </ToolbarGroup>
                 </Toolbar>

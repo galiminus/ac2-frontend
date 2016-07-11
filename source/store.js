@@ -18,7 +18,6 @@ const reducer = compose(
 
         state.users = Immutable.Map(persistedState.users);
         state.currentUser = persistedState.currentUser;
-
         return state;
     })
 )(rootReducer);
@@ -29,7 +28,7 @@ const storage = compose(
     (formerStorage) => ({
         ...formerStorage,
         put: (key, state, callback) => {
-            storage.put(key, {
+            formerStorage.put(key, {
                 tokens: state.tokens.toJS(),
                 users: state.tokens.toJS(),
                 currentToken: state.currentToken,
