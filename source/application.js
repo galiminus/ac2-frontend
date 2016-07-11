@@ -113,7 +113,7 @@ const Application = React.createClass({
 
     render() {
         if (!this.props.settings.data) {
-            return (<CircularProgress style={{position: "absolute", top: "40%", left: "50%", marginLeft: -25}} />);
+            return (<CircularProgress style={{ position: 'absolute', top: '40%', left: '50%', marginLeft: -25 }} />);
         }
 
         return (

@@ -47,13 +47,13 @@ function fetchJSON(path, params) {
     return fetch(path, params)
         .then(handleDisconnect)
         .then(handleError)
-        .then(handleJSON)
+        .then(handleJSON);
 }
 
 function fetchNoResponse(path, params) {
     return fetch(path, params)
         .then(handleDisconnect)
-        .then(handleError)
+        .then(handleError);
 }
 
 export default {

@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { connect } from 'react-redux';
 
 import List from 'material-ui/List';
@@ -22,7 +24,7 @@ const defaultProps = {
             properties: {}
         }
     }
-}
+};
 
 const Profile = React.createClass({
     propTypes: {
@@ -30,6 +32,8 @@ const Profile = React.createClass({
         addResource: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired
     },
+
+    mixins: [PureRenderMixin],
 
     getDefaultProps() {
         return (defaultProps);

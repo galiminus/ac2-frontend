@@ -26,16 +26,16 @@ const reducer = compose(
 const storage = compose(
     filter(['tokens', 'currentToken', 'users', 'currentUser']),
     debounce(1000),
-    (storage) => ({
-        ...storage,
-         put: (key, state, callback) => {
+    (formerStorage) => ({
+        ...formerStorage,
+        put: (key, state, callback) => {
             storage.put(key, {
-              tokens: state.tokens.toJS(),
-              users: state.tokens.toJS(),
-              currentToken: state.currentToken,
-              currentUser: state.currentUser
+                tokens: state.tokens.toJS(),
+                users: state.tokens.toJS(),
+                currentToken: state.currentToken,
+                currentUser: state.currentUser
             }, callback);
-         }
+        }
     }),
     transformState([JSON.stringify], [JSON.parse])
 )(adapter(window.localStorage));
