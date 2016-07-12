@@ -137,36 +137,29 @@ const Message = React.createClass({
                             style={{ margin: -12 }}
                         >
                             {
-                                (() => {
-                                    if (this.props.message.permissions.update) {
-                                        return (
-                                            <MenuItem
-                                                leftIcon={<EditIcon />}
-                                                primaryText={this.props.translation.t('actions.edit')}
-                                                onClick={this.handleOpenMessageEditModal}
-                                            />
-                                        );
-                                    }
-                                })()
+                                this.props.message.permissions.update &&
+                                    <MenuItem
+                                        leftIcon={<EditIcon />}
+                                        style={{ cursor: "pointer" }}
+                                        primaryText={this.props.translation.t('actions.edit')}
+                                        onTouchTap={this.handleOpenMessageEditModal}
+                                    />
                             }
 
                             {
-                                (() => {
-                                    if (this.props.message.permissions.destroy) {
-                                        return (
-                                            <MenuItem
-                                                leftIcon={<DeleteIcon />}
-                                                primaryText={this.props.translation.t('actions.destroy')}
-                                                onClick={this.handleMessageDestroy}
-                                            />
-                                        );
-                                    }
-                                })()
+                                this.props.message.permissions.destroy &&
+                                    <MenuItem
+                                        leftIcon={<DeleteIcon />}
+                                        style={{ cursor: "pointer" }}
+                                        primaryText={this.props.translation.t('actions.destroy')}
+                                        onTouchTap={this.handleMessageDestroy}
+                                    />
                             }
                             <MenuItem
                                 leftIcon={<ReportIcon />}
+                                style={{ cursor: "pointer" }}
                                 primaryText={this.props.translation.t('actions.report')}
-                                onClick={this.handleMessageReport}
+                                onTouchTap={this.handleMessageReport}
                             />
 
                         </IconMenu>
