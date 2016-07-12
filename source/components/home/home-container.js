@@ -41,15 +41,22 @@ const HomeContainer = React.createClass({
     },
 
     componentDidMount() {
-        api.users.me({ include: 'page' }).then((response) => {
-            this.props.setCurrentUser(response.data.id);
-            this.props.addResource(response);
-        });
+        api.users.me({ include: 'page' })
+            .then((response) => {
+                this.props.setCurrentUser(response.data.id);
+                this.props.addResource(response);
+            })
+            .catch((error) => {
+                this.props.pushNotification('me_get_fatal_error');
+            });
     },
 
     componentWillReceiveProps(props) {
         if (props.currentUser && (props.currentUser !== this.props.currentUser)) {
-            api.pages.update(props.currentUser.page_id, { presence: 'available' });
+            api.pages.update(props.currentUser.page_id, { presence: 'available' })
+                .catch((error) => {
+                    this.props.pushNotification('presence_update_fatal_error');
+                });
         }
     },
 

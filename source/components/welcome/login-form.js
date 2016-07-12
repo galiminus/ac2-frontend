@@ -22,15 +22,11 @@ import { validateEmail, validatePassword } from 'validators';
 const authenticate = (fields) =>
     tokens.create(fields, dispatch)
         .then((data) => {
-            try {
-                dispatch(batchActions([
-                    addToken(data),
-                    setCurrentToken(data.access_token),
-                    updatePath('/')
-                ]));
-            } catch (e) {
-                console.log(e.message, e.stack);
-            }
+            dispatch(batchActions([
+                addToken(data),
+                setCurrentToken(data.access_token),
+                updatePath('/')
+            ]));
         })
         .catch((error) => {
             if (error.response !== undefined) {

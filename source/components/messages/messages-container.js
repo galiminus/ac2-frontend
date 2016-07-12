@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import actionCreators from 'action-creators';
 import api from 'api';
+import { find } from 'api/http';
+
 import Immutable from 'immutable';
 
 import Messages from './messages';
@@ -75,14 +77,18 @@ const MessagesContainer = React.createClass({
 
         this.setState({ loadingMore: true });
 
-        api.messages.find(query).then((response) => {
-            this.props.addResource(response);
+        api.messages.find(query)
+            .then((response) => {
+                this.props.addResource(response);
 
-            if (response.data.length > 0) {
-                this.setState({ lastMessageDate: response.data[0].updated_at });
-            }
-            this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
-        });
+                if (response.data.length > 0) {
+                    this.setState({ lastMessageDate: response.data[0].updated_at });
+                }
+                this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
+            })
+            .catch((error) => {
+                this.props.pushNotification('messages_find_fatal_error');
+            })
     },
 
     handleLoadUpdates() {

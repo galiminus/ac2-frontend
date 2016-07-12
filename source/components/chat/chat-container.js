@@ -39,9 +39,13 @@ const ChatContainer = React.createClass({
     },
 
     componentDidMount() {
-        api.pages.find({ presence: "available" }).then((response) => {
-            this.props.addResource(response);
-        });
+        api.pages.find({ presence: "available" })
+            .then((response) => {
+                this.props.addResource(response);
+            })
+            .catch(() => {
+                this.props.pushNotification("roster_load_fatal_error");
+            });
     },
 
     handleSetCurrentRecipient(recipient) {

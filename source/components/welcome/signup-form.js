@@ -54,8 +54,13 @@ const signup = (fields) =>
         }
     }, dispatch)
         .then((userId) => authenticate(userId, fields, dispatch))
-        .catch((error) => dispatch(pushNotification(error.value)))
-
+        .catch((error) => {
+            if (error.body.email[0] === 'has already been taken') {
+                dispatch(pushNotification('email_already_in_use'));
+            } else {
+                dispatch(pushNotification('unknown'));
+            }
+        });
 const validate = values => {
     return {
         fullName: validateFullName(values.fullName),
