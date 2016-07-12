@@ -37,7 +37,7 @@ function handleError(response) {
     const error = new Error(response.statusText);
 
     error.response = response;
-    if (response.headers.get('content-type').match('application/json')) {
+    if ((response.headers.get('content-type') || "").match('application/json')) {
         return response.json().then(() => {
             throw { body: body };
         });
@@ -46,7 +46,7 @@ function handleError(response) {
 }
 
 function parseJSON(response) {
-    if (response.headers.get('content-type').match('application/json')) {
+    if ((response.headers.get('content-type') || "").match('application/json')) {
         return response.json();
     }
     return Promise.resolve(null);
