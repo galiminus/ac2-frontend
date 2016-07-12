@@ -78,17 +78,19 @@ const MessagesContainer = React.createClass({
         this.setState({ loadingMore: true });
 
         api.messages.find(query)
-            .then((response) => {
-                this.props.addResource(response);
+            .then(
+                (response) => {
+                    this.props.addResource(response);
 
-                if (response.data.length > 0) {
-                    this.setState({ lastMessageDate: response.data[0].updated_at });
+                    if (response.data.length > 0) {
+                        this.setState({ lastMessageDate: response.data[0].updated_at });
+                    }
+                    this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
+                },
+                (error) => {
+                    this.props.pushNotification('messages_find_fatal_error');
                 }
-                this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
-            })
-            .catch((error) => {
-                this.props.pushNotification('messages_find_fatal_error');
-            })
+            );
     },
 
     handleLoadUpdates() {

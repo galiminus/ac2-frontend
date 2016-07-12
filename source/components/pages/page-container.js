@@ -56,10 +56,16 @@ const PageContainer = React.createClass({
 
     loadPage(pageId) {
         if (pageId) {
-            api.pages.get(pageId).then((response) => {
-                this.props.setCurrentPage(response.data.id);
-                this.props.addResource(response);
-            });
+            api.pages.get(pageId)
+                .then(
+                    (response) => {
+                        this.props.setCurrentPage(response.data.id);
+                        this.props.addResource(response);
+                    },
+                    (error) => {
+                        this.props.pushNotification('pages_get_fatal_error')
+                    }
+                );
         } else {
             this.props.setCurrentPage('main');
         }

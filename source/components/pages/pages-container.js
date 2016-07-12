@@ -65,12 +65,14 @@ const PagesContainer = React.createClass({
         this.setState({ loadingMore: true });
 
         api.pages.find(query)
-            .then((response) => {
-                this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
-            })
-            .catch((error) => {
-                this.props.pushNotification('pages_find_fatal_error')
-            })
+            .then(
+                (response) => {
+                    this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
+                },
+                (error) => {
+                    this.props.pushNotification('pages_find_fatal_error')
+                }
+            );
     },
 
     handleLoadMore() {

@@ -21,23 +21,25 @@ import { validateEmail, validatePassword, validateFullName, validateUserName } f
 
 const authenticate = (userId, fields) =>
     tokens.create({ email: fields.email, password: fields.password }, dispatch)
-        .then((data) => {
-            dispatch(batchActions([
-                addToken(data),
-                setCurrentUser(userId),
-                setCurrentToken(data.access_token),
-                updatePath('/')
-            ]));
-        })
-        .catch((error) => {
-            if (error.response !== undefined) {
-                const authError = error.response.headers.get('www-authenticate');
+        .then(
+            (data) => {
+                dispatch(batchActions([
+                    addToken(data),
+                    setCurrentUser(userId),
+                    setCurrentToken(data.access_token),
+                    updatePath('/')
+                ]));
+            },
+            (error) => {
+                if (error.response !== undefined) {
+                    const authError = error.response.headers.get('www-authenticate');
 
-                if (authError && authError.match('invalid_grant')) {
-                    dispatch(pushNotification('invalidGrant'));
+                    if (authError && authError.match('invalid_grant')) {
+                        dispatch(pushNotification('invalidGrant'));
+                    }
                 }
             }
-        });
+        );
 
 const signup = (fields) =>
     users.create({
@@ -52,15 +54,19 @@ const signup = (fields) =>
                 }
             }
         }
-    }, dispatch)
-        .then((userId) => authenticate(userId, fields, dispatch))
-        .catch((error) => {
+    })
+    .then(
+        (userId) => {
+            authenticate(userId, fields, dispatch)
+        },
+        (error) => {
             if (error.body.email[0] === 'has already been taken') {
                 dispatch(pushNotification('email_already_in_use'));
             } else {
                 dispatch(pushNotification('unknown'));
             }
-        });
+        }
+    );
 const validate = values => {
     return {
         fullName: validateFullName(values.fullName),

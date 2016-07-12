@@ -41,14 +41,16 @@ const HomeContainer = React.createClass({
     },
 
     componentDidMount() {
-        api.users.me({ include: 'page' })
-            .then((response) => {
-                this.props.setCurrentUser(response.data.id);
-                this.props.addResource(response);
-            })
-            .catch((error) => {
-                this.props.pushNotification('me_get_fatal_error');
-            });
+        api.users.me({ include: 'page,page.friend_group' })
+            .then(
+                (response) => {
+                    this.props.setCurrentUser(response.data.id);
+                    this.props.addResource(response);
+                },
+                (error) => {
+                    this.props.pushNotification('me_get_fatal_error');
+                }
+            );
     },
 
     componentWillReceiveProps(props) {

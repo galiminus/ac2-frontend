@@ -21,22 +21,24 @@ import { validateEmail, validatePassword } from 'validators';
 
 const authenticate = (fields) =>
     tokens.create(fields, dispatch)
-        .then((data) => {
-            dispatch(batchActions([
-                addToken(data),
-                setCurrentToken(data.access_token),
-                updatePath('/')
-            ]));
-        })
-        .catch((error) => {
-            if (error.response !== undefined) {
-                const authError = error.response.headers.get('www-authenticate');
+        .then(
+            (data) => {
+                dispatch(batchActions([
+                    addToken(data),
+                    setCurrentToken(data.access_token),
+                    updatePath('/')
+                ]));
+            },
+            (error) => {
+                if (error.response !== undefined) {
+                    const authError = error.response.headers.get('www-authenticate');
 
-                if (authError && authError.match('invalid_grant')) {
-                    dispatch(pushNotification('invalidGrant'));
+                    if (authError && authError.match('invalid_grant')) {
+                        dispatch(pushNotification('invalidGrant'));
+                    }
                 }
             }
-        });
+        );
 
 const validate = values => {
     return {
