@@ -11,9 +11,7 @@ import api from 'api';
 import Comment from './comment';
 
 const defaultProps = {
-    sender: { id: null, type: '' },
-    likes: Immutable.Map({}),
-    currentUserPage: { id: null, type: '' }
+    likes: Immutable.Map({})
 };
 
 function mapStateToProps(state, props) {
@@ -25,7 +23,7 @@ function mapStateToProps(state, props) {
 
 const CommentContainer = React.createClass({
     propTypes: {
-        sender: PropTypes.object.isRequired,
+        sender: PropTypes.object,
         comment: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
@@ -80,6 +78,10 @@ const CommentContainer = React.createClass({
     },
 
     render() {
+        if (!this.props.sender) {
+            return (<div />);
+        }
+
         return (
             <Comment
                 currentUserPage={this.props.currentUserPage}

@@ -36,16 +36,12 @@ function mapStateToProps(state, props) {
 }
 
 const defaultProps = {
-    likes: Immutable.Map({}),
-    currentUserPage: {
-        id: null,
-        type: ''
-    }
+    likes: Immutable.Map({})
 };
 
 const Message = React.createClass({
     propTypes: {
-        sender: PropTypes.object.isRequired,
+        sender: PropTypes.object,
         recipient: PropTypes.object,
         message: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
@@ -101,6 +97,10 @@ const Message = React.createClass({
     },
 
     render() {
+        if (!this.props.sender) {
+            return (<div />);
+        }
+
         const isLiked = !!this.myLike();
 
         return (

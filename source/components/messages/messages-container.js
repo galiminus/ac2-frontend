@@ -28,7 +28,7 @@ const MessagesContainer = React.createClass({
         clearMessages: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object,
+        currentUserPage: PropTypes.object.isRequired,
         page: PropTypes.object.isRequired
     },
 

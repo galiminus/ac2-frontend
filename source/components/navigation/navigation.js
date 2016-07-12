@@ -28,15 +28,6 @@ const Navigation = React.createClass({
 
     mixins: [PureRenderMixin],
 
-    getDefaultProps() {
-        return ({
-            currentUserPage: {
-                id: null,
-                type: ''
-            }
-        });
-    },
-
     render() {
         return (
             <nav styleName="root">

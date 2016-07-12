@@ -83,6 +83,10 @@ const HomeContainer = React.createClass({
     },
 
     render() {
+        if (!this.props.currentUserPage) {
+            return (<div />);
+        }
+
         return (
             <Home
                 toggleLeftNav={this.props.toggleLeftNav}

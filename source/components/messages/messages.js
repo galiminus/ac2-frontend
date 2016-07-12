@@ -26,7 +26,7 @@ const Messages = React.createClass({
         updateCount: PropTypes.number,
         hasMore: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired,
-        currentUserPage: PropTypes.object,
+        currentUserPage: PropTypes.object.isRequired,
         page: PropTypes.object,
         translation: PropTypes.object.isRequired
     },

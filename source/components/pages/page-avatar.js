@@ -25,31 +25,15 @@ const UserAvatar = React.createClass({
 
     mixins: [PureRenderMixin],
 
-    getDefaultProps() {
-        return ({
-            page: {
-                id: null,
-                type: ''
-            }
-        });
-    },
-
     render() {
         const styles = getStyles();
 
-        let name;
-        if (this.props.page.type.match(/^Page::Profile/)) {
-            name = this.props.page.data.personal_informations.full_name;
-        } else {
-            name = '';
-        }
-
         return (
             <Avatar
-                backgroundColor={randomColor(name)}
+                backgroundColor={randomColor(this.props.page.title)}
                 style={Object.assign(styles.root, this.props.style)}
             >
-                {name[0]}
+                {this.props.page.title[0]}
             </Avatar>
         );
     }

@@ -22,7 +22,7 @@ const validate = values => {
 
 const MessageDialog = React.createClass({
     propTypes: {
-        sender: PropTypes.object,
+        sender: PropTypes.object.isRequired,
         recipient: PropTypes.object,
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,

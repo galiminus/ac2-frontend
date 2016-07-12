@@ -20,20 +20,6 @@ const CurrentUserMenu = React.createClass({
 
     mixins: [PureRenderMixin],
 
-    getDefaultProps() {
-        return ({
-            currentUserPage: {
-                id: null,
-                type: '',
-                data: {
-                    personal_informations: {
-                        full_name: ''
-                    }
-                }
-            }
-        });
-    },
-
     render() {
         const style = {
             marginTop: 8,
@@ -41,11 +27,11 @@ const CurrentUserMenu = React.createClass({
             fontFamily: 'Roboto, sans-serif',
             textTransform: 'uppercase',
             cursor: 'pointer',
-            backgroundColor: randomColor(this.props.currentUserPage.data.personal_informations.full_name)
+            backgroundColor: randomColor(this.props.currentUserPage.title)
         };
 
         return (
-            <Avatar style={style}>{this.props.currentUserPage.data.personal_informations.full_name[0]}</Avatar>
+            <Avatar style={style}>{this.props.currentUserPage.title[0]}</Avatar>
         );
     }
 });

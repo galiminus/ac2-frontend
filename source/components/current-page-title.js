@@ -28,20 +28,11 @@ const style = {
 
 const CurrentPageTitle = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired,
+        page: PropTypes.object,
         translation: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
-
-    getDefaultProps() {
-        return ({
-            page: {
-                id: null,
-                type: ''
-            }
-        });
-    },
 
     render() {
         let title;
@@ -52,12 +43,8 @@ const CurrentPageTitle = React.createClass({
 
         if (this.props.page.type === 'Page::Main') {
             title = this.props.translation.t('links.mainFeed');
-        } else if (this.props.page.type.match(/^Page::Profile/)) {
-            title = this.props.page.data.personal_informations.full_name;
-        } else if (this.props.page.type === 'Page::Static') {
-            title = this.props.page.data.title;
         } else {
-            title = '';
+            title = this.props.page.title;
         }
 
         return (

@@ -20,7 +20,7 @@ const Home = React.createClass({
         isDisconnected: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object
+        currentUserPage: PropTypes.object.isRequired
     },
 
     render() {

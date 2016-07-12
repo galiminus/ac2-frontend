@@ -21,28 +21,12 @@ const PageLink = React.createClass({
         style: PropTypes.object
     },
 
-    getDefaultProps() {
-        return ({
-            page: {
-                id: null,
-                type: ''
-            }
-        });
-    },
-
     render() {
         const styles = getStyles();
 
-        let name;
-        if (this.props.page.type.match(/^Page::Profile/)) {
-            name = this.props.page.data.personal_informations.full_name;
-        } else {
-            name = '';
-        }
-
         return (
             <Link to={`/${this.props.page.id}`} style={Object.assign(styles.root, this.props.style)}>
-                {name}
+                {this.props.page.title}
             </Link>
         );
     }
