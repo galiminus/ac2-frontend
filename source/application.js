@@ -41,7 +41,6 @@ import Profile from 'components/profile/profile';
 import MessagesContainer from 'components/messages/messages-container';
 import ProfilePages from 'components/pages/profile-pages';
 import EventPages from 'components/pages/event-pages';
-import FriendPages from 'components/pages/friend-pages';
 
 import { Provider } from 'react-redux';
 
@@ -138,7 +137,6 @@ const Application = React.createClass({
 
                     <Route path=":pageId" component={PageContainer}>
                         <IndexRoute component={MessagesContainer} />
-                        <Route path="friends" component={FriendPages} />
                     </Route>
                 </Route>
             </Router>

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { CardHeader } from 'material-ui/Card';
 
+import ArrowIcon from 'material-ui/svg-icons/av/play-arrow';
+
 import PageAvatar from 'components/pages/page-avatar';
 import PageLink from 'components/pages/page-link';
 
@@ -19,7 +21,7 @@ const PageCardHeader = React.createClass({
             title = (
                 <div>
                     <PageLink page={this.props.sender} />
-                    <span style={{ fontSize: 10, marginLeft: 4, marginRight: 4 }}>►</span>
+                    <ArrowIcon style={{ width: 10, height: 10 }} />
                     <PageLink page={this.props.recipient} />
                     {this.props.additionalInfos}
                 </div>

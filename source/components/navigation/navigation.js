@@ -14,7 +14,6 @@ import QuizzIcon from 'material-ui/svg-icons/toggle/check-box';
 import PollsIcon from 'material-ui/svg-icons/social/poll';
 import GroupsIcon from 'material-ui/svg-icons/social/group';
 import MembersIcon from 'material-ui/svg-icons/action/language';
-import FriendsIcon from 'material-ui/svg-icons/action/favorite';
 import MessagesIcon from 'material-ui/svg-icons/communication/email';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
@@ -73,12 +72,6 @@ const Navigation = React.createClass({
                         <ListItem
                             primaryText={this.props.translation.t('links.currentUserPage')}
                             leftIcon={<AccountIcon />}
-                        />
-                    </Link>
-                    <Link to={`/${this.props.currentUserPage.id}/friends`}>
-                        <ListItem
-                            primaryText={this.props.translation.t('links.friends')}
-                            leftIcon={<FriendsIcon />}
                         />
                     </Link>
                     <Link to="/messages">

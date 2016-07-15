@@ -24,9 +24,8 @@ const Pages = React.createClass({
                 {
                     this.props.pages.valueSeq().map((page) => {
                         return (
-                            <div style={{ width: '48%' }}>
+                            <div style={{ width: '48%' }} key={page.id}>
                                 <PageBanner
-                                    key={page.id}
                                     page={page}
                                     translation={this.props.translation}
                                     compact
