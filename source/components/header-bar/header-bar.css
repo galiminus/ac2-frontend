@@ -22,12 +22,13 @@
 }
 
 .separator {
-    background-color: #ffffff !important;
-    margin-right: 24px;
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    margin-right: 16px;
+    margin-left: 16px !important;
 }
 
 .searchField {
-    width: 400px;
+    width: 460px;
     margin: 5px 0px 5px 16px;
     background: #444;
     padding: 0 12px;

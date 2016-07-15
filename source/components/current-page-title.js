@@ -22,7 +22,6 @@ function mapStateToProps(state) {
 const style = {
     fontFamily: 'Roboto, sans-serif',
     fontWeight: 400,
-    letterSpacing: 3,
     color: '#ffffff'
 };
 

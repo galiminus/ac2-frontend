@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 import styles from './additional-links.css';
 
-import actionCreators from 'action-creators';
-
 function mapStateToProps(state) {
     if (state.settings && state.settings.data) {
         return ({
@@ -19,7 +17,6 @@ function mapStateToProps(state) {
 
 const AdditionalLinks = React.createClass({
     propTypes: {
-        clearTokens: PropTypes.func.isRequired,
         additionalLinks: PropTypes.array.isRequired,
         translation: PropTypes.object.isRequired
     },
@@ -30,10 +27,6 @@ const AdditionalLinks = React.createClass({
         return ({
             additionalLinks: []
         });
-    },
-
-    handleClearToken() {
-        this.props.clearTokens();
     },
 
     render() {
@@ -53,12 +46,9 @@ const AdditionalLinks = React.createClass({
                         );
                     })
                 }
-                <li>
-                    <a href="#" onClick={this.handleClearToken}>Déconnexion</a>
-                </li>
             </ul>
         );
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(CSSModules(AdditionalLinks, styles));
+export default connect(mapStateToProps)(CSSModules(AdditionalLinks, styles));
