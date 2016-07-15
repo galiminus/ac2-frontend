@@ -41,7 +41,6 @@ const ToolbarLogo = React.createClass({
             <ToolbarTitle
                 style={style}
                 text={this.props.title}
-                {...this.props}
             />
         );
     }
