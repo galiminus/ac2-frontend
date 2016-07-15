@@ -31,6 +31,7 @@ import currentLocale from 'reducers/current-locale';
 import settings from 'reducers/settings';
 
 import leftNav from 'reducers/leftnav';
+import formFocused from 'reducers/form-focused';
 
 const reducers = combineReducers({
     tokens,
@@ -56,6 +57,7 @@ const reducers = combineReducers({
     translations,
     currentLocale,
     settings,
+    formFocused,
     routing: routeReducer
 });
 

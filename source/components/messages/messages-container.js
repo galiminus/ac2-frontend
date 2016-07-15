@@ -104,25 +104,6 @@ const MessagesContainer = React.createClass({
         this.setState({ page: nextPage });
         this.loadMessages(this.props.params.pageId, nextPage);
     },
-    //
-    // handleMessage(message) {
-    //     if (message) {
-    //         switch (message.meta.action) {
-    //         case 'create':
-    //         case 'update':
-    //             if (message.data.attributes.created_at === message.data.attributes.updated_at &&
-    //                 message.data.relationships.sender.data.id !== this.props.currentUserPage.id) {
-    //                 this.setState({ updateCount: this.state.updateCount + 1 });
-    //             }
-    //             break;
-    //         case 'destroy':
-    //             this.props.removeResource(message.data);
-    //             break;
-    //         default:
-    //             break;
-    //         }
-    //     }
-    // },
 
     render() {
         return (

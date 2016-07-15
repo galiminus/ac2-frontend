@@ -8,7 +8,7 @@ const EventPages = React.createClass({
 
     render() {
         return (
-            <PagesContainer filters={{ type: 'Page::Event' }} />
+            <PagesContainer filters={{ type: 'Page::Event' }} {...this.props} />
         );
     }
 });

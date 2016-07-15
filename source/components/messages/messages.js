@@ -9,14 +9,13 @@ import styles from './messages.css';
 import List from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CreateContentIcon from 'material-ui/svg-icons/content/create';
 import RefreshIcon from 'material-ui/svg-icons/navigation/arrow-upward';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import MessageDialog from './message-dialog';
-
 import Message from './message';
+import FloatingActionButton from 'components/floating-action-button';
 
 const Messages = React.createClass({
     propTypes: {
@@ -136,7 +135,6 @@ const Messages = React.createClass({
                     </InfiniteScroll>
                 </List>
                 <FloatingActionButton
-                    styleName="addMessageButton"
                     onMouseUp={this.handleOpenMessageCreationModal}
                 >
                     <CreateContentIcon />
