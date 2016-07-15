@@ -140,7 +140,7 @@ const Message = React.createClass({
                                 this.props.message.permissions.update &&
                                     <MenuItem
                                         leftIcon={<EditIcon />}
-                                        style={{ cursor: "pointer" }}
+                                        style={{ cursor: 'pointer' }}
                                         primaryText={this.props.translation.t('actions.edit')}
                                         onTouchTap={this.handleOpenMessageEditModal}
                                     />
@@ -150,14 +150,14 @@ const Message = React.createClass({
                                 this.props.message.permissions.destroy &&
                                     <MenuItem
                                         leftIcon={<DeleteIcon />}
-                                        style={{ cursor: "pointer" }}
+                                        style={{ cursor: 'pointer' }}
                                         primaryText={this.props.translation.t('actions.destroy')}
                                         onTouchTap={this.handleMessageDestroy}
                                     />
                             }
                             <MenuItem
                                 leftIcon={<ReportIcon />}
-                                style={{ cursor: "pointer" }}
+                                style={{ cursor: 'pointer' }}
                                 primaryText={this.props.translation.t('actions.report')}
                                 onTouchTap={this.handleMessageReport}
                             />

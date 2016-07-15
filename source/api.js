@@ -16,6 +16,9 @@ import updateMessage from 'api/update-message';
 import destroyMessage from 'api/destroy-message';
 import createLike from 'api/create-like';
 import destroyLike from 'api/destroy-like';
+import createRelationship from 'api/create-relationship';
+import updateRelationship from 'api/update-relationship';
+import destroyRelationship from 'api/destroy-relationship';
 
 export default {
     settings: {
@@ -55,5 +58,11 @@ export default {
     likes: {
         create: createLike,
         destroy: destroyLike
+    },
+
+    relationships: {
+        create: createRelationship,
+        update: updateRelationship,
+        destroy: destroyRelationship
     }
 };

@@ -10,28 +10,30 @@ import PageAvatar from 'components/pages/page-avatar';
 const PageCardTitle = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        children: PropTypes.node
+        children: PropTypes.node,
+        style: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
 
     render() {
         return (
-            <Link to={`/${this.props.page.id}`} style={{ textDecoration: "none" }}>
-                <CardTitle
-                    titleColor="#fff"
-                    style={{ padding: 8 }}
-                    title={
-                        <div>
-                            <PageAvatar
-                                page={this.props.page}
-                            />
-                            {this.props.page.title}
-                        </div>
-                    }
-                    {...this.props}
-                />
-            </Link>
+            <CardTitle
+                titleColor="#fff"
+                style={{ padding: '8px 16px', display: 'flex', justifyContent: 'space-between' }}
+                title={
+                    <Link to={`/${this.props.page.id}`} style={{ textDecoration: 'none', color: '#fff' }}>
+                        <PageAvatar
+                            page={this.props.page}
+                        />
+                        {this.props.page.title}
+                    </Link>
+                }
+            >
+                <div>
+                    {this.props.children}
+                </div>
+            </CardTitle>
         );
     }
 });

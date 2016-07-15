@@ -5,7 +5,6 @@ import styles from './home.css';
 import Drawer from 'material-ui/Drawer';
 import Paper from 'material-ui/Paper';
 
-import DisconnectedModal from 'components/disconnected-modal';
 import Notifier from 'components/notifier';
 
 import Chat from 'components/chat/chat-container';
@@ -17,7 +16,6 @@ const Home = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
         leftNav: PropTypes.bool.isRequired,
-        isDisconnected: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired
@@ -53,7 +51,12 @@ const Home = React.createClass({
                         />
                     </div>
                     <div styleName="mainContent">
-                        {React.cloneElement(this.props.children, { translation: this.props.translation })}
+                        {
+                            React.cloneElement(this.props.children, {
+                                translation: this.props.translation,
+                                currentUserPage: this.props.currentUserPage
+                            })
+                        }
                     </div>
                     <Paper styleName="messagePanel">
                         <Chat
@@ -64,11 +67,6 @@ const Home = React.createClass({
                 </div>
 
                 <Notifier translation={this.props.translation} />
-
-                <DisconnectedModal
-                    isDisconnected={this.props.isDisconnected}
-                    translation={this.props.translation}
-                />
             </div>
         );
     }

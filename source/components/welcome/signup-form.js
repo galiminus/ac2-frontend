@@ -57,7 +57,7 @@ const signup = (fields) =>
     })
     .then(
         (userId) => {
-            authenticate(userId, fields, dispatch)
+            authenticate(userId, fields, dispatch);
         },
         (error) => {
             if (error.body.email[0] === 'has already been taken') {

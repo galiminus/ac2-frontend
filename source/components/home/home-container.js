@@ -4,6 +4,8 @@ import actionCreators from 'action-creators';
 import api from 'api';
 import connectToCable from 'components/action-cable';
 
+import DisconnectedModal from 'components/disconnected-modal';
+
 import Home from './home';
 
 function mapStateToProps(state) {
@@ -36,18 +38,19 @@ const HomeContainer = React.createClass({
         leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
+        pushNotification: PropTypes.func.isRequired,
         currentToken: PropTypes.object,
         currentUser: PropTypes.object
     },
 
     componentDidMount() {
-        api.users.me({ include: 'page,page.friend_group' })
+        api.users.me({ include: 'page,page.relationships' })
             .then(
                 (response) => {
                     this.props.setCurrentUser(response.data.id);
                     this.props.addResource(response);
                 },
-                (error) => {
+                () => {
                     this.props.pushNotification('me_get_fatal_error');
                 }
             );
@@ -56,7 +59,7 @@ const HomeContainer = React.createClass({
     componentWillReceiveProps(props) {
         if (props.currentUser && (props.currentUser !== this.props.currentUser)) {
             api.pages.update(props.currentUser.page_id, { presence: 'available' })
-                .catch((error) => {
+                .catch(() => {
                     this.props.pushNotification('presence_update_fatal_error');
                 });
         }
@@ -86,7 +89,12 @@ const HomeContainer = React.createClass({
 
     render() {
         if (!this.props.currentUserPage) {
-            return (<div />);
+            return (
+                <DisconnectedModal
+                    isDisconnected={!this.props.currentToken}
+                    translation={this.props.translation}
+                />
+            );
         }
 
         return (

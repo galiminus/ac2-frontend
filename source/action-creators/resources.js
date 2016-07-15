@@ -14,7 +14,9 @@ function normalizeRecord(record) {
 
     if (record.relationships) {
         for (const name of Object.keys(record.relationships)) {
-            if (record.relationships[name].data) {
+            if (Array.isArray(record.relationships[name].data)) {
+                record.attributes[name] = record.relationships[name].data;
+            } else if (record.relationships[name].data) {
                 record.attributes[`${name}_id`] = record.relationships[name].data.id;
                 record.attributes[`${name}_type`] = record.relationships[name].data.type;
             } else {

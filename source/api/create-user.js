@@ -6,4 +6,4 @@ export default (attributes, query) =>
             type: 'users',
             attributes
         }
-    }, query)
+    }, query);

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Pages from './pages';
 
 import api from 'api';
+import actionCreators from 'action-creators';
 
 function mapStateToProps(state, props) {
     const mappedProps = {};
@@ -32,7 +33,8 @@ const PagesContainer = React.createClass({
         pages: PropTypes.object.isRequired,
         filters: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object
+        currentUserPage: PropTypes.object.isRequired,
+        pushNotification: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -69,8 +71,8 @@ const PagesContainer = React.createClass({
                 (response) => {
                     this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
                 },
-                (error) => {
-                    this.props.pushNotification('pages_find_fatal_error')
+                () => {
+                    this.props.pushNotification('pages_find_fatal_error');
                 }
             );
     },
@@ -87,6 +89,10 @@ const PagesContainer = React.createClass({
 
         pages = this.props.pages.filter((page) => {
             let match = true;
+
+            if (page.id === this.props.currentUserPage.id) {
+                return (false);
+            }
 
             if (this.props.filters.type) {
                 const typeRegexp = new RegExp(`${this.props.filters.type}$`);
@@ -105,4 +111,4 @@ const PagesContainer = React.createClass({
     }
 });
 
-export default connect(mapStateToProps)(PagesContainer);
+export default connect(mapStateToProps, actionCreators)(PagesContainer);

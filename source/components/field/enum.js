@@ -51,7 +51,7 @@ const StringField = React.createClass({
                               isSelected ? '#999' : '#cacaca'
                           }
                       >
-                          {this.props.translation.t(`${this.props.label}.enum.${possibleValue}`)}
+                          {this.props.translation.t(`${this.props.label}.${possibleValue}`)}
                       </Chip>
                 );
             })

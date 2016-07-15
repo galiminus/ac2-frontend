@@ -1,10 +1,10 @@
 import { create } from 'api/http';
 import generateUUID from 'utils/uuid';
 
-export default (messageId, attributes) =>
-    create(`/messages/${messageId}/relationships/comments`, {
+export default (attributes) =>
+    create('/relationships', {
         data: {
-            type: 'comments',
+            type: 'relationships',
             id: generateUUID(),
             attributes
         }

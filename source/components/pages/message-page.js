@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import PageBanner from './page-banner';
 
@@ -8,6 +9,8 @@ const MessagePage = React.createClass({
         translation: PropTypes.object.isRequired,
         children: PropTypes.node
     },
+
+    mixins: [PureRenderMixin],
 
     render() {
         return (

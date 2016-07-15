@@ -32,6 +32,7 @@ const PageContainer = React.createClass({
         addResource: PropTypes.func.isRequired,
         setCurrentPage: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
+        pushNotification: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object,
         page: PropTypes.object
     },
@@ -62,8 +63,8 @@ const PageContainer = React.createClass({
                         this.props.setCurrentPage(response.data.id);
                         this.props.addResource(response);
                     },
-                    (error) => {
-                        this.props.pushNotification('pages_get_fatal_error')
+                    () => {
+                        this.props.pushNotification('pages_get_fatal_error');
                     }
                 );
         } else {

@@ -6,4 +6,4 @@ export default (id, attributes) =>
             type: 'comments',
             attributes
         }
-    })
+    });

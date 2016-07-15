@@ -8,20 +8,38 @@ import FlatButton from 'material-ui/FlatButton';
 
 import PageCardTitle from 'components/pages/page-card-title';
 
+import RelationChip from './relation-chip';
+
 const ProfileBanner = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
+        compact: PropTypes.bool,
         style: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
 
+    getDefaultProps() {
+        return ({
+            compact: false
+        });
+    },
+
     render() {
         return (
             <Card style={Object.assign({ marginTop: 32 }, this.props.style)}>
                 <CardMedia
-                    overlay={<PageCardTitle page={this.props.page} />}
+                    overlay={
+                        <PageCardTitle page={this.props.page}>
+                            {!this.props.compact &&
+                                <RelationChip
+                                    page={this.props.page}
+                                    translation={this.props.translation}
+                                />
+                            }
+                        </PageCardTitle>
+                    }
                 >
                     <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
                 </CardMedia>

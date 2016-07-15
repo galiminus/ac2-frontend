@@ -6,8 +6,7 @@ import PageBanner from './page-banner';
 const Pages = React.createClass({
     propTypes: {
         pages: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object
+        translation: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -25,7 +24,14 @@ const Pages = React.createClass({
                 {
                     this.props.pages.valueSeq().map((page) => {
                         return (
-                            <PageBanner key={page.id} page={page} style={{ width: '48%' }} translation={this.props.translation} />
+                            <div style={{ width: '48%' }}>
+                                <PageBanner
+                                    key={page.id}
+                                    page={page}
+                                    translation={this.props.translation}
+                                    compact
+                                />
+                            </div>
                         );
                     })
                 }

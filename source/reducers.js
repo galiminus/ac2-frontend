@@ -10,6 +10,9 @@ import currentToken from 'reducers/current-token';
 
 import currentPage from 'reducers/current-page';
 
+import groups from 'reducers/groups';
+import relationships from 'reducers/relationships';
+import relationshipsByProposer from 'reducers/relationships-by-proposer';
 import pages from 'reducers/pages';
 import pagesByType from 'reducers/pages-by-type';
 import messages from 'reducers/messages';
@@ -33,6 +36,9 @@ const reducers = combineReducers({
     tokens,
     currentToken,
     users,
+    groups,
+    relationships,
+    relationshipsByProposer,
     currentUser,
     currentPage,
     messages,

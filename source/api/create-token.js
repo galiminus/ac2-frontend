@@ -5,4 +5,4 @@ export default (record) =>
         username: record.email,
         password: record.password,
         grant_type: 'password'
-    })
+    });

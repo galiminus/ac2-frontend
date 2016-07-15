@@ -8,7 +8,7 @@ const ProfilePages = React.createClass({
 
     render() {
         return (
-            <PagesContainer filters={{ type: 'Page::Profile' }} />
+            <PagesContainer filters={{ type: 'Page::Profile' }} {...this.props} />
         );
     }
 });

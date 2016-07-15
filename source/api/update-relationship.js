@@ -1,9 +1,9 @@
 import { update } from 'api/http';
 
 export default (id, attributes) =>
-    update(`/messages/${id}`, {
+    update(`/relationships/${id}`, {
         data: {
-            type: 'messages',
+            type: 'relationship',
             attributes
         }
     });

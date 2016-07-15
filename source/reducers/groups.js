@@ -2,11 +2,14 @@ import Immutable from 'immutable';
 
 export default function (state = Immutable.Map({}), action) {
     switch (action.type) {
-    case 'PAGE_ADD':
+    case 'GROUP_ADD':
         return state.set(action.data.id, action.data);
 
-    case 'PAGE_REMOVE':
+    case 'GROUP_REMOVE':
         return state.delete(action.data.id);
+
+    case 'GROUP_CLEAR':
+        return state.clear();
 
     default:
         return state;

@@ -3,7 +3,7 @@ import queryString from 'query-string';
 import settings from 'webpack-env-loader!settings';
 
 import store from 'store';
-import { clearTokens, pushNotification } from 'action-creators';
+import { clearTokens } from 'action-creators';
 
 function headers() {
     const base = {
@@ -37,16 +37,17 @@ function handleError(response) {
     const error = new Error(response.statusText);
 
     error.response = response;
-    if ((response.headers.get('content-type') || "").match('application/json')) {
+    if ((response.headers.get('content-type') || '').match('application/json')) {
         return response.json().then(() => {
-            throw { body: body };
+            error.body = response.body;
+            throw error;
         });
     }
     throw error;
 }
 
 function parseJSON(response) {
-    if ((response.headers.get('content-type') || "").match('application/json')) {
+    if ((response.headers.get('content-type') || '').match('application/json')) {
         return response.json();
     }
     return Promise.resolve(null);

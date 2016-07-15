@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import actionCreators from 'action-creators';
 import api from 'api';
-import { find } from 'api/http';
 
 import Immutable from 'immutable';
 
@@ -29,7 +28,8 @@ const MessagesContainer = React.createClass({
         addResource: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        page: PropTypes.object.isRequired
+        page: PropTypes.object.isRequired,
+        pushNotification: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -87,7 +87,7 @@ const MessagesContainer = React.createClass({
                     }
                     this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
                 },
-                (error) => {
+                () => {
                     this.props.pushNotification('messages_find_fatal_error');
                 }
             );

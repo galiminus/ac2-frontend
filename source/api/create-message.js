@@ -8,4 +8,4 @@ export default (attributes) =>
             id: generateUUID(),
             attributes
         }
-    })
+    });
