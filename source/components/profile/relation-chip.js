@@ -113,6 +113,12 @@ const FriendChip = React.createClass({
     render() {
         const relationship = this.findRelationship();
 
+        if (this.props.page.id === this.props.currentUserPage.id) {
+            return (
+                <div />
+            );
+        }
+
         return (
             <IconMenu
                 iconButtonElement={
