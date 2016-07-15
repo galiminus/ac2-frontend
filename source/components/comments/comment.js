@@ -129,7 +129,6 @@ const Comment = React.createClass({
                         }
                     />
                     <CommentDialog
-                        contentStyle={{ width: 500 }}
                         modal={false}
                         open={this.props.commentEditModalOpen}
                         onRequestClose={this.props.onCloseCommentEditModal}

@@ -142,7 +142,6 @@ const Messages = React.createClass({
                     <CreateContentIcon />
                 </FloatingActionButton>
                 <MessageDialog
-                    contentStyle={{ width: 500 }}
                     modal={false}
                     open={this.state.messageCreationModalOpen}
                     onRequestClose={this.handleCloseMessageCreationModal}

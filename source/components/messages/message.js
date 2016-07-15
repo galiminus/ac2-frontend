@@ -165,7 +165,6 @@ const Message = React.createClass({
                         </IconMenu>
                     </div>
                     <MessageDialog
-                        contentStyle={{ width: 500 }}
                         modal={false}
                         open={this.state.messageEditModalOpen}
                         onRequestClose={this.handleCloseMessageEditModal}
