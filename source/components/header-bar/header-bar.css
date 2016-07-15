@@ -41,6 +41,9 @@
 }
 
 @media (max-width: 1010px) {
+    .root {
+        padding: 0 10px !important;
+    }
     .logo {
         display: none;
     }
@@ -54,9 +57,6 @@
 }
 
 @media (max-width: 800px) {
-    .root {
-        padding: 0 10px !important;
-    }
     .title {
         display: none;
     }

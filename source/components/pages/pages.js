@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
+import CSSModules from 'react-css-modules';
+import styles from './pages.css';
+
 import PageBanner from './page-banner';
 
 const Pages = React.createClass({
@@ -24,7 +27,7 @@ const Pages = React.createClass({
                 {
                     this.props.pages.valueSeq().map((page) => {
                         return (
-                            <div style={{ width: '48%' }} key={page.id}>
+                            <div styleName="page" key={page.id}>
                                 <PageBanner
                                     page={page}
                                     translation={this.props.translation}
@@ -39,4 +42,4 @@ const Pages = React.createClass({
     }
 });
 
-export default Pages;
+export default CSSModules(Pages, styles);
