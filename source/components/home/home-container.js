@@ -67,7 +67,12 @@ const HomeContainer = React.createClass({
 
     getChannels() {
         return ([
-            'PagesChannel', 'MessagesChannel', 'CommentsChannel', 'LikesChannel', 'MessagesChannel'
+            'PagesChannel',
+            'MessagesChannel',
+            'CommentsChannel',
+            'LikesChannel',
+            'SettingsChannel',
+            'RelationshipsChannel'
         ]);
     },
 
