@@ -48,7 +48,8 @@ const Message = React.createClass({
         removeResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
         likes: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired,
+        pushNotification: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -70,9 +71,13 @@ const Message = React.createClass({
     },
 
     handleMessageDestroy() {
-        api.messages.destroy(this.props.message.id).then(() => {
-            this.props.removeResource(this.props.message);
-        });
+        api.messages.destroy(this.props.message.id).then(
+            () => {
+                this.props.removeResource(this.props.message);
+            },
+            () => {
+                this.props.pushNotification('message_destroy_fatal_error');
+            });
     },
 
     myLike() {
@@ -83,17 +88,27 @@ const Message = React.createClass({
         api.likes.create({
             liked_id: this.props.message.id,
             liked_type: 'Message'
-        }).then((response) => {
-            this.props.addResource(response);
-        });
+        }).then(
+            (response) => {
+                this.props.addResource(response);
+            },
+            () => {
+                this.props.pushNotification('like_create_fatal_error');
+            }
+        );
     },
 
     handleLikeDestroy() {
         const myLike = this.myLike();
 
-        api.likes.destroy(myLike.id).then(() => {
-            this.props.removeResource(myLike);
-        });
+        api.likes.destroy(myLike.id).then(
+            () => {
+                this.props.removeResource(myLike);
+            },
+            () => {
+                this.props.pushNotification('like_destroy_fatal_error');
+            }
+        );
     },
 
     render() {

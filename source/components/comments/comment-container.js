@@ -29,7 +29,8 @@ const CommentContainer = React.createClass({
         removeResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object.isRequired,
         likes: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired,
+        pushNotification: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -50,17 +51,27 @@ const CommentContainer = React.createClass({
         api.likes.create({
             liked_id: this.props.comment.id,
             liked_type: 'Comment'
-        }).then((response) => {
-            this.props.addResource(response);
-        });
+        }).then(
+            (response) => {
+                this.props.addResource(response);
+            },
+            () => {
+                this.props.pushNotification('like_create_fatal_error');
+            }
+        );
     },
 
     handleLikeDestroy() {
         const myLike = this.myLike();
 
-        api.likes.destroy(myLike.id).then(() => {
-            this.props.removeResource(myLike);
-        });
+        api.likes.destroy(myLike.id).then(
+            () => {
+                this.props.removeResource(myLike);
+            },
+            () => {
+                this.props.pushNotification('like_destroy_fatal_error');
+            }
+        );
     },
 
     handleCommentDestroy() {

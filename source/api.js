@@ -1,4 +1,5 @@
 import getCurrentSettings from 'api/get-current-settings';
+import updateSettings from 'api/update-settings';
 import createToken from 'api/create-token';
 import createUser from 'api/create-user';
 import findUsers from 'api/find-users';
@@ -22,7 +23,8 @@ import destroyRelationship from 'api/destroy-relationship';
 
 export default {
     settings: {
-        getCurrent: getCurrentSettings
+        getCurrent: getCurrentSettings,
+        update: updateSettings
     },
 
     tokens: {

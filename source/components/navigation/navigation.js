@@ -37,30 +37,38 @@ const Navigation = React.createClass({
                             leftIcon={<HomeIcon />}
                         />
                     </Link>
-                    <Link to="/events">
-                        <ListItem
-                            primaryText={this.props.translation.t('links.events')}
-                            leftIcon={<EventsIcon />}
-                        />
-                    </Link>
-                    <Link to="/quizz">
-                        <ListItem
-                            primaryText={this.props.translation.t('links.quizz')}
-                            leftIcon={<QuizzIcon />}
-                        />
-                    </Link>
-                    <Link to="/polls">
-                        <ListItem
-                            primaryText={this.props.translation.t('links.polls')}
-                            leftIcon={<PollsIcon />}
-                        />
-                    </Link>
-                    <Link to="/groups">
-                        <ListItem
-                            primaryText={this.props.translation.t('links.groups')}
-                            leftIcon={<GroupsIcon />}
-                        />
-                    </Link>
+                    {false &&
+                        <Link to="/events">
+                            <ListItem
+                                primaryText={this.props.translation.t('links.events')}
+                                leftIcon={<EventsIcon />}
+                            />
+                        </Link>
+                    }
+                    {false &&
+                        <Link to="/quizz">
+                            <ListItem
+                                primaryText={this.props.translation.t('links.quizz')}
+                                leftIcon={<QuizzIcon />}
+                            />
+                        </Link>
+                    }
+                    {false &&
+                        <Link to="/polls">
+                            <ListItem
+                                primaryText={this.props.translation.t('links.polls')}
+                                leftIcon={<PollsIcon />}
+                            />
+                        </Link>
+                    }
+                    {false &&
+                        <Link to="/groups">
+                            <ListItem
+                                primaryText={this.props.translation.t('links.groups')}
+                                leftIcon={<GroupsIcon />}
+                            />
+                        </Link>
+                    }
                     <Link to="/members">
                         <ListItem
                             primaryText={this.props.translation.t('links.members')}
@@ -74,18 +82,22 @@ const Navigation = React.createClass({
                             leftIcon={<AccountIcon />}
                         />
                     </Link>
-                    <Link to="/messages">
-                        <ListItem
-                            primaryText={this.props.translation.t('links.messages')}
-                            leftIcon={<MessagesIcon />}
-                        />
-                    </Link>
-                    <Link to="/settings">
-                        <ListItem
-                            primaryText={this.props.translation.t('links.settings')}
-                            leftIcon={<SettingsIcon />}
-                        />
-                    </Link>
+                    {false &&
+                        <Link to="/messages">
+                            <ListItem
+                                primaryText={this.props.translation.t('links.messages')}
+                                leftIcon={<MessagesIcon />}
+                            />
+                        </Link>
+                    }
+                    {false &&
+                        <Link to="/settings">
+                            <ListItem
+                                primaryText={this.props.translation.t('links.settings')}
+                                leftIcon={<SettingsIcon />}
+                            />
+                        </Link>
+                    }
                 </List>
             </nav>
         );
