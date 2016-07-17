@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import { CardHeader } from 'material-ui/Card';
 
 import ArrowIcon from 'material-ui/svg-icons/av/play-arrow';
@@ -11,8 +13,11 @@ const PageCardHeader = React.createClass({
         sender: PropTypes.object.isRequired,
         recipient: PropTypes.object,
         children: PropTypes.node,
-        additionalInfos: PropTypes.node
+        additionalInfos: PropTypes.node,
+        subtitle: PropTypes.node
     },
+
+    mixins: [PureRenderMixin],
 
     render() {
         let title;
@@ -41,7 +46,7 @@ const PageCardHeader = React.createClass({
                 avatar={
                     <PageAvatar page={this.props.sender} />
                 }
-                {...this.props}
+                subtitle={this.props.subtitle}
             />
         );
     }

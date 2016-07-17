@@ -11,20 +11,8 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {
-    indigo400,
-    cyan700,
-    grey400,
-    orangeA700,
-    grey100,
-    grey500,
-    darkBlack,
-    white,
-    grey300
-} from 'material-ui/styles/colors';
 import CircularProgress from 'material-ui/CircularProgress';
 
-import { fade } from 'material-ui/utils/colorManipulator';
 import Spacing from 'material-ui/styles/spacing';
 
 import { syncReduxAndRouter } from 'redux-simple-router';
@@ -49,6 +37,9 @@ import store from 'store';
 import api from 'api';
 
 import actionCreators from 'action-creators';
+
+/* this doesn't seem to work with import */
+const colors = require('material-ui/styles/colors');
 
 syncReduxAndRouter(browserHistory, store);
 
@@ -83,23 +74,20 @@ const Application = React.createClass({
     mixins: [PureRenderMixin],
 
     getChildContext() {
+        let palette = {};
+
+        if (this.props.settings.data) {
+            const paletteSettings = this.props.settings.data.palette || {};
+            for (const category of Object.keys(paletteSettings)) {
+                palette[category] = colors[paletteSettings[category]];
+            }
+        }
+
         return {
             muiTheme: getMuiTheme({
                 spacing: Spacing,
                 fontFamily: 'Roboto, sans-serif',
-                palette: {
-                    primary1Color: indigo400,
-                    primary2Color: cyan700,
-                    primary3Color: grey400,
-                    accent1Color: orangeA700,
-                    accent2Color: grey100,
-                    accent3Color: grey500,
-                    textColor: darkBlack,
-                    alternateTextColor: white,
-                    canvasColor: white,
-                    borderColor: grey300,
-                    disabledColor: fade(darkBlack, 0.3)
-                }
+                palette: palette
             })
         };
     },

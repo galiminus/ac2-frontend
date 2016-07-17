@@ -28,7 +28,6 @@ function mapStateToProps(state) {
 const HeaderBar = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
-        openSettingsDialog: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
         canUpdateSettings: PropTypes.bool.isRequired,
         currentUserPage: PropTypes.object
