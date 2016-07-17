@@ -126,7 +126,7 @@ const Message = React.createClass({
                     additionalInfos={<PlusCounter likes={this.props.likes} />}
                     subtitle={
                         <CreationDate
-                            style={{ marginLeft: 0, textAlign: "left" }}
+                            style={{ marginLeft: 0, textAlign: 'left' }}
                             date={this.props.message.created_at}
                         />
                     }

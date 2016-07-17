@@ -74,7 +74,7 @@ const Application = React.createClass({
     mixins: [PureRenderMixin],
 
     getChildContext() {
-        let palette = {};
+        const palette = {};
 
         if (this.props.settings.data) {
             const paletteSettings = this.props.settings.data.palette || {};
@@ -87,7 +87,7 @@ const Application = React.createClass({
             muiTheme: getMuiTheme({
                 spacing: Spacing,
                 fontFamily: 'Roboto, sans-serif',
-                palette: palette
+                palette
             })
         };
     },
