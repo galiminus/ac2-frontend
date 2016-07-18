@@ -99,6 +99,13 @@ const Application = React.createClass({
             });
     },
 
+    componentWillReceiveProps(props) {
+        /* side effect here */
+        if (props.settings.data) {
+            document.title = props.settings.data.title;
+        }
+    },
+
     render() {
         if (!this.props.settings.data) {
             return (<CircularProgress style={{ position: 'absolute', top: '40%', left: '50%', marginLeft: -25 }} />);
