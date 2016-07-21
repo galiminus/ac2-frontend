@@ -8,6 +8,7 @@ import api from 'api';
 
 import MessagePage from './message-page';
 import StaticPage from './static-page';
+import MainPage from './main-page';
 
 function mapStateToProps(state, props) {
     let currentUser;
@@ -56,12 +57,6 @@ const PageContainer = React.createClass({
         if (newProps.params.pageId !== this.props.params.pageId) {
             this.loadPage(newProps.params.pageId);
         }
-
-        if (newProps.page.type === 'Page::Main') {
-            this.props.setTitle(this.props.translation.t('links.mainFeed'));
-        } else {
-            this.props.setTitle(newProps.page.title);
-        }
     },
 
     loadPage(pageId) {
@@ -82,8 +77,9 @@ const PageContainer = React.createClass({
     },
 
     render() {
-        if (this.props.page.type === 'Page::Main' ||
-            this.props.page.type.match(/^Page::Profile/)) {
+        if (this.props.page.type === 'Page::Main') {
+            return (<MainPage {...this.props} />);
+        } else if (this.props.page.type.match(/^Page::Profile/)) {
             return (<MessagePage {...this.props} />);
         } else if (this.props.page.type.match(/^Page::Static/)) {
             return (<StaticPage { ...this.props} />);

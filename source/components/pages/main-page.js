@@ -4,9 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import PageBanner from './page-banner';
-
-const MessagePage = React.createClass({
+const MainPage = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
@@ -17,17 +15,14 @@ const MessagePage = React.createClass({
     mixins: [PureRenderMixin],
 
     componentWillMount() {
-        this.props.setTitle(this.props.page.title);
+        this.props.setTitle(this.props.translation.t('links.mainFeed'));
     },
 
     render() {
         return (
-            <div>
-                <PageBanner page={this.props.page} translation={this.props.translation} />
-                {React.cloneElement(this.props.children, { ...this.props, key: undefined })}
-            </div>
+            React.cloneElement(this.props.children, { ...this.props, key: undefined })
         );
     }
 });
 
-export default connect(undefined, { setTitle })(MessagePage);
+export default connect(undefined, { setTitle })(MainPage);

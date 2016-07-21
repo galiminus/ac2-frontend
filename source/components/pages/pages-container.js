@@ -51,7 +51,7 @@ const PagesContainer = React.createClass({
         };
     },
 
-    componentDidMount() {
+    componentWillMount() {
         this.loadPages(1);
     },
 

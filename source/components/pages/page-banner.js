@@ -20,16 +20,13 @@ const PageBanner = React.createClass({
     },
 
     render() {
-        if (this.props.page.type.match(/^Page::Profile/)) {
-            return (
-                <ProfileBanner
-                    page={this.props.page}
-                    translation={this.props.translation}
-                    compact={this.props.compact}
-                />
-            );
-        }
-        return (<div />);
+        return (
+            <ProfileBanner
+                page={this.props.page}
+                translation={this.props.translation}
+                compact={this.props.compact}
+            />
+        );
     }
 });
 
