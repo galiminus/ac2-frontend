@@ -1,12 +1,20 @@
 import React, { PropTypes } from 'react';
 
+import { connect } from 'react-redux';
+import { setTitle } from 'action-creators';
+
 import { Card, CardText } from 'material-ui/Card';
 
 import Marked from 'components/marked/marked';
 
-const Messages = React.createClass({
+const StaticPage = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired
+        page: PropTypes.object.isRequired,
+        setTitle: PropTypes.func.isRequired
+    },
+
+    componentWillMount() {
+        this.props.setTitle(this.props.page.title);
     },
 
     render() {
@@ -20,4 +28,4 @@ const Messages = React.createClass({
     }
 });
 
-export default Messages;
+export default connect(undefined, { setTitle })(StaticPage);

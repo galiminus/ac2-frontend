@@ -6,41 +6,68 @@ import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 import styles from './additional-links.css';
 
+import actionCreators from 'action-creators';
+import api from 'api';
+
+import Immutable from 'immutable';
+
 function mapStateToProps(state) {
-    if (state.settings && state.settings.data) {
-        return ({
-            additionalLinks: state.settings.data.additionalLinks
-        });
-    }
-    return ({});
+    return ({
+        pages: state.pagesByType.get('Page::Static')
+    });
 }
+
+const defaultProps = {
+    pages: Immutable.Map({})
+};
 
 const AdditionalLinks = React.createClass({
     propTypes: {
-        additionalLinks: PropTypes.array.isRequired,
-        translation: PropTypes.object.isRequired
+        pages: PropTypes.object.isRequired,
+        translation: PropTypes.object.isRequired,
+        addResource: PropTypes.func.isRequired,
+        pushNotification: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return ({
-            additionalLinks: []
-        });
+        return (defaultProps);
+    },
+
+    componentWillMount() {
+        this.loadPages();
+    },
+
+    loadPages() {
+        const query = {};
+
+        query['filter[type]'] = 'Page::Static';
+        query['page[size]'] = 20;
+
+        api.pages.find(query)
+            .then(
+                (response) => {
+                    this.props.addResource(response);
+                },
+                () => {
+                    this.props.pushNotification('pages_find_fatal_error');
+                }
+            );
     },
 
     render() {
         return (
             <ul styleName="additionalLinks">
                 {
-                    this.props.additionalLinks.map((additionalLink, index) => {
+                    this.props.pages.valueSeq().map((page, index) => {
                         return (
                             <li key={index}>
                                 <a
                                     target="_blank"
-                                    href={additionalLink.href}
+                                    href={`/${page.slug}`}
                                 >
-                                    {this.props.translation.t(additionalLink.name)}
+                                    {page.title}
                                 </a>
                             </li>
                         );
@@ -51,4 +78,4 @@ const AdditionalLinks = React.createClass({
     }
 });
 
-export default connect(mapStateToProps)(CSSModules(AdditionalLinks, styles));
+export default connect(mapStateToProps, actionCreators)(CSSModules(AdditionalLinks, styles));

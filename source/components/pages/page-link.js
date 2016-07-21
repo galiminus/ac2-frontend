@@ -25,7 +25,7 @@ const PageLink = React.createClass({
         const styles = getStyles();
 
         return (
-            <Link to={`/${this.props.page.id}`} style={Object.assign(styles.root, this.props.style)}>
+            <Link to={`/${this.props.page.slug}`} style={Object.assign(styles.root, this.props.style)}>
                 {this.props.page.title}
             </Link>
         );

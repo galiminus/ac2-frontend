@@ -7,9 +7,9 @@ import api from 'api';
 import actionCreators from 'action-creators';
 import Form from 'components/form';
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
     return {
-        page: state.pages.get(props.params.pageId),
+        page: state.pages.get(state.currentPage),
         translation: state.translations.get(state.currentLocale)
     };
 }
@@ -37,7 +37,8 @@ const Profile = React.createClass({
 
     onChange(data) {
         return (
-            api.pages.update(this.props.page.id, { data })
+            api.pages
+                .update(this.props.page.id, { data })
                 .then(this.props.addResource)
         );
     },

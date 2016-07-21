@@ -51,15 +51,15 @@ const MessagesContainer = React.createClass({
         };
     },
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.clearMessages();
-        this.loadMessages(this.props.params.pageId, 1);
+        this.loadMessages(this.props.page.id, 1);
     },
 
     componentWillReceiveProps(newProps) {
         if (this.props.params.pageId !== newProps.params.pageId) {
             this.props.clearMessages();
-            this.loadMessages(newProps.params.pageId, 1);
+            this.loadMessages(newProps.page.id, 1);
         }
     },
 
@@ -95,14 +95,14 @@ const MessagesContainer = React.createClass({
 
     handleLoadUpdates() {
         this.setState({ updateCount: 0 });
-        this.loadMessages(this.props.params.pageId, 1);
+        this.loadMessages(this.props.page.id, 1);
     },
 
     handleLoadMore() {
         const nextPage = this.state.page + 1;
 
         this.setState({ page: nextPage });
-        this.loadMessages(this.props.params.pageId, nextPage);
+        this.loadMessages(this.props.page.id, nextPage);
     },
 
     render() {

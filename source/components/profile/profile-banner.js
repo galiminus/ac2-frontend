@@ -44,7 +44,7 @@ const ProfileBanner = React.createClass({
                     <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
                 </CardMedia>
                 <CardActions style={{ textAlign: 'right' }}>
-                    <Link to={`/${this.props.page.id}/profile`}>
+                    <Link to={`/${this.props.page.slug}/profile`}>
                         <FlatButton label={this.props.translation.t('labels.about')} />
                     </Link>
                 </CardActions>

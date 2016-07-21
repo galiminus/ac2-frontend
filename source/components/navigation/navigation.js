@@ -76,7 +76,7 @@ const Navigation = React.createClass({
                         />
                     </Link>
                     <Divider />
-                    <Link to={`/${this.props.currentUserPage.id}/profile`}>
+                    <Link to={`/${this.props.currentUserPage.slug}/profile`}>
                         <ListItem
                             primaryText={this.props.translation.t('links.currentUserPage')}
                             leftIcon={<AccountIcon />}

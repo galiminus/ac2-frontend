@@ -10,7 +10,7 @@ import MessagePage from './message-page';
 import StaticPage from './static-page';
 import MainPage from './main-page';
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
     let currentUser;
     if (state.currentUser) {
         currentUser = state.users.get(state.currentUser);
@@ -20,10 +20,9 @@ function mapStateToProps(state, props) {
     if (currentUser) {
         currentUserPage = state.pages.get(currentUser.page_id);
     }
-
     return {
         currentUserPage,
-        page: state.pages.get(props.params.pageId)
+        page: state.pages.get(state.currentPage)
     };
 }
 
@@ -64,8 +63,8 @@ const PageContainer = React.createClass({
             api.pages.get(pageId)
                 .then(
                     (response) => {
-                        this.props.setCurrentPage(response.data.id);
                         this.props.addResource(response);
+                        this.props.setCurrentPage(response.data.id);
                     },
                     () => {
                         this.props.pushNotification('pages_get_fatal_error');
@@ -77,6 +76,10 @@ const PageContainer = React.createClass({
     },
 
     render() {
+        if (this.props.params.pageId && this.props.page.type === 'Page::Main') {
+            return (<div />);
+        }
+
         if (this.props.page.type === 'Page::Main') {
             return (<MainPage {...this.props} />);
         } else if (this.props.page.type.match(/^Page::Profile/)) {
