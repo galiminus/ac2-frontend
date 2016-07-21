@@ -61,60 +61,74 @@ const ArrayField = React.createClass({
         );
     },
 
+    renderChips() {
+        return (
+            (this.props.record || []).map((item, i) => {
+                return (
+                    <Chip
+                        key={i}
+                        onRequestDelete={this.props.editable ? () => this.handleRequestDelete(i) : undefined}
+                        style={{ margin: '4px 4px 4px 0' }}
+                    >
+                        {item}
+                    </Chip>
+                );
+            })
+        );
+    },
+
+    renderDialog() {
+        return (
+            <Dialog
+                open={this.state.addDialogOpen}
+                onRequestClose={this.handleRequestClose}
+                actions={[
+                    <FlatButton
+                        label={this.props.translation.t('actions.cancel')}
+                        onClick={this.handleRequestClose}
+                    />,
+                    <FlatButton
+                        type="submit"
+                        label={this.props.translation.t('actions.add')}
+                        onTouchTap={this.handleRequestAdd}
+                        secondary
+                    />
+                ]}
+            >
+                <TextField
+                    fullWidth
+                    value={this.state.newItemValue}
+                    onChange={this.handleItemValueChange}
+                    floatingLabelText={this.props.translation.t('forms.array.add')}
+                />
+            </Dialog>
+        );
+    },
+
+    renderAddChip() {
+        return (
+            <Chip
+                onTouchTap={this.handleOpenAddDialog}
+                style={{ margin: '4px 4px 4px 0' }}
+            >
+                <Avatar icon={<AddIcon />} />
+                {this.props.translation.t('forms.array.add')}
+            </Chip>
+        );
+    },
+
     render() {
         return (
             <ListItem
                 disabled
                 primaryText={
                     <div>
-                    {this.props.title}
+                        {this.props.title}
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                            {
-                                (this.props.record || []).map((item, i) => {
-                                    return (
-                                        <Chip
-                                            key={i}
-                                            onRequestDelete={this.props.editable ? () => this.handleRequestDelete(i) : undefined}
-                                            style={{ margin: '4px 4px 4px 0' }}
-                                        >
-                                            {item}
-                                        </Chip>
-                                    );
-                                })
-                            }
-                            {this.props.editable &&
-                                <Chip
-                                    onTouchTap={this.handleOpenAddDialog}
-                                    style={{ margin: '4px 4px 4px 0' }}
-                                >
-                                    <Avatar icon={<AddIcon />} />
-                                    {this.props.translation.t('forms.array.add')}
-                                </Chip>
-                            }
+                            {this.renderChips()}
+                            {this.props.editable && this.renderAddChip()}
                         </div>
-                        <Dialog
-                            open={this.state.addDialogOpen}
-                            onRequestClose={this.handleRequestClose}
-                            actions={[
-                                <FlatButton
-                                    label={this.props.translation.t('actions.cancel')}
-                                    onClick={this.handleRequestClose}
-                                />,
-                                <FlatButton
-                                    type="submit"
-                                    label={this.props.translation.t('actions.add')}
-                                    onTouchTap={this.handleRequestAdd}
-                                    secondary
-                                />
-                            ]}
-                        >
-                            <TextField
-                                fullWidth
-                                value={this.state.newItemValue}
-                                onChange={this.handleItemValueChange}
-                                floatingLabelText={this.props.translation.t('forms.array.add')}
-                            />
-                        </Dialog>
+                        {this.renderDialog()}
                     </div>
                 }
             />

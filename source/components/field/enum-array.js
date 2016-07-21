@@ -18,19 +18,23 @@ const EnumField = React.createClass({
 
     mixins: [PureRenderMixin],
 
-    getInitialState() {
-        return { selected: null };
-    },
-
     handleTouchTap(value) {
-        this.props.onChange(value);
-        this.setState({ selected: value });
+        const newArray = (this.props.record || []).slice();
+        const index = newArray.indexOf(value);
+
+        if (index < 0) {
+            newArray.push(value);
+        } else {
+            newArray.splice(index, 1);
+        }
+
+        this.props.onChange(newArray);
     },
 
     renderField() {
         return (
             this.props.schema.items.enum.map((possibleValue) => {
-                const isSelected = this.props.record === possibleValue || this.state.selected === possibleValue;
+                const isSelected = (this.props.record || []).indexOf(possibleValue) >= 0;
                 return (
                       <Chip
                           key={possibleValue}
