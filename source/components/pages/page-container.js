@@ -33,6 +33,7 @@ const PageContainer = React.createClass({
         setCurrentPage: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
         pushNotification: PropTypes.func.isRequired,
+        setTitle: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object,
         page: PropTypes.object
     },
@@ -41,17 +42,25 @@ const PageContainer = React.createClass({
 
     getDefaultProps() {
         return ({
-            page: { type: 'Page::Main' }
+            page: {
+                type: 'Page::Main'
+            }
         });
     },
 
-    componentDidMount() {
+    componentWillMount() {
         this.loadPage(this.props.params.pageId);
     },
 
     componentWillReceiveProps(newProps) {
         if (newProps.params.pageId !== this.props.params.pageId) {
             this.loadPage(newProps.params.pageId);
+        }
+
+        if (newProps.page.type === 'Page::Main') {
+            this.props.setTitle(this.props.translation.t('links.mainFeed'));
+        } else {
+            this.props.setTitle(newProps.page.title);
         }
     },
 

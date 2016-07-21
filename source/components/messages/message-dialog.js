@@ -104,7 +104,7 @@ const MessageDialog = React.createClass({
                     <FlatButton
                         disabled={body.invalid}
                         type="submit"
-                        label={this.props.translation.t('actions.message')}
+                        label={this.props.translation.t('actions.post')}
                         secondary
                         onClick={handleSubmit(this.message)}
                     />

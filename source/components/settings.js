@@ -1,78 +1,57 @@
 import React, { PropTypes } from 'react';
-import { reduxForm, reset } from 'redux-form';
-
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import { batchActions } from 'redux-batched-actions';
+import { connect } from 'react-redux';
 
-import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
-import { Card, CardHeader } from 'material-ui/Card';
-
-import { addResource, closeSettingsDialog } from 'action-creators';
+import actionCreators from 'action-creators';
+import Form from 'components/form';
 
 import api from 'api';
 
+function mapStateToProps(state) {
+    return ({
+        settings: state.settings
+    });
+}
+
 const Settings = React.createClass({
     propTypes: {
-        fields: PropTypes.object.isRequired,
+        params: PropTypes.object.isRequired,
         settings: PropTypes.object.isRequired,
-        handleSubmit: PropTypes.func.isRequired,
-        onRequestClose: PropTypes.func.isRequired,
-        onSubmit: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
-        error: PropTypes.string,
-        id: PropTypes.string
+        addResource: PropTypes.func.isRequired,
+        setTitle: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
 
-    handleSubmit(fields, dispatch) {
-        api.settings.update(this.props.settings.id, {
-            data: fields.settings
-        }).then((response) => {
-            dispatch(batchActions([
-                reset('settings'),
-                addResource(response),
-                closeSettingsDialog()
-            ]));
-        });
+    componentWillMount() {
+        this.props.setTitle(this.props.translation.t('links.settings'));
+    },
+
+    onChange(data) {
+        return (
+            api.settings.update(this.props.settings.id, { data })
+                .then(
+                    (response) => {
+                        this.props.addResource(response);
+                    })
+        );
     },
 
     render() {
-        const {
-            fields: { settings },
-            handleSubmit
-        } = this.props;
-
         return (
-            <Card
-                style={{ margin: '24px 0', fontSize: '0.9em', lineHeight: '1.4em' }}
-            >
-                <CardHeader
-                    title={this.props.settings.name}
-                />
-            >
-                <TextField
-                    style={{ width: '100%' }}
-                    type="text"
-                    multiLine
-                    rows={5}
-                    {...settings}
-                />
-                <FlatButton
-                    disabled={settings.invalid}
-                    type="submit"
-                    label={this.props.translation.t('actions.submit')}
-                    secondary
-                    onClick={handleSubmit(this.handleSubmit)}
-                />
-            </Card>
+            <Form
+                label="settings"
+                record={this.props.settings.data}
+                schema={this.props.settings.schema}
+                editable={this.props.settings.permissions.update}
+                translation={this.props.translation}
+                onChange={this.onChange}
+                only={[this.props.params.category]}
+            />
         );
     }
 });
 
-export default reduxForm({
-    form: 'settings',
-    fields: ['settings']
-})(Settings);
+export default connect(mapStateToProps, actionCreators)(Settings);

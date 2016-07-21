@@ -16,7 +16,7 @@ const style = {
 function mapStateToProps(state) {
     if (state.settings && state.settings.data) {
         return ({
-            title: state.settings.data.title
+            title: state.settings.data.site.title
         });
     }
     return ({});

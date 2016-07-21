@@ -36,12 +36,16 @@ const Profile = React.createClass({
     },
 
     onChange(data) {
-        api.pages.update(this.props.page.id, data).then(this.props.addResource);
+        return (
+            api.pages.update(this.props.page.id, { data })
+                .then(this.props.addResource)
+        );
     },
 
     render() {
         return (
             <Form
+                label="profile"
                 record={this.props.page.data}
                 schema={this.props.page.schema}
                 editable={this.props.page.permissions.update}

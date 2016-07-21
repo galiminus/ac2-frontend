@@ -7,7 +7,7 @@ import ListItem from 'material-ui/List/ListItem';
 
 const EnumField = React.createClass({
     propTypes: {
-        record: PropTypes.string,
+        record: PropTypes.array,
         schema: PropTypes.object.isRequired,
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
@@ -23,19 +23,19 @@ const EnumField = React.createClass({
     },
 
     handleTouchTap(value) {
+        this.props.onChange(value);
         this.setState({ selected: value });
-        return (this.props.onChange(value));
     },
 
     renderField() {
         return (
-            this.props.schema.enum.map((possibleValue) => {
+            this.props.schema.items.enum.map((possibleValue) => {
                 const isSelected = this.props.record === possibleValue || this.state.selected === possibleValue;
                 return (
                       <Chip
                           key={possibleValue}
                           style={{ margin: '4px 4px 4px 0', display: 'inline-block' }}
-                          onTouchTap={() => this.handleTouchTap(possibleValue)}
+                          onTouchTap={this.props.editable ? () => this.handleTouchTap(possibleValue) : undefined}
                           backgroundColor={
                               isSelected ? '#999' : '#cacaca'
                           }
@@ -47,7 +47,7 @@ const EnumField = React.createClass({
         );
     },
 
-    renderEdit() {
+    render() {
         const valueField = (
             <ListItem
                 disabled
@@ -64,20 +64,6 @@ const EnumField = React.createClass({
             />
         );
         return (valueField);
-    },
-
-    renderValue() {
-        return (
-            <ListItem
-                style={{ maxHeight: 80, minHeight: 80 }}
-                primaryText={this.props.title}
-                secondaryText={<p>{this.props.record || this.props.translation.t('texts.emptyField')}</p>}
-            />
-        );
-    },
-
-    render() {
-        return (this.props.editable ? this.renderEdit() : this.renderValue());
     }
 });
 

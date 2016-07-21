@@ -2,20 +2,17 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router';
-
 import CSSModules from 'react-css-modules';
 import styles from './header-bar.css';
-
-import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import AutoComplete from 'material-ui/AutoComplete';
-import IconButton from 'material-ui/IconButton';
 import ToolbarLogo from 'components/toolbar-logo';
 import CurrentPageTitle from 'components/current-page-title';
 import CurrentUserMenu from 'components/current-user-menu';
+
+import SettingsMenu from './settings-menu';
 
 import actionCreators from 'action-creators';
 
@@ -70,13 +67,9 @@ const HeaderBar = React.createClass({
                 </ToolbarGroup>
                 <ToolbarGroup key={2} styleName="right">
                     {this.props.canUpdateSettings &&
-                        <Link to="/settings">
-                            <IconButton style={{ height: 56 }}>
-                                <SettingsIcon
-                                    color="#ffffff"
-                                />
-                            </IconButton>
-                        </Link>
+                        <SettingsMenu
+                            translation={this.props.translation}
+                        />
                     }
                     <CurrentUserMenu
                         currentUserPage={this.props.currentUserPage}

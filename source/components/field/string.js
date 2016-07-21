@@ -1,36 +1,29 @@
 import React, { PropTypes } from 'react';
-import { reduxForm } from 'redux-form';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import ListItem from 'material-ui/List/ListItem';
 import TextField from 'material-ui/TextField';
 
-import { validateText } from 'validators';
-
-const validate = (values) => {
-    return {
-        value: validateText(values.value)
-    };
-};
-
 const StringField = React.createClass({
     propTypes: {
-        fields: PropTypes.object.isRequired,
-        handleSubmit: PropTypes.func.isRequired,
-        values: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
-        error: PropTypes.string,
+        record: PropTypes.string,
         label: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
         editable: PropTypes.bool.isRequired,
-        translation: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired,
+        translateLabel: PropTypes.bool
     },
 
     mixins: [PureRenderMixin],
 
     getInitialState() {
-        return { edit: false, mouseInside: false };
+        return {
+            edit: false,
+            mouseInside: false
+        };
     },
 
     setMouseInside() {
@@ -43,7 +36,11 @@ const StringField = React.createClass({
 
     switchToEditMode() {
         if (!this.state.mouseInside && this.props.editable) {
-            this.setState({ edit: true, mouseInside: true });
+            this.setState({
+                edit: true,
+                mouseInside: true,
+                value: (this.props.record || '').slice()
+            });
         }
     },
 
@@ -53,21 +50,15 @@ const StringField = React.createClass({
         }
     },
 
-    update() {
-        this.props.onChange(this.props.fields.value.value);
-        this.setState({ edit: false, mouseInside: false });
+    handleChange(event) {
+        this.setState({ value: event.target.value });
     },
 
-    renderField() {
-        return (
-            <TextField
-                ref="valueField"
-                {...this.props.fields.value}
-                onBlur={this.switchToValueMode}
-                fullWidth
-                hintText={this.props.translation.t(this.props.label)}
-            />
-        );
+    handleKeyDown(event) {
+        if (event.keyCode === 13) {
+            this.setState({ edit: false, mouseInside: false });
+            return (this.props.onChange(this.state.value));
+        }
     },
 
     renderEdit() {
@@ -76,9 +67,15 @@ const StringField = React.createClass({
                 onMouseEnter={this.setMouseInside}
                 onMouseLeave={this.setMouseOutside}
                 primaryText={
-                    <form onSubmit={this.props.handleSubmit(this.update)}>
-                        {this.renderField()}
-                    </form>
+                    <TextField
+                        ref="valueField"
+                        value={this.state.value}
+                        onBlur={this.switchToValueMode}
+                        fullWidth
+                        hintText={this.props.title}
+                        onChange={this.handleChange}
+                        onKeyDown={this.handleKeyDown}
+                    />
                 }
             />
         );
@@ -90,12 +87,12 @@ const StringField = React.createClass({
     renderValue() {
         let secondaryText;
 
-        if (this.props.values.value) {
+        if (this.props.record) {
             switch (this.props.schema.type) {
             case 'string':
                 secondaryText = (
                     <p>
-                        {this.props.values.value}
+                        {this.props.record}
                     </p>
                 );
                 break;
@@ -109,7 +106,7 @@ const StringField = React.createClass({
         return (
             <ListItem
                 style={{ maxHeight: 80, minHeight: 80 }}
-                primaryText={this.props.translation.t(this.props.label)}
+                primaryText={this.props.title}
                 secondaryText={secondaryText}
                 onTouchTap={this.switchToEditMode}
                 rightIcon={this.props.editable ? <EditIcon /> : undefined}
@@ -122,8 +119,4 @@ const StringField = React.createClass({
     }
 });
 
-export default reduxForm({
-    form: 'field',
-    fields: ['value'],
-    validate
-})(StringField);
+export default StringField;

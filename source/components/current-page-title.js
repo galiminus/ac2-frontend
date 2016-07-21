@@ -4,19 +4,10 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { ToolbarTitle } from 'material-ui';
 
-const mainPage = { type: 'Page::Main' };
-
 function mapStateToProps(state) {
-    if (state.currentPage === 'main') {
-        return ({
-            page: mainPage
-        });
-    } else if (state.currentPage) {
-        return ({
-            page: state.pages.get(state.currentPage)
-        });
-    }
-    return ({});
+    return ({
+        title: state.title
+    });
 }
 
 const style = {
@@ -27,27 +18,15 @@ const style = {
 
 const CurrentPageTitle = React.createClass({
     propTypes: {
-        page: PropTypes.object,
+        title: PropTypes.string.isRequired,
         translation: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
 
     render() {
-        let title;
-
-        if (!this.props.page) {
-            return (<span />);
-        }
-
-        if (this.props.page.type === 'Page::Main') {
-            title = this.props.translation.t('links.mainFeed');
-        } else {
-            title = this.props.page.title;
-        }
-
         return (
-            <ToolbarTitle style={style} text={title} />
+            <ToolbarTitle style={style} text={this.props.title} />
         );
     }
 });

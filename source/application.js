@@ -29,7 +29,7 @@ import Profile from 'components/profile/profile';
 import MessagesContainer from 'components/messages/messages-container';
 import ProfilePages from 'components/pages/profile-pages';
 import EventPages from 'components/pages/event-pages';
-import SettingsContainer from 'components/settings-container';
+import Settings from 'components/settings';
 
 import { Provider } from 'react-redux';
 
@@ -102,16 +102,16 @@ const Application = React.createClass({
     componentWillReceiveProps(props) {
         /* side effect here */
         if (props.settings.data) {
-            document.title = props.settings.data.title;
+            document.title = props.settings.data.site.title;
         }
     },
 
-    render() {
-        if (!this.props.settings.data) {
-            return (<CircularProgress style={{ position: 'absolute', top: '40%', left: '50%', marginLeft: -25 }} />);
+    renderRouter() {
+        if (this.router) {
+            return (this.router);
         }
 
-        return (
+        this.router = (
             <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
                 <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
                     <Route path="login" component={LoginForm} />
@@ -126,7 +126,7 @@ const Application = React.createClass({
 
                     <Route path="members" component={ProfilePages} />
                     <Route path="events" component={EventPages} />
-                    <Route path="settings" component={SettingsContainer} />
+                    <Route path="settings/:category" component={Settings} />
 
                     <Route path=":pageId/profile" component={PageContainer}>
                         <IndexRoute component={Profile} />
@@ -137,6 +137,17 @@ const Application = React.createClass({
                     </Route>
                 </Route>
             </Router>
+        );
+        return (this.router);
+    },
+
+    render() {
+        if (!this.props.settings.data) {
+            return (<CircularProgress style={{ position: 'absolute', top: '40%', left: '50%', marginLeft: -25 }} />);
+        }
+
+        return (
+            this.renderRouter()
         );
     }
 });

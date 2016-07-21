@@ -33,6 +33,8 @@ import settings from 'reducers/settings';
 import leftNav from 'reducers/leftnav';
 import formFocused from 'reducers/form-focused';
 
+import title from 'reducers/title';
+
 const reducers = combineReducers({
     tokens,
     currentToken,
@@ -58,6 +60,7 @@ const reducers = combineReducers({
     currentLocale,
     settings,
     formFocused,
+    title,
     routing: routeReducer
 });
 

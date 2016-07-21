@@ -34,14 +34,19 @@ const Home = React.createClass({
                     open={this.props.leftNav}
                     onRequestChange={this.props.toggleLeftNav}
                 >
-                    <Navigation
-                        currentUserPage={this.props.currentUserPage}
-                        translation={this.props.translation}
-                    />
+                    <div>
+                        <Navigation
+                            currentUserPage={this.props.currentUserPage}
+                            translation={this.props.translation}
+                        />
+                        <AdditionalLinks
+                            translation={this.props.translation}
+                        />
+                    </div>
                 </Drawer>
 
                 <div styleName="flexLayout">
-                    <div styleName="leftNav">
+                <div styleName="leftNav">
                         <Navigation
                             currentUserPage={this.props.currentUserPage}
                             translation={this.props.translation}
