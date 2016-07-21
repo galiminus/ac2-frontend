@@ -64,7 +64,7 @@ const MessagesContainer = React.createClass({
     },
 
     loadMessages(pageId, pageNum) {
-        const query = { include: 'received_likes,sender,recipient,comments,comments.received_likes' };
+        const query = { include: 'received_likes,sender,recipient,comments,comments.received_likes,comments.received_likes.page' };
 
         if (pageId) {
             query['filter[participant_id]'] = pageId;

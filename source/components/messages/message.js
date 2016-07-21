@@ -115,7 +115,6 @@ const Message = React.createClass({
         if (!this.props.sender) {
             return (<div />);
         }
-
         const isLiked = !!this.myLike();
 
         return (

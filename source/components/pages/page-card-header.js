@@ -19,34 +19,35 @@ const PageCardHeader = React.createClass({
 
     mixins: [PureRenderMixin],
 
+    renderSender() {
+        return (
+            <div>
+                <PageLink page={this.props.sender} />
+                {this.props.additionalInfos}
+            </div>
+        );
+    },
+
+    renderSenderWithRecipient() {
+        return (
+            <div>
+                <PageLink page={this.props.sender} />
+                <ArrowIcon style={{ width: 10, height: 10 }} />
+                <PageLink page={this.props.recipient} />
+                {this.props.additionalInfos}
+            </div>
+        );
+    },
+
     render() {
-        let title;
-
-        if (this.props.recipient && this.props.recipient.type !== 'Page::Main') {
-            title = (
-                <div>
-                    <PageLink page={this.props.sender} />
-                    <ArrowIcon style={{ width: 10, height: 10 }} />
-                    <PageLink page={this.props.recipient} />
-                    {this.props.additionalInfos}
-                </div>
-            );
-        } else {
-            title = (
-                <div>
-                    <PageLink page={this.props.sender} />
-                    {this.props.additionalInfos}
-                </div>
-            );
-        }
-
         return (
             <CardHeader
-                title={title}
+                title={this.props.recipient ? this.renderSenderWithRecipient() : this.renderSender()}
                 avatar={
                     <PageAvatar page={this.props.sender} />
                 }
                 subtitle={this.props.subtitle}
+                children={this.props.children}
             />
         );
     }

@@ -45,6 +45,7 @@ const Comment = React.createClass({
             return (
                 <div>
                     <ListItem
+                        disabled
                         leftAvatar={
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                                 <PageAvatar page={this.props.sender} />

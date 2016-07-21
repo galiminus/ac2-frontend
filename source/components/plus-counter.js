@@ -1,6 +1,12 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+
+import { Link } from 'react-router';
+
 import Dialog from 'material-ui/Dialog';
 import { List, ListItem } from 'material-ui/List';
+
+import PageAvatar from 'components/pages/page-avatar';
 
 function getStyles() {
     const styles = {
@@ -14,6 +20,12 @@ function getStyles() {
     return (styles);
 }
 
+function mapStateToProps(state) {
+    return ({
+        pages: state.pages
+    });
+}
+
 const PlusCounter = React.createClass({
     propTypes: {
         likes: PropTypes.object.isRequired,
@@ -21,9 +33,7 @@ const PlusCounter = React.createClass({
     },
 
     getInitialState() {
-        return ({
-            plusListOpen: false
-        });
+        return ({ plusListOpen: false });
     },
 
     handleOpenPlusList() {
@@ -34,22 +44,50 @@ const PlusCounter = React.createClass({
         this.setState({ plusListOpen: false });
     },
 
+    renderZero() {
+        return (
+            `+${this.props.likes.size.toString()}`
+        );
+    },
+
+    renderClickable() {
+        return (
+            <a
+                onClick={this.handleOpenPlusList}
+                style={{ cursor: 'pointer' }}
+            >
+                {`+${this.props.likes.size.toString()}`}
+            </a>
+        );
+    },
+
     render() {
         const styles = getStyles();
 
         return (
             <span style={Object.assign(styles.root, this.props.style)}>
-                <a onClick={this.handleOpenPlusList}>{`+${this.props.likes.size.toString()}`}</a>
+                {this.props.likes.size === 0 ? this.renderZero() : this.renderClickable()}
                 <Dialog
                     open={this.state.plusListOpen}
-                    contentStyle={{ width: 500 }}
                     modal={false}
                     onRequestClose={this.handleClosePlusList}
                 >
                     <List>
                         {
-                            this.props.likes.map((like) => {
-                                return (<ListItem key={like.id} primaryText={like.page_id} />);
+                            this.props.likes.valueSeq().map((like) => {
+                                const page = this.props.pages.get(like.page_id);
+                                return (
+                                    <Link
+                                        style={{ textDecoration: 'none' }}
+                                        to={`/${page.slug}`}
+                                        key={like.page_id}
+                                    >
+                                        <ListItem>
+                                            <PageAvatar page={page} />
+                                            {page.title}
+                                        </ListItem>
+                                    </Link>
+                                );
                             })
                         }
                     </List>
@@ -59,4 +97,4 @@ const PlusCounter = React.createClass({
     }
 });
 
-export default PlusCounter;
+export default connect(mapStateToProps)(PlusCounter);

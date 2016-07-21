@@ -30,7 +30,7 @@ function mapStateToProps(state) {
     return {
         currentUserPage,
         relationships,
-        relationshipStatus: state.settings.data.relationshipStatus
+        relationshipStatus: state.settings.data.profile.relationshipStatus
     };
 }
 
@@ -39,7 +39,7 @@ const defaultProps = {
     relationshipStatus: []
 };
 
-const FriendChip = React.createClass({
+const RelationChip = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
@@ -145,4 +145,4 @@ const FriendChip = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(FriendChip);
+export default connect(mapStateToProps, actionCreators)(RelationChip);
