@@ -27,17 +27,26 @@ const Profile = React.createClass({
 
     mixins: [PureRenderMixin],
 
+    getInitialState() {
+        return ({ loading: false });
+    },
+
     onChange(data) {
+        this.setState({ loading: true });
         return (
             api.pages
                 .update(this.props.page.id, { data })
-                .then(this.props.addResource)
+                .then((resource) => {
+                    this.setState({ loading: false });
+                    this.props.addResource(resource);
+                })
         );
     },
 
     render() {
         return (
             <Form
+                loading={this.state.loading}
                 label="profile"
                 record={this.props.page.data}
                 schema={this.props.schema.data}

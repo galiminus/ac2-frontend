@@ -73,7 +73,8 @@ const CommentForm = React.createClass({
                             fullWidth
                             type="text"
                             hintText={this.props.translation.t('labels.comment')}
-                            {...body}
+                            value={body.value}
+                            onChange={body.onChange}
                         />
                     }
                     rightIconButton={

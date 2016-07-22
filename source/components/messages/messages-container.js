@@ -24,6 +24,7 @@ const MessagesContainer = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         messages: PropTypes.object.isRequired,
+        model: PropTypes.string.isRequired,
         addResource: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
@@ -51,7 +52,7 @@ const MessagesContainer = React.createClass({
         };
     },
 
-    componentDidMount() {
+    componentWillMount() {
         this.loadMessages(this.props.page.id, 1);
     },
 

@@ -21,11 +21,11 @@ const Pages = React.createClass({
         allowCreate: PropTypes.bool.isRequired
     },
 
+    mixins: [PureRenderMixin],
+
     getDefaultProps() {
         return (defaultProps);
     },
-
-    mixins: [PureRenderMixin],
 
     render() {
         return (
