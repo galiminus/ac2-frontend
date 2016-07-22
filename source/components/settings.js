@@ -27,15 +27,21 @@ const Settings = React.createClass({
 
     mixins: [PureRenderMixin],
 
+    getInitialState() {
+        return ({ loading: false });
+    },
+
     componentWillMount() {
         this.props.setTitle(this.props.translation.t('links.settings'));
     },
 
     handleChange(data) {
+        this.setState({ loading: true });
         return (
             api.settings.update(this.props.settings.id, { data })
                 .then(
                     (response) => {
+                        this.setState({ loading: false });
                         this.props.addResource(response);
                     })
         );
@@ -48,6 +54,7 @@ const Settings = React.createClass({
                 record={this.props.settings.data}
                 schema={this.props.schema.data}
                 editable={this.props.settings.permissions.update}
+                loading={this.state.loading}
                 translation={this.props.translation}
                 onChange={this.handleChange}
                 only={[this.props.params.category]}

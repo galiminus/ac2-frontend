@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
+import CircularProgress from 'material-ui/CircularProgress';
+
 import Field from 'components/field/field';
 
 const defaultProps = {
     schema: {
-        properties: {}
+        properties: {},
+        loading: false
     }
 };
 
@@ -15,6 +18,7 @@ const Form = React.createClass({
         translation: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
+        loading: PropTypes.bool.isRequired,
         onChange: PropTypes.func.isRequired,
         label: PropTypes.string.isRequired,
         only: PropTypes.array
@@ -31,6 +35,26 @@ const Form = React.createClass({
         newRecord[category] = record;
 
         return (this.props.onChange(newRecord));
+    },
+
+    renderLoadingOverlay() {
+        return (
+            <div>
+                <div
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        background: 'white',
+                        opacity: 0.8,
+                        left: 0,
+                        top: 0
+                    }}
+                >
+                </div>
+                <CircularProgress style={{ position: 'absolute', top: 100, left: '50%', marginLeft: -25 }} />
+            </div>
+        );
     },
 
     render() {
@@ -55,8 +79,9 @@ const Form = React.createClass({
             );
         }
         return (
-            <div>
+            <div style={{ position: 'relative' }}>
                 {cards}
+                {this.props.loading && this.renderLoadingOverlay()}
             </div>
         );
     }
