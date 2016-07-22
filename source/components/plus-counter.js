@@ -29,6 +29,7 @@ function mapStateToProps(state) {
 const PlusCounter = React.createClass({
     propTypes: {
         likes: PropTypes.object.isRequired,
+        pages: PropTypes.object.isRequired,
         style: PropTypes.object
     },
 
@@ -71,6 +72,7 @@ const PlusCounter = React.createClass({
                     open={this.state.plusListOpen}
                     modal={false}
                     onRequestClose={this.handleClosePlusList}
+                    bodyStyle={{ padding: '8px 16px' }}
                 >
                     <List>
                         {

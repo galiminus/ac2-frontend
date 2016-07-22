@@ -4,11 +4,12 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import CSSModules from 'react-css-modules';
 import styles from './navigation.css';
 
+import { Link } from 'react-router';
+
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
 import HomeIcon from 'material-ui/svg-icons/action/home';
-import AccountIcon from 'material-ui/svg-icons/action/account-circle';
 import EventsIcon from 'material-ui/svg-icons/action/event';
 import QuizzIcon from 'material-ui/svg-icons/toggle/check-box';
 import PollsIcon from 'material-ui/svg-icons/social/poll';
@@ -16,8 +17,6 @@ import GroupsIcon from 'material-ui/svg-icons/social/group';
 import MembersIcon from 'material-ui/svg-icons/action/language';
 import MessagesIcon from 'material-ui/svg-icons/communication/email';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
-
-import { Link } from 'react-router';
 
 const Navigation = React.createClass({
     propTypes: {
@@ -37,14 +36,12 @@ const Navigation = React.createClass({
                             leftIcon={<HomeIcon />}
                         />
                     </Link>
-                    {false &&
-                        <Link to="/events">
-                            <ListItem
-                                primaryText={this.props.translation.t('links.events')}
-                                leftIcon={<EventsIcon />}
-                            />
-                        </Link>
-                    }
+                    <Link to="/events">
+                        <ListItem
+                            primaryText={this.props.translation.t('links.events')}
+                            leftIcon={<EventsIcon />}
+                        />
+                    </Link>
                     {false &&
                         <Link to="/quizz">
                             <ListItem
@@ -76,12 +73,6 @@ const Navigation = React.createClass({
                         />
                     </Link>
                     <Divider />
-                    <Link to={`/${this.props.currentUserPage.slug}/profile`}>
-                        <ListItem
-                            primaryText={this.props.translation.t('links.currentUserPage')}
-                            leftIcon={<AccountIcon />}
-                        />
-                    </Link>
                     {false &&
                         <Link to="/messages">
                             <ListItem

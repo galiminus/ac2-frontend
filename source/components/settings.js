@@ -10,7 +10,8 @@ import api from 'api';
 
 function mapStateToProps(state) {
     return ({
-        settings: state.settings
+        settings: state.settings,
+        schema: state.schemas.get(state.settings.schema_id)
     });
 }
 
@@ -20,7 +21,8 @@ const Settings = React.createClass({
         settings: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
-        setTitle: PropTypes.func.isRequired
+        setTitle: PropTypes.func.isRequired,
+        schema: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -29,7 +31,7 @@ const Settings = React.createClass({
         this.props.setTitle(this.props.translation.t('links.settings'));
     },
 
-    onChange(data) {
+    handleChange(data) {
         return (
             api.settings.update(this.props.settings.id, { data })
                 .then(
@@ -44,10 +46,10 @@ const Settings = React.createClass({
             <Form
                 label="settings"
                 record={this.props.settings.data}
-                schema={this.props.settings.schema}
+                schema={this.props.schema.data}
                 editable={this.props.settings.permissions.update}
                 translation={this.props.translation}
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 only={[this.props.params.category]}
             />
         );

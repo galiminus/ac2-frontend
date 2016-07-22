@@ -20,6 +20,7 @@ import destroyLike from 'api/destroy-like';
 import createRelationship from 'api/create-relationship';
 import updateRelationship from 'api/update-relationship';
 import destroyRelationship from 'api/destroy-relationship';
+import findSchemas from 'api/find-schemas';
 
 export default {
     settings: {
@@ -66,5 +67,9 @@ export default {
         create: createRelationship,
         update: updateRelationship,
         destroy: destroyRelationship
+    },
+
+    schemas: {
+        find: findSchemas
     }
 };

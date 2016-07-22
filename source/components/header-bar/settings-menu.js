@@ -12,7 +12,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 function mapStateToProps(state) {
     return {
-        properties: state.settings.schema.properties
+        properties: state.schemas.get(state.settings.schema_id).data.properties
     };
 }
 

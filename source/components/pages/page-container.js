@@ -60,7 +60,7 @@ const PageContainer = React.createClass({
 
     loadPage(pageId) {
         if (pageId) {
-            api.pages.get(pageId)
+            api.pages.get(pageId, { include: 'schema' })
                 .then(
                     (response) => {
                         this.props.addResource(response);

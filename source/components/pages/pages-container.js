@@ -12,8 +12,8 @@ import actionCreators from 'action-creators';
 function mapStateToProps(state, props) {
     const mappedProps = {};
 
-    if (props.filters && props.filters.type) {
-        mappedProps.pages = state.pagesByType.get(props.filters.type);
+    if (props.model) {
+        mappedProps.pages = state.pagesByType.get(props.model);
     } else {
         mappedProps.pages = state.pages;
     }
@@ -24,14 +24,13 @@ function mapStateToProps(state, props) {
 }
 
 const defaultProps = {
-    pages: Immutable.Map({}),
-    filters: {}
+    pages: Immutable.Map({})
 };
 
 const PagesContainer = React.createClass({
     propTypes: {
         pages: PropTypes.object.isRequired,
-        filters: PropTypes.object.isRequired,
+        model: PropTypes.string.isRequired,
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
         pushNotification: PropTypes.func.isRequired
@@ -58,11 +57,12 @@ const PagesContainer = React.createClass({
     loadPages(pageNum) {
         const query = {};
 
-        if (this.props.filters.type) {
-            query['filter[type]'] = this.props.filters.type;
+        if (this.props.model) {
+            query['filter[type]'] = this.props.model;
         }
         query['page[number]'] = pageNum;
         query['page[size]'] = 10;
+        query.include = 'schema';
 
         this.setState({ loadingMore: true });
 
@@ -94,8 +94,8 @@ const PagesContainer = React.createClass({
                 return (false);
             }
 
-            if (this.props.filters.type) {
-                const typeRegexp = new RegExp(`${this.props.filters.type}$`);
+            if (this.props.model) {
+                const typeRegexp = new RegExp(`${this.props.model}$`);
 
                 if (!page.type.match(typeRegexp)) {
                     match = false;
@@ -106,7 +106,7 @@ const PagesContainer = React.createClass({
         });
 
         return (
-            <Pages pages={pages} translation={this.props.translation} />
+            <Pages pages={pages} {...this.props} />
         );
     }
 });

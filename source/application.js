@@ -29,6 +29,7 @@ import Profile from 'components/profile/profile';
 import MessagesContainer from 'components/messages/messages-container';
 import ProfilePages from 'components/pages/profile-pages';
 import EventPages from 'components/pages/event-pages';
+import PageForm from 'components/pages/page-form';
 import Settings from 'components/settings';
 
 import { Provider } from 'react-redux';
@@ -93,7 +94,7 @@ const Application = React.createClass({
     },
 
     componentWillMount() {
-        api.settings.getCurrent()
+        api.settings.getCurrent({ include: 'schema' })
             .then((settings) => {
                 this.props.addResource(settings);
             });
@@ -123,6 +124,8 @@ const Application = React.createClass({
                     <Route component={PageContainer}>
                         <IndexRoute component={MessagesContainer} />
                     </Route>
+
+                    <Route path="pages/new" component={PageForm} />
 
                     <Route path="members" component={ProfilePages} />
                     <Route path="events" component={EventPages} />

@@ -30,6 +30,9 @@ import currentLocale from 'reducers/current-locale';
 
 import settings from 'reducers/settings';
 
+import schemas from 'reducers/schemas';
+import schemaByModel from 'reducers/schema-by-model';
+
 import leftNav from 'reducers/leftnav';
 import formFocused from 'reducers/form-focused';
 
@@ -59,6 +62,8 @@ const reducers = combineReducers({
     translations,
     currentLocale,
     settings,
+    schemas,
+    schemaByModel,
     formFocused,
     title,
     routing: routeReducer

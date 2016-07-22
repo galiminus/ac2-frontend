@@ -21,7 +21,7 @@ const ProfilePages = React.createClass({
 
     render() {
         return (
-            <PagesContainer filters={{ type: 'Page::Profile' }} {...this.props} />
+            <PagesContainer model="Page::Profile" {...this.props} />
         );
     }
 });
