@@ -34,6 +34,9 @@ export default function (state = Immutable.Map({}), action) {
 
         return (newState);
 
+    case 'MESSAGE_CLEAR':
+        return state.clear();
+
     default:
         return state;
     }

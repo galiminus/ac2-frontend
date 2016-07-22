@@ -51,13 +51,13 @@ const MessagesContainer = React.createClass({
         };
     },
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.clearMessages();
         this.loadMessages(this.props.page.id, 1);
     },
 
     componentWillReceiveProps(newProps) {
-        if (this.props.params.pageId !== newProps.params.pageId) {
+        if (newProps.params.pageId && this.props.params.pageId !== newProps.params.pageId) {
             this.props.clearMessages();
             this.loadMessages(newProps.page.id, 1);
         }

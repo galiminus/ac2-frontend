@@ -1,3 +1,5 @@
 export default {
-    clearMessages: () => ({ type: 'MESSAGES_CLEAR' })
+    clearMessages: () => {
+        return ({ type: 'MESSAGE_CLEAR' });
+    }
 };
