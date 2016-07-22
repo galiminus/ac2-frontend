@@ -6,7 +6,6 @@ import leftNav from 'action-creators/leftnav';
 import notifications from 'action-creators/notifications';
 import resources from 'action-creators/resources';
 import translations from 'action-creators/translations';
-import messages from 'action-creators/messages';
 import currentLocale from 'action-creators/current-locale';
 import title from 'action-creators/title';
 
@@ -22,7 +21,6 @@ export default {
     ...translations,
     ...currentLocale,
     ...resources,
-    ...messages,
     ...title,
     updatePath
 };

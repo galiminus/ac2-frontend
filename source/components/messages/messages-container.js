@@ -24,7 +24,6 @@ const MessagesContainer = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         messages: PropTypes.object.isRequired,
-        clearMessages: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
@@ -45,6 +44,7 @@ const MessagesContainer = React.createClass({
             page: 1,
             loadingMore: false,
             hasMore: false,
+            ids: [],
             lastMessageDate: null,
             updateCount: 0,
             messageCreationModalOpen: false
@@ -52,13 +52,11 @@ const MessagesContainer = React.createClass({
     },
 
     componentDidMount() {
-        this.props.clearMessages();
         this.loadMessages(this.props.page.id, 1);
     },
 
     componentWillReceiveProps(newProps) {
         if (newProps.params.pageId && this.props.params.pageId !== newProps.params.pageId) {
-            this.props.clearMessages();
             this.loadMessages(newProps.page.id, 1);
         }
     },
@@ -83,9 +81,17 @@ const MessagesContainer = React.createClass({
                     this.props.addResource(response);
 
                     if (response.data.length > 0) {
-                        this.setState({ lastMessageDate: response.data[0].updated_at });
+                        this.setState({
+                            lastMessageDate: response.data[0].updated_at
+                        });
                     }
-                    this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
+
+                    const ids = response.data.map((page) => page.id);
+                    this.setState({
+                        ids: [...this.state.ids, ...ids],
+                        hasMore: !!(response.links && response.links.next),
+                        loadingMore: false
+                    });
                 },
                 () => {
                     this.props.pushNotification('messages_find_fatal_error');
@@ -106,9 +112,27 @@ const MessagesContainer = React.createClass({
     },
 
     render() {
+        let messages = [];
+
+        messages = this.props.messages.filter((message) => {
+            if (this.state.ids.indexOf(message.id) < 0) {
+                return (false);
+            }
+
+            if (this.props.model) {
+                const typeRegexp = new RegExp(`${this.props.model}$`);
+
+                if (!message.type.match(typeRegexp)) {
+                    return (false);
+                }
+            }
+
+            return (true);
+        });
+
         return (
             <Messages
-                messages={this.props.messages}
+                messages={messages}
                 page={this.props.page}
                 onLoadMore={this.handleLoadMore}
                 onLoadUpdates={this.handleLoadUpdates}

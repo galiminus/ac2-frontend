@@ -11,17 +11,7 @@ import StaticPage from './static-page';
 import MainPage from './main-page';
 
 function mapStateToProps(state) {
-    let currentUser;
-    if (state.currentUser) {
-        currentUser = state.users.get(state.currentUser);
-    }
-
-    let currentUserPage;
-    if (currentUser) {
-        currentUserPage = state.pages.get(currentUser.page_id);
-    }
     return {
-        currentUserPage,
         page: state.pages.get(state.currentPage)
     };
 }

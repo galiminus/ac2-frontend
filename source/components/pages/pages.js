@@ -9,11 +9,20 @@ import CreateContentIcon from 'material-ui/svg-icons/action/note-add';
 
 import PageBanner from './page-banner';
 
+const defaultProps = {
+    allowCreate: true
+};
+
 const Pages = React.createClass({
     propTypes: {
         model: PropTypes.string.isRequired,
         pages: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired,
+        allowCreate: PropTypes.bool.isRequired
+    },
+
+    getDefaultProps() {
+        return (defaultProps);
     },
 
     mixins: [PureRenderMixin],
@@ -41,11 +50,13 @@ const Pages = React.createClass({
                         );
                     })
                 }
-                <FloatingActionButton
-                    href={`/pages/new?model=${this.props.model}`}
-                >
-                    <CreateContentIcon />
-                </FloatingActionButton>
+                {this.props.allowCreate &&
+                    <FloatingActionButton
+                        href={`/pages/new?model=${this.props.model}`}
+                    >
+                        <CreateContentIcon />
+                    </FloatingActionButton>
+                }
             </div>
         );
     }

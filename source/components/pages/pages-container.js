@@ -17,9 +17,6 @@ function mapStateToProps(state, props) {
     } else {
         mappedProps.pages = state.pages;
     }
-
-    mappedProps.translation = state.translations.get(state.currentLocale);
-
     return (mappedProps);
 }
 
@@ -33,7 +30,8 @@ const PagesContainer = React.createClass({
         model: PropTypes.string.isRequired,
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        pushNotification: PropTypes.func.isRequired
+        pushNotification: PropTypes.func.isRequired,
+        addResource: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -46,7 +44,8 @@ const PagesContainer = React.createClass({
         return {
             page: 1,
             loadingMore: false,
-            hasMore: false
+            hasMore: false,
+            ids: []
         };
     },
 
@@ -69,7 +68,14 @@ const PagesContainer = React.createClass({
         api.pages.find(query)
             .then(
                 (response) => {
-                    this.setState({ hasMore: !!(response.links && response.links.next), loadingMore: false });
+                    this.props.addResource(response);
+
+                    const ids = response.data.map((page) => page.id);
+                    this.setState({
+                        ids: [...this.state.ids, ...ids],
+                        hasMore: !!(response.links && response.links.next),
+                        loadingMore: false
+                    });
                 },
                 () => {
                     this.props.pushNotification('pages_find_fatal_error');
@@ -88,9 +94,7 @@ const PagesContainer = React.createClass({
         let pages = [];
 
         pages = this.props.pages.filter((page) => {
-            let match = true;
-
-            if (page.id === this.props.currentUserPage.id) {
+            if (this.state.ids.indexOf(page.id) < 0) {
                 return (false);
             }
 
@@ -98,15 +102,15 @@ const PagesContainer = React.createClass({
                 const typeRegexp = new RegExp(`${this.props.model}$`);
 
                 if (!page.type.match(typeRegexp)) {
-                    match = false;
+                    return (false);
                 }
             }
 
-            return (match);
+            return (true);
         });
 
         return (
-            <Pages pages={pages} {...this.props} />
+            <Pages {...this.props} pages={pages} />
         );
     }
 });

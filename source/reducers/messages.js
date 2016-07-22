@@ -8,9 +8,6 @@ export default function (state = Immutable.Map({}), action) {
     case 'MESSAGE_REMOVE':
         return state.delete(action.data.id);
 
-    case 'MESSAGE_CLEAR':
-        return state.clear();
-
     default:
         return state;
     }
