@@ -1,6 +1,8 @@
 import { batchActions } from 'redux-batched-actions';
 import { typeToActions } from 'utils/types';
 
+const recordsUpdatedAt = {};
+
 function normalizeRecord(record) {
     record.attributes = { ...(record.attributes || {}), id: record.id, type: record.type };
 
@@ -63,7 +65,17 @@ export default {
             }
             actions = actions.concat(addRecord(resource.data, options));
         }
-        return (batchActions(actions));
+
+        const newActions = actions.reduce((accumulator, action) => {
+            if (recordsUpdatedAt[action.data.id] === action.data.updated_at) {
+                return (accumulator);
+            }
+
+            recordsUpdatedAt[action.data.id] = action.data.updated_at;
+            accumulator.push(action);
+            return (accumulator);
+        }, []);
+        return (batchActions(newActions));
     },
 
     removeJSONAPIResource: (record) => {
