@@ -10,9 +10,9 @@ import CreateContentIcon from 'material-ui/svg-icons/action/note-add';
 import EventBanner from 'components/event/event-banner';
 import Loader from 'components/loader';
 
-const ProfilePagesPage = React.createClass({
+const Events = React.createClass({
     propTypes: {
-        pages: PropTypes.object,
+        resources: PropTypes.object,
         translation: PropTypes.object.isRequired,
         onLoadMore: PropTypes.func.isRequired,
         hasMore: PropTypes.bool.isRequired,
@@ -23,7 +23,7 @@ const ProfilePagesPage = React.createClass({
 
     renderEvents() {
         return (
-            this.props.pages.valueSeq().map((page) => {
+            this.props.resources.valueSeq().map((page) => {
                 return (
                     <EventBanner
                         key={page.id}
@@ -57,4 +57,4 @@ const ProfilePagesPage = React.createClass({
     }
 });
 
-export default CSSModules(ProfilePagesPage, styles);
+export default CSSModules(Events, styles);

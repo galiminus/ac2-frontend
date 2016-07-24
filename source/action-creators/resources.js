@@ -31,16 +31,12 @@ function normalizeRecord(record) {
 
 function addRecord(record, options = { commited: true, error: false }) {
     const normalizedRecord = normalizeRecord(record);
+    const data = { ...normalizedRecord.attributes, ...options };
 
     return (
         typeToActions(normalizedRecord.type, 'ADD').map((type) => {
-            return (
-                {
-                    type,
-                    data: { ...normalizedRecord.attributes, ...options }
-                }
-            );
-        })
+            return ({ type, data });
+        }).concat({ type: 'RESOURCE_ADD', data })
     );
 }
 
@@ -67,41 +63,36 @@ export default {
         }
 
         const newActions = actions.reduce((accumulator, action) => {
-            if (recordsUpdatedAt[action.data.id] >= action.data.updated_at) {
+            if (!recordsUpdatedAt[action.type]) {
+                recordsUpdatedAt[action.type] = {};
+            }
+
+            if (recordsUpdatedAt[action.type][action.data.id] >= action.data.updated_at) {
                 return (accumulator);
             }
-            recordsUpdatedAt[action.data.id] = action.data.updated_at;
+            recordsUpdatedAt[action.type][action.data.id] = action.data.updated_at;
             accumulator.push(action);
             return (accumulator);
         }, []);
+
         return (batchActions(newActions));
     },
 
     removeJSONAPIResource: (record) => {
-        const normalizedRecord = normalizeRecord(record);
+        const data = normalizeRecord(record);
 
         return (batchActions(
-            typeToActions(normalizedRecord.type, 'REMOVE').map((type) => {
-                return (
-                    {
-                        type,
-                        data: normalizedRecord.attributes
-                    }
-                );
-            })
+            typeToActions(data.type, 'REMOVE').map((type) => {
+                return ({ type, data });
+            }).concat({ type: 'RESOURCE_REMOVE', data })
         ));
     },
 
-    removeResource: (record) => {
+    removeResource: (data) => {
         return (batchActions(
-            typeToActions(record.type, 'REMOVE').map((type) => {
-                return (
-                    {
-                        type,
-                        data: record
-                    }
-                );
-            })
+            typeToActions(data.type, 'REMOVE').map((type) => {
+                return ({ type, data });
+            }).concat({ type: 'RESOURCE_REMOVE', data })
         ));
     }
 };

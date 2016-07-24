@@ -23,7 +23,7 @@ const EventPages = React.createClass({
 
     render() {
         return (
-            <PagesContainer model="Page::Event" factory={EventsFactory} {...this.props} />
+            <PagesContainer filters={{ type: 'Page::Event' }} factory={EventsFactory} {...this.props} />
         );
     }
 });

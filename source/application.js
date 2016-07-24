@@ -24,9 +24,12 @@ import LoginForm from 'components/welcome/login-form';
 import SignupForm from 'components/welcome/signup-form';
 import RecoverForm from 'components/welcome/recover-form';
 
-import PageContainer from 'components/pages/page-container';
-import Profile from 'components/profile/profile';
-import MessagesContainer from 'components/messages/messages-container';
+import MainPage from 'components/pages/main-page';
+import ProfileMessagesPage from 'components/pages/profile-messages-page';
+
+import ProfilePage from 'components/pages/profile-page';
+import StaticPage from 'components/pages/static-page';
+// import ProfileEditPage from 'components/pages/profile-edit-page';
 import ProfilePages from 'components/pages/profile-pages';
 import EventPages from 'components/pages/event-pages';
 import PageForm from 'components/pages/page-form';
@@ -112,6 +115,9 @@ const Application = React.createClass({
             return (this.router);
         }
 
+        // <Route path=":resourceId/edit" component={ProfileEditpage} />
+
+
         this.router = (
             <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
                 <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
@@ -121,9 +127,8 @@ const Application = React.createClass({
                 </Route>
 
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
-                    <Route component={PageContainer}>
-                        <IndexRoute component={MessagesContainer} />
-                    </Route>
+                    <IndexRoute component={MainPage} />
+                    <Route path="/messages/:pageId" component={ProfileMessagesPage} />
 
                     <Route path="pages/new" component={PageForm} />
 
@@ -131,13 +136,8 @@ const Application = React.createClass({
                     <Route path="events" component={EventPages} />
                     <Route path="settings/:category" component={Settings} />
 
-                    <Route path=":pageId/profile" component={PageContainer}>
-                        <IndexRoute component={Profile} />
-                    </Route>
-
-                    <Route path=":pageId" component={PageContainer}>
-                        <IndexRoute component={MessagesContainer} />
-                    </Route>
+                    <Route path="/profiles/:resourceId" component={ProfilePage} />
+                    <Route path="/statics/:resourceId" component={StaticPage} />
                 </Route>
             </Router>
         );

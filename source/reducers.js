@@ -10,6 +10,8 @@ import currentToken from 'reducers/current-token';
 
 import currentPage from 'reducers/current-page';
 
+import resources from 'reducers/resources';
+
 import groups from 'reducers/groups';
 import relationships from 'reducers/relationships';
 import relationshipsByProposer from 'reducers/relationships-by-proposer';
@@ -41,6 +43,7 @@ import title from 'reducers/title';
 const reducers = combineReducers({
     tokens,
     currentToken,
+    resources,
     users,
     groups,
     relationships,

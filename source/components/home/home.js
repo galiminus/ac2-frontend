@@ -10,7 +10,7 @@ import Notifier from 'components/notifier';
 import Chat from 'components/chat/chat-container';
 import Navigation from 'components/navigation/navigation';
 import HeaderBar from 'components/header-bar/header-bar';
-import AdditionalLinks from 'components/static/additional-links';
+import AdditionalLinksContainer from 'components/static/additional-links-container';
 
 const Home = React.createClass({
     propTypes: {
@@ -39,7 +39,7 @@ const Home = React.createClass({
                             currentUserPage={this.props.currentUserPage}
                             translation={this.props.translation}
                         />
-                        <AdditionalLinks
+                        <AdditionalLinksContainer
                             translation={this.props.translation}
                         />
                     </div>
@@ -51,7 +51,7 @@ const Home = React.createClass({
                             currentUserPage={this.props.currentUserPage}
                             translation={this.props.translation}
                         />
-                        <AdditionalLinks
+                        <AdditionalLinksContainer
                             translation={this.props.translation}
                         />
                     </div>
@@ -64,10 +64,7 @@ const Home = React.createClass({
                         }
                     </div>
                     <Paper styleName="messagePanel">
-                        <Chat
-                            currentUserPage={this.props.currentUserPage}
-                            translation={this.props.translation}
-                        />
+
                     </Paper>
                 </div>
 
@@ -76,5 +73,10 @@ const Home = React.createClass({
         );
     }
 });
+
+// <Chat
+//     currentUserPage={this.props.currentUserPage}
+//     translation={this.props.translation}
+// />
 
 export default CSSModules(Home, styles);

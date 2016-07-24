@@ -8,18 +8,6 @@ import { List, ListItem } from 'material-ui/List';
 
 import PageAvatar from 'components/pages/page-avatar';
 
-function getStyles() {
-    const styles = {
-        root: {
-            fontSize: 12,
-            marginLeft: 8,
-            color: '#666',
-            fontWeight: 500
-        }
-    };
-    return (styles);
-}
-
 function mapStateToProps(state) {
     return ({
         pages: state.pages
@@ -62,11 +50,36 @@ const PlusCounter = React.createClass({
         );
     },
 
-    render() {
-        const styles = getStyles();
-
+    renderLikePages() {
         return (
-            <span style={Object.assign(styles.root, this.props.style)}>
+            this.props.likes.valueSeq().map((like) => {
+                const page = this.props.pages.get(like.page_id);
+                return (
+                    <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/${page.slug}`}
+                        key={like.page_id}
+                    >
+                        <ListItem>
+                            <PageAvatar page={page} />
+                            {page.title}
+                        </ListItem>
+                    </Link>
+                );
+            })
+        );
+    },
+
+    render() {
+        return (
+            <span
+                style={{
+                    fontSize: 12,
+                    marginLeft: 8,
+                    color: '#666',
+                    fontWeight: 500
+                }}
+            >
                 {this.props.likes.size === 0 ? this.renderZero() : this.renderClickable()}
                 <Dialog
                     open={this.state.plusListOpen}
@@ -75,23 +88,7 @@ const PlusCounter = React.createClass({
                     bodyStyle={{ padding: '8px 16px' }}
                 >
                     <List>
-                        {
-                            this.props.likes.valueSeq().map((like) => {
-                                const page = this.props.pages.get(like.page_id);
-                                return (
-                                    <Link
-                                        style={{ textDecoration: 'none' }}
-                                        to={`/${page.slug}`}
-                                        key={like.page_id}
-                                    >
-                                        <ListItem>
-                                            <PageAvatar page={page} />
-                                            {page.title}
-                                        </ListItem>
-                                    </Link>
-                                );
-                            })
-                        }
+                        {this.renderLikePages()}
                     </List>
                 </Dialog>
             </span>

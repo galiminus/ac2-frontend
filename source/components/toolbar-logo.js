@@ -5,14 +5,6 @@ import { connect } from 'react-redux';
 
 import { ToolbarTitle } from 'material-ui';
 
-const style = {
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 400,
-    color: 'rgb(204, 150, 116)',
-    paddingRight: 0,
-    textDecoration: 'none'
-};
-
 function mapStateToProps(state) {
     if (state.settings && state.settings.data) {
         return ({
@@ -30,15 +22,19 @@ const ToolbarLogo = React.createClass({
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return ({
-            title: ''
-        });
+        return ({ title: '' });
     },
 
     render() {
         return (
             <ToolbarTitle
-                style={style}
+                style={{
+                    fontFamily: 'Roboto, sans-serif',
+                    fontWeight: 400,
+                    color: 'rgb(204, 150, 116)',
+                    paddingRight: 0,
+                    textDecoration: 'none'
+                }}
                 text={this.props.title}
             />
         );

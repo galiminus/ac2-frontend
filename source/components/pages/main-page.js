@@ -4,12 +4,12 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
+import MessagesContainer from 'components/messages/messages-container';
+
 const MainPage = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
-        setTitle: PropTypes.func.isRequired,
-        children: PropTypes.node
+        setTitle: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -20,7 +20,17 @@ const MainPage = React.createClass({
 
     render() {
         return (
-            React.cloneElement(this.props.children, { ...this.props, key: undefined })
+            <MessagesContainer
+                {...this.props}
+                include={[
+                    'received_likes',
+                    'sender',
+                    'recipient',
+                    'comments',
+                    'comments.received_likes',
+                    'comments.received_likes.page'
+                ]}
+            />
         );
     }
 });

@@ -6,26 +6,22 @@ import { connect } from 'react-redux';
 
 import actionCreators from 'action-creators';
 
-function mapStateToProps(state, props) {
-    const mappedProps = {};
-
-    if (props.model) {
-        mappedProps.pages = state.pagesByType.get(props.model);
-    } else {
-        mappedProps.pages = state.pages;
-    }
-    return (mappedProps);
-}
-
 const defaultProps = {
-    resources: Immutable.Map({})
+    filters: {},
+    include: []
 };
+
+function mapStateToProps(state, props) {
+    return ({ resources: state[props.storeName] });
+}
 
 const ResourcesContainer = React.createClass({
     propTypes: {
         resources: PropTypes.object.isRequired,
+        storeName: PropTypes.string.isRequired,
         find: PropTypes.func.isRequired,
-        model: PropTypes.string,
+        filters: PropTypes.object,
+        include: PropTypes.array,
         pushNotification: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         factory: PropTypes.func.isRequired
@@ -47,18 +43,18 @@ const ResourcesContainer = React.createClass({
     },
 
     componentWillMount() {
-        this.loadPages(1);
+        this.load(1);
     },
 
-    loadPages(pageNum) {
+    load(pageNum) {
         const query = {};
 
-        if (this.props.model) {
-            query['filter[type]'] = this.props.model;
+        for (const filter of Object.keys(this.props.filters)) {
+            query[`filter[${filter}]`] = this.props.filters[filter];
         }
         query['page[number]'] = pageNum;
-        query['page[size]'] = 10;
-        query.include = 'schema';
+        query['page[size]'] = 20;
+        query.include = this.props.include.join(',');
 
         this.setState({ loadingMore: true });
 
@@ -67,10 +63,10 @@ const ResourcesContainer = React.createClass({
                 (response) => {
                     this.props.addResource(response);
 
-                    const ids = response.data.map((page) => page.id);
+                    const ids = response.data.map((resource) => resource.id);
                     this.setState({
-                        ids: [...this.state.ids, ...ids],
-                        hasMore: !!(response.links && response.links.next),
+                        ids: this.state.ids.concat(ids),
+                        hasMore: !!response.links.last,
                         loadingMore: false
                     });
                 },
@@ -84,26 +80,19 @@ const ResourcesContainer = React.createClass({
         const nextPage = this.state.page + 1;
 
         this.setState({ page: nextPage });
-        this.loadPages(nextPage);
+        this.load(nextPage);
     },
 
     render() {
         let resources = [];
 
-        resources = this.props.resources.filter((resource) => {
-            if (this.state.ids.indexOf(resource.id) < 0) {
-                return (false);
-            }
-
-            if (this.props.model) {
-                const typeRegexp = new RegExp(`${this.props.model}$`);
-
-                if (!resource.type.match(typeRegexp)) {
-                    return (false);
-                }
-            }
-
-            return (true);
+        resources = this.props.resources.reduce((accumulator, resource) => {
+            return (accumulator.set(resource.id, resource));
+        }, Immutable.Map({}))
+        .filter((resource) => {
+            return (this.state.ids.indexOf(resource.id) >= 0);
+        }).sort((resource1, resource2) => {
+            return (this.state.ids.indexOf(resource1.id) > this.state.ids.indexOf(resource2.id) ? 1 : -1);
         });
 
         return (

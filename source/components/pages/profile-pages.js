@@ -23,7 +23,7 @@ const ProfilePages = React.createClass({
 
     render() {
         return (
-            <PagesContainer model="Page::Profile" factory={ProfilesFactory} {...this.props} />
+            <PagesContainer filters={{ type: 'Page::Profile' }} factory={ProfilesFactory} {...this.props} />
         );
     }
 });

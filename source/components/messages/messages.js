@@ -14,7 +14,7 @@ import Loader from 'components/loader';
 
 const Messages = React.createClass({
     propTypes: {
-        messages: PropTypes.object.isRequired,
+        resources: PropTypes.object.isRequired,
         onLoadMore: PropTypes.func.isRequired,
         hasMore: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired,
@@ -38,12 +38,8 @@ const Messages = React.createClass({
     },
 
     renderMessages() {
-        const orderedMessages = this.props.messages.sort((message1, message2) =>
-            (message1.updated_at > message2.updated_at ? -1 : 1)
-        );
-
         return (
-            orderedMessages.valueSeq().map(message =>
+            this.props.resources.valueSeq().map(message =>
                 <Message
                     key={message.id}
                     message={message}

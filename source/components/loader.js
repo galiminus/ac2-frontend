@@ -8,6 +8,7 @@ import CSSModules from 'react-css-modules';
 import styles from './loader';
 
 import List from 'material-ui/List';
+import FlatButton from 'material-ui/FlatButton';
 
 const Loader = React.createClass({
     propTypes: {
@@ -20,41 +21,77 @@ const Loader = React.createClass({
     mixins: [PureRenderMixin],
 
     render() {
+        console.log(this.props.children);
         return (
-            <List>
-                <InfiniteScroll
-                    elementIsScrollable={false}
-                    loadMore={this.props.onLoadMore}
-                    hasMore={this.props.hasMore}
-                    loadingMore={this.props.loadingMore}
-                    styleName="loader"
-                    loader={
-                        <div
+            <List styleName="loader">
+                {this.props.children}
+                {this.props.hasMore &&
+                    <FlatButton
+                        label="more"
+                        onClick={this.props.onLoadMore}
+                    />
+                }
+                {this.props.loadingMore &&
+                    <div
+                        style={{
+                            position: 'relative',
+                            margin: '60px auto 30px auto',
+                            width: 50
+                        }}
+                    >
+                        <RefreshIndicator
+                            size={50}
+                            top={0}
+                            left={0}
+                            loadingColor="#ff9800"
+                            status="loading"
                             style={{
                                 position: 'relative',
-                                margin: '60px auto 30px auto',
-                                width: 50
+                                display: 'inline-block'
                             }}
-                        >
-                            <RefreshIndicator
-                                size={50}
-                                top={0}
-                                left={0}
-                                loadingColor="#ff9800"
-                                status="loading"
-                                style={{
-                                    position: 'relative',
-                                    display: 'inline-block'
-                                }}
-                            />
-                        </div>
-                    }
-                >
-                    {this.props.children}
-                </InfiniteScroll>
+                        />
+                    </div>
+                }
             </List>
         );
     }
+
+    // render() {
+    //     return (
+    //         <List>
+    //             <InfiniteScroll
+    //                 elementIsScrollable={false}
+    //                 loadMore={this.props.onLoadMore}
+    //                 hasMore={this.props.hasMore}
+    //                 loadingMore={this.props.loadingMore}
+    //                 styleName="loader"
+    //                 loader={
+    //                     <div
+    //                         style={{
+    //                             position: 'relative',
+    //                             margin: '60px auto 30px auto',
+    //                             width: 50
+    //                         }}
+    //                     >
+    //                         <RefreshIndicator
+    //                             size={50}
+    //                             top={0}
+    //                             left={0}
+    //                             loadingColor="#ff9800"
+    //                             status="loading"
+    //                             style={{
+    //                                 position: 'relative',
+    //                                 display: 'inline-block'
+    //                             }}
+    //                         />
+    //                     </div>
+    //                 }
+    //             >
+    //                 {this.props.children}
+    //             </InfiniteScroll>
+    //         </List>
+    //     );
+    // }
 });
 
 export default CSSModules(Loader, styles);
