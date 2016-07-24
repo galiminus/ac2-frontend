@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
 import PagesContainer from './pages-container';
+import Events from 'components/event/events';
 
 const EventPages = React.createClass({
     propTypes: {
@@ -20,7 +21,9 @@ const EventPages = React.createClass({
 
     render() {
         return (
-            <PagesContainer model="Page::Event" {...this.props} />
+            <PagesContainer model="Page::Event" {...this.props}>
+                <Events translation={this.props.translation} />
+            </PagesContainer>
         );
     }
 });

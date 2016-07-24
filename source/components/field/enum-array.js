@@ -5,6 +5,10 @@ import Chip from 'material-ui/Chip';
 
 import ListItem from 'material-ui/List/ListItem';
 
+const defaultProps = {
+    record: []
+};
+
 const EnumField = React.createClass({
     propTypes: {
         record: PropTypes.array,
@@ -18,8 +22,12 @@ const EnumField = React.createClass({
 
     mixins: [PureRenderMixin],
 
+    getDefaultProps() {
+        return (defaultProps);
+    },
+
     handleTouchTap(value) {
-        const newArray = (this.props.record || []).slice();
+        const newArray = this.props.record.slice();
         const index = newArray.indexOf(value);
 
         if (index < 0) {
@@ -34,7 +42,7 @@ const EnumField = React.createClass({
     renderField() {
         return (
             this.props.schema.items.enum.map((possibleValue) => {
-                const isSelected = (this.props.record || []).indexOf(possibleValue) >= 0;
+                const isSelected = this.props.record.indexOf(possibleValue) >= 0;
                 return (
                       <Chip
                           key={possibleValue}

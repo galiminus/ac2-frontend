@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
 import PagesContainer from './pages-container';
+import Profiles from 'components/profile/profiles';
 
 const ProfilePages = React.createClass({
     propTypes: {
         translation: PropTypes.object.isRequired,
-        setTitle: PropTypes.func.isRequired,
-        children: PropTypes.node
+        setTitle: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -21,7 +21,9 @@ const ProfilePages = React.createClass({
 
     render() {
         return (
-            <PagesContainer model="Page::Profile" allowCreate={false} {...this.props} />
+            <PagesContainer model="Page::Profile" {...this.props}>
+                <Profiles translation={this.props.translation} />
+            </PagesContainer>
         );
     }
 });

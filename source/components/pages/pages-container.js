@@ -4,8 +4,6 @@ import Immutable from 'immutable';
 
 import { connect } from 'react-redux';
 
-import Pages from './pages';
-
 import api from 'api';
 import actionCreators from 'action-creators';
 
@@ -31,7 +29,8 @@ const PagesContainer = React.createClass({
         translation: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
         pushNotification: PropTypes.func.isRequired,
-        addResource: PropTypes.func.isRequired
+        addResource: PropTypes.func.isRequired,
+        children: PropTypes.node.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -110,7 +109,7 @@ const PagesContainer = React.createClass({
         });
 
         return (
-            <Pages {...this.props} pages={pages} />
+            React.cloneElement(this.props.children, { pages })
         );
     }
 });

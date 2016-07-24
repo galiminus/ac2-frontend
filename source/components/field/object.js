@@ -8,6 +8,10 @@ import Divider from 'material-ui/Divider';
 
 import Field from 'components/field/field';
 
+const defaultProps = {
+    record: {}
+};
+
 const ObjectField = React.createClass({
     propTypes: {
         label: PropTypes.string.isRequired,
@@ -21,6 +25,10 @@ const ObjectField = React.createClass({
     },
 
     mixins: [PureRenderMixin],
+
+    getDefaultProps() {
+        return (defaultProps);
+    },
 
     handleChange(field, record) {
         const newRecord = Object.assign({}, this.props.record);
@@ -46,7 +54,6 @@ const ObjectField = React.createClass({
                 />
             );
         }
-
         if (this.props.depth === 1) {
             return (
                 <Card

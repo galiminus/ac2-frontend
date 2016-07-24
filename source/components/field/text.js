@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
+import FlatButton from 'material-ui/FlatButton';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import ListItem from 'material-ui/List/ListItem';
-import TextField from 'material-ui/TextField';
+import MaterialTextField from 'material-ui/TextField';
 
 const defaultProps = {
     record: ''
 };
 
-const StringField = React.createClass({
+const TextField = React.createClass({
     propTypes: {
         schema: PropTypes.object.isRequired,
         record: PropTypes.string.isRequired,
@@ -29,21 +30,12 @@ const StringField = React.createClass({
 
     getInitialState() {
         return {
-            edit: false,
-            mouseInside: false
+            edit: false
         };
     },
 
-    setMouseInside() {
-        this.setState({ mouseInside: true });
-    },
-
-    setMouseOutside() {
-        this.setState({ mouseInside: false });
-    },
-
     switchToEditMode() {
-        if (!this.state.mouseInside && this.props.editable) {
+        if (this.props.editable) {
             this.setState({
                 edit: true,
                 mouseInside: true,
@@ -53,37 +45,49 @@ const StringField = React.createClass({
     },
 
     switchToValueMode() {
-        if (!this.state.mouseInside) {
-            this.setState({ edit: false });
-        }
+        this.setState({ edit: false });
     },
 
     handleChange(event) {
         this.setState({ value: event.target.value });
     },
 
-    handleKeyDown(event) {
-        if (event.keyCode === 13) {
-            this.setState({ edit: false, mouseInside: false });
-            return (this.props.onChange(this.state.value));
-        }
+    handleUpdate() {
+        this.setState({ edit: false });
+        return (this.props.onChange(this.state.value));
     },
 
     renderEdit() {
         const valueField = (
             <ListItem
+                disabled={this.state.edit}
                 onMouseEnter={this.setMouseInside}
                 onMouseLeave={this.setMouseOutside}
                 primaryText={
-                    <TextField
-                        ref="valueField"
-                        value={this.state.value}
-                        onBlur={this.switchToValueMode}
-                        fullWidth
-                        hintText={this.props.title}
-                        onChange={this.handleChange}
-                        onKeyDown={this.handleKeyDown}
-                    />
+                    <div>
+                        <MaterialTextField
+                            multiLine
+                            rows={2}
+                            ref="valueField"
+                            value={this.state.value}
+                            fullWidth
+                            hintText={this.props.title}
+                            onChange={this.handleChange}
+                            onBlur={this.switchToValueMode}
+                        />
+                        <div style={{ textAlign: 'right' }}>
+                            <FlatButton
+                                label={this.props.translation.t('actions.cancel')}
+                                onClick={this.switchToValueMode}
+                            />
+                            <FlatButton
+                                type="submit"
+                                label={this.props.translation.t('actions.update')}
+                                onTouchTap={this.handleUpdate}
+                                secondary
+                            />
+                        </div>
+                    </div>
                 }
             />
         );
@@ -122,4 +126,4 @@ const StringField = React.createClass({
     }
 });
 
-export default StringField;
+export default TextField;

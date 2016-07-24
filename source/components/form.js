@@ -9,7 +9,8 @@ const defaultProps = {
     schema: {
         properties: {},
         loading: false
-    }
+    },
+    record: {}
 };
 
 const Form = React.createClass({
@@ -64,7 +65,6 @@ const Form = React.createClass({
             if (this.props.only && this.props.only.indexOf(category) < 0) {
                 continue;
             }
-
             cards.push(
                 <Field
                     label={`${this.props.label}.${category}`}

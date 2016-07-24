@@ -2,30 +2,17 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import CSSModules from 'react-css-modules';
-import styles from './pages.css';
+import styles from './profiles.css';
 
-import FloatingActionButton from 'components/floating-action-button';
-import CreateContentIcon from 'material-ui/svg-icons/action/note-add';
+import ProfileBanner from 'components/profile/profile-banner';
 
-import PageBanner from './page-banner';
-
-const defaultProps = {
-    allowCreate: true
-};
-
-const Pages = React.createClass({
+const Profiles = React.createClass({
     propTypes: {
-        model: PropTypes.string.isRequired,
-        pages: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
-        allowCreate: PropTypes.bool.isRequired
+        pages: PropTypes.object,
+        translation: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
-
-    getDefaultProps() {
-        return (defaultProps);
-    },
 
     render() {
         return (
@@ -41,7 +28,7 @@ const Pages = React.createClass({
                     this.props.pages.valueSeq().map((page) => {
                         return (
                             <div styleName="page" key={page.id}>
-                                <PageBanner
+                                <ProfileBanner
                                     page={page}
                                     translation={this.props.translation}
                                     compact
@@ -50,16 +37,9 @@ const Pages = React.createClass({
                         );
                     })
                 }
-                {this.props.allowCreate &&
-                    <FloatingActionButton
-                        href={`/pages/new?model=${this.props.model}`}
-                    >
-                        <CreateContentIcon />
-                    </FloatingActionButton>
-                }
             </div>
         );
     }
 });
 
-export default CSSModules(Pages, styles);
+export default CSSModules(Profiles, styles);

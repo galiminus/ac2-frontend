@@ -10,11 +10,15 @@ import Subheader from 'material-ui/Subheader';
 import DictionnaryItem from './dictionnary-item';
 import DictionnaryAddDialog from './dictionnary-add-dialog';
 
+const defaultProps = {
+    record: {}
+};
+
 const Dictionnary = React.createClass({
     propTypes: {
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        record: PropTypes.object,
+        record: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
@@ -22,6 +26,10 @@ const Dictionnary = React.createClass({
     },
 
     mixins: [PureRenderMixin],
+
+    getDefaultProps() {
+        return (defaultProps);
+    },
 
     getInitialState() {
         return { addDialogOpen: false };

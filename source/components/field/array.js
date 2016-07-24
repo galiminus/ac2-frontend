@@ -11,6 +11,10 @@ import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
 import TextField from 'material-ui/TextField';
 
+const defaultProps = {
+    record: []
+};
+
 const ArrayField = React.createClass({
     propTypes: {
         record: PropTypes.array,
@@ -23,6 +27,10 @@ const ArrayField = React.createClass({
     },
 
     mixins: [PureRenderMixin],
+
+    getDefaultProps() {
+        return (defaultProps);
+    },
 
     getInitialState() {
         return { addDialogOpen: false };
@@ -63,7 +71,7 @@ const ArrayField = React.createClass({
 
     renderChips() {
         return (
-            (this.props.record || []).map((item, i) => {
+            (this.props.record).map((item, i) => {
                 return (
                     <Chip
                         key={i}

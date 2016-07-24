@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import PageBanner from './page-banner';
+import ProfileBanner from 'components/profile/profile-banner';
 
 const MessagePage = React.createClass({
     propTypes: {
@@ -23,7 +23,7 @@ const MessagePage = React.createClass({
     render() {
         return (
             <div>
-                <PageBanner page={this.props.page} translation={this.props.translation} />
+                <ProfileBanner page={this.props.page} translation={this.props.translation} />
                 {React.cloneElement(this.props.children, { ...this.props, key: undefined })}
             </div>
         );

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import { connect } from 'react-redux';
+import Immutable from 'immutable';
 
 import Form from 'components/form';
 
@@ -36,6 +37,12 @@ const PageForm = React.createClass({
         return (defaultProps);
     },
 
+    getInitialState() {
+        return ({
+            record: Immutable.fromJS({})
+        });
+    },
+
     componentWillMount() {
         api.schemas
             .find({ 'filter[model]': this.props.location.query.model })
@@ -44,19 +51,20 @@ const PageForm = React.createClass({
             });
     },
 
-    handleChange() {
-
+    handleChange(data) {
+        this.setState({ record: this.state.record.mergeDeep(data) });
     },
 
     render() {
         return (
             <Form
+                loading={false}
                 editable
                 label="profile"
-                record={{}}
                 schema={this.props.schema.data}
                 translation={this.props.translation}
                 onChange={this.handleChange}
+                record={this.state.record.toJS()}
             />
         );
     }

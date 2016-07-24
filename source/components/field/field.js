@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import StringField from './string';
+import TextField from './text';
 import EnumField from './enum';
 import ArrayField from './array';
 import EnumArray from './enum-array';
@@ -32,7 +33,14 @@ const Field = React.createClass({
             if (this.props.schema.enum) {
                 return (<EnumField {...newProps} />);
             }
-            return (<StringField {...newProps} />);
+
+            switch (this.props.schema.format) {
+            case 'text':
+                return (<TextField {...newProps} />);
+            default:
+                return (<StringField {...newProps} />);
+            }
+            break;
         case 'array':
             if (this.props.schema.items.enum) {
                 return (<EnumArray {...newProps} />);
