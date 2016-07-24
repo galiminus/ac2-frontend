@@ -12,17 +12,10 @@ const EventBanner = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
-        compact: PropTypes.bool,
         style: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
-
-    getDefaultProps() {
-        return ({
-            compact: false
-        });
-    },
 
     render() {
         return (

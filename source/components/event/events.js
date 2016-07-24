@@ -8,38 +8,45 @@ import FloatingActionButton from 'components/floating-action-button';
 import CreateContentIcon from 'material-ui/svg-icons/action/note-add';
 
 import EventBanner from 'components/event/event-banner';
+import Loader from 'components/loader';
 
 const ProfilePagesPage = React.createClass({
     propTypes: {
         pages: PropTypes.object,
-        translation: PropTypes.object.isRequired
+        translation: PropTypes.object.isRequired,
+        onLoadMore: PropTypes.func.isRequired,
+        hasMore: PropTypes.bool.isRequired,
+        loadingMore: PropTypes.bool.isRequired
     },
 
     mixins: [PureRenderMixin],
 
+    renderEvents() {
+        return (
+            this.props.pages.valueSeq().map((page) => {
+                return (
+                    <EventBanner
+                        key={page.id}
+                        page={page}
+                        translation={this.props.translation}
+                        compact
+                    />
+                );
+            })
+        );
+    },
+
     render() {
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent:
-                    'space-between'
-                }}
-            >
-                {
-                    this.props.pages.valueSeq().map((page) => {
-                        return (
-                            <div styleName="page" key={page.id}>
-                                <EventBanner
-                                    page={page}
-                                    translation={this.props.translation}
-                                    compact
-                                />
-                            </div>
-                        );
-                    })
-                }
+            <div>
+                <Loader
+                    onLoadMore={this.props.onLoadMore}
+                    hasMore={this.props.hasMore}
+                    loadingMore={this.props.loadingMore}
+                    styles={styles}
+                >
+                    {this.renderEvents()}
+                </Loader>
                 <FloatingActionButton
                     href={`/pages/new?model=Page::Event`}
                 >

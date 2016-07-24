@@ -1,3 +1,5 @@
 .loadMoreButton, .loadMoreButton button, .loadMoreButton button > div > div  {
     border-radius: 24px !important;
 }
+
+.loader {}

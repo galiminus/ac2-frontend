@@ -3,6 +3,9 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import { Link } from 'react-router';
 
+import CSSModules from 'react-css-modules';
+import styles from './profile-banner.css';
+
 import { Card, CardActions, CardMedia } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -13,37 +16,27 @@ import RelationChip from './relation-chip';
 const ProfileBanner = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
-        compact: PropTypes.bool,
-        style: PropTypes.object
+        translation: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
 
-    getDefaultProps() {
-        return ({
-            compact: false
-        });
-    },
-
     render() {
         return (
-            <Card style={Object.assign({ marginTop: 32 }, this.props.style)}>
+            <Card styleName="card">
                 <CardMedia
                     overlay={
                         <PageCardTitle page={this.props.page}>
-                            {!this.props.compact &&
-                                <RelationChip
-                                    page={this.props.page}
-                                    translation={this.props.translation}
-                                />
-                            }
+                            <RelationChip
+                                page={this.props.page}
+                                translation={this.props.translation}
+                            />
                         </PageCardTitle>
                     }
                 >
                     <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
                 </CardMedia>
-                <CardActions style={{ textAlign: 'right' }}>
+                <CardActions styleName="card-actions">
                     <Link to={`/${this.props.page.slug}/profile`}>
                         <FlatButton label={this.props.translation.t('labels.about')} />
                     </Link>
@@ -53,4 +46,4 @@ const ProfileBanner = React.createClass({
     }
 });
 
-export default ProfileBanner;
+export default CSSModules(ProfileBanner, styles);

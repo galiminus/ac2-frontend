@@ -10,7 +10,7 @@ import Notifier from 'components/notifier';
 import Chat from 'components/chat/chat-container';
 import Navigation from 'components/navigation/navigation';
 import HeaderBar from 'components/header-bar/header-bar';
-import AdditionalLinks from 'components/additional-links/additional-links';
+import AdditionalLinks from 'components/static/additional-links';
 
 const Home = React.createClass({
     propTypes: {
@@ -46,7 +46,7 @@ const Home = React.createClass({
                 </Drawer>
 
                 <div styleName="flexLayout">
-                <div styleName="leftNav">
+                    <div styleName="leftNav">
                         <Navigation
                             currentUserPage={this.props.currentUserPage}
                             translation={this.props.translation}

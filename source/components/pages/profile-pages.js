@@ -7,6 +7,8 @@ import { setTitle } from 'action-creators';
 import PagesContainer from './pages-container';
 import Profiles from 'components/profile/profiles';
 
+const ProfilesFactory = React.createFactory(Profiles);
+
 const ProfilePages = React.createClass({
     propTypes: {
         translation: PropTypes.object.isRequired,
@@ -21,9 +23,7 @@ const ProfilePages = React.createClass({
 
     render() {
         return (
-            <PagesContainer model="Page::Profile" {...this.props}>
-                <Profiles translation={this.props.translation} />
-            </PagesContainer>
+            <PagesContainer model="Page::Profile" factory={ProfilesFactory} {...this.props} />
         );
     }
 });

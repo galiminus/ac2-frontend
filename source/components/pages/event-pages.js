@@ -7,6 +7,8 @@ import { setTitle } from 'action-creators';
 import PagesContainer from './pages-container';
 import Events from 'components/event/events';
 
+const EventsFactory = React.createFactory(Events);
+
 const EventPages = React.createClass({
     propTypes: {
         translation: PropTypes.object.isRequired,
@@ -21,9 +23,7 @@ const EventPages = React.createClass({
 
     render() {
         return (
-            <PagesContainer model="Page::Event" {...this.props}>
-                <Events translation={this.props.translation} />
-            </PagesContainer>
+            <PagesContainer model="Page::Event" factory={EventsFactory} {...this.props} />
         );
     }
 });
