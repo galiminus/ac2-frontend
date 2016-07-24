@@ -35,6 +35,8 @@
 
 .formPaper form {
     width: 350px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .headerBar {
@@ -44,4 +46,22 @@
     width: 100%;
     left: 0;
     top: 0;
+}
+
+@media (max-width: 1010px) {
+    .illustration {
+        display: none;
+    }
+
+    .formContainer {
+        width: 100%;
+        position: fixed;
+    }
+}
+
+@media (max-width: 400px) {
+    .formPaper form {
+        width: auto;
+        max-width: 100%;
+    }
 }

@@ -94,10 +94,34 @@ const SignupForm = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(signup)}>
-                <TextField fullWidth type="text" {...fullName} hintText={this.props.translation.t('labels.signup.fullName')} />
-                <TextField fullWidth type="text" {...userName} hintText={this.props.translation.t('labels.signup.userName')} />
-                <TextField fullWidth type="email" {...email} hintText={this.props.translation.t('labels.signup.email')} />
-                <TextField fullWidth type="password" {...password} hintText={this.props.translation.t('labels.signup.password')} />
+                <TextField
+                    fullWidth
+                    type="text"
+                    value={fullName.value}
+                    onChange={fullName.onChange}
+                    hintText={this.props.translation.t('labels.signup.fullName')}
+                />
+                <TextField
+                    fullWidth
+                    type="text"
+                    value={userName.value}
+                    onChange={userName.onChange}
+                    hintText={this.props.translation.t('labels.signup.userName')}
+                />
+                <TextField
+                    fullWidth
+                    type="email"
+                    value={email.value}
+                    onChange={email.onChange}
+                    hintText={this.props.translation.t('labels.signup.email')}
+                />
+                <TextField
+                    fullWidth
+                    type="password"
+                    value={password.value}
+                    onChange={password.onChange}
+                    hintText={this.props.translation.t('labels.signup.password')}
+                />
                 <div styleName="actionButtons">
                     <RaisedButton
                         disabled={fullName.invalid || userName.invalid || email.invalid || password.invalid}

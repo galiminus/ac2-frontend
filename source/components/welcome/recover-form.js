@@ -3,6 +3,9 @@ import { reduxForm } from 'redux-form';
 import { updatePath } from 'redux-simple-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
+import CSSModules from 'react-css-modules';
+import styles from './recover-form.css';
+
 import {
     TextField,
     RaisedButton
@@ -44,13 +47,18 @@ const RecoverForm = React.createClass({
         const {
             fields: { email },
             handleSubmit
-            // error
         } = this.props;
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={this.props.translation.t('labels.recover.email')} />
-                <div style={{ marginTop: '1em' }}>
+                <TextField
+                    fullWidth
+                    type="email"
+                    value={email.value}
+                    onChange={email.onChange}
+                    hintText={this.props.translation.t('labels.recover.email')}
+                />
+                <div styleName="actionButtons">
                     <RaisedButton
                         disabled={email.invalid}
                         type="submit"
@@ -65,7 +73,7 @@ const RecoverForm = React.createClass({
 });
 
 export default reduxForm({
-    form: 'login',
+    form: 'recover',
     fields: ['email'],
     validate
-})(RecoverForm);
+})(CSSModules(RecoverForm, styles));

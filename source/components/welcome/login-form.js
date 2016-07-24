@@ -65,8 +65,20 @@ const LoginForm = React.createClass({
 
         return (
             <form onSubmit={handleSubmit(authenticate)}>
-                <TextField fullWidth type="email" {...email} hintText={this.props.translation.t('labels.login.email')} />
-                <TextField fullWidth type="password" {...password} hintText={this.props.translation.t('labels.login.password')} />
+                <TextField
+                    fullWidth
+                    type="email"
+                    value={email.value}
+                    onChange={email.onChange}
+                    hintText={this.props.translation.t('labels.login.email')}
+                />
+                <TextField
+                    fullWidth
+                    type="password"
+                    value={password.value}
+                    onChange={password.onChange}
+                    hintText={this.props.translation.t('labels.login.password')}
+                />
                 <div styleName="actionButtons">
                     <RaisedButton
                         disabled={email.invalid || password.invalid}
