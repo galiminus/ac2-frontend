@@ -67,10 +67,9 @@ export default {
         }
 
         const newActions = actions.reduce((accumulator, action) => {
-            if (recordsUpdatedAt[action.data.id] === action.data.updated_at) {
+            if (recordsUpdatedAt[action.data.id] >= action.data.updated_at) {
                 return (accumulator);
             }
-
             recordsUpdatedAt[action.data.id] = action.data.updated_at;
             accumulator.push(action);
             return (accumulator);
