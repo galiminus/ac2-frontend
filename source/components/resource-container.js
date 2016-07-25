@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 import actionCreators from 'action-creators';
@@ -20,7 +20,6 @@ function mapStateToProps(state, props) {
 const ResourceContainer = React.createClass({
     propTypes: {
         addResource: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
         pushNotification: PropTypes.func.isRequired,
         id: PropTypes.string.isRequired,
         get: PropTypes.func.isRequired,

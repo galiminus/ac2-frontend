@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import CSSModules from 'react-css-modules';
 import styles from './profiles.css';
@@ -15,7 +15,6 @@ import Loader from 'components/loader';
 const Profiles = React.createClass({
     propTypes: {
         resources: PropTypes.object,
-        translation: PropTypes.object.isRequired,
         onLoadMore: PropTypes.func.isRequired,
         hasMore: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired
@@ -31,7 +30,7 @@ const Profiles = React.createClass({
                         <PageCardTitle page={page} titleColor="#333" />
                         <CardActions styleName="card-actions">
                             <Link to={`/messages/${page.slug}`}>
-                                <FlatButton label={this.props.translation.t('labels.page')} />
+                                <FlatButton label={this.context.translation.t('labels.page')} />
                             </Link>
                         </CardActions>
                     </Card>
@@ -46,7 +45,6 @@ const Profiles = React.createClass({
                 onLoadMore={this.props.onLoadMore}
                 hasMore={this.props.hasMore}
                 loadingMore={this.props.loadingMore}
-                translation={this.props.translation}
                 style={{
                     display: 'flex',
                     flexWrap: 'wrap',

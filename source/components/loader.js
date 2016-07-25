@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import MoreIcon from 'material-ui/svg-icons/navigation/expand-more';

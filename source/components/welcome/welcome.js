@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import CSSModules from 'react-css-modules';
 import styles from './welcome.css';
@@ -33,10 +33,20 @@ const WelcomePage = React.createClass({
         welcomePageIllustrations: PropTypes.array.isRequired
     },
 
+    childContextTypes: {
+        translation: React.PropTypes.object
+    },
+
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
         return (defaultProps);
+    },
+
+    getChildContext() {
+        return ({
+            translation: this.props.translation
+        });
     },
 
     render() {
@@ -51,10 +61,10 @@ const WelcomePage = React.createClass({
                 </div>
                 <div styleName="formContainer">
                     <div styleName="formPaper">
-                        {React.cloneElement(this.props.children, { translation: this.props.translation })}
+                        {this.props.children}
                     </div>
                 </div>
-                <Notifier translation={this.props.translation} />
+                <Notifier />
             </div>
         );
     }

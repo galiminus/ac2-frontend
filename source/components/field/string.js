@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import ListItem from 'material-ui/List/ListItem';
@@ -17,7 +17,6 @@ const StringField = React.createClass({
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
         editable: PropTypes.bool.isRequired,
-        translation: PropTypes.object.isRequired,
         translateLabel: PropTypes.bool
     },
 
@@ -102,7 +101,7 @@ const StringField = React.createClass({
                 </p>
             );
         } else {
-            secondaryText = <p>{this.props.translation.t('texts.emptyField')}</p>;
+            secondaryText = <p>{this.context.translation.t('texts.emptyField')}</p>;
         }
 
         return (

@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import React from 'react';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import CSSModules from 'react-css-modules';
 import styles from './navigation.css';
@@ -17,11 +17,6 @@ import GroupsIcon from 'material-ui/svg-icons/social/group';
 import MembersIcon from 'material-ui/svg-icons/action/language';
 
 const Navigation = React.createClass({
-    propTypes: {
-        currentUserPage: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired
-    },
-
     mixins: [PureRenderMixin],
 
     render() {
@@ -30,37 +25,37 @@ const Navigation = React.createClass({
                 <List>
                     <Link to="/">
                         <ListItem
-                            primaryText={this.props.translation.t('links.mainFeed')}
+                            primaryText={this.context.translation.t('links.mainFeed')}
                             leftIcon={<HomeIcon />}
                         />
                     </Link>
                     <Link to="/events">
                         <ListItem
-                            primaryText={this.props.translation.t('links.events')}
+                            primaryText={this.context.translation.t('links.events')}
                             leftIcon={<EventsIcon />}
                         />
                     </Link>
                     <Link to="/quizz">
                         <ListItem
-                            primaryText={this.props.translation.t('links.quizz')}
+                            primaryText={this.context.translation.t('links.quizz')}
                             leftIcon={<QuizzIcon />}
                         />
                     </Link>
                     <Link to="/polls">
                         <ListItem
-                            primaryText={this.props.translation.t('links.polls')}
+                            primaryText={this.context.translation.t('links.polls')}
                             leftIcon={<PollsIcon />}
                         />
                     </Link>
                     <Link to="/groups">
                         <ListItem
-                            primaryText={this.props.translation.t('links.groups')}
+                            primaryText={this.context.translation.t('links.groups')}
                             leftIcon={<GroupsIcon />}
                         />
                     </Link>
                     <Link to="/members">
                         <ListItem
-                            primaryText={this.props.translation.t('links.members')}
+                            primaryText={this.context.translation.t('links.members')}
                             leftIcon={<MembersIcon />}
                         />
                     </Link>

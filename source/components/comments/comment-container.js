@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
@@ -27,9 +27,7 @@ const CommentContainer = React.createClass({
         comment: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
         likes: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         pushNotification: PropTypes.func.isRequired
     },
 
@@ -95,7 +93,6 @@ const CommentContainer = React.createClass({
 
         return (
             <Comment
-                currentUserPage={this.props.currentUserPage}
                 sender={this.props.sender}
                 likes={this.props.likes}
                 comment={this.props.comment}
@@ -106,7 +103,6 @@ const CommentContainer = React.createClass({
                 onLikeCreate={this.handleLikeCreate}
                 onCommentDestroy={this.handleCommentDestroy}
                 myLike={this.myLike()}
-                translation={this.props.translation}
             />
         );
     }

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import SelectableChip from 'components/selectable-chip';
 
@@ -16,8 +16,7 @@ const EnumField = React.createClass({
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
-        editable: PropTypes.bool.isRequired,
-        translation: PropTypes.object.isRequired
+        editable: PropTypes.bool.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -49,7 +48,7 @@ const EnumField = React.createClass({
                           onTouchTap={this.props.editable ? () => this.handleTouchTap(possibleValue) : undefined}
                           isSelected={isSelected}
                       >
-                          {this.props.translation.t(`${this.props.label}.${possibleValue}`)}
+                          {this.context.translation.t(`${this.props.label}.${possibleValue}`)}
                       </SelectableChip>
                 );
             })

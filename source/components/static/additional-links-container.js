@@ -1,5 +1,5 @@
 import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import PagesContainer from 'components/pages/pages-container';
 import AdditionalLinks from 'components/static/additional-links';

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -9,8 +9,7 @@ const DictionnaryAddDialog = React.createClass({
     propTypes: {
         open: PropTypes.bool.isRequired,
         onRequestClose: PropTypes.func.isRequired,
-        onCreate: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired
+        onCreate: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -49,12 +48,12 @@ const DictionnaryAddDialog = React.createClass({
                 onRequestClose={this.handleRequestClose}
                 actions={[
                     <FlatButton
-                        label={this.props.translation.t('actions.cancel')}
+                        label={this.context.translation.t('actions.cancel')}
                         onClick={this.handleRequestClose}
                     />,
                     <FlatButton
                         type="submit"
-                        label={this.props.translation.t('actions.create')}
+                        label={this.context.translation.t('actions.create')}
                         onTouchTap={this.handleCreate}
                         secondary
                     />
@@ -64,13 +63,13 @@ const DictionnaryAddDialog = React.createClass({
                     fullWidth
                     value={this.state.itemKey}
                     onChange={this.handleItemKeyChange}
-                    floatingLabelText={this.props.translation.t('forms.dictionnary.key')}
+                    floatingLabelText={this.context.translation.t('forms.dictionnary.key')}
                 />
                 <TextField
                     fullWidth
                     value={this.state.itemValue}
                     onChange={this.handleItemValueChange}
-                    floatingLabelText={this.props.translation.t('forms.dictionnary.value')}
+                    floatingLabelText={this.context.translation.t('forms.dictionnary.value')}
                 />
             </Dialog>
         );

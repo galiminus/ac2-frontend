@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
@@ -16,7 +16,6 @@ const defaultProps = {
 const Form = React.createClass({
     propTypes: {
         record: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
         loading: PropTypes.bool.isRequired,
@@ -68,13 +67,12 @@ const Form = React.createClass({
             cards.push(
                 <Field
                     label={`${this.props.label}.${category}`}
-                    title={this.props.translation.t(`${this.props.label}.${category}`)}
+                    title={this.context.translation.t(`${this.props.label}.${category}`)}
                     record={this.props.record[category]}
                     schema={this.props.schema.properties[category]}
                     key={category}
                     onChange={(record) => this.handleUpdate(category, record)}
                     editable={this.props.editable}
-                    translation={this.props.translation}
                 />
             );
         }

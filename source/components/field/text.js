@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import FlatButton from 'material-ui/FlatButton';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
@@ -18,7 +18,6 @@ const TextField = React.createClass({
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
         editable: PropTypes.bool.isRequired,
-        translation: PropTypes.object.isRequired,
         translateLabel: PropTypes.bool
     },
 
@@ -77,12 +76,12 @@ const TextField = React.createClass({
                         />
                         <div style={{ textAlign: 'right' }}>
                             <FlatButton
-                                label={this.props.translation.t('actions.cancel')}
+                                label={this.context.translation.t('actions.cancel')}
                                 onClick={this.switchToValueMode}
                             />
                             <FlatButton
                                 type="submit"
-                                label={this.props.translation.t('actions.update')}
+                                label={this.context.translation.t('actions.update')}
                                 onTouchTap={this.handleUpdate}
                                 secondary
                             />
@@ -106,7 +105,7 @@ const TextField = React.createClass({
                 </p>
             );
         } else {
-            secondaryText = <p>{this.props.translation.t('texts.emptyField')}</p>;
+            secondaryText = <p>{this.context.translation.t('texts.emptyField')}</p>;
         }
 
         return (

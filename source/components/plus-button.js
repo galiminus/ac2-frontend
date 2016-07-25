@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+// import PureRenderMixin from 'components/pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import IconButton from 'material-ui/IconButton/IconButton';
 import PlusOneIcon from 'material-ui/svg-icons/social/plus-one';
@@ -9,10 +10,6 @@ const PlusButton = React.createClass({
         isSelected: PropTypes.bool,
         onLike: PropTypes.func.isRequired,
         onUnlike: PropTypes.func.isRequired
-    },
-
-    contextTypes: {
-        muiTheme: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],

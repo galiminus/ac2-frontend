@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 
@@ -21,9 +21,7 @@ import randomColor from 'utils/random-color';
 
 const CurrentUserMenu = React.createClass({
     propTypes: {
-        clearTokens: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired
+        clearTokens: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -52,19 +50,19 @@ const CurrentUserMenu = React.createClass({
                         }}
                     >
                         <Avatar
-                            backgroundColor={randomColor(this.props.currentUserPage.title)}
+                            backgroundColor={randomColor(this.context.currentUserPage.title)}
                         >
-                            {this.props.currentUserPage.title[0]}
+                            {this.context.currentUserPage.title[0]}
                         </Avatar>
                     </IconButton>
                 }
             >
                 <Link
-                    to={`/profiles/${this.props.currentUserPage.slug}`}
+                    to={`/profiles/${this.context.currentUserPage.slug}`}
                     style={linkStyle}
                 >
                     <MenuItem
-                        primaryText={this.props.translation.t('links.currentUserPage')}
+                        primaryText={this.context.translation.t('links.currentUserPage')}
                         rightIcon={<AccountIcon />}
                     />
                 </Link>
@@ -72,7 +70,7 @@ const CurrentUserMenu = React.createClass({
                     style={linkStyle}
                 >
                     <MenuItem
-                        primaryText={this.props.translation.t('links.messages')}
+                        primaryText={this.context.translation.t('links.messages')}
                         rightIcon={<MessagesIcon />}
                     />
                 </Link>
@@ -80,7 +78,7 @@ const CurrentUserMenu = React.createClass({
                     style={linkStyle}
                 >
                     <MenuItem
-                        primaryText={this.props.translation.t('links.settings')}
+                        primaryText={this.context.translation.t('links.settings')}
                         rightIcon={<SettingsIcon />}
                     />
                 </Link>
@@ -88,7 +86,7 @@ const CurrentUserMenu = React.createClass({
                 <MenuItem
                     style={{ cursor: 'pointer' }}
                     onTouchTap={this.handleClearToken}
-                    primaryText={this.props.translation.t(`actions.disconnect`)}
+                    primaryText={this.context.translation.t(`actions.disconnect`)}
                 />
             </IconMenu>
         );

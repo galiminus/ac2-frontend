@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { Link } from 'react-router';
 
@@ -11,7 +11,6 @@ import PageCardTitle from 'components/pages/page-card-title';
 const EventBanner = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         style: PropTypes.object
     },
 
@@ -31,7 +30,7 @@ const EventBanner = React.createClass({
                 </CardMedia>
                 <CardActions style={{ textAlign: 'right' }}>
                     <Link to={`/${this.props.page.slug}/profile`}>
-                        <FlatButton label={this.props.translation.t('labels.about')} />
+                        <FlatButton label={this.context.translation.t('labels.about')} />
                     </Link>
                 </CardActions>
             </Card>

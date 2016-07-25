@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 
 import { Link } from 'react-router';
@@ -18,7 +18,6 @@ function mapStateToProps(state) {
 
 const SettingsMenu = React.createClass({
     propTypes: {
-        translation: PropTypes.object.isRequired,
         properties: PropTypes.object.isRequired
     },
 
@@ -40,7 +39,7 @@ const SettingsMenu = React.createClass({
                         return (
                             <Link to={`/settings/${category}`} style={{ textDecoration: 'none' }} key={category}>
                                 <MenuItem
-                                    primaryText={this.props.translation.t(`settings.${category}`)}
+                                    primaryText={this.context.translation.t(`settings.${category}`)}
                                 />
                             </Link>
                         );

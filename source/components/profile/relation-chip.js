@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import Immutable from 'immutable';
 
@@ -43,7 +43,6 @@ const RelationChip = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
         currentUserPage: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         relationshipStatus: PropTypes.array.isRequired,
         relationships: PropTypes.object,
         addResource: PropTypes.func.isRequired,
@@ -124,7 +123,7 @@ const RelationChip = React.createClass({
                 iconButtonElement={
                     <Chip>
                         <Avatar icon={<RelationshipIcon />} />
-                        {this.props.translation.t(`labels.relationships.${relationship ? relationship.value : 'none'}`)}
+                        {this.context.translation.t(`labels.relationships.${relationship ? relationship.value : 'none'}`)}
                     </Chip>
                 }
             >
@@ -135,7 +134,7 @@ const RelationChip = React.createClass({
                                 key={value}
                                 style={{ cursor: 'pointer' }}
                                 onTouchTap={() => this.handleRelationshipChange(relationship, value)}
-                                primaryText={this.props.translation.t(`labels.relationships.${value}`)}
+                                primaryText={this.context.translation.t(`labels.relationships.${value}`)}
                             />
                         );
                     })

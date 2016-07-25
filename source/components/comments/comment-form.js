@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 import { batchActions } from 'redux-batched-actions';
 
 import TextField from 'material-ui/TextField';
@@ -25,8 +25,6 @@ const CommentForm = React.createClass({
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         messageId: PropTypes.string.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
@@ -60,7 +58,7 @@ const CommentForm = React.createClass({
         return (
             <List>
                 <ListItem
-                    leftAvatar={<PageAvatar page={this.props.currentUserPage} />}
+                    leftAvatar={<PageAvatar page={this.context.currentUserPage} />}
                     disabled
                     innerDivStyle={{
                         paddingTop: 0,
@@ -72,7 +70,7 @@ const CommentForm = React.createClass({
                             style={{ fontSize: '1em' }}
                             fullWidth
                             type="text"
-                            hintText={this.props.translation.t('labels.comment')}
+                            hintText={this.context.translation.t('labels.comment')}
                             value={body.value}
                             onChange={body.onChange}
                         />

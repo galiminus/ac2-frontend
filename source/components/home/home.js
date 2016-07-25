@@ -16,18 +16,13 @@ const Home = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
         leftNav: PropTypes.bool.isRequired,
-        children: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired
+        children: PropTypes.object.isRequired
     },
 
     render() {
         return (
             <div styleName="home">
-                <HeaderBar
-                    currentUserPage={this.props.currentUserPage}
-                    translation={this.props.translation}
-                />
+                <HeaderBar />
 
                 <Drawer
                     docked={false}
@@ -35,40 +30,25 @@ const Home = React.createClass({
                     onRequestChange={this.props.toggleLeftNav}
                 >
                     <div>
-                        <Navigation
-                            currentUserPage={this.props.currentUserPage}
-                            translation={this.props.translation}
-                        />
-                        <AdditionalLinksContainer
-                            translation={this.props.translation}
-                        />
+                        <Navigation />
+                        <AdditionalLinksContainer />
                     </div>
                 </Drawer>
 
                 <div styleName="flexLayout">
                     <div styleName="leftNav">
-                        <Navigation
-                            currentUserPage={this.props.currentUserPage}
-                            translation={this.props.translation}
-                        />
-                        <AdditionalLinksContainer
-                            translation={this.props.translation}
-                        />
+                        <Navigation />
+                        <AdditionalLinksContainer />
                     </div>
                     <div styleName="mainContent">
-                        {
-                            React.cloneElement(this.props.children, {
-                                translation: this.props.translation,
-                                currentUserPage: this.props.currentUserPage
-                            })
-                        }
+                        {this.props.children}
                     </div>
                     <Paper styleName="messagePanel">
 
                     </Paper>
                 </div>
 
-                <Notifier translation={this.props.translation} />
+                <Notifier />
             </div>
         );
     }

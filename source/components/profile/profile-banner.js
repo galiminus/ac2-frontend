@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { Link } from 'react-router';
 
@@ -15,8 +15,7 @@ import RelationChip from './relation-chip';
 
 const ProfileBanner = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired
+        page: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -29,7 +28,6 @@ const ProfileBanner = React.createClass({
                         <PageCardTitle page={this.props.page} titleColor="#fff">
                             <RelationChip
                                 page={this.props.page}
-                                translation={this.props.translation}
                             />
                         </PageCardTitle>
                     }
@@ -38,7 +36,7 @@ const ProfileBanner = React.createClass({
                 </CardMedia>
                 <CardActions styleName="card-actions">
                     <Link to={`/profiles/${this.props.page.slug}`}>
-                        <FlatButton label={this.props.translation.t('labels.about')} />
+                        <FlatButton label={this.context.translation.t('labels.about')} />
                     </Link>
                 </CardActions>
             </Card>

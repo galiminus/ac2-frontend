@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
@@ -19,7 +19,6 @@ const Dictionnary = React.createClass({
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         record: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
         onChange: PropTypes.func.isRequired
@@ -82,7 +81,6 @@ const Dictionnary = React.createClass({
                     itemValue={this.props.record[field]}
                     onChange={(itemKey, itemValue) => this.handleItemChange(field, itemKey, itemValue)}
                     onDestroy={() => this.handleItemDestroy(field)}
-                    translation={this.props.translation}
                     editable={this.props.editable}
                 />
             );
@@ -91,7 +89,7 @@ const Dictionnary = React.createClass({
             <List>
                 <Subheader>{this.props.title}</Subheader>
                 <ListItem
-                    primaryText={this.props.translation.t('forms.dictionnary.add')}
+                    primaryText={this.context.translation.t('forms.dictionnary.add')}
                     rightIcon={<AddIcon />}
                     onTouchTap={this.handleOpenAddDialog}
                 />
@@ -100,7 +98,6 @@ const Dictionnary = React.createClass({
                     open={this.state.addDialogOpen}
                     onRequestClose={this.handleRequestClose}
                     onCreate={this.handleItemCreate}
-                    translation={this.props.translation}
                 />
             </List>
         );

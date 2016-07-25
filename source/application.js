@@ -74,7 +74,8 @@ const Application = React.createClass({
     },
 
     childContextTypes: {
-        muiTheme: React.PropTypes.object
+        muiTheme: React.PropTypes.object,
+        settings: React.PropTypes.object
     },
 
     mixins: [PureRenderMixin],
@@ -94,7 +95,8 @@ const Application = React.createClass({
                 spacing: Spacing,
                 fontFamily: 'Roboto, sans-serif',
                 palette
-            })
+            }),
+            settings: this.props.settings
         };
     },
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
@@ -23,13 +23,11 @@ const Comment = React.createClass({
     propTypes: {
         sender: PropTypes.object.isRequired,
         comment: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
         likes: PropTypes.object.isRequired,
         commentEditModalOpen: PropTypes.bool.isRequired,
         onLikeDestroy: PropTypes.func.isRequired,
         onLikeCreate: PropTypes.func.isRequired,
         onCommentDestroy: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
         myLike: PropTypes.object,
         onOpenCommentEditModal: PropTypes.func,
         onCommentReport: PropTypes.func,
@@ -94,20 +92,23 @@ const Comment = React.createClass({
                                     {this.props.comment.permissions.update &&
                                         <MenuItem
                                             leftIcon={<EditIcon />}
-                                            primaryText={this.props.translation.t('actions.edit')}
+                                            style={{ cursor: 'pointer' }}
+                                            primaryText={this.context.translation.t('actions.edit')}
                                             onClick={this.props.onOpenCommentEditModal}
                                         />
                                     }
                                     {this.props.comment.permissions.destroy &&
                                         <MenuItem
                                             leftIcon={<DeleteIcon />}
-                                            primaryText={this.props.translation.t('actions.destroy')}
+                                            style={{ cursor: 'pointer' }}
+                                            primaryText={this.context.translation.t('actions.destroy')}
                                             onClick={this.props.onCommentDestroy}
                                         />
                                     }
                                     <MenuItem
                                         leftIcon={<ReportIcon />}
-                                        primaryText={this.props.translation.t('actions.report')}
+                                        style={{ cursor: 'pointer' }}
+                                        primaryText={this.context.translation.t('actions.report')}
                                         onClick={this.props.onCommentReport}
                                     />
                                 </IconMenu>
@@ -122,7 +123,6 @@ const Comment = React.createClass({
                         initialValues={this.props.comment.data}
                         id={this.props.comment.id}
                         formKey={this.props.comment.id}
-                        translation={this.props.translation}
                     />
                 </div>
             );

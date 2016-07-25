@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { updatePath } from 'redux-simple-router';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import CSSModules from 'react-css-modules';
 import styles from './recover-form.css';
@@ -37,7 +37,6 @@ const RecoverForm = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
@@ -56,13 +55,13 @@ const RecoverForm = React.createClass({
                     type="email"
                     value={email.value}
                     onChange={email.onChange}
-                    hintText={this.props.translation.t('labels.recover.email')}
+                    hintText={this.context.translation.t('labels.recover.email')}
                 />
                 <div styleName="actionButtons">
                     <RaisedButton
                         disabled={email.invalid}
                         type="submit"
-                        label={this.props.translation.t('actions.continue')}
+                        label={this.context.translation.t('actions.continue')}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />

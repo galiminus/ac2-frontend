@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import List from 'material-ui/List';
 import { Card, CardHeader } from 'material-ui/Card';
@@ -17,7 +17,6 @@ const ObjectField = React.createClass({
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         record: PropTypes.object,
-        translation: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
         onChange: PropTypes.func.isRequired,
@@ -43,13 +42,12 @@ const ObjectField = React.createClass({
             fields.push(
                 <Field
                     label={this.props.label}
-                    title={this.props.translation.t(`${this.props.label}.${field}`)}
+                    title={this.context.translation.t(`${this.props.label}.${field}`)}
                     record={(this.props.record || {})[field]}
                     schema={this.props.schema.properties[field]}
                     key={field}
                     onChange={(record) => this.handleChange(field, record)}
                     editable={this.props.editable}
-                    translation={this.props.translation}
                     depth={this.props.depth}
                 />
             );

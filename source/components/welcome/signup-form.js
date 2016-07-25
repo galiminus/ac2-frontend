@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { updatePath } from 'redux-simple-router';
 import { dispatch } from 'store';
@@ -80,7 +80,6 @@ const SignupForm = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
@@ -99,40 +98,40 @@ const SignupForm = React.createClass({
                     type="text"
                     value={fullName.value}
                     onChange={fullName.onChange}
-                    hintText={this.props.translation.t('labels.signup.fullName')}
+                    hintText={this.context.translation.t('labels.signup.fullName')}
                 />
                 <TextField
                     fullWidth
                     type="text"
                     value={userName.value}
                     onChange={userName.onChange}
-                    hintText={this.props.translation.t('labels.signup.userName')}
+                    hintText={this.context.translation.t('labels.signup.userName')}
                 />
                 <TextField
                     fullWidth
                     type="email"
                     value={email.value}
                     onChange={email.onChange}
-                    hintText={this.props.translation.t('labels.signup.email')}
+                    hintText={this.context.translation.t('labels.signup.email')}
                 />
                 <TextField
                     fullWidth
                     type="password"
                     value={password.value}
                     onChange={password.onChange}
-                    hintText={this.props.translation.t('labels.signup.password')}
+                    hintText={this.context.translation.t('labels.signup.password')}
                 />
                 <div styleName="actionButtons">
                     <RaisedButton
                         disabled={fullName.invalid || userName.invalid || email.invalid || password.invalid}
                         type="submit"
-                        label={this.props.translation.t('actions.signup')}
+                        label={this.context.translation.t('actions.signup')}
                         secondary
                         onClick={handleSubmit(signup)}
                     />
                     <Link to="/welcome/login">
                         <FlatButton
-                            label={this.props.translation.t('labels.have_account')}
+                            label={this.context.translation.t('labels.have_account')}
                         />
                     </Link>
                 </div>

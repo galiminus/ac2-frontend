@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { batchActions } from 'redux-batched-actions';
 
@@ -27,7 +27,6 @@ const MessageDialog = React.createClass({
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         onRequestClose: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
         error: PropTypes.string,
         id: PropTypes.string
     },
@@ -98,13 +97,13 @@ const MessageDialog = React.createClass({
                 }
                 actions={[
                     <FlatButton
-                        label={this.props.translation.t('actions.cancel')}
+                        label={this.context.translation.t('actions.cancel')}
                         onClick={this.props.onRequestClose}
                     />,
                     <FlatButton
                         disabled={body.invalid}
                         type="submit"
-                        label={this.props.translation.t('actions.post')}
+                        label={this.context.translation.t('actions.post')}
                         secondary
                         onClick={handleSubmit(this.message)}
                     />

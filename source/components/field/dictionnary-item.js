@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import Dialog from 'material-ui/Dialog';
 import ListItem from 'material-ui/List/ListItem';
@@ -13,7 +13,6 @@ const DictionnaryItem = React.createClass({
         itemValue: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
         onDestroy: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired
     },
 
@@ -76,18 +75,18 @@ const DictionnaryItem = React.createClass({
                         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                             <div>
                                 <FlatButton
-                                    label={this.props.translation.t('actions.destroy')}
+                                    label={this.context.translation.t('actions.destroy')}
                                     onClick={this.handleDestroy}
                                 />
                             </div>
                             <div>
                                 <FlatButton
-                                    label={this.props.translation.t('actions.cancel')}
+                                    label={this.context.translation.t('actions.cancel')}
                                     onClick={this.handleRequestClose}
                                 />
                                 <FlatButton
                                     type="submit"
-                                    label={this.props.translation.t('actions.update')}
+                                    label={this.context.translation.t('actions.update')}
                                     onTouchTap={this.handleUpdate}
                                     secondary
                                 />
@@ -99,13 +98,13 @@ const DictionnaryItem = React.createClass({
                         fullWidth
                         value={this.state.itemKey}
                         onChange={this.handleItemKeyChange}
-                        floatingLabelText={this.props.translation.t('forms.dictionnary.key')}
+                        floatingLabelText={this.context.translation.t('forms.dictionnary.key')}
                     />
                     <TextField
                         fullWidth
                         value={this.state.itemValue}
                         onChange={this.handleItemValueChange}
-                        floatingLabelText={this.props.translation.t('forms.dictionnary.value')}
+                        floatingLabelText={this.context.translation.t('forms.dictionnary.value')}
                     />
                 </Dialog>
             </div>

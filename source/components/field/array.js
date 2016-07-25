@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import AddIcon from 'material-ui/svg-icons/content/add';
 
@@ -22,8 +22,7 @@ const ArrayField = React.createClass({
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
-        editable: PropTypes.bool.isRequired,
-        translation: PropTypes.object.isRequired
+        editable: PropTypes.bool.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -91,12 +90,12 @@ const ArrayField = React.createClass({
                 onRequestClose={this.handleRequestClose}
                 actions={[
                     <FlatButton
-                        label={this.props.translation.t('actions.cancel')}
+                        label={this.context.translation.t('actions.cancel')}
                         onClick={this.handleRequestClose}
                     />,
                     <FlatButton
                         type="submit"
-                        label={this.props.translation.t('actions.add')}
+                        label={this.context.translation.t('actions.add')}
                         onTouchTap={this.handleRequestAdd}
                         secondary
                     />
@@ -106,7 +105,7 @@ const ArrayField = React.createClass({
                     fullWidth
                     value={this.state.newItemValue}
                     onChange={this.handleItemValueChange}
-                    floatingLabelText={this.props.translation.t('forms.array.add')}
+                    floatingLabelText={this.context.translation.t('forms.array.add')}
                 />
             </Dialog>
         );
@@ -118,7 +117,7 @@ const ArrayField = React.createClass({
                 onTouchTap={this.handleOpenAddDialog}
             >
                 <Avatar icon={<AddIcon />} />
-                {this.props.translation.t('forms.array.add')}
+                {this.context.translation.t('forms.array.add')}
             </SelectableChip>
         );
     },

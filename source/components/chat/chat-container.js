@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
@@ -19,8 +19,7 @@ function mapStateToProps(state) {
 const ChatContainer = React.createClass({
     propTypes: {
         currentUserPage: PropTypes.object.isRequired,
-        recipients: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired
+        recipients: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],

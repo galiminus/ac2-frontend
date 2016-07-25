@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { dispatch } from 'store';
 import { updatePath } from 'redux-simple-router';
@@ -51,7 +51,6 @@ const LoginForm = React.createClass({
     propTypes: {
         fields: PropTypes.object.isRequired,
         handleSubmit: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
         error: PropTypes.string
     },
 
@@ -70,26 +69,26 @@ const LoginForm = React.createClass({
                     type="email"
                     value={email.value}
                     onChange={email.onChange}
-                    hintText={this.props.translation.t('labels.login.email')}
+                    hintText={this.context.translation.t('labels.login.email')}
                 />
                 <TextField
                     fullWidth
                     type="password"
                     value={password.value}
                     onChange={password.onChange}
-                    hintText={this.props.translation.t('labels.login.password')}
+                    hintText={this.context.translation.t('labels.login.password')}
                 />
                 <div styleName="actionButtons">
                     <RaisedButton
                         disabled={email.invalid || password.invalid}
                         type="submit"
-                        label={this.props.translation.t('actions.login')}
+                        label={this.context.translation.t('actions.login')}
                         secondary
                         onClick={handleSubmit(authenticate)}
                     />
                     <Link to="/welcome/signup">
                         <FlatButton
-                            label={this.props.translation.t('labels.signup.signup')}
+                            label={this.context.translation.t('labels.signup.signup')}
                         />
                     </Link>
                 </div>
@@ -98,7 +97,7 @@ const LoginForm = React.createClass({
                     <Link to="/welcome/recover">
                         <FlatButton
                             labelStyle={{ fontSize: 12, color: '#999' }}
-                            label={this.props.translation.t('labels.recover')}
+                            label={this.context.translation.t('labels.recover')}
                             secondary={false}
                         />
                     </Link>

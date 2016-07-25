@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import CSSModules from 'react-css-modules';
 import styles from './events.css';
@@ -13,7 +13,6 @@ import Loader from 'components/loader';
 const Events = React.createClass({
     propTypes: {
         resources: PropTypes.object,
-        translation: PropTypes.object.isRequired,
         onLoadMore: PropTypes.func.isRequired,
         hasMore: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired
@@ -28,8 +27,6 @@ const Events = React.createClass({
                     <EventBanner
                         key={page.id}
                         page={page}
-                        translation={this.props.translation}
-                        compact
                     />
                 );
             })

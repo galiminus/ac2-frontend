@@ -3,7 +3,7 @@ export default function (state = null, action) {
     case 'CURRENT_USER_SET':
         return action.id;
 
-    case 'TOKENS_CLEAR':
+    case 'TOKEN_CLEAR':
         return null;
 
     default:

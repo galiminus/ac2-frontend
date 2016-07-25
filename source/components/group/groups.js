@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import CSSModules from 'react-css-modules';
 import styles from './groups.css';
@@ -12,7 +12,6 @@ import Loader from 'components/loader';
 const Groups = React.createClass({
     propTypes: {
         resources: PropTypes.object,
-        translation: PropTypes.object.isRequired,
         onLoadMore: PropTypes.func.isRequired,
         hasMore: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired

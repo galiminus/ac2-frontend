@@ -43,6 +43,18 @@ const HomeContainer = React.createClass({
         currentUser: PropTypes.object
     },
 
+    childContextTypes: {
+        currentUserPage: React.PropTypes.object,
+        translation: React.PropTypes.object
+    },
+
+    getChildContext() {
+        return ({
+            currentUserPage: this.props.currentUserPage,
+            translation: this.props.translation
+        });
+    },
+
     componentDidMount() {
         api.users.me({ include: 'page,page.relationships' })
             .then(
@@ -97,7 +109,6 @@ const HomeContainer = React.createClass({
             return (
                 <DisconnectedModal
                     isDisconnected={!this.props.currentToken}
-                    translation={this.props.translation}
                 />
             );
         }
@@ -109,7 +120,6 @@ const HomeContainer = React.createClass({
                 leftNav={this.props.leftNav}
                 isDisconnected={!this.props.currentToken}
                 currentUserPage={this.props.currentUserPage}
-                translation={this.props.translation}
             />
         );
     }

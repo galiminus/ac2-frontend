@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import actionCreators from 'action-creators';
 
@@ -21,8 +21,6 @@ const Comments = React.createClass({
         messageId: PropTypes.string.isRequired,
         comments: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object,
         parentId: PropTypes.string,
         load: PropTypes.bool
     },
@@ -41,8 +39,6 @@ const Comments = React.createClass({
                             <CommentContainer
                                 key={comment.id}
                                 comment={comment}
-                                currentUserPage={this.props.currentUserPage}
-                                translation={this.props.translation}
                             />
                         );
                     })}
@@ -58,8 +54,6 @@ const Comments = React.createClass({
                     style={{ padding: '0 26px' }}
                     messageId={this.props.messageId}
                     formKey={this.props.messageId}
-                    currentUserPage={this.props.currentUserPage}
-                    translation={this.props.translation}
                 />
             </aside>
         );

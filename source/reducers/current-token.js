@@ -3,7 +3,7 @@ export default function (state = null, action) {
     case 'CURRENT_TOKEN_SET':
         return action.accessToken;
 
-    case 'TOKENS_CLEAR':
+    case 'TOKEN_CLEAR':
         return null;
 
     default:

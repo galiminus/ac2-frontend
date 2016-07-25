@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
@@ -10,7 +10,6 @@ import MessagesContainer from 'components/messages/messages-container';
 const ProfileMessages = React.createClass({
     propTypes: {
         resource: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         setTitle: PropTypes.func.isRequired
     },
 
@@ -23,7 +22,7 @@ const ProfileMessages = React.createClass({
     render() {
         return (
             <div>
-                <ProfileBanner page={this.props.resource} translation={this.props.translation} />
+                <ProfileBanner page={this.props.resource} />
                 <MessagesContainer {...this.props} filters={{ participant_id: this.props.resource.id }}/>
             </div>
         );

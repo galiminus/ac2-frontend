@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 
@@ -13,7 +13,6 @@ const Profile = React.createClass({
         resource: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
         setTitle: PropTypes.func.isRequired
     },
 
@@ -47,7 +46,6 @@ const Profile = React.createClass({
                 record={this.props.resource.data}
                 schema={this.props.schema.data}
                 editable={this.props.resource.permissions.update}
-                translation={this.props.translation}
                 onChange={this.onChange}
             />
         );

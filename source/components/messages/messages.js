@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import CSSModules from 'react-css-modules';
 import styles from './messages.css';
@@ -18,9 +18,7 @@ const Messages = React.createClass({
         onLoadMore: PropTypes.func.isRequired,
         hasMore: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
-        page: PropTypes.object,
-        translation: PropTypes.object.isRequired
+        page: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
@@ -43,8 +41,6 @@ const Messages = React.createClass({
                 <Message
                     key={message.id}
                     message={message}
-                    currentUserPage={this.props.currentUserPage}
-                    translation={this.props.translation}
                 />
             )
         );
@@ -70,9 +66,8 @@ const Messages = React.createClass({
                     modal={false}
                     open={this.state.messageCreationModalOpen}
                     onRequestClose={this.handleCloseMessageCreationModal}
-                    sender={this.props.currentUserPage}
+                    sender={this.context.currentUserPage}
                     recipient={this.props.page}
-                    translation={this.props.translation}
                 />
             </div>
         );

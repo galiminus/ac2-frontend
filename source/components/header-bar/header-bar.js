@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 
 import CSSModules from 'react-css-modules';
@@ -25,9 +25,7 @@ function mapStateToProps(state) {
 const HeaderBar = React.createClass({
     propTypes: {
         toggleLeftNav: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired,
-        canUpdateSettings: PropTypes.bool.isRequired,
-        currentUserPage: PropTypes.object
+        canUpdateSettings: PropTypes.bool.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -51,12 +49,12 @@ const HeaderBar = React.createClass({
                     <ToolbarSeparator styleName="separator" />
 
                     <div styleName="title">
-                        <CurrentPageTitle translation={this.props.translation} />
+                        <CurrentPageTitle />
                     </div>
 
                     <div styleName="searchField">
                         <AutoComplete
-                            hintText={this.props.translation.t('labels.search')}
+                            hintText={this.context.translation.t('labels.search')}
                             dataSource={[]}
                             fullWidth
                             hintStyle={{ color: 'rgba(255, 255, 255, 0.8)' }}
@@ -67,14 +65,9 @@ const HeaderBar = React.createClass({
                 </ToolbarGroup>
                 <ToolbarGroup key={2} styleName="right">
                     {this.props.canUpdateSettings &&
-                        <SettingsMenu
-                            translation={this.props.translation}
-                        />
+                        <SettingsMenu />
                     }
-                    <CurrentUserMenu
-                        currentUserPage={this.props.currentUserPage}
-                        translation={this.props.translation}
-                    />
+                    <CurrentUserMenu />
                 </ToolbarGroup>
             </Toolbar>
         );

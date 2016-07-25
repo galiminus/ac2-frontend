@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
@@ -26,7 +26,6 @@ function mapStateToProps(state, props) {
 const PageForm = React.createClass({
     propTypes: {
         location: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired
     },
@@ -62,7 +61,6 @@ const PageForm = React.createClass({
                 editable
                 label="profile"
                 schema={this.props.schema.data}
-                translation={this.props.translation}
                 onChange={this.handleChange}
                 record={this.state.record.toJS()}
             />

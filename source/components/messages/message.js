@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 
@@ -46,9 +46,7 @@ const Message = React.createClass({
         message: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
         likes: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         pushNotification: PropTypes.func.isRequired
     },
 
@@ -151,7 +149,7 @@ const Message = React.createClass({
                                     <MenuItem
                                         leftIcon={<EditIcon />}
                                         style={{ cursor: 'pointer' }}
-                                        primaryText={this.props.translation.t('actions.edit')}
+                                        primaryText={this.context.translation.t('actions.edit')}
                                         onTouchTap={this.handleOpenMessageEditModal}
                                     />
                             }
@@ -161,14 +159,14 @@ const Message = React.createClass({
                                     <MenuItem
                                         leftIcon={<DeleteIcon />}
                                         style={{ cursor: 'pointer' }}
-                                        primaryText={this.props.translation.t('actions.destroy')}
+                                        primaryText={this.context.translation.t('actions.destroy')}
                                         onTouchTap={this.handleMessageDestroy}
                                     />
                             }
                             <MenuItem
                                 leftIcon={<ReportIcon />}
                                 style={{ cursor: 'pointer' }}
-                                primaryText={this.props.translation.t('actions.report')}
+                                primaryText={this.context.translation.t('actions.report')}
                                 onTouchTap={this.handleMessageReport}
                             />
 
@@ -178,12 +176,11 @@ const Message = React.createClass({
                         modal={false}
                         open={this.state.messageEditModalOpen}
                         onRequestClose={this.handleCloseMessageEditModal}
-                        sender={this.props.currentUserPage}
+                        sender={this.context.currentUserPage}
                         recipient={this.props.recipient}
                         initialValues={this.props.message.data}
                         id={this.props.message.id}
                         formKey={this.props.message.id}
-                        translation={this.props.translation}
                     />
                 </PageCardHeader>
                 <Divider inset />
@@ -193,8 +190,6 @@ const Message = React.createClass({
                 <Comments
                     messageId={this.props.message.id}
                     parentId={null}
-                    currentUserPage={this.props.currentUserPage}
-                    translation={this.props.translation}
                 />
             </Card>
         );

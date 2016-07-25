@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 
@@ -19,7 +19,6 @@ const Settings = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired,
         settings: PropTypes.object.isRequired,
-        translation: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         setTitle: PropTypes.func.isRequired,
         schema: PropTypes.object.isRequired
@@ -32,7 +31,7 @@ const Settings = React.createClass({
     },
 
     componentWillMount() {
-        this.props.setTitle(this.props.translation.t('links.settings'));
+        this.props.setTitle(this.context.translation.t('links.settings'));
     },
 
     handleChange(data) {
@@ -55,7 +54,6 @@ const Settings = React.createClass({
                 schema={this.props.schema.data}
                 editable={this.props.settings.permissions.update}
                 loading={this.state.loading}
-                translation={this.props.translation}
                 onChange={this.handleChange}
                 only={[this.props.params.category]}
             />

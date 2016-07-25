@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 import { Snackbar } from 'material-ui';
@@ -15,8 +15,7 @@ function mapStateToProps(state) {
 const Notifier = React.createClass({
     propTypes: {
         notification: PropTypes.object.isRequired,
-        clearNotifications: PropTypes.func.isRequired,
-        translation: PropTypes.object.isRequired
+        clearNotifications: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -36,7 +35,7 @@ const Notifier = React.createClass({
             fontFamily: 'Roboto, sans-serif'
         };
 
-        const message = this.props.notification.message ? this.props.translation.t(`errors.${this.props.notification.message}`) : '';
+        const message = this.props.notification.message ? this.context.translation.t(`errors.${this.props.notification.message}`) : '';
         return (
             <Snackbar
                 message={message}
