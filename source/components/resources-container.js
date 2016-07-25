@@ -50,7 +50,9 @@ const ResourcesContainer = React.createClass({
         const query = {};
 
         for (const filter of Object.keys(this.props.filters)) {
-            query[`filter[${filter}]`] = this.props.filters[filter];
+            if (this.props.filters[filter]) {
+                query[`filter[${filter}]`] = this.props.filters[filter];
+            }
         }
         query['page[number]'] = pageNum;
         query['page[size]'] = 20;

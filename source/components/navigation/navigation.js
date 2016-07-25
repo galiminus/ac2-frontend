@@ -40,22 +40,18 @@ const Navigation = React.createClass({
                             leftIcon={<EventsIcon />}
                         />
                     </Link>
-                    {false &&
-                        <Link to="/quizz">
-                            <ListItem
-                                primaryText={this.props.translation.t('links.quizz')}
-                                leftIcon={<QuizzIcon />}
-                            />
-                        </Link>
-                    }
-                    {false &&
-                        <Link to="/polls">
-                            <ListItem
-                                primaryText={this.props.translation.t('links.polls')}
-                                leftIcon={<PollsIcon />}
-                            />
-                        </Link>
-                    }
+                    <Link to="/quizz">
+                        <ListItem
+                            primaryText={this.props.translation.t('links.quizz')}
+                            leftIcon={<QuizzIcon />}
+                        />
+                    </Link>
+                    <Link to="/polls">
+                        <ListItem
+                            primaryText={this.props.translation.t('links.polls')}
+                            leftIcon={<PollsIcon />}
+                        />
+                    </Link>
                     <Link to="/groups">
                         <ListItem
                             primaryText={this.props.translation.t('links.groups')}

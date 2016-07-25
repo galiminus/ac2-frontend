@@ -25,6 +25,8 @@ import SignupForm from 'components/welcome/signup-form';
 import RecoverForm from 'components/welcome/recover-form';
 
 import MainPage from 'components/pages/main-page';
+import QuizzPage from 'components/pages/quizz-page';
+import PollsPage from 'components/pages/polls-page';
 import ProfileMessagesPage from 'components/pages/profile-messages-page';
 
 import ProfilePage from 'components/pages/profile-page';
@@ -127,11 +129,15 @@ const Application = React.createClass({
                     <IndexRoute component={MainPage} />
                     <Route path="/messages/:pageId" component={ProfileMessagesPage} />
 
+                    <Route path="quizz" component={QuizzPage} />
+                    <Route path="polls" component={PollsPage} />
+
                     <Route path="pages/new" component={PageForm} />
 
                     <Route path="members" component={ProfilePages} />
                     <Route path="events" component={EventPages} />
                     <Route path="groups" component={GroupPages} />
+
                     <Route path="settings/:category" component={Settings} />
 
                     <Route path="/profiles/:resourceId" component={ProfilePage} />
