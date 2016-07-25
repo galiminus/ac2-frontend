@@ -6,7 +6,7 @@ import styles from './profiles.css';
 
 import { Link } from 'react-router';
 
-import { Card, CardActions, CardMedia } from 'material-ui/Card';
+import { Card, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 import PageCardTitle from 'components/pages/page-card-title';
@@ -47,7 +47,11 @@ const Profiles = React.createClass({
                 hasMore={this.props.hasMore}
                 loadingMore={this.props.loadingMore}
                 translation={this.props.translation}
-                styles={styles}
+                style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between'
+                }}
             >
                 {this.renderProfiles()}
             </Loader>

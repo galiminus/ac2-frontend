@@ -43,7 +43,11 @@ const Events = React.createClass({
                     onLoadMore={this.props.onLoadMore}
                     hasMore={this.props.hasMore}
                     loadingMore={this.props.loadingMore}
-                    styles={styles}
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between'
+                    }}
                 >
                     {this.renderEvents()}
                 </Loader>

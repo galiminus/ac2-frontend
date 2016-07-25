@@ -91,31 +91,19 @@ const Comment = React.createClass({
                                     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                                     style={{ margin: '0px 0px 0px -10px' }}
                                 >
-                                    {
-                                        (() => {
-                                            if (this.props.comment.permissions.update) {
-                                                return (
-                                                    <MenuItem
-                                                        leftIcon={<EditIcon />}
-                                                        primaryText={this.props.translation.t('actions.edit')}
-                                                        onClick={this.props.onOpenCommentEditModal}
-                                                    />
-                                                );
-                                            }
-                                        })()
+                                    {this.props.comment.permissions.update &&
+                                        <MenuItem
+                                            leftIcon={<EditIcon />}
+                                            primaryText={this.props.translation.t('actions.edit')}
+                                            onClick={this.props.onOpenCommentEditModal}
+                                        />
                                     }
-                                    {
-                                        (() => {
-                                            if (this.props.comment.permissions.destroy) {
-                                                return (
-                                                    <MenuItem
-                                                        leftIcon={<DeleteIcon />}
-                                                        primaryText={this.props.translation.t('actions.destroy')}
-                                                        onClick={this.props.onCommentDestroy}
-                                                    />
-                                                );
-                                            }
-                                        })()
+                                    {this.props.comment.permissions.destroy &&
+                                        <MenuItem
+                                            leftIcon={<DeleteIcon />}
+                                            primaryText={this.props.translation.t('actions.destroy')}
+                                            onClick={this.props.onCommentDestroy}
+                                        />
                                     }
                                     <MenuItem
                                         leftIcon={<ReportIcon />}
