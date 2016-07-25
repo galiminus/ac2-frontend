@@ -15,21 +15,9 @@ import MenuItem from 'material-ui/MenuItem';
 
 import api from 'api';
 
-function mapStateToProps(state) {
-    let currentUser;
-    if (state.currentUser) {
-        currentUser = state.users.get(state.currentUser);
-    }
-
-    let currentUserPage;
-    if (currentUser) {
-        currentUserPage = state.pages.get(currentUser.page_id);
-    }
-    const relationships = state.relationshipsByProposer.get(currentUserPage.id);
-
+function mapStateToProps(state, props) {
     return {
-        currentUserPage,
-        relationships,
+        relationships: state.relationshipsByProposer.get(props.proposer.id),
         relationshipStatus: state.settings.data.profile.relationshipStatus
     };
 }
@@ -41,8 +29,8 @@ const defaultProps = {
 
 const RelationChip = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired,
-        currentUserPage: PropTypes.object.isRequired,
+        recipient: PropTypes.object.isRequired,
+        proposer: PropTypes.object.isRequired,
         relationshipStatus: PropTypes.array.isRequired,
         relationships: PropTypes.object,
         addResource: PropTypes.func.isRequired,
@@ -57,13 +45,13 @@ const RelationChip = React.createClass({
     },
 
     findRelationship() {
-        return this.props.relationships.find((relationship) => relationship.recipient_id === this.props.page.id);
+        return this.props.relationships.find((relationship) => relationship.recipient_id === this.props.recipient.id);
     },
 
     createRelationship(value) {
         return (
             api.relationships.create({
-                recipient_id: this.props.page.id,
+                recipient_id: this.props.recipient.id,
                 value
             })
         );
@@ -112,7 +100,7 @@ const RelationChip = React.createClass({
     render() {
         const relationship = this.findRelationship();
 
-        if (this.props.page.id === this.props.currentUserPage.id) {
+        if (this.props.recipient.id === this.props.proposer.id) {
             return (
                 <div />
             );

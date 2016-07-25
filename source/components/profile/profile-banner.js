@@ -27,7 +27,8 @@ const ProfileBanner = React.createClass({
                     overlay={
                         <PageCardTitle page={this.props.page} titleColor="#fff">
                             <RelationChip
-                                page={this.props.page}
+                                proposer={this.context.currentUserPage}
+                                recipient={this.props.page}
                             />
                         </PageCardTitle>
                     }
