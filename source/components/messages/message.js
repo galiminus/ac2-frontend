@@ -14,7 +14,6 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import ReportIcon from 'material-ui/svg-icons/content/report';
-import PlusOneIcon from 'material-ui/svg-icons/social/plus-one';
 
 import api from 'api';
 import actionCreators from 'action-creators';
@@ -24,6 +23,7 @@ import Comments from 'components/comments/comments';
 import Marked from 'components/marked/marked';
 import CreationDate from 'components/creation-date';
 import PlusCounter from 'components/plus-counter';
+import PlusButton from 'components/plus-button';
 
 import MessageDialog from './message-dialog';
 
@@ -131,18 +131,11 @@ const Message = React.createClass({
                     }
                 >
                     <div style={{ float: 'right' }}>
-                        <IconButton
-                            onClick={isLiked ? this.handleLikeDestroy : this.handleLikeCreate}
-                            iconStyle={{
-                                width: 16,
-                                height: 16,
-                                background: (isLiked ? '#999' : '#cacaca'),
-                                borderRadius: 24,
-                                padding: 4
-                            }}
-                        >
-                            <PlusOneIcon />
-                        </IconButton>
+                        <PlusButton
+                            onLike={this.handleLikeCreate}
+                            onUnlike={this.handleLikeDestroy}
+                            isSelected={isLiked}
+                        />
                         <IconMenu
                             iconButtonElement={
                                 <IconButton>

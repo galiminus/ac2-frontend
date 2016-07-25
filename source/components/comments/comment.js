@@ -3,7 +3,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import { ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
-import PlusOneIcon from 'material-ui/svg-icons/social/plus-one';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import ReportIcon from 'material-ui/svg-icons/content/report';
@@ -15,6 +14,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import PageAvatar from 'components/pages/page-avatar';
 import PageLink from 'components/pages/page-link';
 import PlusCounter from 'components/plus-counter';
+import PlusButton from 'components/plus-button';
 import Marked from 'components/marked/marked';
 import CreationDate from 'components/creation-date';
 import CommentDialog from './comment-dialog';
@@ -72,18 +72,11 @@ const Comment = React.createClass({
                         }
                         rightIconButton={
                             <div style={{ display: 'flex' }}>
-                                <IconButton
-                                    onClick={isLiked ? this.props.onLikeDestroy : this.props.onLikeCreate}
-                                    iconStyle={{
-                                        width: 16,
-                                        height: 16,
-                                        background: (isLiked ? '#999' : '#cacaca'),
-                                        borderRadius: 24,
-                                        padding: 4
-                                    }}
-                                >
-                                    <PlusOneIcon />
-                                </IconButton>
+                                <PlusButton
+                                    onLike={this.props.onLikeCreate}
+                                    onUnlike={this.props.onLikeDestroy}
+                                    isSelected={isLiked}
+                                />
                                 <IconMenu
                                     iconButtonElement={
                                         <IconButton>
