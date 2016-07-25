@@ -69,7 +69,8 @@ const ResourcesContainer = React.createClass({
                     this.setState({
                         ids: this.state.ids.concat(ids),
                         hasMore: !!response.links.last,
-                        loadingMore: false
+                        loadingMore: false,
+                        page: (!!response.links.last ? pageNum + 1 : pageNum)
                     });
                 },
                 () => {
@@ -79,10 +80,7 @@ const ResourcesContainer = React.createClass({
     },
 
     handleLoadMore() {
-        const nextPage = this.state.page + 1;
-
-        this.setState({ page: nextPage });
-        this.load(nextPage);
+        this.load(this.state.page);
     },
 
     render() {
