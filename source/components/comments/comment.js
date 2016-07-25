@@ -36,6 +36,10 @@ const Comment = React.createClass({
         onCloseCommentEditModal: PropTypes.func
     },
 
+    contextTypes: {
+        muiTheme: PropTypes.object.isRequired
+    },
+
     mixins: [PureRenderMixin],
 
     render() {
@@ -54,7 +58,7 @@ const Comment = React.createClass({
                                     style={{
                                         lineHeight: '26px',
                                         fontSize: 12,
-                                        color: '#999',
+                                        color: this.context.muiTheme.palette.accent3Color,
                                         textAlign: 'center',
                                         marginLeft: -8
                                     }}
@@ -80,7 +84,7 @@ const Comment = React.createClass({
                                 <IconMenu
                                     iconButtonElement={
                                         <IconButton>
-                                            <MoreVertIcon color="#999" />
+                                            <MoreVertIcon color={this.context.muiTheme.palette.accent3Color} />
                                         </IconButton>
                                     }
                                     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}

@@ -9,6 +9,10 @@ const AdditionalLinks = React.createClass({
         resources: PropTypes.object.isRequired
     },
 
+    contextTypes: {
+        muiTheme: PropTypes.object.isRequired
+    },
+
     mixins: [PureRenderMixin],
 
     render() {
@@ -20,6 +24,9 @@ const AdditionalLinks = React.createClass({
                             <li key={index}>
                                 <a
                                     target="_blank"
+                                    style={{
+                                        color: this.context.muiTheme.palette.accent3Color
+                                    }}
                                     href={`/statics/${page.slug}`}
                                 >
                                     {page.title}

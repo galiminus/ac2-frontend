@@ -8,13 +8,17 @@ const PageLink = React.createClass({
         page: PropTypes.object.isRequired
     },
 
+    contextTypes: {
+        muiTheme: PropTypes.object.isRequired
+    },
+
     render() {
         return (
             <Link
                 to={`/messages/${this.props.page.slug}`}
                 style={{
                     textDecoration: 'none',
-                    color: indigo600,
+                    color: this.context.muiTheme.palette.primary1Color,
                     padding: 0,
                     marginBottom: 2
                 }}

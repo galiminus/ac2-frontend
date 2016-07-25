@@ -21,6 +21,10 @@ const PlusCounter = React.createClass({
         style: PropTypes.object
     },
 
+    contextTypes: {
+        muiTheme: PropTypes.object.isRequired
+    },
+
     getInitialState() {
         return ({ plusListOpen: false });
     },
@@ -76,7 +80,7 @@ const PlusCounter = React.createClass({
                 style={{
                     fontSize: 12,
                     marginLeft: 8,
-                    color: '#666',
+                    color: this.context.muiTheme.palette.accent3Color,
                     fontWeight: 500
                 }}
             >
