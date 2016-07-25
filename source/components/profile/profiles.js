@@ -28,14 +28,10 @@ const Profiles = React.createClass({
             this.props.resources.valueSeq().map((page) => {
                 return (
                     <Card styleName="card" key={page.id}>
-                        <CardMedia
-                            overlay={<PageCardTitle page={page} />}
-                        >
-                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
-                        </CardMedia>
+                        <PageCardTitle page={page} titleColor="#333" />
                         <CardActions styleName="card-actions">
-                            <Link to={`/profiles/${page.slug}`}>
-                                <FlatButton label={this.props.translation.t('labels.about')} />
+                            <Link to={`/messages/${page.slug}`}>
+                                <FlatButton label={this.props.translation.t('labels.page')} />
                             </Link>
                         </CardActions>
                     </Card>

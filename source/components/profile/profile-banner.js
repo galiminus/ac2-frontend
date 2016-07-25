@@ -26,7 +26,7 @@ const ProfileBanner = React.createClass({
             <Card styleName="card">
                 <CardMedia
                     overlay={
-                        <PageCardTitle page={this.props.page}>
+                        <PageCardTitle page={this.props.page} titleColor="#fff">
                             <RelationChip
                                 page={this.props.page}
                                 translation={this.props.translation}

@@ -15,8 +15,6 @@ import QuizzIcon from 'material-ui/svg-icons/toggle/check-box';
 import PollsIcon from 'material-ui/svg-icons/social/poll';
 import GroupsIcon from 'material-ui/svg-icons/social/group';
 import MembersIcon from 'material-ui/svg-icons/action/language';
-import MessagesIcon from 'material-ui/svg-icons/communication/email';
-import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 const Navigation = React.createClass({
     propTypes: {
@@ -58,14 +56,12 @@ const Navigation = React.createClass({
                             />
                         </Link>
                     }
-                    {false &&
-                        <Link to="/groups">
-                            <ListItem
-                                primaryText={this.props.translation.t('links.groups')}
-                                leftIcon={<GroupsIcon />}
-                            />
-                        </Link>
-                    }
+                    <Link to="/groups">
+                        <ListItem
+                            primaryText={this.props.translation.t('links.groups')}
+                            leftIcon={<GroupsIcon />}
+                        />
+                    </Link>
                     <Link to="/members">
                         <ListItem
                             primaryText={this.props.translation.t('links.members')}
@@ -73,22 +69,6 @@ const Navigation = React.createClass({
                         />
                     </Link>
                     <Divider />
-                    {false &&
-                        <Link to="/messages">
-                            <ListItem
-                                primaryText={this.props.translation.t('links.messages')}
-                                leftIcon={<MessagesIcon />}
-                            />
-                        </Link>
-                    }
-                    {false &&
-                        <Link to="/settings">
-                            <ListItem
-                                primaryText={this.props.translation.t('links.settings')}
-                                leftIcon={<SettingsIcon />}
-                            />
-                        </Link>
-                    }
                 </List>
             </nav>
         );

@@ -14,6 +14,8 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import AccountIcon from 'material-ui/svg-icons/action/account-circle';
+import MessagesIcon from 'material-ui/svg-icons/communication/email';
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import randomColor from 'utils/random-color';
 
@@ -31,6 +33,10 @@ const CurrentUserMenu = React.createClass({
     },
 
     render() {
+        const linkStyle = {
+            textDecoration: 'none'
+        };
+
         return (
             <IconMenu
                 iconButtonElement={
@@ -54,12 +60,28 @@ const CurrentUserMenu = React.createClass({
                 }
             >
                 <Link
-                    to={`/${this.props.currentUserPage.slug}/profile`}
-                    style={{ textDecoration: 'none' }}
+                    to={`/profiles/${this.props.currentUserPage.slug}`}
+                    style={linkStyle}
                 >
                     <MenuItem
                         primaryText={this.props.translation.t('links.currentUserPage')}
                         rightIcon={<AccountIcon />}
+                    />
+                </Link>
+                <Link to="/messages"
+                    style={linkStyle}
+                >
+                    <MenuItem
+                        primaryText={this.props.translation.t('links.messages')}
+                        rightIcon={<MessagesIcon />}
+                    />
+                </Link>
+                <Link to="/settings"
+                    style={linkStyle}
+                >
+                    <MenuItem
+                        primaryText={this.props.translation.t('links.settings')}
+                        rightIcon={<SettingsIcon />}
                     />
                 </Link>
                 <Divider />

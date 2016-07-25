@@ -29,9 +29,9 @@ import ProfileMessagesPage from 'components/pages/profile-messages-page';
 
 import ProfilePage from 'components/pages/profile-page';
 import StaticPage from 'components/pages/static-page';
-// import ProfileEditPage from 'components/pages/profile-edit-page';
 import ProfilePages from 'components/pages/profile-pages';
 import EventPages from 'components/pages/event-pages';
+import GroupPages from 'components/pages/group-pages';
 import PageForm from 'components/pages/page-form';
 import Settings from 'components/settings';
 
@@ -115,9 +115,6 @@ const Application = React.createClass({
             return (this.router);
         }
 
-        // <Route path=":resourceId/edit" component={ProfileEditpage} />
-
-
         this.router = (
             <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
                 <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
@@ -134,6 +131,7 @@ const Application = React.createClass({
 
                     <Route path="members" component={ProfilePages} />
                     <Route path="events" component={EventPages} />
+                    <Route path="groups" component={GroupPages} />
                     <Route path="settings/:category" component={Settings} />
 
                     <Route path="/profiles/:resourceId" component={ProfilePage} />

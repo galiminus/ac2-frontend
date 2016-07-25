@@ -21,7 +21,6 @@ const Loader = React.createClass({
     mixins: [PureRenderMixin],
 
     render() {
-        console.log(this.props.children);
         return (
             <List styleName="loader">
                 {this.props.children}
