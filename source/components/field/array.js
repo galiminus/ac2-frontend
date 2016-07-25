@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import AddIcon from 'material-ui/svg-icons/content/add';
 
-import Chip from 'material-ui/Chip';
+import SelectableChip from 'components/selectable-chip';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import Avatar from 'material-ui/Avatar';
@@ -73,13 +73,12 @@ const ArrayField = React.createClass({
         return (
             (this.props.record).map((item, i) => {
                 return (
-                    <Chip
+                    <SelectableChip
                         key={i}
                         onRequestDelete={this.props.editable ? () => this.handleRequestDelete(i) : undefined}
-                        style={{ margin: '4px 4px 4px 0' }}
                     >
                         {item}
-                    </Chip>
+                    </SelectableChip>
                 );
             })
         );
@@ -115,13 +114,12 @@ const ArrayField = React.createClass({
 
     renderAddChip() {
         return (
-            <Chip
+            <SelectableChip
                 onTouchTap={this.handleOpenAddDialog}
-                style={{ margin: '4px 4px 4px 0' }}
             >
                 <Avatar icon={<AddIcon />} />
                 {this.props.translation.t('forms.array.add')}
-            </Chip>
+            </SelectableChip>
         );
     },
 

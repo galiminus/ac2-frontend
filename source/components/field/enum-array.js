@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import Chip from 'material-ui/Chip';
+import SelectableChip from 'components/selectable-chip';
 
 import ListItem from 'material-ui/List/ListItem';
 
@@ -44,16 +44,13 @@ const EnumField = React.createClass({
             this.props.schema.items.enum.map((possibleValue) => {
                 const isSelected = this.props.record.indexOf(possibleValue) >= 0;
                 return (
-                      <Chip
+                      <SelectableChip
                           key={possibleValue}
-                          style={{ margin: '4px 4px 4px 0', display: 'inline-block' }}
                           onTouchTap={this.props.editable ? () => this.handleTouchTap(possibleValue) : undefined}
-                          backgroundColor={
-                              isSelected ? '#999' : '#cacaca'
-                          }
+                          isSelected={isSelected}
                       >
                           {this.props.translation.t(`${this.props.label}.${possibleValue}`)}
-                      </Chip>
+                      </SelectableChip>
                 );
             })
         );
@@ -68,7 +65,7 @@ const EnumField = React.createClass({
                 primaryText={
                     <div>
                         {this.props.title}
-                        <div>
+                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {this.renderField()}
                         </div>
                     </div>
