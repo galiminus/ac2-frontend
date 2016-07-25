@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { indigo600 } from 'material-ui/styles/colors';
 
 import { Link } from 'react-router';
 

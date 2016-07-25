@@ -79,8 +79,7 @@ export default {
     },
 
     removeJSONAPIResource: (record) => {
-        const data = normalizeRecord(record);
-
+        const data = normalizeRecord(record).attributes;
         return (batchActions(
             typeToActions(data.type, 'REMOVE').map((type) => {
                 return ({ type, data });
