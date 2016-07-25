@@ -120,6 +120,7 @@ const RelationChip = React.createClass({
 
         return (
             <IconMenu
+                useLayerForClickAway
                 iconButtonElement={
                     <Chip>
                         <Avatar icon={<RelationshipIcon />} />

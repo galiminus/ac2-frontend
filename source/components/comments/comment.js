@@ -80,6 +80,7 @@ const Comment = React.createClass({
                                     isSelected={isLiked}
                                 />
                                 <IconMenu
+                                    useLayerForClickAway
                                     iconButtonElement={
                                         <IconButton>
                                             <MoreVertIcon color={this.context.muiTheme.palette.accent3Color} />

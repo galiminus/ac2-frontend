@@ -135,6 +135,7 @@ const Message = React.createClass({
                             isSelected={isLiked}
                         />
                         <IconMenu
+                            useLayerForClickAway
                             iconButtonElement={
                                 <IconButton>
                                     <MoreVertIcon />

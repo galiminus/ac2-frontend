@@ -37,6 +37,7 @@ const CurrentUserMenu = React.createClass({
 
         return (
             <IconMenu
+                useLayerForClickAway
                 iconButtonElement={
                     <IconButton
                         style={{

@@ -26,6 +26,7 @@ const SettingsMenu = React.createClass({
     render() {
         return (
             <IconMenu
+                useLayerForClickAway
                 iconButtonElement={
                     <IconButton style={{ height: 56 }}>
                         <SettingsIcon
