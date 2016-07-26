@@ -24,6 +24,9 @@ const QuizzPage = React.createClass({
                 filters={{
                     type: 'Message::Quizz'
                 }}
+                sort={[
+                    '-updated_at'
+                ]}
                 include={[
                     'received_likes',
                     'sender',

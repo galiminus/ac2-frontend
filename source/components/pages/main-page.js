@@ -21,6 +21,9 @@ const MainPage = React.createClass({
         return (
             <MessagesContainer
                 {...this.props}
+                sort={[
+                    '-updated_at'
+                ]}
                 include={[
                     'received_likes',
                     'sender',

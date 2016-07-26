@@ -4,7 +4,7 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import CSSModules from 'react-css-modules';
 import styles from './navigation.css';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';

@@ -6,7 +6,7 @@ import { updatePath } from 'redux-simple-router';
 import { dispatch } from 'store';
 import { batchActions } from 'redux-batched-actions';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 import CSSModules from 'react-css-modules';
 import styles from './signup-form.css';

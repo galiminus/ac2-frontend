@@ -3,7 +3,7 @@ import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';

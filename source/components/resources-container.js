@@ -8,6 +8,7 @@ import actionCreators from 'action-creators';
 
 const defaultProps = {
     filters: {},
+    sort: [],
     include: []
 };
 
@@ -20,8 +21,9 @@ const ResourcesContainer = React.createClass({
         resources: PropTypes.object.isRequired,
         storeName: PropTypes.string.isRequired,
         find: PropTypes.func.isRequired,
-        filters: PropTypes.object,
-        include: PropTypes.array,
+        filters: PropTypes.object.isRequired,
+        sort: PropTypes.array.isRequired,
+        include: PropTypes.array.isRequired,
         pushNotification: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         factory: PropTypes.func.isRequired
@@ -57,6 +59,7 @@ const ResourcesContainer = React.createClass({
         query['page[number]'] = pageNum;
         query['page[size]'] = 20;
         query.include = this.props.include.join(',');
+        query.sort = this.props.sort.join(',');
 
         this.setState({ loadingMore: true });
 

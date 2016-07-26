@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 import Dialog from 'material-ui/Dialog';
 import { List, ListItem } from 'material-ui/List';
@@ -59,11 +59,7 @@ const PlusCounter = React.createClass({
             this.props.likes.valueSeq().map((like) => {
                 const page = this.props.pages.get(like.page_id);
                 return (
-                    <Link
-                        style={{ textDecoration: 'none' }}
-                        to={`/${page.slug}`}
-                        key={like.page_id}
-                    >
+                    <Link to={`/${page.slug}`} key={like.page_id}>
                         <ListItem>
                             <PageAvatar page={page} />
                             {page.title}

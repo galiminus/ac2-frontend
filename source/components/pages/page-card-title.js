@@ -3,7 +3,7 @@ import PureRenderMixin from 'components/pure-render-mixin';
 
 import { CardTitle } from 'material-ui/Card';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 import PageAvatar from 'components/pages/page-avatar';
 
@@ -22,7 +22,7 @@ const PageCardTitle = React.createClass({
             <CardTitle
                 style={{ padding: '8px 16px', display: 'flex', justifyContent: 'space-between' }}
                 title={
-                    <Link to={`/profiles/${this.props.page.id}`} style={{ textDecoration: 'none', color: this.props.titleColor }}>
+                    <Link to={`/profiles/${this.props.page.id}`} onBlack>
                         <PageAvatar page={this.props.page} />
                         {this.props.page.title}
                     </Link>

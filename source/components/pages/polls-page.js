@@ -24,6 +24,9 @@ const PollsPage = React.createClass({
                 filters={{
                     type: 'Message::Polls'
                 }}
+                sort={[
+                    '-updated_at'
+                ]}
                 include={[
                     'received_likes',
                     'sender',

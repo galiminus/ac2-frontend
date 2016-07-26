@@ -5,7 +5,6 @@ import RefreshIndicator from 'material-ui/RefreshIndicator';
 import MoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import RefreshIcon from 'material-ui/svg-icons/navigation/refresh';
 
-import List from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 
 const defaultProps = {
@@ -52,9 +51,9 @@ const Loader = React.createClass({
 
         return (
             <div style={{ width: '100%', marginTop: (this.props.children.length === 0 ? '30%' : 0) }}>
-                <List style={this.props.style}>
+                <div style={this.props.style}>
                     {this.props.children}
-                </List>
+                </div>
                 <div style={{ textAlign: 'center' }}>
                     {noRecords &&
                         <div>
@@ -80,7 +79,7 @@ const Loader = React.createClass({
                             style={iconButtonStyle}
                             iconStyle={iconStyle}
                         >
-                            <MoreIcon />
+                            <MoreIcon color={this.context.muiTheme.palette.accent3Color} />
                         </IconButton>
                     }
                     {this.props.loadingMore &&

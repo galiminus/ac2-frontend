@@ -23,7 +23,23 @@ const ProfileMessages = React.createClass({
         return (
             <div>
                 <ProfileBanner page={this.props.resource} />
-                <MessagesContainer {...this.props} filters={{ participant_id: this.props.resource.id }}/>
+                <MessagesContainer
+                    {...this.props}
+                    sort={[
+                        '-updated_at'
+                    ]}
+                    filters={{
+                        participant_id: this.props.resource.id
+                    }}
+                    include={[
+                        'received_likes',
+                        'sender',
+                        'recipient',
+                        'comments',
+                        'comments.received_likes',
+                        'comments.received_likes.page'
+                    ]}
+                />
             </div>
         );
     }

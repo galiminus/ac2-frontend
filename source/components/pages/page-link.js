@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 const PageLink = React.createClass({
     propTypes: {
@@ -16,7 +16,6 @@ const PageLink = React.createClass({
             <Link
                 to={`/messages/${this.props.page.slug}`}
                 style={{
-                    textDecoration: 'none',
                     color: this.context.muiTheme.palette.primary1Color,
                     padding: 0,
                     marginBottom: 2

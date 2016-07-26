@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 import styles from './floating-action-button.css';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 import MaterialFloatingActionButton from 'material-ui/FloatingActionButton';
 

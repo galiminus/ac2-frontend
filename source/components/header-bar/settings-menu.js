@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
@@ -38,7 +38,7 @@ const SettingsMenu = React.createClass({
                 {
                     Object.keys(this.props.properties).map((category) => {
                         return (
-                            <Link to={`/settings/${category}`} style={{ textDecoration: 'none' }} key={category}>
+                            <Link to={`/settings/${category}`} key={category}>
                                 <MenuItem
                                     primaryText={this.context.translation.t(`settings.${category}`)}
                                 />

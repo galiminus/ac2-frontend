@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
 import CSSModules from 'react-css-modules';
 import styles from './profile-banner.css';

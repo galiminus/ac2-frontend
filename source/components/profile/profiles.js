@@ -4,12 +4,14 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import CSSModules from 'react-css-modules';
 import styles from './profiles.css';
 
-import { Link } from 'react-router';
+import Link from 'components/link';
 
-import { Card, CardActions } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import AccountIcon from 'material-ui/svg-icons/action/account-circle';
+import IconButton from 'material-ui/IconButton';
 
-import PageCardTitle from 'components/pages/page-card-title';
+import PageAvatar from 'components/pages/page-avatar';
+import { GridList, GridTile } from 'material-ui/GridList';
+
 import Loader from 'components/loader';
 
 const Profiles = React.createClass({
@@ -24,18 +26,29 @@ const Profiles = React.createClass({
 
     renderProfiles() {
         return (
-            this.props.resources.valueSeq().map((page) => {
-                return (
-                    <Card styleName="card" key={page.id}>
-                        <PageCardTitle page={page} titleColor="#333" />
-                        <CardActions styleName="card-actions">
-                            <Link to={`/messages/${page.slug}`}>
-                                <FlatButton label={this.context.translation.t('labels.page')} />
+            this.props.resources.valueSeq().map(page =>
+                <GridTile
+                    key={page.id}
+                    titleBackground="rgba(0, 0, 0, 0.9)"
+                    title={
+                        <Link to={`/messages/${page.slug}`} onBlack>
+                            <PageAvatar page={page} />
+                            {page.title}
+                        </Link>
+                    }
+                    actionIcon={
+                        <div>
+                            <Link to={`/profiles/${page.slug}`} onBlack>
+                                <IconButton>
+                                    <AccountIcon color="#fff" />
+                                </IconButton>
                             </Link>
-                        </CardActions>
-                    </Card>
-                );
-            })
+                        </div>
+                    }
+                >
+                    <img src="https://placeimg.com/640/480/any" />
+                </GridTile>
+            )
         );
     },
 
@@ -45,13 +58,12 @@ const Profiles = React.createClass({
                 onLoadMore={this.props.onLoadMore}
                 hasMore={this.props.hasMore}
                 loadingMore={this.props.loadingMore}
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'space-between'
-                }}
             >
-                {this.renderProfiles()}
+                <GridList
+                    style={{ marginTop: 20, marginBottom: 20 }}
+                >
+                    {this.renderProfiles()}
+                </GridList>
             </Loader>
         );
     }
