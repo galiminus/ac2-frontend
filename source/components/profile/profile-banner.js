@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 import PageCardTitle from 'components/pages/page-card-title';
 
-import RelationChip from './relation-chip';
+import RelationChip from 'components/relation-chip';
 
 const ProfileBanner = React.createClass({
     propTypes: {

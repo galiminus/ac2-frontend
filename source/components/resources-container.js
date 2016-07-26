@@ -87,9 +87,7 @@ const ResourcesContainer = React.createClass({
     },
 
     render() {
-        let resources = [];
-
-        resources = this.props.resources.reduce((accumulator, resource) => {
+        const resources = this.props.resources.reduce((accumulator, resource) => {
             return (accumulator.set(resource.id, resource));
         }, Immutable.Map({}))
         .filter((resource) => {
@@ -97,7 +95,6 @@ const ResourcesContainer = React.createClass({
         }).sort((resource1, resource2) => {
             return (this.state.ids.indexOf(resource1.id) > this.state.ids.indexOf(resource2.id) ? 1 : -1);
         });
-
         return (
             this.props.factory(
                 {

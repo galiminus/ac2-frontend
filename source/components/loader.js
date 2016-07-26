@@ -8,12 +8,12 @@ import RefreshIcon from 'material-ui/svg-icons/navigation/refresh';
 import IconButton from 'material-ui/IconButton';
 
 const defaultProps = {
-    style: {},
-    children: []
+    style: {}
 };
 
 const Loader = React.createClass({
     propTypes: {
+        resources: PropTypes.object.isRequired,
         loadingMore: PropTypes.bool.isRequired,
         children: PropTypes.node.isRequired,
         onLoadMore: PropTypes.func.isRequired,
@@ -48,10 +48,17 @@ const Loader = React.createClass({
             boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px'
         };
 
-        const noRecords = (this.props.children.size === 0 && !this.props.hasMore && !this.props.loadingMore);
+        const loadingStyle = {
+            marginTop: border / 2,
+            marginBottom: border / 2,
+            width: size,
+            display: 'inline-block'
+        };
+
+        const noRecords = (this.props.resources.size === 0 && !this.props.hasMore && !this.props.loadingMore);
 
         return (
-            <div style={{ width: '100%', marginTop: (this.props.children.size === 0 ? '30%' : 0) }}>
+            <div style={{ width: '100%', marginTop: (this.props.resources.size === 0 ? '30%' : 0) }}>
                 <div style={this.props.style}>
                     {this.props.children}
                 </div>
@@ -84,16 +91,7 @@ const Loader = React.createClass({
                         </IconButton>
                     }
                     {this.props.loadingMore &&
-                        <div
-                            style={{
-                                position: 'relative',
-                                marginLeft: 'auto',
-                                marginRight: 'auto',
-                                marginTop: border / 2,
-                                marginBottom: border / 2,
-                                width: size
-                            }}
-                        >
+                        <div style={loadingStyle}>
                             <RefreshIndicator
                                 size={size}
                                 top={0}

@@ -12,9 +12,6 @@ import Loader from 'components/loader';
 const Messages = React.createClass({
     propTypes: {
         resources: PropTypes.object.isRequired,
-        onLoadMore: PropTypes.func.isRequired,
-        hasMore: PropTypes.bool.isRequired,
-        loadingMore: PropTypes.bool.isRequired,
         page: PropTypes.object
     },
 
@@ -45,12 +42,8 @@ const Messages = React.createClass({
 
     render() {
         return (
-            <div>
-                <Loader
-                    onLoadMore={this.props.onLoadMore}
-                    hasMore={this.props.hasMore}
-                    loadingMore={this.props.loadingMore}
-                >
+            <div style={{ marginTop: (React.Children.count(this.props.children) === 0 ? '30%' : 0) }}>
+                <Loader {...this.props}>
                     {this.renderMessages()}
                 </Loader>
                 <FloatingActionButton

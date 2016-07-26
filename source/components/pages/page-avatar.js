@@ -26,7 +26,7 @@ const UserAvatar = React.createClass({
         return (
             <Avatar
                 backgroundColor={randomColor(this.props.page.title)}
-                style={{...style.root, ...this.props.style}}
+                style={{ ...style.root, ...this.props.style }}
             >
                 {this.props.page.title[0]}
             </Avatar>

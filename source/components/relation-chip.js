@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import actionCreators from 'action-creators';
 
 import Chip from 'material-ui/Chip';
-import Avatar from 'material-ui/Avatar';
-import RelationshipIcon from 'material-ui/svg-icons/social/people-outline';
 
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -111,7 +109,6 @@ const RelationChip = React.createClass({
                 useLayerForClickAway
                 iconButtonElement={
                     <Chip>
-                        <Avatar icon={<RelationshipIcon />} />
                         {this.context.translation.t(`labels.relationships.${relationship ? relationship.value : 'none'}`)}
                     </Chip>
                 }
