@@ -8,7 +8,8 @@ import RefreshIcon from 'material-ui/svg-icons/navigation/refresh';
 import IconButton from 'material-ui/IconButton';
 
 const defaultProps = {
-    style: {}
+    style: {},
+    children: []
 };
 
 const Loader = React.createClass({
@@ -47,10 +48,10 @@ const Loader = React.createClass({
             boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px'
         };
 
-        const noRecords = (this.props.children.length === 0 && !this.props.hasMore && !this.props.loadingMore);
+        const noRecords = (this.props.children.size === 0 && !this.props.hasMore && !this.props.loadingMore);
 
         return (
-            <div style={{ width: '100%', marginTop: (this.props.children.length === 0 ? '30%' : 0) }}>
+            <div style={{ width: '100%', marginTop: (this.props.children.size === 0 ? '30%' : 0) }}>
                 <div style={this.props.style}>
                     {this.props.children}
                 </div>

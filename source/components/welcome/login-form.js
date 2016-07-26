@@ -96,7 +96,7 @@ const LoginForm = React.createClass({
                     secondary
                     onClick={handleSubmit(authenticate)}
                 />
-                <Link to="/welcome/signup" fullWidth>
+                <Link to="/welcome/signup">
                     <FlatButton
                         style={style.button}
                         label={this.context.translation.t('labels.signup.signup')}
@@ -104,7 +104,7 @@ const LoginForm = React.createClass({
                 </Link>
 
                 <div style={style.passwordRecoverButton}>
-                    <Link to="/welcome/recover" fullWidth>
+                    <Link to="/welcome/recover">
                         <FlatButton
                             style={style.button}
                             labelStyle={{ fontSize: 12, color: '#999' }}

@@ -135,7 +135,7 @@ const SignupForm = React.createClass({
                     secondary
                     onClick={handleSubmit(signup)}
                 />
-                <Link to="/welcome/login" fullWidth>
+                <Link to="/welcome/login">
                     <FlatButton
                         style={style.button}
                         label={this.context.translation.t('labels.have_account')}

@@ -6,7 +6,7 @@ import RouterLink from 'react-router/lib/Link';
 const defaultProps = {
     style: {},
     onBlack: false,
-    fullWidth: false
+    fullWidth: true
 };
 
 const Link = React.createClass({
@@ -31,7 +31,6 @@ const Link = React.createClass({
                     textDecoration: 'none',
                     fontFamily: this.context.muiTheme.fontFamily,
                     color: (onBlack ? '#fff' : '#000'),
-                    display: 'inline-block',
                     width: (fullWidth ? '100%' : 'auto'),
                     ...style
                 }}
