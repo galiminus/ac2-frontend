@@ -1,7 +1,4 @@
 import React, { PropTypes } from 'react';
-import CSSModules from 'react-css-modules';
-import styles from './marked.css';
-
 import marked from 'marked';
 
 const renderer = new marked.Renderer();
@@ -30,8 +27,13 @@ const Marked = React.createClass({
             smartypants: false,
             ...(this.props.options || {})
         });
-        return (<div dangerouslySetInnerHTML={{ __html: marked(this.props.body) }} />);
+        return (
+            <div
+                className="markdown-body"
+                dangerouslySetInnerHTML={{ __html: marked(this.props.body) }}
+            />
+        );
     }
 });
 
-export default CSSModules(Marked, styles);
+export default Marked;

@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import CSSModules from 'react-css-modules';
-import styles from './events.css';
-
 import FloatingActionButton from 'components/floating-action-button';
 import CreateContentIcon from 'material-ui/svg-icons/action/note-add';
 
@@ -58,4 +55,4 @@ const Events = React.createClass({
     }
 });
 
-export default CSSModules(Events, styles);
+export default Events;

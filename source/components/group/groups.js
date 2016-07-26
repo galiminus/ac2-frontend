@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import CSSModules from 'react-css-modules';
-import styles from './groups.css';
-
 import FloatingActionButton from 'components/floating-action-button';
 import CreateContentIcon from 'material-ui/svg-icons/action/note-add';
 
@@ -50,4 +47,4 @@ const Groups = React.createClass({
     }
 });
 
-export default CSSModules(Groups, styles);
+export default Groups;

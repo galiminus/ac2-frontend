@@ -3,9 +3,6 @@ import PureRenderMixin from 'components/pure-render-mixin';
 
 import Link from 'components/link';
 
-import CSSModules from 'react-css-modules';
-import styles from './profile-banner.css';
-
 import { Card, CardActions, CardMedia } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -22,7 +19,7 @@ const ProfileBanner = React.createClass({
 
     render() {
         return (
-            <Card styleName="card">
+            <Card>
                 <CardMedia
                     overlay={
                         <PageCardTitle page={this.props.page} titleColor="#fff">
@@ -35,7 +32,7 @@ const ProfileBanner = React.createClass({
                 >
                     <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
                 </CardMedia>
-                <CardActions styleName="card-actions">
+                <CardActions style={{ textAlign: 'right' }}>
                     <Link to={`/profiles/${this.props.page.slug}`}>
                         <FlatButton label={this.context.translation.t('labels.about')} />
                     </Link>
@@ -45,4 +42,4 @@ const ProfileBanner = React.createClass({
     }
 });
 
-export default CSSModules(ProfileBanner, styles);
+export default ProfileBanner;

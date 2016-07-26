@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import CSSModules from 'react-css-modules';
-import styles from './profiles.css';
-
 import Link from 'components/link';
 
 import AccountIcon from 'material-ui/svg-icons/action/account-circle';
@@ -69,4 +66,4 @@ const Profiles = React.createClass({
     }
 });
 
-export default CSSModules(Profiles, styles);
+export default Profiles;

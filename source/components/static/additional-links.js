@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import CSSModules from 'react-css-modules';
-import styles from './additional-links.css';
+import Link from 'components/link';
 
 const AdditionalLinks = React.createClass({
     propTypes: {
@@ -17,20 +16,31 @@ const AdditionalLinks = React.createClass({
 
     render() {
         return (
-            <ul styleName="additionalLinks">
+            <ul
+                style={{
+                    listStyle: 'none',
+                    paddingLeft: 16,
+                    paddingBottom: 16
+                }}
+            >
                 {
                     this.props.resources.valueSeq().map((page, index) => {
                         return (
-                            <li key={index}>
-                                <a
-                                    target="_blank"
+                            <li
+                                key={index}
+                                style={{
+                                    display: 'inline-block',
+                                    padding: 4
+                                }}
+                            >
+                                <Link
                                     style={{
                                         color: this.context.muiTheme.palette.accent3Color
                                     }}
-                                    href={`/statics/${page.slug}`}
+                                    to={`/statics/${page.slug}`}
                                 >
                                     {page.title}
-                                </a>
+                                </Link>
                             </li>
                         );
                     })
@@ -40,4 +50,4 @@ const AdditionalLinks = React.createClass({
     }
 });
 
-export default CSSModules(AdditionalLinks, styles);
+export default AdditionalLinks;

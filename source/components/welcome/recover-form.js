@@ -3,17 +3,21 @@ import { reduxForm } from 'redux-form';
 import { updatePath } from 'redux-simple-router';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import CSSModules from 'react-css-modules';
-import styles from './recover-form.css';
-
-import {
-    TextField,
-    RaisedButton
-} from 'material-ui';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import api from 'api';
 import { setCurrentToken, setCurrentUser } from 'action-creators';
 import { validateEmail } from 'validators';
+
+const style = {
+    button: {
+        display: 'block',
+        textAlign: 'center',
+        width: '100%',
+        marginTop: 8
+    }
+};
 
 const authenticate = (fields, dispatch) =>
 api.tokens.create(fields, dispatch).then((accessTokenData) => {
@@ -57,15 +61,14 @@ const RecoverForm = React.createClass({
                     onChange={email.onChange}
                     hintText={this.context.translation.t('labels.recover.email')}
                 />
-                <div styleName="actionButtons">
-                    <RaisedButton
-                        disabled={email.invalid}
-                        type="submit"
-                        label={this.context.translation.t('actions.continue')}
-                        secondary
-                        onClick={handleSubmit(authenticate)}
-                    />
-                </div>
+                <RaisedButton
+                    style={style.button}
+                    disabled={email.invalid}
+                    type="submit"
+                    label={this.context.translation.t('actions.continue')}
+                    secondary
+                    onClick={handleSubmit(authenticate)}
+                />
             </form>
         );
     }
@@ -75,4 +78,4 @@ export default reduxForm({
     form: 'recover',
     fields: ['email'],
     validate
-})(CSSModules(RecoverForm, styles));
+})(RecoverForm);

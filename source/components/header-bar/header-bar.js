@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
-import { connect } from 'react-redux';
+import ResponsiveMixin from 'react-responsive-mixin';
 
-import CSSModules from 'react-css-modules';
-import styles from './header-bar.css';
+import { connect } from 'react-redux';
 
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
@@ -16,43 +15,113 @@ import SettingsMenu from './settings-menu';
 
 import actionCreators from 'action-creators';
 
-function mapStateToProps(state) {
-    return {
-        canUpdateSettings: state.settings.permissions.update
-    };
-}
+const style = {
+    root: {
+        position: 'fixed',
+        zIndex: 3,
+        backgroundColor: '#333333',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'end'
+    },
+
+    left: {
+        flex: 2,
+        justifyContent: 'flex-start'
+    },
+
+    leftNavTrigger: {
+        paddingLeft: 0,
+        paddingRight: 8,
+        height: 56
+    },
+
+    separator: {
+        backgroundColor: 'rgba(255, 255, 255, 0.4)',
+        marginRight: 16,
+        marginLeft: 16
+    },
+
+    searchField: {
+        width: 460,
+        margin: '5px 0 5px 16px',
+        background: '#444',
+        padding: '0 12px'
+    }
+};
+
+const tabletScreenStyle = {
+    ...style,
+    root: {
+        ...style.root,
+        padding: '0 10px'
+    },
+
+    logo: {
+        ...style.logo,
+        display: 'none'
+    },
+
+    searchField: {
+        ...style.searchField,
+        width: '100%',
+        marginLeft: 0
+    },
+
+    separator: {
+        ...style.separator,
+        display: 'none'
+    }
+};
+
+const phoneScreenStyle = {
+    ...tabletScreenStyle,
+    title: {
+        ...tabletScreenStyle.title,
+        display: 'none'
+    }
+};
 
 const HeaderBar = React.createClass({
     propTypes: {
-        toggleLeftNav: PropTypes.func.isRequired,
-        canUpdateSettings: PropTypes.bool.isRequired
+        toggleLeftNav: PropTypes.func.isRequired
     },
 
-    mixins: [PureRenderMixin],
+    mixins: [PureRenderMixin, ResponsiveMixin],
+
+    getInitialState() {
+        return ({ style });
+    },
+
+    componentDidMount() {
+        this.media({ minWidth: 1010 }, () => this.setState({ style }));
+        this.media({ maxWidth: 1010 }, () => this.setState({ style: tabletScreenStyle }));
+        this.media({ maxWidth: 800 }, () => this.setState({ style: phoneScreenStyle }));
+    },
 
     render() {
         return (
-            <Toolbar styleName="root">
-                <ToolbarGroup key={0} styleName="left">
-                    <div styleName="leftNavTrigger">
+            <Toolbar style={this.state.style.root}>
+                <ToolbarGroup key={0} style={this.state.style.left}>
+                    <div style={this.state.style.leftNavTrigger}>
                         <MenuIcon
-                            styleName="leftNavTrigger"
-                            style={{ height: 56 }}
+                            style={this.state.style.leftNavTrigger}
                             color="#ffffff"
                             hoverColor="#ffffff"
                             onClick={this.props.toggleLeftNav}
                         />
                     </div>
-                    <div styleName="logo">
+                    <div style={this.state.style.logo}>
                         <ToolbarLogo />
                     </div>
-                    <ToolbarSeparator styleName="separator" />
+                    <ToolbarSeparator style={this.state.style.separator} />
 
-                    <div styleName="title">
+                    <div style={this.state.style.title}>
                         <CurrentPageTitle />
                     </div>
 
-                    <div styleName="searchField">
+                    <div style={this.state.style.searchField}>
                         <AutoComplete
                             hintText={this.context.translation.t('labels.search')}
                             dataSource={[]}
@@ -63,8 +132,8 @@ const HeaderBar = React.createClass({
                         />
                     </div>
                 </ToolbarGroup>
-                <ToolbarGroup key={2} styleName="right">
-                    {this.props.canUpdateSettings &&
+                <ToolbarGroup key={2}>
+                    {this.context.settings.permissions.update &&
                         <SettingsMenu />
                     }
                     <CurrentUserMenu />
@@ -74,4 +143,4 @@ const HeaderBar = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(CSSModules(HeaderBar, styles));
+export default connect(undefined, actionCreators)(HeaderBar);

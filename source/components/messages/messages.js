@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import CSSModules from 'react-css-modules';
-import styles from './messages.css';
-
 import CreateContentIcon from 'material-ui/svg-icons/content/create';
 
 import MessageDialog from './message-dialog';
@@ -50,7 +47,6 @@ const Messages = React.createClass({
         return (
             <div>
                 <Loader
-                    styles={styles}
                     onLoadMore={this.props.onLoadMore}
                     hasMore={this.props.hasMore}
                     loadingMore={this.props.loadingMore}
@@ -74,4 +70,4 @@ const Messages = React.createClass({
     }
 });
 
-export default CSSModules(Messages, styles);
+export default Messages;

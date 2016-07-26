@@ -1,9 +1,6 @@
 import React from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import CSSModules from 'react-css-modules';
-import styles from './navigation.css';
-
 import Link from 'components/link';
 
 import { List, ListItem } from 'material-ui/List';
@@ -21,7 +18,7 @@ const Navigation = React.createClass({
 
     render() {
         return (
-            <nav styleName="root">
+            <nav style={{ height: '100%' }}>
                 <List>
                     <Link to="/">
                         <ListItem
@@ -66,4 +63,4 @@ const Navigation = React.createClass({
     }
 });
 
-export default CSSModules(Navigation, styles);
+export default Navigation;

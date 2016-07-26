@@ -8,9 +8,6 @@ import { batchActions } from 'redux-batched-actions';
 
 import Link from 'components/link';
 
-import CSSModules from 'react-css-modules';
-import styles from './signup-form.css';
-
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -18,6 +15,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { tokens, users } from 'api';
 import { addToken, setCurrentUser, setCurrentToken, pushNotification } from 'action-creators';
 import { validateEmail, validatePassword, validateFullName, validateUserName } from 'validators';
+
+const style = {
+    button: {
+        display: 'block',
+        textAlign: 'center',
+        width: '100%',
+        marginTop: 8
+    }
+};
 
 const authenticate = (userId, fields) =>
     tokens.create({ email: fields.email, password: fields.password }, dispatch)
@@ -121,20 +127,20 @@ const SignupForm = React.createClass({
                     onChange={password.onChange}
                     hintText={this.context.translation.t('labels.signup.password')}
                 />
-                <div styleName="actionButtons">
-                    <RaisedButton
-                        disabled={fullName.invalid || userName.invalid || email.invalid || password.invalid}
-                        type="submit"
-                        label={this.context.translation.t('actions.signup')}
-                        secondary
-                        onClick={handleSubmit(signup)}
+                <RaisedButton
+                    style={style.button}
+                    disabled={fullName.invalid || userName.invalid || email.invalid || password.invalid}
+                    type="submit"
+                    label={this.context.translation.t('actions.signup')}
+                    secondary
+                    onClick={handleSubmit(signup)}
+                />
+                <Link to="/welcome/login" fullWidth>
+                    <FlatButton
+                        style={style.button}
+                        label={this.context.translation.t('labels.have_account')}
                     />
-                    <Link to="/welcome/login">
-                        <FlatButton
-                            label={this.context.translation.t('labels.have_account')}
-                        />
-                    </Link>
-                </div>
+                </Link>
             </form>
         );
     }
@@ -144,4 +150,4 @@ export default reduxForm({
     form: 'signup',
     fields: ['fullName', 'userName', 'email', 'password'],
     validate
-})(CSSModules(SignupForm, styles));
+})(SignupForm);
