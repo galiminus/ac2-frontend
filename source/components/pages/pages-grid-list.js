@@ -16,10 +16,10 @@ const phoneScreenStyle = {
     ...style,
     gridList: {
         ...style.gridList,
-        marginTop: 0,
-        marginBottom: 0
+        marginTop: 2,
+        marginBottom: 2
     },
-    gridListPadding: 0
+    gridListPadding: 2
 };
 
 const PagesGridList = React.createClass({
