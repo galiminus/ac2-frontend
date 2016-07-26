@@ -5,17 +5,14 @@ import randomColor from 'utils/random-color';
 
 import Avatar from 'material-ui/Avatar';
 
-function getStyles() {
-    const styles = {
-        root: {
-            marginRight: 8,
-            fontFamily: 'Roboto, sans-serif',
-            textTransform: 'uppercase',
-            cursor: 'pointer'
-        }
-    };
-    return (styles);
-}
+const style = {
+    root: {
+        marginRight: 8,
+        fontFamily: 'Roboto, sans-serif',
+        textTransform: 'uppercase',
+        cursor: 'pointer'
+    }
+};
 
 const UserAvatar = React.createClass({
     propTypes: {
@@ -26,12 +23,10 @@ const UserAvatar = React.createClass({
     mixins: [PureRenderMixin],
 
     render() {
-        const styles = getStyles();
-
         return (
             <Avatar
                 backgroundColor={randomColor(this.props.page.title)}
-                style={Object.assign(styles.root, this.props.style)}
+                style={{...style.root, ...this.props.style}}
             >
                 {this.props.page.title[0]}
             </Avatar>

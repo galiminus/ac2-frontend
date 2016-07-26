@@ -33,7 +33,6 @@ const Groups = React.createClass({
                     onLoadMore={this.props.onLoadMore}
                     hasMore={this.props.hasMore}
                     loadingMore={this.props.loadingMore}
-                    styles={styles}
                 >
                     {this.renderGroups()}
                 </Loader>

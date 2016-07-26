@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
+import ResponsiveMixin from 'react-responsive-mixin';
 
 import Link from 'components/link';
 
@@ -11,6 +12,24 @@ import { GridList, GridTile } from 'material-ui/GridList';
 
 import Loader from 'components/loader';
 
+const style = {
+    gridList: {
+        marginTop: 20,
+        marginBottom: 20
+    },
+    gridListPadding: 4
+};
+
+const phoneScreenStyle = {
+    ...style,
+    gridList: {
+        ...style.gridList,
+        marginTop: 0,
+        marginBottom: 0
+    },
+    gridListPadding: 0
+};
+
 const Profiles = React.createClass({
     propTypes: {
         resources: PropTypes.object,
@@ -19,7 +38,16 @@ const Profiles = React.createClass({
         loadingMore: PropTypes.bool.isRequired
     },
 
-    mixins: [PureRenderMixin],
+    mixins: [PureRenderMixin, ResponsiveMixin],
+
+    getInitialState() {
+        return ({ style });
+    },
+
+    componentDidMount() {
+        this.media({ minWidth: 480 }, () => this.setState({ style }));
+        this.media({ maxWidth: 480 }, () => this.setState({ style: phoneScreenStyle }));
+    },
 
     renderProfiles() {
         return (
@@ -57,7 +85,8 @@ const Profiles = React.createClass({
                 loadingMore={this.props.loadingMore}
             >
                 <GridList
-                    style={{ marginTop: 20, marginBottom: 20 }}
+                    style={this.state.style.gridList}
+                    padding={this.state.style.gridListPadding}
                 >
                     {this.renderProfiles()}
                 </GridList>
