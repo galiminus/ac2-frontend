@@ -6,8 +6,8 @@ import { GridList } from 'material-ui/GridList';
 
 const style = {
     gridList: {
-        marginTop: 16,
-        marginBottom: 16
+        marginTop: 8,
+        marginBottom: 8
     },
     gridListPadding: 16
 };
@@ -19,7 +19,7 @@ const phoneScreenStyle = {
         marginTop: 2,
         marginBottom: 2
     },
-    gridListPadding: 2
+    gridListPadding: 4
 };
 
 const PagesGridList = React.createClass({

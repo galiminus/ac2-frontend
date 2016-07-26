@@ -41,7 +41,7 @@ const style = {
     },
 
     mainContent: {
-        marginTop: 48,
+        marginTop: 56,
         width: 660,
         marginLeft: 'auto',
         marginRight: 'auto',

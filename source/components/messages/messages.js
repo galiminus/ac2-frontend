@@ -42,7 +42,7 @@ const Messages = React.createClass({
 
     render() {
         return (
-            <div style={{ marginTop: (React.Children.count(this.props.children) === 0 ? '30%' : 0) }}>
+            <div>
                 <Loader {...this.props}>
                     {this.renderMessages()}
                 </Loader>

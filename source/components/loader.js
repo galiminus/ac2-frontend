@@ -58,11 +58,11 @@ const Loader = React.createClass({
         const noRecords = (this.props.resources.size === 0 && !this.props.hasMore && !this.props.loadingMore);
 
         return (
-            <div style={{ width: '100%', marginTop: (this.props.resources.size === 0 ? '30%' : 0) }}>
+            <div style={{ width: '100%' }}>
                 <div style={this.props.style}>
                     {this.props.children}
                 </div>
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: 'center', marginTop: (this.props.resources.size === 0 ? '30%' : 0) }}>
                     {noRecords &&
                         <div>
                             <IconButton
