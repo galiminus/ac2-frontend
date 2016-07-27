@@ -30,8 +30,9 @@ import QuizzPage from 'components/pages/quizz-page';
 import PollsPage from 'components/pages/polls-page';
 
 import StaticPage from 'components/pages/static-page';
-import PageForm from 'components/pages/page-form';
 import Settings from 'components/settings';
+
+import NotFoundPage from 'components/not-found-page';
 
 import { Provider } from 'react-redux';
 
@@ -140,18 +141,18 @@ const Application = React.createClass({
 
                     {
                         pagesResources.map(resource => {
-                            const page_new = require(`components/${resource}s/${resource}-new`);
+                            const pageNew = require(`components/${resource}s/${resource}-new`);
                             return (
-                                <Route key={`${resource}-new`} path={`${resource}s/new`} component={page_new} />
+                                <Route key={`${resource}-new`} path={`${resource}s/new`} component={pageNew} />
                             );
                         })
                     }
 
                     {
                         pagesResources.map(resource => {
-                            const messages_page = require(`components/${resource}s/${resource}-messages-page`);
+                            const messagesPage = require(`components/${resource}s/${resource}-messages-page`);
                             return (
-                                <Route key={`${resource}-messages-page`} path={`${resource}s/:resourceId`} component={messages_page} />
+                                <Route key={`${resource}-messages-page`} path={`${resource}s/:resourceId`} component={messagesPage} />
                             );
                         })
                     }
@@ -167,6 +168,8 @@ const Application = React.createClass({
 
                     <Route path="settings/:category" component={Settings} />
                     <Route path="statics/:resourceId" component={StaticPage} />
+
+                    <Route path="*" component={NotFoundPage} />
                 </Route>
             </Router>
         );

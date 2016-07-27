@@ -6,16 +6,18 @@ import MoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import RefreshIcon from 'material-ui/svg-icons/navigation/refresh';
 import CheckIcon from 'material-ui/svg-icons/navigation/check';
 
-import IconButton from 'material-ui/IconButton';
+import LoaderIcon from 'components/loader-icon';
 
 const defaultProps = {
     style: {},
+    loaderTop: false,
     endIconThreshold: 20
 };
 
 const Loader = React.createClass({
     propTypes: {
         resources: PropTypes.object.isRequired,
+        loaderTop: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired,
         children: PropTypes.node.isRequired,
         onLoadMore: PropTypes.func.isRequired,
@@ -38,19 +40,6 @@ const Loader = React.createClass({
         const border = 40;
         const size = 60;
 
-        const iconButtonStyle = {
-            width: border + size,
-            height: border + size
-        };
-
-        const iconStyle = {
-            width: size,
-            height: size,
-            background: '#fff',
-            borderRadius: size / 2,
-            boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px'
-        };
-
         const loadingStyle = {
             marginTop: border / 2,
             marginBottom: border / 2,
@@ -59,57 +48,46 @@ const Loader = React.createClass({
         };
 
         const {
-            resources, endIconThreshold, hasMore, loadingMore, onLoadMore, style, children
+            resources, endIconThreshold, hasMore, loadingMore, onLoadMore, style, children, loaderTop
         } = this.props;
+
+        let marginTop = 0;
+        if (resources.size === 0 && !loaderTop) {
+            marginTop = `calc(38% - ${(size / 2)}px)`;
+        }
 
         return (
             <div style={{ width: '100%' }}>
                 <div style={style}>
                     {children}
                 </div>
-                <div
-                    style={{
-                        textAlign: 'center'
-                    }}
-                >
+                <div style={{ textAlign: 'center', marginTop }}>
                     {resources.size === 0 && !hasMore && !loadingMore &&
-                        <div>
-                            <IconButton
-                                onTouchTap={onLoadMore}
-                                style={iconButtonStyle}
-                                iconStyle={iconStyle}
-                            >
-                                <RefreshIcon color={this.context.muiTheme.palette.accent3Color} />
-                            </IconButton>
-                            <p
-                                style={{
-                                    color: this.context.muiTheme.palette.accent3Color
-                                }}
-                            >
-                                {this.context.translation.t('labels.noRecords')}
-                            </p>
-                        </div>
+                        <LoaderIcon
+                            size={size}
+                            border={border}
+                            comment={this.context.translation.t('labels.noRecords')}
+                            onTouchTap={onLoadMore}
+                            icon={<RefreshIcon />}
+                        />
                     }
                     {hasMore && !loadingMore &&
-                        <IconButton
+                        <LoaderIcon
+                            size={size}
+                            border={border}
                             onTouchTap={onLoadMore}
-                            style={iconButtonStyle}
-                            iconStyle={iconStyle}
-                        >
-                            <MoreIcon color={this.context.muiTheme.palette.accent3Color} />
-                        </IconButton>
+                            icon={<MoreIcon />}
+                        />
                     }
                     {resources.size > endIconThreshold && !hasMore && !loadingMore &&
-                        <IconButton
-                            onTouchTap={onLoadMore}
-                            style={iconButtonStyle}
-                            iconStyle={iconStyle}
-                        >
-                            <CheckIcon color={this.context.muiTheme.palette.accent3Color} />
-                        </IconButton>
+                        <LoaderIcon
+                            size={size}
+                            border={border}
+                            icon={<CheckIcon />}
+                        />
                     }
                     {resources.size <= endIconThreshold && !hasMore && !loadingMore &&
-                        <div style={iconButtonStyle} />
+                        <div style={{ height: border + size }} />
                     }
                     {loadingMore &&
                         <div style={loadingStyle}>

@@ -25,6 +25,7 @@ const GroupMessages = React.createClass({
                 <ProfileBanner page={this.props.resource} />
                 <MessagesContainer
                     {...this.props}
+                    loaderTop
                     page={this.props.resource}
                     sort={[
                         '-updated_at'
