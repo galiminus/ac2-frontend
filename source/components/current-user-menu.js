@@ -67,7 +67,7 @@ const CurrentUserMenu = React.createClass({
                         rightIcon={<AccountIcon />}
                     />
                 </Link>
-                <Link to="/messages"
+                <Link to="/chat"
                     style={linkStyle}
                 >
                     <MenuItem

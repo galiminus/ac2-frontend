@@ -15,14 +15,12 @@ import api from 'api';
 
 function mapStateToProps(state, props) {
     return {
-        relationships: state.relationshipsByProposer.get(props.proposer.id),
-        relationshipStatus: state.settings.data.profile.relationshipStatus
+        relationships: state.relationshipsByProposer.get(props.proposer.id)
     };
 }
 
 const defaultProps = {
-    relationships: Immutable.Map({}),
-    relationshipStatus: []
+    relationships: Immutable.Map({})
 };
 
 const RelationChip = React.createClass({

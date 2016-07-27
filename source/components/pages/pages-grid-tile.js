@@ -30,6 +30,7 @@ const PagesGridTile = React.createClass({
         page: PropTypes.object.isRequired,
         banner: PropTypes.string.isRequired,
         title: PropTypes.node.isRequired,
+        relationshipStatus: PropTypes.array.isRequired,
         actionIcons: PropTypes.array
     },
 
@@ -64,6 +65,7 @@ const PagesGridTile = React.createClass({
                         <RelationChip
                             proposer={this.context.currentUserPage}
                             recipient={this.props.page}
+                            relationshipStatus={this.props.relationshipStatus}
                         />
                     </div>
                 </div>

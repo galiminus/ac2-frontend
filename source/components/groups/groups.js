@@ -28,6 +28,7 @@ const Groups = React.createClass({
                 <PagesGridTile
                     key={page.id}
                     page={page}
+                    relationshipStatus={this.context.settings.data.groups.relationshipStatus}
                     banner={"https://placeimg.com/640/480/any"}
                     title={
                         <Link to={`/groups/${page.slug}`} onBlack>

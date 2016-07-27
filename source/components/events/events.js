@@ -28,6 +28,7 @@ const Events = React.createClass({
                 <PagesGridTile
                     key={page.id}
                     page={page}
+                    relationshipStatus={this.context.settings.data.events.relationshipStatus}
                     banner={"https://placeimg.com/640/480/any"}
                     title={
                         <Link to={`/events/${page.slug}`} onBlack>

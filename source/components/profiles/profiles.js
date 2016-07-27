@@ -25,6 +25,7 @@ const Profiles = React.createClass({
                 <PagesGridTile
                     key={page.id}
                     page={page}
+                    relationshipStatus={this.context.settings.data.profiles.relationshipStatus}
                     banner={"https://placeimg.com/640/480/any"}
                     title={
                         <Link to={`/profiles/${page.slug}`} onBlack>
