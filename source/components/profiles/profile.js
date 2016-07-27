@@ -8,6 +8,8 @@ import api from 'api';
 import actionCreators from 'action-creators';
 import Form from 'components/form';
 
+import ProfileBanner from 'components/profiles/profile-banner';
+
 const Profile = React.createClass({
     propTypes: {
         resource: PropTypes.object.isRequired,
@@ -40,14 +42,17 @@ const Profile = React.createClass({
 
     render() {
         return (
-            <Form
-                loading={this.state.loading}
-                label="profile"
-                record={this.props.resource.data}
-                schema={this.props.schema.data}
-                editable={this.props.resource.permissions.update}
-                onChange={this.onChange}
-            />
+            <div style={{ marginTop: 16 }}>
+                <ProfileBanner page={this.props.resource} />
+                <Form
+                    loading={this.state.loading}
+                    label="profile"
+                    record={this.props.resource.data}
+                    schema={this.props.schema.data}
+                    editable={this.props.resource.permissions.update}
+                    onChange={this.onChange}
+                />
+            </div>
         );
     }
 });

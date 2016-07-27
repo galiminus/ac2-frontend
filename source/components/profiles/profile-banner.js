@@ -7,7 +7,6 @@ import { Card, CardActions, CardMedia } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 import PageCardTitle from 'components/pages/page-card-title';
-
 import RelationChip from 'components/relation-chip';
 
 const ProfileBanner = React.createClass({
@@ -22,10 +21,11 @@ const ProfileBanner = React.createClass({
             <Card>
                 <CardMedia
                     overlay={
-                        <PageCardTitle page={this.props.page} titleColor="#fff">
+                        <PageCardTitle page={this.props.page}>
                             <RelationChip
                                 proposer={this.context.currentUserPage}
                                 recipient={this.props.page}
+                                relationshipStatus={this.context.settings.data.profiles.relationshipStatus}
                             />
                         </PageCardTitle>
                     }

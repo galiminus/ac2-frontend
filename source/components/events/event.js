@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import api from 'api';
 
+import EventBanner from 'components/events/event-banner';
+
 import actionCreators from 'action-creators';
 import Form from 'components/form';
 
@@ -40,14 +42,17 @@ const Event = React.createClass({
 
     render() {
         return (
-            <Form
-                loading={this.state.loading}
-                label="profile"
-                record={this.props.resource.data}
-                schema={this.props.schema.data}
-                editable={this.props.resource.permissions.update}
-                onChange={this.onChange}
-            />
+            <div style={{ marginTop: 16 }}>
+                <EventBanner page={this.props.resource} />
+                <Form
+                    loading={this.state.loading}
+                    label="profile"
+                    record={this.props.resource.data}
+                    schema={this.props.schema.data}
+                    editable={this.props.resource.permissions.update}
+                    onChange={this.onChange}
+                />
+            </div>
         );
     }
 });

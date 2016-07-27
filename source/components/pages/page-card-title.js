@@ -10,7 +10,6 @@ import PageAvatar from 'components/pages/page-avatar';
 const PageCardTitle = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
-        titleColor: PropTypes.string.isRequired,
         children: PropTypes.node,
         style: PropTypes.object
     },
