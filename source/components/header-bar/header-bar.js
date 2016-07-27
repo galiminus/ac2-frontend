@@ -34,7 +34,8 @@ const style = {
     leftNavTrigger: {
         paddingLeft: 0,
         paddingRight: 8,
-        height: 56
+        height: 56,
+        display: 'none'
     },
 
     separator: {
@@ -61,6 +62,11 @@ const tabletScreenStyle = {
     logo: {
         ...style.logo,
         display: 'none'
+    },
+
+    leftNavTrigger: {
+        ...style.leftNavTrigger,
+        display: 'block'
     },
 
     searchField: {

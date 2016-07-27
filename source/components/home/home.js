@@ -122,7 +122,7 @@ const Home = React.createClass({
 
     render() {
         return (
-            <div style={style.home}>
+            <div style={this.state.style.home}>
                 <HeaderBar />
 
                 <Drawer
