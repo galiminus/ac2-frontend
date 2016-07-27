@@ -19,6 +19,7 @@ function mapStateToProps(state, props) {
 const PageCreateForm = React.createClass({
     propTypes: {
         type: PropTypes.string.isRequired,
+        onSubmit: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         pushNotification: PropTypes.func.isRequired,
         schema: PropTypes.object.isRequired
@@ -37,6 +38,7 @@ const PageCreateForm = React.createClass({
                     (resource) => {
                         this.props.addResource(resource);
                         this.props.pushNotification('saveSuccess');
+                        this.props.onSubmit(resource);
                     },
                     () => {
                         this.props.pushNotification('saveError');

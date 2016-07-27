@@ -69,6 +69,7 @@ function mapStateToProps(state) {
 const Application = React.createClass({
     propTypes: {
         settings: PropTypes.object.isRequired,
+        schemas: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired
     },
 

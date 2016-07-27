@@ -3,8 +3,6 @@ import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 
-import api from 'api';
-
 import EventBanner from 'components/events/event-banner';
 
 import actionCreators from 'action-creators';

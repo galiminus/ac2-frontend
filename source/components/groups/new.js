@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
+import browserHistory from 'react-router/lib/browserHistory';
+
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
