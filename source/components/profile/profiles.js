@@ -27,7 +27,7 @@ const Profiles = React.createClass({
                     page={page}
                     banner={"https://placeimg.com/640/480/any"}
                     title={
-                        <Link to={`/messages/${page.slug}`} onBlack>
+                        <Link to={`/members/${page.slug}`} onBlack>
                             <PageAvatar page={page} />
                             {page.title}
                         </Link>

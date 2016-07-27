@@ -15,7 +15,7 @@ const ProfileMessagesPage = React.createClass({
 
     render() {
         return (
-            <PageContainer factory={ProfileMessagesFactory} id={this.props.params.pageId} {...this.props} />
+            <PageContainer factory={ProfileMessagesFactory} id={this.props.params.resourceId} {...this.props} />
         );
     }
 });

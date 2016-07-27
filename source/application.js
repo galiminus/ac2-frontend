@@ -8,14 +8,15 @@ injectTapEventPlugin();
 
 import ReactDOM from 'react-dom';
 
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import Router from 'react-router/lib/Router';
+import Route from 'react-router/lib/Route';
+import IndexRoute from 'react-router/lib/IndexRoute';
+import browserHistory from 'react-router/lib/browserHistory';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import CircularProgress from 'material-ui/CircularProgress';
 
 import Spacing from 'material-ui/styles/spacing';
-
-import { syncReduxAndRouter } from 'redux-simple-router';
 
 import HomeContainer from 'components/home/home-container';
 
@@ -27,7 +28,9 @@ import RecoverForm from 'components/welcome/recover-form';
 import MainPage from 'components/pages/main-page';
 import QuizzPage from 'components/pages/quizz-page';
 import PollsPage from 'components/pages/polls-page';
+
 import ProfileMessagesPage from 'components/pages/profile-messages-page';
+import EventMessagesPage from 'components/pages/event-messages-page';
 
 import ProfilePage from 'components/pages/profile-page';
 import StaticPage from 'components/pages/static-page';
@@ -129,21 +132,28 @@ const Application = React.createClass({
 
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
                     <IndexRoute component={MainPage} />
-                    <Route path="/messages/:pageId" component={ProfileMessagesPage} />
 
                     <Route path="quizz" component={QuizzPage} />
                     <Route path="polls" component={PollsPage} />
 
-                    <Route path="pages/new" component={PageForm} />
+                    <Route path="profiles" component={ProfilePages} />
+                    <Route path="profiles/new" component={PageForm} />
+                    <Route path="profiles/:resourceId" component={ProfileMessagesPage} />
+                    <Route path="profiles/:resourceId/infos" component={ProfilePage} />
 
-                    <Route path="members" component={ProfilePages} />
                     <Route path="events" component={EventPages} />
+                    <Route path="events/new" component={EventPages} />
+                    <Route path="events/:resourceId" component={EventMessagesPage} />
+                    <Route path="events/:resourceId/infos" component={ProfileMessagesPage} />
+
                     <Route path="groups" component={GroupPages} />
+                    <Route path="groups/new" component={EventPages} />
+                    <Route path="groups/:resourceId" component={EventPages} />
+                    <Route path="groups/:resourceId/infos" component={EventPages} />
 
                     <Route path="settings/:category" component={Settings} />
 
-                    <Route path="/profiles/:resourceId" component={ProfilePage} />
-                    <Route path="/statics/:resourceId" component={StaticPage} />
+                    <Route path="statics/:resourceId" component={StaticPage} />
                 </Route>
             </Router>
         );

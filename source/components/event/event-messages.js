@@ -7,7 +7,7 @@ import { setTitle } from 'action-creators';
 import ProfileBanner from 'components/profile/profile-banner';
 import MessagesContainer from 'components/messages/messages-container';
 
-const ProfileMessages = React.createClass({
+const EventMessages = React.createClass({
     propTypes: {
         resource: PropTypes.object.isRequired,
         setTitle: PropTypes.func.isRequired
@@ -46,4 +46,4 @@ const ProfileMessages = React.createClass({
     }
 });
 
-export default connect(undefined, { setTitle })(ProfileMessages);
+export default connect(undefined, { setTitle })(EventMessages);

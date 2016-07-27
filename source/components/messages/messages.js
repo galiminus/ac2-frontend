@@ -32,10 +32,7 @@ const Messages = React.createClass({
     renderMessages() {
         return (
             this.props.resources.valueSeq().map(message =>
-                <Message
-                    key={message.id}
-                    message={message}
-                />
+                <Message key={message.id} message={message} />
             )
         );
     },

@@ -19,7 +19,7 @@ const Static = React.createClass({
 
     render() {
         return (
-            <Card style={{ minHeight: '100%', marginTop: 48 }}>
+            <Card style={{ minHeight: '100%', marginTop: 56 }}>
                 <CardText>
                     <Marked body={this.props.resource.data.body} />
                 </CardText>

@@ -4,11 +4,13 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import MoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import RefreshIcon from 'material-ui/svg-icons/navigation/refresh';
+import CheckIcon from 'material-ui/svg-icons/navigation/check';
 
 import IconButton from 'material-ui/IconButton';
 
 const defaultProps = {
-    style: {}
+    style: {},
+    endIconThreshold: 20
 };
 
 const Loader = React.createClass({
@@ -18,6 +20,7 @@ const Loader = React.createClass({
         children: PropTypes.node.isRequired,
         onLoadMore: PropTypes.func.isRequired,
         hasMore: PropTypes.bool.isRequired,
+        endIconThreshold: PropTypes.number.isRequired,
         style: PropTypes.object
     },
 
@@ -55,18 +58,24 @@ const Loader = React.createClass({
             display: 'inline-block'
         };
 
-        const noRecords = (this.props.resources.size === 0 && !this.props.hasMore && !this.props.loadingMore);
+        const {
+            resources, endIconThreshold, hasMore, loadingMore, onLoadMore, style, children
+        } = this.props;
 
         return (
             <div style={{ width: '100%' }}>
-                <div style={this.props.style}>
-                    {this.props.children}
+                <div style={style}>
+                    {children}
                 </div>
-                <div style={{ textAlign: 'center', marginTop: (this.props.resources.size === 0 ? '30%' : 0) }}>
-                    {noRecords &&
+                <div
+                    style={{
+                        textAlign: 'center'
+                    }}
+                >
+                    {resources.size === 0 && !hasMore && !loadingMore &&
                         <div>
                             <IconButton
-                                onTouchTap={this.props.onLoadMore}
+                                onTouchTap={onLoadMore}
                                 style={iconButtonStyle}
                                 iconStyle={iconStyle}
                             >
@@ -81,16 +90,28 @@ const Loader = React.createClass({
                             </p>
                         </div>
                     }
-                    {this.props.hasMore && !this.props.loadingMore &&
+                    {hasMore && !loadingMore &&
                         <IconButton
-                            onTouchTap={this.props.onLoadMore}
+                            onTouchTap={onLoadMore}
                             style={iconButtonStyle}
                             iconStyle={iconStyle}
                         >
                             <MoreIcon color={this.context.muiTheme.palette.accent3Color} />
                         </IconButton>
                     }
-                    {this.props.loadingMore &&
+                    {resources.size > endIconThreshold && !hasMore && !loadingMore &&
+                        <IconButton
+                            onTouchTap={onLoadMore}
+                            style={iconButtonStyle}
+                            iconStyle={iconStyle}
+                        >
+                            <CheckIcon color={this.context.muiTheme.palette.accent3Color} />
+                        </IconButton>
+                    }
+                    {resources.size <= endIconThreshold && !hasMore && !loadingMore &&
+                        <div style={iconButtonStyle} />
+                    }
+                    {loadingMore &&
                         <div style={loadingStyle}>
                             <RefreshIndicator
                                 size={size}
