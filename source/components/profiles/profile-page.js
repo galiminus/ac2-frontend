@@ -16,7 +16,7 @@ const ProfilePage = React.createClass({
                 {...this.props}
                 factory={ProfileFactory}
                 id={this.props.params.resourceId}
-                storeName="pages"
+                storeName="profiles"
             />
         );
     }

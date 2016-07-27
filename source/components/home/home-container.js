@@ -16,7 +16,7 @@ function mapStateToProps(state) {
 
     let currentUserPage;
     if (currentUser) {
-        currentUserPage = state.pages.get(currentUser.page_id);
+        currentUserPage = state.profiles.get(currentUser.page_id);
     }
 
     return {

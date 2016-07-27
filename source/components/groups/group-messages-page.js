@@ -19,7 +19,7 @@ const GroupMessagesPage = React.createClass({
                 {...this.props}
                 factory={GroupMessagesFactory}
                 id={this.props.params.resourceId}
-                storeName="pages"
+                storeName="groups"
             />
         );
     }

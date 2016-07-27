@@ -16,7 +16,7 @@ const GroupPage = React.createClass({
                 {...this.props}
                 factory={GroupFactory}
                 id={this.props.params.resourceId}
-                storeName="pages"
+                storeName="groups"
             />
         );
     }

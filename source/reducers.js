@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 
-import users from 'reducers/users';
 import currentUser from 'reducers/current-user';
 
 import tokens from 'reducers/tokens';
@@ -9,17 +8,11 @@ import currentToken from 'reducers/current-token';
 
 import currentPage from 'reducers/current-page';
 
-import groups from 'reducers/groups';
-import relationships from 'reducers/relationships';
 import relationshipsByProposer from 'reducers/relationships-by-proposer';
-import pages from 'reducers/pages';
-import messages from 'reducers/messages';
-import comments from 'reducers/comments';
 import commentsByMessage from 'reducers/comments-by-message';
 import likesByComment from 'reducers/likes-by-comment';
 import likesByMessage from 'reducers/likes-by-message';
 import messagesByPage from 'reducers/messages-by-page';
-import likes from 'reducers/likes';
 
 import notifications from 'reducers/notifications';
 
@@ -28,7 +21,6 @@ import currentLocale from 'reducers/current-locale';
 
 import settings from 'reducers/settings';
 
-import schemas from 'reducers/schemas';
 import schemaByModel from 'reducers/schema-by-model';
 
 import leftNav from 'reducers/leftnav';
@@ -36,33 +28,38 @@ import formFocused from 'reducers/form-focused';
 
 import title from 'reducers/title';
 
+import resourcesReducerFactory from 'reducer-factories/resources';
+
 const reducers = combineReducers({
     tokens,
     currentToken,
-    users,
-    groups,
-    relationships,
     relationshipsByProposer,
     currentUser,
     currentPage,
-    messages,
     messagesByPage,
-    pages,
-    comments,
     commentsByMessage,
     likesByComment,
     likesByMessage,
-    likes,
     leftNav,
     form,
     notifications,
     translations,
     currentLocale,
     settings,
-    schemas,
     schemaByModel,
     formFocused,
-    title
+    title,
+
+    users: resourcesReducerFactory('USER'),
+    schemas: resourcesReducerFactory('SCHEMA'),
+    relationships: resourcesReducerFactory('RELATIONSHIP'),
+    comments: resourcesReducerFactory('COMMENT'),
+    likes: resourcesReducerFactory('LIKE'),
+    messages: resourcesReducerFactory('MESSAGE'),
+    pages: resourcesReducerFactory('PAGE'),
+    events: resourcesReducerFactory('PAGE_EVENT'),
+    groups: resourcesReducerFactory('PAGE_GROUP'),
+    profiles: resourcesReducerFactory('PAGE_PROFILE')
 });
 
 export default reducers;

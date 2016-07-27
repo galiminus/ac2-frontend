@@ -19,7 +19,7 @@ const EventMessagesPage = React.createClass({
                 {...this.props}
                 factory={EventMessagesFactory}
                 id={this.props.params.resourceId}
-                storeName="pages"
+                storeName="events"
             />
         );
     }

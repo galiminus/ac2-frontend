@@ -19,7 +19,7 @@ const ProfileMessagesPage = React.createClass({
                 {...this.props}
                 factory={ProfileMessagesFactory}
                 id={this.props.params.resourceId}
-                storeName="pages"
+                storeName="profiles"
             />
         );
     }
