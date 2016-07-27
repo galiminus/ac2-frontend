@@ -113,7 +113,7 @@ const Application = React.createClass({
             return (this.router);
         }
 
-        const resources = ['profile', 'group', 'event'];
+        const pagesResources = ['profile', 'group', 'event'];
 
         this.router = (
             <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -130,7 +130,7 @@ const Application = React.createClass({
                     <Route path="polls" component={PollsPage} />
 
                     {
-                        resources.map(resource => {
+                        pagesResources.map(resource => {
                             const pages = require(`components/${resource}s/${resource}-pages`);
                             return (
                                 <Route key={`${resource}-pages`} path={`${resource}s`} component={pages} />
@@ -139,15 +139,16 @@ const Application = React.createClass({
                     }
 
                     {
-                        resources.map(resource => {
+                        pagesResources.map(resource => {
+                            const page_new = require(`components/${resource}s/${resource}-new`);
                             return (
-                                <Route key={`${resource}-new`} path={`${resource}s/new`} component={PageForm} />
+                                <Route key={`${resource}-new`} path={`${resource}s/new`} component={page_new} />
                             );
                         })
                     }
 
                     {
-                        resources.map(resource => {
+                        pagesResources.map(resource => {
                             const messages_page = require(`components/${resource}s/${resource}-messages-page`);
                             return (
                                 <Route key={`${resource}-messages-page`} path={`${resource}s/:resourceId`} component={messages_page} />
@@ -156,7 +157,7 @@ const Application = React.createClass({
                     }
 
                     {
-                        resources.map(resource => {
+                        pagesResources.map(resource => {
                             const page = require(`components/${resource}s/${resource}-page`);
                             return (
                                 <Route key={`${resource}-page`} path={`${resource}s/:resourceId/infos`} component={page} />
@@ -165,7 +166,6 @@ const Application = React.createClass({
                     }
 
                     <Route path="settings/:category" component={Settings} />
-
                     <Route path="statics/:resourceId" component={StaticPage} />
                 </Route>
             </Router>

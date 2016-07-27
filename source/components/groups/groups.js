@@ -53,7 +53,7 @@ const Groups = React.createClass({
                 <PagesGridList>
                     {this.renderResources()}
                 </PagesGridList>
-                <FloatingActionButton href={`/pages/new?model=Page::Group`}>
+                <FloatingActionButton href={`/groups/new`}>
                     <CreateContentIcon />
                 </FloatingActionButton>
             </Loader>

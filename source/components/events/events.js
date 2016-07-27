@@ -53,7 +53,7 @@ const Events = React.createClass({
                 <PagesGridList>
                     {this.renderResources()}
                 </PagesGridList>
-                <FloatingActionButton href={`/pages/new?model=Page::Event`}>
+                <FloatingActionButton href={`/events/new`}>
                     <CreateContentIcon />
                 </FloatingActionButton>
             </Loader>

@@ -19,13 +19,13 @@ const defaultProps = {
 
 function mapStateToProps(state, props) {
     return ({
-        schema: state.schemaByModel.get(props.location.query.model)
+        schema: state.schemaByModel.get(props.model)
     });
 }
 
 const PageForm = React.createClass({
     propTypes: {
-        location: PropTypes.object.isRequired,
+        model: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired
     },
@@ -44,7 +44,7 @@ const PageForm = React.createClass({
 
     componentWillMount() {
         api.schemas
-            .find({ 'filter[model]': this.props.location.query.model })
+            .find({ 'filter[model]': this.props.model })
             .then((resources) => {
                 this.props.addResource(resources);
             });
