@@ -2,7 +2,7 @@ const typeToActionPrefix = type =>
     type.split('::').map((klass) => klass.toUpperCase());
 
 const typeToShortPluralType = type =>
-    type.split('::').pop().toLowerCase() + 's'
+    type.split('::').pop().toLowerCase() + 's';
 
 export default {
     typeToActionPrefix,

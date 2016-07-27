@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import CircularProgress from 'material-ui/CircularProgress';
+import SaveIcon from 'material-ui/svg-icons/content/save';
+
+import FloatingActionButton from 'components/floating-action-button';
 
 import Field from 'components/field/field';
 
 const defaultProps = {
     schema: {
-        properties: {},
-        loading: false
+        properties: {}
     },
     record: {}
 };
@@ -18,9 +19,9 @@ const Form = React.createClass({
         record: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
-        loading: PropTypes.bool.isRequired,
-        onChange: PropTypes.func.isRequired,
+        onSubmit: PropTypes.func.isRequired,
         label: PropTypes.string.isRequired,
+        onChange: PropTypes.func,
         only: PropTypes.array
     },
 
@@ -30,31 +31,23 @@ const Form = React.createClass({
         return (defaultProps);
     },
 
-    handleUpdate(category, record) {
-        const newRecord = Object.assign({}, this.props.record);
-        newRecord[category] = record;
-
-        return (this.props.onChange(newRecord));
+    getInitialState() {
+        return ({ record: this.props.record, loading: false });
     },
 
-    renderLoadingOverlay() {
-        return (
-            <div>
-                <div
-                    style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        background: 'white',
-                        opacity: 0.8,
-                        left: 0,
-                        top: 0
-                    }}
-                >
-                </div>
-                <CircularProgress style={{ position: 'absolute', top: 100, left: '50%', marginLeft: -25 }} />
-            </div>
-        );
+    handleUpdate(category, record) {
+        const newRecord = Object.assign({}, this.state.record);
+        newRecord[category] = record;
+
+        this.setState({ record: newRecord });
+        return (this.props.onChange && this.props.onChange(newRecord));
+    },
+
+    handleSubmit() {
+        this.setState({ loading: true });
+        this.props.onSubmit(this.state.record).then(() => {
+            this.setState({ loading: false });
+        });
     },
 
     render() {
@@ -66,20 +59,25 @@ const Form = React.createClass({
             }
             cards.push(
                 <Field
+                    key={category}
                     label={`${this.props.label}.${category}`}
                     title={this.context.translation.t(`${this.props.label}.${category}`)}
-                    record={this.props.record[category]}
+                    record={this.state.record[category]}
                     schema={this.props.schema.properties[category]}
-                    key={category}
+                    onUpdate={this.handleUpdate}
                     onChange={(record) => this.handleUpdate(category, record)}
                     editable={this.props.editable}
                 />
             );
         }
         return (
-            <div style={{ position: 'relative' }}>
+            <div>
                 {cards}
-                {this.props.loading && this.renderLoadingOverlay()}
+                {this.props.editable &&
+                    <FloatingActionButton loading={this.state.loading} onMouseUp={this.handleSubmit}>
+                        <SaveIcon />
+                    </FloatingActionButton>
+                }
             </div>
         );
     }

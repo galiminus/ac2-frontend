@@ -34,7 +34,7 @@ const Settings = React.createClass({
         this.props.setTitle(this.context.translation.t('links.settings'));
     },
 
-    handleChange(data) {
+    handleSubmit(data) {
         this.setState({ loading: true });
         return (
             api.settings.update(this.props.settings.id, { data })
@@ -54,7 +54,7 @@ const Settings = React.createClass({
                 schema={this.props.schema.data}
                 editable={this.props.settings.permissions.update}
                 loading={this.state.loading}
-                onChange={this.handleChange}
+                onSubmit={this.handleSubmit}
                 only={[this.props.params.category]}
             />
         );

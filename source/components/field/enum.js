@@ -16,24 +16,14 @@ const EnumField = React.createClass({
 
     mixins: [PureRenderMixin],
 
-    getInitialState() {
-        return { selected: null };
-    },
-
-    handleTouchTap(value) {
-        this.setState({ selected: value });
-        return (this.props.onChange(value));
-    },
-
     renderField() {
         return (
             this.props.schema.enum.map((possibleValue) => {
-                const isSelected = this.props.record === possibleValue || this.state.selected === possibleValue;
                 return (
                       <SelectableChip
                           key={possibleValue}
-                          onTouchTap={() => this.handleTouchTap(possibleValue)}
-                          isSelected={isSelected}
+                          onTouchTap={() => this.props.onChange(possibleValue)}
+                          isSelected={this.props.record === possibleValue}
                       >
                           {this.context.translation.t(`${this.props.label}.${possibleValue}`)}
                       </SelectableChip>
@@ -46,8 +36,6 @@ const EnumField = React.createClass({
         const valueField = (
             <ListItem
                 disabled
-                onMouseEnter={this.setMouseInside}
-                onMouseLeave={this.setMouseOutside}
                 primaryText={
                     <div>
                         {this.props.title}

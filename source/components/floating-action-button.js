@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 import ResponsiveMixin from 'react-responsive-mixin';
 
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
 import { connect } from 'react-redux';
 
 import Link from 'components/link';
@@ -45,7 +47,8 @@ const FloatingActionButton = React.createClass({
         children: PropTypes.node.isRequired,
         onMouseUp: PropTypes.func,
         href: PropTypes.string,
-        visible: PropTypes.bool.isRequired
+        visible: PropTypes.bool.isRequired,
+        loading: PropTypes.bool
     },
 
     mixins: [PureRenderMixin, ResponsiveMixin],
@@ -89,8 +92,35 @@ const FloatingActionButton = React.createClass({
         );
     },
 
+    renderLoading() {
+        return (
+            <div style={this.state.style.button}>
+                <RefreshIndicator
+                    top={0}
+                    left={0}
+                    size={56}
+                    loadingColor="#fff"
+                    status="loading"
+                    style={{
+                        position: 'relative',
+                        display: 'inline-block',
+                        backgroundColor: this.context.muiTheme.palette.primary1Color
+                    }}
+                />
+            </div>
+        );
+    },
+
     render() {
-        return (this.props.href ? this.renderLink() : this.renderButton());
+        if (this.props.loading) {
+            return (this.renderLoading());
+        }
+
+        if (this.props.href) {
+            return (this.renderLink());
+        }
+
+        return (this.renderButton());
     }
 });
 

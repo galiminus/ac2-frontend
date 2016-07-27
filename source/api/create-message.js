@@ -4,7 +4,7 @@ import generateUUID from 'utils/uuid';
 export default (attributes) =>
     create('/messages', {
         data: {
-            type: 'messages',
+            type: 'Message',
             id: generateUUID(),
             attributes
         }

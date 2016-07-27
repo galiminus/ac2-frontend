@@ -18,7 +18,13 @@ const EventNew = React.createClass({
     },
 
     render() {
-        return (<PageForm model="Page::Event" />);
+        return (
+            <PageForm
+                label="events"
+                model="Page::Event"
+                editable
+            />
+        );
     }
 });
 

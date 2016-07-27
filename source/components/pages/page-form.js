@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
-import Immutable from 'immutable';
 
 import Form from 'components/form';
 
@@ -10,11 +9,10 @@ import actionCreators from 'action-creators';
 import api from 'api';
 
 const defaultProps = {
-    schema: {
-        data: {
-            properties: {}
-        }
-    }
+    resource: {
+        data: {}
+    },
+    editable: false
 };
 
 function mapStateToProps(state, props) {
@@ -25,9 +23,13 @@ function mapStateToProps(state, props) {
 
 const PageForm = React.createClass({
     propTypes: {
+        resource: PropTypes.object.isRequired,
         model: PropTypes.string.isRequired,
-        schema: PropTypes.object.isRequired,
-        addResource: PropTypes.func.isRequired
+        label: PropTypes.string.isRequired,
+        addResource: PropTypes.func.isRequired,
+        editable: PropTypes.bool.isRequired,
+        pushNotification: PropTypes.func.isRequired,
+        schema: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
@@ -38,31 +40,60 @@ const PageForm = React.createClass({
 
     getInitialState() {
         return ({
-            record: Immutable.fromJS({})
+            record: this.props.resource.data
         });
     },
 
     componentWillMount() {
-        api.schemas
-            .find({ 'filter[model]': this.props.model })
-            .then((resources) => {
-                this.props.addResource(resources);
-            });
+        if (!this.props.schema) {
+            api.schemas
+                .find({ 'filter[model]': this.props.model })
+                .then((resources) => {
+                    this.props.addResource(resources);
+                });
+        }
     },
 
-    handleChange(data) {
-        this.setState({ record: this.state.record.mergeDeep(data) });
+    handleUpdate(data) {
+        return (
+            api.pages.update(this.props.resource.id, { data })
+        );
+    },
+
+    handleCreate(data) {
+        return (
+            api.pages.create(this.props.model, { data })
+        );
+    },
+
+    handleSubmit(data) {
+        return (
+            (this.props.resource.id ? this.handleUpdate(data) : this.handleCreate(data))
+                .then(
+                    (resource) => {
+                        this.props.addResource(resource);
+                        this.props.pushNotification('saveSuccess');
+                    },
+                    () => {
+                        this.props.pushNotification('saveError');
+                    }
+                )
+        );
     },
 
     render() {
+        if (!this.props.schema) {
+            return (<div />);
+        }
+
         return (
             <Form
-                loading={false}
-                editable
-                label="profile"
+                label={this.props.label}
+                loading={this.state.loading}
+                editable={this.props.editable}
                 schema={this.props.schema.data}
-                onChange={this.handleChange}
-                record={this.state.record.toJS()}
+                onSubmit={this.handleSubmit}
+                record={this.state.record}
             />
         );
     }

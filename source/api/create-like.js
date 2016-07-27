@@ -4,7 +4,7 @@ import generateUUID from 'utils/uuid';
 export default (attributes) =>
     create('/likes', {
         data: {
-            type: 'likes',
+            type: 'Like',
             id: generateUUID(),
             attributes
         }

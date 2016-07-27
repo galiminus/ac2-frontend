@@ -1,11 +1,11 @@
 import { create } from 'api/http';
 import generateUUID from 'utils/uuid';
 
-export default (messageId, attributes) =>
-    create(`/messages/${messageId}/relationships/comments`, {
+export default (type, attributes, query) =>
+    create('/pages', {
         data: {
-            type: 'Comment',
+            type,
             id: generateUUID(),
             attributes
         }
-    });
+    }, query);

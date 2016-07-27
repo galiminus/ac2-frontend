@@ -4,7 +4,7 @@ import generateUUID from 'utils/uuid';
 export default (attributes) =>
     create('/relationships', {
         data: {
-            type: 'relationships',
+            type: 'Relationship',
             id: generateUUID(),
             attributes
         }

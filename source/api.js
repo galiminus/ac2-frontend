@@ -5,6 +5,7 @@ import createUser from 'api/create-user';
 import findUsers from 'api/find-users';
 import getMe from 'api/get-me';
 import getPage from 'api/get-page';
+import createPage from 'api/create-page';
 import findPages from 'api/find-pages';
 import updatePage from 'api/update-page';
 import createComment from 'api/create-comment';
@@ -48,7 +49,8 @@ export default {
     pages: {
         find: findPages,
         get: getPage,
-        update: updatePage
+        update: updatePage,
+        create: createPage
     },
 
     comments: {
