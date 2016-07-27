@@ -20,7 +20,7 @@ const UserAvatar = React.createClass({
             textTransform: 'uppercase',
             cursor: 'pointer'
         };
-        
+
         return (
             <Avatar
                 backgroundColor={randomColor(this.props.page.title)}

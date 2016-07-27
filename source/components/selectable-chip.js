@@ -11,10 +11,6 @@ const SelectableChip = React.createClass({
         isSelected: PropTypes.bool
     },
 
-    contextTypes: {
-        muiTheme: PropTypes.object.isRequired
-    },
-
     mixins: [PureRenderMixin],
 
     render() {

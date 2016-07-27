@@ -26,10 +26,6 @@ const Loader = React.createClass({
         style: PropTypes.object
     },
 
-    contextTypes: {
-        muiTheme: PropTypes.object.isRequired
-    },
-
     mixins: [PureRenderMixin],
 
     getDefaultProps() {

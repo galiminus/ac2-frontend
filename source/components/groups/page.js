@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import Group from 'components/groups/group';
 import PageContainer from 'components/pages/page-container';
@@ -9,6 +10,8 @@ const GroupPage = React.createClass({
     propTypes: {
         params: PropTypes.object.isRequired
     },
+
+    mixins: [PureRenderMixin],
 
     render() {
         return (

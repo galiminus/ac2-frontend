@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'components/pure-render-mixin';
+
 import { connect } from 'react-redux';
 import actionCreators from 'action-creators';
 import api from 'api';
@@ -47,6 +49,8 @@ const HomeContainer = React.createClass({
         currentUserPage: React.PropTypes.object,
         translation: React.PropTypes.object
     },
+
+    mixins: [PureRenderMixin],
 
     getChildContext() {
         return ({

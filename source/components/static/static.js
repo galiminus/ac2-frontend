@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'components/pure-render-mixin';
 
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
@@ -12,6 +13,8 @@ const Static = React.createClass({
         resource: PropTypes.object.isRequired,
         setTitle: PropTypes.func.isRequired
     },
+
+    mixins: [PureRenderMixin],
 
     componentWillMount() {
         this.props.setTitle(this.props.resource.data.title);

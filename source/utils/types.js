@@ -1,6 +1,15 @@
+const typeToActionPrefix = type =>
+    type.split('::').map((klass) => klass.toUpperCase());
+
+const typeToShortPluralType = type =>
+    type.split('::').pop().toLowerCase() + 's'
+
 export default {
+    typeToActionPrefix,
+    typeToShortPluralType,
+
     typeToActions: (type, suffix) => {
-        const classes = type.split('::').map((klass) => klass.toUpperCase());
+        const classes = typeToActionPrefix(type);
 
         const actionNames = [];
         for (let i = 0; i < classes.length; i++) {

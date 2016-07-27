@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'components/pure-render-mixin';
+
 import { connect } from 'react-redux';
 import Cable from 'es6-actioncable';
 
@@ -18,6 +20,8 @@ function connectToCable(Component) {
             tokens: PropTypes.object.isRequired,
             children: React.PropTypes.node
         },
+
+        mixins: [PureRenderMixin],
 
         getInitialState() {
             return { subscriptions: [] };

@@ -8,10 +8,6 @@ const AdditionalLinks = React.createClass({
         resources: PropTypes.object.isRequired
     },
 
-    contextTypes: {
-        muiTheme: PropTypes.object.isRequired
-    },
-
     mixins: [PureRenderMixin],
 
     render() {

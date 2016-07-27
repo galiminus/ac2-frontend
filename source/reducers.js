@@ -1,3 +1,6 @@
+import models from 'models';
+import { typeToShortPluralType, typeToActionPrefix } from 'utils/types';
+
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 
@@ -30,6 +33,11 @@ import title from 'reducers/title';
 
 import resourcesReducerFactory from 'reducer-factories/resources';
 
+const modelReducers = {};
+for (const model of models) {
+    modelReducers[typeToShortPluralType(model)] = resourcesReducerFactory(typeToActionPrefix(model).join('_'));
+}
+
 const reducers = combineReducers({
     tokens,
     currentToken,
@@ -49,17 +57,7 @@ const reducers = combineReducers({
     schemaByModel,
     formFocused,
     title,
-
-    users: resourcesReducerFactory('USER'),
-    schemas: resourcesReducerFactory('SCHEMA'),
-    relationships: resourcesReducerFactory('RELATIONSHIP'),
-    comments: resourcesReducerFactory('COMMENT'),
-    likes: resourcesReducerFactory('LIKE'),
-    messages: resourcesReducerFactory('MESSAGE'),
-    pages: resourcesReducerFactory('PAGE'),
-    events: resourcesReducerFactory('PAGE_EVENT'),
-    groups: resourcesReducerFactory('PAGE_GROUP'),
-    profiles: resourcesReducerFactory('PAGE_PROFILE')
+    ...modelReducers
 });
 
 export default reducers;

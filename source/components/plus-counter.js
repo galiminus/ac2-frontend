@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'components/pure-render-mixin';
+
 import { connect } from 'react-redux';
 
 import Link from 'components/link';
@@ -21,9 +23,7 @@ const PlusCounter = React.createClass({
         style: PropTypes.object
     },
 
-    contextTypes: {
-        muiTheme: PropTypes.object.isRequired
-    },
+    mixins: [PureRenderMixin],
 
     getInitialState() {
         return ({ plusListOpen: false });

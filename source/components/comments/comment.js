@@ -34,10 +34,6 @@ const Comment = React.createClass({
         onCloseCommentEditModal: PropTypes.func
     },
 
-    contextTypes: {
-        muiTheme: PropTypes.object.isRequired
-    },
-
     mixins: [PureRenderMixin],
 
     render() {

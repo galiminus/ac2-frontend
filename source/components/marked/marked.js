@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'components/pure-render-mixin';
+
 import marked from 'marked';
 
 const renderer = new marked.Renderer();
@@ -8,6 +10,8 @@ const Marked = React.createClass({
         body: PropTypes.string.isRequired,
         options: PropTypes.object
     },
+
+    mixins: [PureRenderMixin],
 
     getDefaultProps() {
         return ({

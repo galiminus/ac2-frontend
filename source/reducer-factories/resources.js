@@ -7,7 +7,7 @@ const resourcesReducerFactory = (type) => (state = Immutable.Map({}), action) =>
             tmp.set(action.data.id, action.data).set(action.data.slug, action.data);
         });
 
-    case `${type}_ADD`:
+    case `${type}_REMOVE`:
         return state.withMutations((tmp) => {
             tmp.delete(action.data.id).delete(action.data.slug);
         });
@@ -18,6 +18,6 @@ const resourcesReducerFactory = (type) => (state = Immutable.Map({}), action) =>
     default:
         return state;
     }
-}
+};
 
 export default resourcesReducerFactory;

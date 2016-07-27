@@ -1,3 +1,6 @@
+import models from 'models';
+import { typeToShortPluralType } from 'utils/types';
+
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
@@ -114,7 +117,9 @@ const Application = React.createClass({
             return (this.router);
         }
 
-        const pagesResources = ['profile', 'group', 'event'];
+        const pagesResources = models
+            .filter(model => model.match(/Page::/))
+            .map(model => typeToShortPluralType(model));
 
         this.router = (
             <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -132,36 +137,36 @@ const Application = React.createClass({
 
                     {
                         pagesResources.map(resource => {
-                            const pages = require(`components/${resource}s/${resource}-pages`);
+                            const pages = require(`components/${resource}/pages`);
                             return (
-                                <Route key={`${resource}-pages`} path={`${resource}s`} component={pages} />
+                                <Route key={`${resource}-pages`} path={resource} component={pages} />
                             );
                         })
                     }
 
                     {
                         pagesResources.map(resource => {
-                            const pageNew = require(`components/${resource}s/${resource}-new`);
+                            const pageNew = require(`components/${resource}/new`);
                             return (
-                                <Route key={`${resource}-new`} path={`${resource}s/new`} component={pageNew} />
+                                <Route key={`${resource}-new`} path={`${resource}/new`} component={pageNew} />
                             );
                         })
                     }
 
                     {
                         pagesResources.map(resource => {
-                            const messagesPage = require(`components/${resource}s/${resource}-messages-page`);
+                            const messagesPage = require(`components/${resource}/messages-page`);
                             return (
-                                <Route key={`${resource}-messages-page`} path={`${resource}s/:resourceId`} component={messagesPage} />
+                                <Route key={`${resource}-messages-page`} path={`${resource}/:resourceId`} component={messagesPage} />
                             );
                         })
                     }
 
                     {
                         pagesResources.map(resource => {
-                            const page = require(`components/${resource}s/${resource}-page`);
+                            const page = require(`components/${resource}/page`);
                             return (
-                                <Route key={`${resource}-page`} path={`${resource}s/:resourceId/infos`} component={page} />
+                                <Route key={`${resource}-page`} path={`${resource}/:resourceId/infos`} component={page} />
                             );
                         })
                     }
