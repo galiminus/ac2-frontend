@@ -25,7 +25,7 @@ function mapStateToProps(state, props) {
 
 const PageForm = React.createClass({
     propTypes: {
-        model: PropTypes.object.isRequired,
+        model: PropTypes.string.isRequired,
         schema: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired
     },
