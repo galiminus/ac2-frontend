@@ -61,7 +61,8 @@ function redirectToLoginPage(_nextState, replace) {
 
 function mapStateToProps(state) {
     return ({
-        settings: state.settings
+        settings: state.settings,
+        schemas: state.schemas
     });
 }
 
@@ -99,10 +100,13 @@ const Application = React.createClass({
     },
 
     componentWillMount() {
-        api.settings.getCurrent({ include: 'schema' })
-            .then((settings) => {
-                this.props.addResource(settings);
-            });
+        api.settings.getCurrent({ include: 'schema' }).then((settings) => {
+            this.props.addResource(settings);
+        });
+
+        api.schemas.find().then((resources) => {
+            this.props.addResource(resources);
+        });
     },
 
     componentWillReceiveProps(props) {
@@ -182,7 +186,7 @@ const Application = React.createClass({
     },
 
     render() {
-        if (!this.props.settings.data) {
+        if (!this.props.settings.data || this.props.schemas.size === 0) {
             return (<CircularProgress style={{ position: 'absolute', top: '40%', left: '50%', marginLeft: -25 }} />);
         }
 

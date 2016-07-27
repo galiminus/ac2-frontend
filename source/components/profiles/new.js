@@ -4,7 +4,7 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import PageForm from 'components/pages/page-form';
+import PageCreateForm from 'components/pages/page-create-form';
 
 const ProfileNew = React.createClass({
     propTypes: {
@@ -17,8 +17,17 @@ const ProfileNew = React.createClass({
         this.props.setTitle(this.context.translation.t('links.newProfile'));
     },
 
+    handleSubmit(resource) {
+        browserHistory.push(`/groups/${resource.slug}`);
+    },
+
     render() {
-        return (<PageForm model="Page::Profile" />);
+        return (
+            <PageCreateForm
+                type="Page::Profile"
+                onSubmit={this.handleSubmit}
+            />
+        );
     }
 });
 

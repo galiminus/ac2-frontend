@@ -4,7 +4,7 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import PageForm from 'components/pages/page-form';
+import PageCreateForm from 'components/pages/page-create-form';
 
 const GroupNew = React.createClass({
     propTypes: {
@@ -17,8 +17,17 @@ const GroupNew = React.createClass({
         this.props.setTitle(this.context.translation.t('links.newGroup'));
     },
 
+    handleSubmit(resource) {
+        browserHistory.push(`/groups/${resource.slug}`);
+    },
+
     render() {
-        return (<PageForm model="Page::Group" />);
+        return (
+            <PageCreateForm
+                type="Page::Group"
+                onSubmit={this.handleSubmit}
+            />
+        );
     }
 });
 

@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
+import browserHistory from 'react-router/lib/browserHistory';
+
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import PageForm from 'components/pages/page-form';
+import PageCreateForm from 'components/pages/page-create-form';
 
 const EventNew = React.createClass({
     propTypes: {
@@ -17,12 +19,15 @@ const EventNew = React.createClass({
         this.props.setTitle(this.context.translation.t('links.newEvent'));
     },
 
+    handleSubmit(resource) {
+        browserHistory.push(`/events/${resource.slug}`);
+    },
+
     render() {
         return (
-            <PageForm
-                label="events"
-                model="Page::Event"
-                editable
+            <PageCreateForm
+                type="Page::Event"
+                onSubmit={this.handleSubmit}
             />
         );
     }

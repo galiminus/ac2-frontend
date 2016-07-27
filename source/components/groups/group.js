@@ -6,48 +6,29 @@ import { connect } from 'react-redux';
 import api from 'api';
 
 import actionCreators from 'action-creators';
-import Form from 'components/form';
+import PageEditForm from 'components/pages/page-edit-form';
 
 const Group = React.createClass({
     propTypes: {
         resource: PropTypes.object.isRequired,
-        schema: PropTypes.object.isRequired,
-        addResource: PropTypes.func.isRequired,
         setTitle: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
 
-    getInitialState() {
-        return ({ loading: false });
-    },
-
     componentWillMount() {
         this.props.setTitle(this.props.resource.title);
     },
 
-    onChange(data) {
-        this.setState({ loading: true });
-        return (
-            api.pages
-                .update(this.props.resource.id, { data })
-                .then((resource) => {
-                    this.setState({ loading: false });
-                    this.props.addResource(resource);
-                })
-        );
-    },
-
     render() {
         return (
-            <Form
-                loading={this.state.loading}
-                label="profile"
-                record={this.props.resource.data}
-                schema={this.props.schema.data}
-                editable={this.props.resource.permissions.update}
-                onChange={this.onChange}
-            />
+            <div style={{ marginTop: 16 }}>
+                <EventBanner page={this.props.resource} />
+                <PageEditForm
+                    resource={this.props.resource}
+                    editable={this.props.resource.permissions.update}
+                />
+            </div>
         );
     }
 });

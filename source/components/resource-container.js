@@ -41,7 +41,7 @@ const ResourceContainer = React.createClass({
     },
 
     load(id) {
-        this.props.get(id, { include: 'schema' })
+        this.props.get(id)
             .then(
                 (response) => {
                     this.props.addResource(response);
