@@ -4,8 +4,8 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import PagesContainer from './pages-container';
-import Groups from 'components/group/groups';
+import PagesContainer from 'components/pages/pages-container';
+import Groups from 'components/groups/groups';
 
 const GroupsFactory = React.createFactory(Groups);
 

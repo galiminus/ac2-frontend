@@ -36,7 +36,7 @@ const Events = React.createClass({
                         </Link>
                     }
                     actionIcons={[
-                        <Link to={`/events/${page.slug}`} onBlack>
+                        <Link to={`/events/${page.slug}/infos`} onBlack>
                             <IconButton>
                                 <InfoButton color="#fff" />
                             </IconButton>

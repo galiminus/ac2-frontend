@@ -3,11 +3,8 @@ import PureRenderMixin from 'components/pure-render-mixin';
 
 import Link from 'components/link';
 
-import InfoButton from 'material-ui/svg-icons/action/info';
+import AccountIcon from 'material-ui/svg-icons/action/account-circle';
 import IconButton from 'material-ui/IconButton';
-
-import FloatingActionButton from 'components/floating-action-button';
-import CreateContentIcon from 'material-ui/svg-icons/action/note-add';
 
 import PageAvatar from 'components/pages/page-avatar';
 import PagesGridList from 'components/pages/pages-grid-list';
@@ -15,7 +12,7 @@ import PagesGridTile from 'components/pages/pages-grid-tile';
 
 import Loader from 'components/loader';
 
-const Groups = React.createClass({
+const Profiles = React.createClass({
     propTypes: {
         resources: PropTypes.object.isRequired
     },
@@ -30,15 +27,15 @@ const Groups = React.createClass({
                     page={page}
                     banner={"https://placeimg.com/640/480/any"}
                     title={
-                        <Link to={`/groups/${page.slug}`} onBlack>
+                        <Link to={`/profiles/${page.slug}`} onBlack>
                             <PageAvatar page={page} />
                             {page.title}
                         </Link>
                     }
                     actionIcons={[
-                        <Link to={`/groups/${page.slug}`} onBlack>
+                        <Link to={`/profiles/${page.slug}/infos`} onBlack>
                             <IconButton>
-                                <InfoButton color="#fff" />
+                                <AccountIcon color="#fff" />
                             </IconButton>
                         </Link>
                     ]}
@@ -53,12 +50,9 @@ const Groups = React.createClass({
                 <PagesGridList>
                     {this.renderResources()}
                 </PagesGridList>
-                <FloatingActionButton href={`/pages/new?model=Page::Group`}>
-                    <CreateContentIcon />
-                </FloatingActionButton>
             </Loader>
         );
     }
 });
 
-export default Groups;
+export default Profiles;

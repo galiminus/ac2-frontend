@@ -4,8 +4,8 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import PagesContainer from './pages-container';
-import Profiles from 'components/profile/profiles';
+import PagesContainer from 'components/pages/pages-container';
+import Profiles from 'components/profiles/profiles';
 
 const ProfilesFactory = React.createFactory(Profiles);
 

@@ -29,16 +29,21 @@ import MainPage from 'components/pages/main-page';
 import QuizzPage from 'components/pages/quizz-page';
 import PollsPage from 'components/pages/polls-page';
 
-import ProfileMessagesPage from 'components/pages/profile-messages-page';
-import EventMessagesPage from 'components/pages/event-messages-page';
-
-import ProfilePage from 'components/pages/profile-page';
 import StaticPage from 'components/pages/static-page';
-import ProfilePages from 'components/pages/profile-pages';
-import EventPages from 'components/pages/event-pages';
-import GroupPages from 'components/pages/group-pages';
 import PageForm from 'components/pages/page-form';
 import Settings from 'components/settings';
+
+import ProfilePages from 'components/profiles/profile-pages';
+import ProfileMessagesPage from 'components/profiles/profile-messages-page';
+import ProfilePage from 'components/profiles/profile-page';
+
+import EventPages from 'components/events/event-pages';
+import EventPage from 'components/events/event-page';
+import EventMessagesPage from 'components/events/event-messages-page';
+
+import GroupPages from 'components/groups/group-pages';
+import GroupPage from 'components/groups/group-page';
+import GroupMessagesPage from 'components/groups/group-messages-page';
 
 import { Provider } from 'react-redux';
 
@@ -140,14 +145,14 @@ const Application = React.createClass({
                     <Route path="profiles/:resourceId/infos" component={ProfilePage} />
 
                     <Route path="events" component={EventPages} />
-                    <Route path="events/new" component={EventPages} />
+                    <Route path="events/new" component={PageForm} />
                     <Route path="events/:resourceId" component={EventMessagesPage} />
-                    <Route path="events/:resourceId/infos" component={ProfileMessagesPage} />
+                    <Route path="events/:resourceId/infos" component={EventPage} />
 
                     <Route path="groups" component={GroupPages} />
-                    <Route path="groups/new" component={EventPages} />
-                    <Route path="groups/:resourceId" component={EventPages} />
-                    <Route path="groups/:resourceId/infos" component={EventPages} />
+                    <Route path="groups/new" component={PageForm} />
+                    <Route path="groups/:resourceId" component={GroupMessagesPage} />
+                    <Route path="groups/:resourceId/infos" component={GroupPage} />
 
                     <Route path="settings/:category" component={Settings} />
 

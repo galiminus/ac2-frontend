@@ -50,7 +50,7 @@ const Navigation = React.createClass({
                             leftIcon={<GroupsIcon />}
                         />
                     </Link>
-                    <Link to="/members">
+                    <Link to="/profiles">
                         <ListItem
                             primaryText={this.context.translation.t('links.members')}
                             leftIcon={<MembersIcon />}

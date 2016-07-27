@@ -4,7 +4,7 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import ProfileBanner from 'components/profile/profile-banner';
+import ProfileBanner from 'components/profiles/profile-banner';
 import MessagesContainer from 'components/messages/messages-container';
 
 const ProfileMessages = React.createClass({

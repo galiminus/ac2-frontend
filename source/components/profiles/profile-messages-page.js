@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import PageContainer from './page-container';
-import ProfileMessages from 'components/profile/profile-messages';
+import PageContainer from 'components/pages/page-container';
+import ProfileMessages from 'components/profiles/profile-messages';
 
 const ProfileMessagesFactory = React.createFactory(ProfileMessages);
 

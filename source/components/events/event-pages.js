@@ -4,8 +4,8 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import PagesContainer from './pages-container';
-import Events from 'components/event/events';
+import PagesContainer from 'components/pages/pages-container';
+import Events from 'components/events/events';
 
 const EventsFactory = React.createFactory(Events);
 

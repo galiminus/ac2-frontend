@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import PageContainer from './page-container';
-import EventMessages from 'components/event/event-messages';
+import PageContainer from 'components/pages/page-container';
+import EventMessages from 'components/events/event-messages';
 
 const EventMessagesFactory = React.createFactory(EventMessages);
 

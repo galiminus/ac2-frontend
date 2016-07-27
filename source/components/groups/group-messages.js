@@ -4,10 +4,10 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 import { setTitle } from 'action-creators';
 
-import ProfileBanner from 'components/profile/profile-banner';
+import ProfileBanner from 'components/profiles/profile-banner';
 import MessagesContainer from 'components/messages/messages-container';
 
-const EventMessages = React.createClass({
+const GroupMessages = React.createClass({
     propTypes: {
         resource: PropTypes.object.isRequired,
         setTitle: PropTypes.func.isRequired
@@ -46,4 +46,4 @@ const EventMessages = React.createClass({
     }
 });
 
-export default connect(undefined, { setTitle })(EventMessages);
+export default connect(undefined, { setTitle })(GroupMessages);

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
-import Profile from 'components/profile/profile';
-import PageContainer from './page-container';
+import Profile from 'components/profiles/profile';
+import PageContainer from 'components/pages/page-container';
 
 const ProfileFactory = React.createFactory(Profile);
 
