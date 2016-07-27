@@ -33,18 +33,6 @@ import StaticPage from 'components/pages/static-page';
 import PageForm from 'components/pages/page-form';
 import Settings from 'components/settings';
 
-import ProfilePages from 'components/profiles/profile-pages';
-import ProfileMessagesPage from 'components/profiles/profile-messages-page';
-import ProfilePage from 'components/profiles/profile-page';
-
-import EventPages from 'components/events/event-pages';
-import EventPage from 'components/events/event-page';
-import EventMessagesPage from 'components/events/event-messages-page';
-
-import GroupPages from 'components/groups/group-pages';
-import GroupPage from 'components/groups/group-page';
-import GroupMessagesPage from 'components/groups/group-messages-page';
-
 import { Provider } from 'react-redux';
 
 import store from 'store';
@@ -125,6 +113,8 @@ const Application = React.createClass({
             return (this.router);
         }
 
+        const resources = ['profile', 'group', 'event'];
+
         this.router = (
             <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
                 <Route path="/welcome" component={WelcomePage} onEnter={redirectToHomePage}>
@@ -139,20 +129,40 @@ const Application = React.createClass({
                     <Route path="quizz" component={QuizzPage} />
                     <Route path="polls" component={PollsPage} />
 
-                    <Route path="profiles" component={ProfilePages} />
-                    <Route path="profiles/new" component={PageForm} />
-                    <Route path="profiles/:resourceId" component={ProfileMessagesPage} />
-                    <Route path="profiles/:resourceId/infos" component={ProfilePage} />
+                    {
+                        resources.map(resource => {
+                            const pages = require(`components/${resource}s/${resource}-pages`);
+                            return (
+                                <Route key={`${resource}-pages`} path={`${resource}s`} component={pages} />
+                            );
+                        })
+                    }
 
-                    <Route path="events" component={EventPages} />
-                    <Route path="events/new" component={PageForm} />
-                    <Route path="events/:resourceId" component={EventMessagesPage} />
-                    <Route path="events/:resourceId/infos" component={EventPage} />
+                    {
+                        resources.map(resource => {
+                            return (
+                                <Route key={`${resource}-new`} path={`${resource}s/new`} component={PageForm} />
+                            );
+                        })
+                    }
 
-                    <Route path="groups" component={GroupPages} />
-                    <Route path="groups/new" component={PageForm} />
-                    <Route path="groups/:resourceId" component={GroupMessagesPage} />
-                    <Route path="groups/:resourceId/infos" component={GroupPage} />
+                    {
+                        resources.map(resource => {
+                            const messages_page = require(`components/${resource}s/${resource}-messages-page`);
+                            return (
+                                <Route key={`${resource}-messages-page`} path={`${resource}s/:resourceId`} component={messages_page} />
+                            );
+                        })
+                    }
+
+                    {
+                        resources.map(resource => {
+                            const page = require(`components/${resource}s/${resource}-page`);
+                            return (
+                                <Route key={`${resource}-page`} path={`${resource}s/:resourceId/infos`} component={page} />
+                            );
+                        })
+                    }
 
                     <Route path="settings/:category" component={Settings} />
 
