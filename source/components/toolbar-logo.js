@@ -29,7 +29,7 @@ const ToolbarLogo = React.createClass({
         return (
             <ToolbarTitle
                 style={{
-                    fontFamily: 'Roboto, sans-serif',
+                    fontFamily: this.context.muiTheme.fontFamily,
                     fontWeight: 400,
                     color: 'rgb(204, 150, 116)',
                     paddingRight: 0,

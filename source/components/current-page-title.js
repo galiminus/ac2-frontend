@@ -10,12 +10,6 @@ function mapStateToProps(state) {
     });
 }
 
-const style = {
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 400,
-    color: '#ffffff'
-};
-
 const CurrentPageTitle = React.createClass({
     propTypes: {
         title: PropTypes.string.isRequired
@@ -24,6 +18,11 @@ const CurrentPageTitle = React.createClass({
     mixins: [PureRenderMixin],
 
     render() {
+        const style = {
+            fontFamily: this.context.muiTheme.fontFamily,
+            fontWeight: 400,
+            color: '#ffffff'
+        };
         return (
             <ToolbarTitle style={style} text={this.props.title} />
         );

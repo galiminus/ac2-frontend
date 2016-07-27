@@ -17,10 +17,6 @@ const LoaderIcon = React.createClass({
         icon: PropTypes.node.isRequired
     },
 
-    contextTypes: {
-        muiTheme: PropTypes.object.isRequired
-    },
-
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
@@ -55,7 +51,8 @@ const LoaderIcon = React.createClass({
                 {comment &&
                     <p
                         style={{
-                            color: this.context.muiTheme.palette.accent3Color
+                            color: this.context.muiTheme.palette.accent3Color,
+                            fontFamily: this.context.muiTheme.fontFamily
                         }}
                     >
                         {comment}

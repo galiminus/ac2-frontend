@@ -32,7 +32,7 @@ const Notifier = React.createClass({
 
     render() {
         const style = {
-            fontFamily: 'Roboto, sans-serif'
+            fontFamily: this.context.muiTheme.fontFamily
         };
 
         const message = this.props.notification.message ? this.context.translation.t(`errors.${this.props.notification.message}`) : '';
