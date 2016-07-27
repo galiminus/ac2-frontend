@@ -10,15 +10,14 @@ import PageCardTitle from 'components/pages/page-card-title';
 
 const EventBanner = React.createClass({
     propTypes: {
-        page: PropTypes.object.isRequired,
-        style: PropTypes.object
+        page: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
 
     render() {
         return (
-            <Card style={Object.assign({ marginTop: 32 }, this.props.style)}>
+            <Card>
                 <CardMedia
                     overlay={
                         <PageCardTitle page={this.props.page}>

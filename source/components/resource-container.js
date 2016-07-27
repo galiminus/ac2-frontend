@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import actionCreators from 'action-creators';
 
 function mapStateToProps(state, props) {
-    const resource = state.resources.get(props.id);
+    const resource = state[props.storeName].get(props.id);
 
     if (!resource) {
         return ({});

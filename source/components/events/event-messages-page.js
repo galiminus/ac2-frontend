@@ -15,7 +15,12 @@ const EventMessagesPage = React.createClass({
 
     render() {
         return (
-            <PageContainer factory={EventMessagesFactory} id={this.props.params.resourceId} {...this.props} />
+            <PageContainer
+                {...this.props}
+                factory={EventMessagesFactory}
+                id={this.props.params.resourceId}
+                storeName="pages"
+            />
         );
     }
 });

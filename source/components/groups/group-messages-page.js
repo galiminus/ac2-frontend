@@ -15,7 +15,12 @@ const GroupMessagesPage = React.createClass({
 
     render() {
         return (
-            <PageContainer factory={GroupMessagesFactory} id={this.props.params.resourceId} {...this.props} />
+            <PageContainer
+                {...this.props}
+                factory={GroupMessagesFactory}
+                id={this.props.params.resourceId}
+                storeName="pages"
+            />
         );
     }
 });

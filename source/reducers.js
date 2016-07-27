@@ -9,13 +9,10 @@ import currentToken from 'reducers/current-token';
 
 import currentPage from 'reducers/current-page';
 
-import resources from 'reducers/resources';
-
 import groups from 'reducers/groups';
 import relationships from 'reducers/relationships';
 import relationshipsByProposer from 'reducers/relationships-by-proposer';
 import pages from 'reducers/pages';
-import pagesByType from 'reducers/pages-by-type';
 import messages from 'reducers/messages';
 import comments from 'reducers/comments';
 import commentsByMessage from 'reducers/comments-by-message';
@@ -42,7 +39,6 @@ import title from 'reducers/title';
 const reducers = combineReducers({
     tokens,
     currentToken,
-    resources,
     users,
     groups,
     relationships,
@@ -52,7 +48,6 @@ const reducers = combineReducers({
     messages,
     messagesByPage,
     pages,
-    pagesByType,
     comments,
     commentsByMessage,
     likesByComment,
