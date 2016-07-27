@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { updatePath } from 'redux-simple-router';
 import PureRenderMixin from 'components/pure-render-mixin';
 
 import TextField from 'material-ui/TextField';
@@ -18,18 +17,6 @@ const style = {
         marginTop: 8
     }
 };
-
-const authenticate = (fields, dispatch) =>
-api.tokens.create(fields, dispatch).then((accessTokenData) => {
-    dispatch(setCurrentToken(accessTokenData.access_token));
-
-    api.users.me({}, dispatch).then((userData) => {
-        dispatch([
-            setCurrentUser(userData.id),
-            updatePath('/')
-        ]);
-    });
-});
 
 const validate = values => {
     return {

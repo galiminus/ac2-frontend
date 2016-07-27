@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import { updatePath } from 'redux-simple-router';
+import browserHistory from 'react-router/lib/browserHistory';
 import { dispatch } from 'store';
 import { batchActions } from 'redux-batched-actions';
 
@@ -32,9 +32,9 @@ const authenticate = (userId, fields) =>
                 dispatch(batchActions([
                     addToken(data),
                     setCurrentUser(userId),
-                    setCurrentToken(data.access_token),
-                    updatePath('/')
+                    setCurrentToken(data.access_token)
                 ]));
+                browserHistory.push('/');
             },
             (error) => {
                 if (error.response !== undefined) {

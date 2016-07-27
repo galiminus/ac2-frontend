@@ -50,8 +50,6 @@ import actionCreators from 'action-creators';
 /* this doesn't seem to work with import */
 const colors = require('material-ui/styles/colors');
 
-syncReduxAndRouter(browserHistory, store);
-
 function redirectToHomePage(_nextState, replace) {
     if (store.getState().currentToken) {
         replace('/');

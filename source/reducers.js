@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
-import { routeReducer } from 'redux-simple-router';
 
 import users from 'reducers/users';
 import currentUser from 'reducers/current-user';
@@ -68,8 +67,7 @@ const reducers = combineReducers({
     schemas,
     schemaByModel,
     formFocused,
-    title,
-    routing: routeReducer
+    title
 });
 
 export default reducers;

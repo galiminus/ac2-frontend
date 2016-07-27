@@ -9,8 +9,6 @@ import translations from 'action-creators/translations';
 import currentLocale from 'action-creators/current-locale';
 import title from 'action-creators/title';
 
-import { updatePath } from 'redux-simple-router';
-
 export default {
     ...currentUser,
     ...currentToken,
@@ -21,6 +19,5 @@ export default {
     ...translations,
     ...currentLocale,
     ...resources,
-    ...title,
-    updatePath
+    ...title
 };

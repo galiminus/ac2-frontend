@@ -3,8 +3,8 @@ import { reduxForm } from 'redux-form';
 import PureRenderMixin from 'components/pure-render-mixin';
 
 import { dispatch } from 'store';
-import { updatePath } from 'redux-simple-router';
 import { batchActions } from 'redux-batched-actions';
+import browserHistory from 'react-router/lib/browserHistory';
 
 import Link from 'components/link';
 
@@ -35,9 +35,9 @@ const authenticate = (fields) =>
             (data) => {
                 dispatch(batchActions([
                     addToken(data),
-                    setCurrentToken(data.access_token),
-                    updatePath('/')
+                    setCurrentToken(data.access_token)
                 ]));
+                browserHistory.push('/');
             },
             (error) => {
                 if (error.response !== undefined) {
