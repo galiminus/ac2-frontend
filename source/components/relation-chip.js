@@ -1,3 +1,5 @@
+import { typeToShortPluralType } from 'utils/types';
+
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
@@ -44,57 +46,47 @@ const RelationChip = React.createClass({
         return this.props.relationships.find((relationship) => relationship.recipient_id === this.props.recipient.id);
     },
 
-    createRelationship(value) {
-        return (
-            api.relationships.create({
-                recipient_id: this.props.recipient.id,
-                value
-            })
-        );
-    },
-
-    updateRelationship(id, value) {
-        return (
-            api.relationships.update(id, {
-                value
-            })
-        );
-    },
-
-    destroyRelationship(id) {
-        return (api.relationships.destroy(id));
-    },
-
-    handleRelationshipChange(relationship, value) {
-        let promise;
-
-        if (relationship && relationship.id) {
-            if (value === 'none') {
-                promise = this.destroyRelationship(relationship.id).then(() => {
-                    this.props.removeResource(relationship);
-                });
-            } else {
-                promise = this.updateRelationship(relationship.id, value).then((response) => {
-                    this.props.addResource(response);
-                });
-            }
-        } else if (value !== 'none') {
-            promise = this.createRelationship(value).then((response) => {
-                this.props.addResource(response);
-            });
-        } else {
-            return;
-        }
-
-        promise.catch(
+    handleRelationshipDestroy(relationship) {
+        api.relationships.destroy(relationship.id).then(
             () => {
-                this.props.pushNotification('relationship_change_fatal_error');
+                this.props.removeResource(relationship);
+            },
+            () => {
+                this.props.pushNotification('relationshipDestroy');
+            }
+        );
+    },
+
+    handleRelationshipCreate(value) {
+        api.relationships.create({
+            recipient_id: this.props.recipient.id,
+            value
+        }).then(
+            (resource) => {
+                this.props.addResource(resource);
+            },
+            () => {
+                this.props.pushNotification('relationshipCreate');
+            }
+        );
+    },
+
+    handleRelationshipUpdate(relationship, value) {
+        api.relationships.update(relationship.id, {
+            value
+        }).then(
+            (resource) => {
+                this.props.addResource(resource);
+            },
+            () => {
+                this.props.pushNotification('relationshipUpdate');
             }
         );
     },
 
     render() {
         const relationship = this.findRelationship();
+        const labelPrefix = `labels.relationshipStatus.${typeToShortPluralType(this.props.recipient.type)}`;
 
         if (this.props.recipient.id === this.props.proposer.id) {
             return (
@@ -102,23 +94,35 @@ const RelationChip = React.createClass({
             );
         }
 
+        const currentLabel = relationship ? relationship.value : 'none';
         return (
             <IconMenu
                 useLayerForClickAway
                 iconButtonElement={
                     <Chip>
-                        {this.context.translation.t(`labels.relationships.${relationship ? relationship.value : 'none'}`)}
+                        {this.context.translation.t(`${labelPrefix}.${currentLabel}`)}
                     </Chip>
                 }
             >
+                <MenuItem
+                    style={{ cursor: 'pointer' }}
+                    onTouchTap={() => this.handleRelationshipDestroy(relationship)}
+                    primaryText={this.context.translation.t(`${labelPrefix}.none`)}
+                />
                 {
                     this.props.relationshipStatus.map((value) => {
                         return (
                             <MenuItem
                                 key={value}
                                 style={{ cursor: 'pointer' }}
-                                onTouchTap={() => this.handleRelationshipChange(relationship, value)}
-                                primaryText={this.context.translation.t(`labels.relationships.${value}`)}
+                                onTouchTap={() => {
+                                    if (relationship) {
+                                        this.handleRelationshipUpdate(relationship, value);
+                                    } else {
+                                        this.handleRelationshipCreate(value);
+                                    }
+                                }}
+                                primaryText={this.context.translation.t(`${labelPrefix}.${value}`)}
                             />
                         );
                     })
