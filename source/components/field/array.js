@@ -11,9 +11,7 @@ import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
 import TextField from 'material-ui/TextField';
 
-const defaultProps = {
-    record: []
-};
+import InputTitle from './input-title';
 
 const ArrayField = React.createClass({
     propTypes: {
@@ -28,7 +26,9 @@ const ArrayField = React.createClass({
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return (defaultProps);
+        return ({
+            record: []
+        });
     },
 
     getInitialState() {
@@ -128,7 +128,7 @@ const ArrayField = React.createClass({
                 disabled
                 primaryText={
                     <div>
-                        {this.props.title}
+                        <InputTitle>{this.props.title}</InputTitle>
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {this.renderChips()}
                             {this.props.editable && this.renderAddChip()}

@@ -9,6 +9,7 @@ import ArrayField from './array';
 import EnumArray from './enum-array';
 import ObjectField from './object';
 import Dictionnary from './dictionnary';
+import DateTimeField from './date-time';
 
 const Field = React.createClass({
     propTypes: {
@@ -33,10 +34,11 @@ const Field = React.createClass({
             if (this.props.schema.enum) {
                 return (<EnumField {...newProps} />);
             }
-
             switch (this.props.schema.format) {
             case 'text':
                 return (<TextField {...newProps} />);
+            case 'date-time':
+                return (<DateTimeField {...newProps} />);
             default:
                 return (<StringField {...newProps} />);
             }

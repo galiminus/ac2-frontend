@@ -4,6 +4,8 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import ListItem from 'material-ui/List/ListItem';
 import SelectableChip from 'components/selectable-chip';
 
+import InputTitle from './input-title';
+
 const EnumField = React.createClass({
     propTypes: {
         record: PropTypes.string,
@@ -38,7 +40,7 @@ const EnumField = React.createClass({
                 disabled
                 primaryText={
                     <div>
-                        {this.props.title}
+                        <InputTitle>{this.props.title}</InputTitle>
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {this.renderField()}
                         </div>

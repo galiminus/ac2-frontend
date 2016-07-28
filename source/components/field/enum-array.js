@@ -5,9 +5,7 @@ import SelectableChip from 'components/selectable-chip';
 
 import ListItem from 'material-ui/List/ListItem';
 
-const defaultProps = {
-    record: []
-};
+import InputTitle from './input-title';
 
 const EnumField = React.createClass({
     propTypes: {
@@ -22,7 +20,9 @@ const EnumField = React.createClass({
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return (defaultProps);
+        return ({
+            record: []
+        });
     },
 
     handleTouchTap(value) {
@@ -63,7 +63,7 @@ const EnumField = React.createClass({
                 onMouseLeave={this.setMouseOutside}
                 primaryText={
                     <div>
-                        {this.props.title}
+                        <InputTitle>{this.props.title}</InputTitle>
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {this.renderField()}
                         </div>

@@ -1,6 +1,3 @@
-import models from 'models';
-import { typeToShortPluralType } from 'utils/types';
-
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
@@ -70,7 +67,8 @@ const Application = React.createClass({
     propTypes: {
         settings: PropTypes.object.isRequired,
         schemas: PropTypes.object.isRequired,
-        addResource: PropTypes.func.isRequired
+        addResource: PropTypes.func.isRequired,
+        pages: PropTypes.array.isRequired
     },
 
     childContextTypes: {
@@ -117,14 +115,54 @@ const Application = React.createClass({
         }
     },
 
+    renderPagesRoutes() {
+        return (
+            this.props.pages.map(resource => {
+                const pages = require(`components/${resource}/pages`);
+                return (
+                    <Route key={`${resource}-pages`} path={resource} component={pages} />
+                );
+            })
+        );
+    },
+
+    renderPageNewRoutes() {
+        return (
+            this.props.pages.map(resource => {
+                const pageNew = require(`components/${resource}/new`);
+                return (
+                    <Route key={`${resource}-new`} path={`${resource}/new`} component={pageNew} />
+                );
+            })
+        );
+    },
+
+    renderMessagePagesRoutes() {
+        return (
+            this.props.pages.map(resource => {
+                const messagesPage = require(`components/${resource}/messages-page`);
+                return (
+                    <Route key={`${resource}-messages-page`} path={`${resource}/:resourceId`} component={messagesPage} />
+                );
+            })
+        );
+    },
+
+    renderPageRoutes() {
+        return (
+            this.props.pages.map(resource => {
+                const page = require(`components/${resource}/page`);
+                return (
+                    <Route key={`${resource}-page`} path={`${resource}/:resourceId/infos`} component={page} />
+                );
+            })
+        );
+    },
+
     renderRouter() {
         if (this.router) {
             return (this.router);
         }
-
-        const pagesResources = models
-            .filter(model => model.match(/Page::/))
-            .map(model => typeToShortPluralType(model));
 
         this.router = (
             <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -140,49 +178,19 @@ const Application = React.createClass({
                     <Route path="quizz" component={QuizzPage} />
                     <Route path="polls" component={PollsPage} />
 
-                    {
-                        pagesResources.map(resource => {
-                            const pages = require(`components/${resource}/pages`);
-                            return (
-                                <Route key={`${resource}-pages`} path={resource} component={pages} />
-                            );
-                        })
-                    }
-
-                    {
-                        pagesResources.map(resource => {
-                            const pageNew = require(`components/${resource}/new`);
-                            return (
-                                <Route key={`${resource}-new`} path={`${resource}/new`} component={pageNew} />
-                            );
-                        })
-                    }
-
-                    {
-                        pagesResources.map(resource => {
-                            const messagesPage = require(`components/${resource}/messages-page`);
-                            return (
-                                <Route key={`${resource}-messages-page`} path={`${resource}/:resourceId`} component={messagesPage} />
-                            );
-                        })
-                    }
-
-                    {
-                        pagesResources.map(resource => {
-                            const page = require(`components/${resource}/page`);
-                            return (
-                                <Route key={`${resource}-page`} path={`${resource}/:resourceId/infos`} component={page} />
-                            );
-                        })
-                    }
-
                     <Route path="settings/:category" component={Settings} />
                     <Route path="statics/:resourceId" component={StaticPage} />
+
+                    {this.renderPagesRoutes()}
+                    {this.renderPageNewRoutes()}
+                    {this.renderMessagePagesRoutes()}
+                    {this.renderPageRoutes()}
 
                     <Route path="*" component={NotFoundPage} />
                 </Route>
             </Router>
         );
+
         return (this.router);
     },
 
@@ -201,6 +209,6 @@ const ConnectedApplication = connect(mapStateToProps, actionCreators)(Applicatio
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedApplication />
+        <ConnectedApplication pages={['profiles', 'events', 'groups']} />
     </Provider>
 , document.getElementById('application'));
