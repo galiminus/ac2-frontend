@@ -4,13 +4,12 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import ListItem from 'material-ui/List/ListItem';
 import MaterialTextField from 'material-ui/TextField';
 
-const defaultProps = {
-    record: ''
-};
+import { translateErrors } from 'utils/errors';
 
 const TextField = React.createClass({
     propTypes: {
         schema: PropTypes.object.isRequired,
+        errors: PropTypes.object.isRequired,
         record: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
@@ -22,7 +21,10 @@ const TextField = React.createClass({
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return (defaultProps);
+        return ({
+            record: '',
+            errors: { values: [] }
+        });
     },
 
     handleChange(event) {
@@ -39,10 +41,10 @@ const TextField = React.createClass({
                             fullWidth
                             multiLine
                             rows={2}
-                            ref="valueField"
                             value={this.props.record}
                             floatingLabelText={this.props.title}
                             onChange={this.handleChange}
+                            errorText={translateErrors(this.props.errors.values, this.context.translation)}
                         />
                     </div>
                 }

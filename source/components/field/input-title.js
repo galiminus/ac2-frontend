@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const InputTitle = React.createClass({
     propTypes: {
-        children: PropTypes.object.isRequired
+        children: PropTypes.string.isRequired
     },
 
     render() {

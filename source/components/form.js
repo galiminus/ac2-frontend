@@ -7,12 +7,7 @@ import FloatingActionButton from 'components/floating-action-button';
 
 import Field from 'components/field/field';
 
-const defaultProps = {
-    schema: {
-        properties: {}
-    },
-    record: {}
-};
+import { validate } from 'jsonschema';
 
 const Form = React.createClass({
     propTypes: {
@@ -28,18 +23,30 @@ const Form = React.createClass({
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return (defaultProps);
+        return ({
+            record: {}
+        });
     },
 
     getInitialState() {
-        return ({ record: this.props.record, loading: false });
+        return ({
+            record: this.props.record,
+            pristine: true,
+            errors: this.validate(this.props.record),
+            loading: false
+        });
     },
 
     handleUpdate(category, record) {
-        const newRecord = Object.assign({}, this.state.record);
+        const newRecord = { ...this.state.record };
         newRecord[category] = record;
 
-        this.setState({ record: newRecord });
+        this.setState({
+            record: newRecord,
+            pristine: false,
+            errors: this.validate(newRecord)
+        });
+
         return (this.props.onChange && this.props.onChange(newRecord));
     },
 
@@ -48,6 +55,25 @@ const Form = React.createClass({
         this.props.onSubmit(this.state.record).then(() => {
             this.setState({ loading: false });
         });
+    },
+
+    validate(record) {
+        const errors = {};
+        const validation = validate(record, this.props.schema);
+
+        for (const error of validation.errors) {
+            const propertiesPath = error.property.replace(/^instance\./, '').split('.');
+
+            let tmpErrorPath = errors;
+            for (const propertyPath of propertiesPath) {
+                if (!tmpErrorPath[propertyPath]) {
+                    tmpErrorPath[propertyPath] = { values: [] };
+                }
+                tmpErrorPath = tmpErrorPath[propertyPath];
+            }
+            tmpErrorPath.values.push(error);
+        }
+        return (errors);
     },
 
     render() {
@@ -67,18 +93,19 @@ const Form = React.createClass({
                     onUpdate={this.handleUpdate}
                     onChange={(record) => this.handleUpdate(category, record)}
                     editable={this.props.editable}
+                    errors={this.state.errors[category]}
                 />
             );
         }
         return (
-            <div>
+            <form>
                 {cards}
-                {this.props.editable &&
+                {this.props.editable && Object.keys(this.state.errors).length === 0 &&
                     <FloatingActionButton loading={this.state.loading} onMouseUp={this.handleSubmit}>
                         <SaveIcon />
                     </FloatingActionButton>
                 }
-            </div>
+            </form>
         );
     }
 });

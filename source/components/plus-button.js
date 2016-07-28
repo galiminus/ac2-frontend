@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-// import PureRenderMixin from 'components/pure-render-mixin';
 import PureRenderMixin from 'components/pure-render-mixin';
 
 import IconButton from 'material-ui/IconButton/IconButton';

@@ -9,10 +9,13 @@ import TimePicker from 'material-ui/TimePicker';
 
 import InputTitle from './input-title';
 
+import { translateErrors } from 'utils/errors';
+
 const DateTimeField = React.createClass({
     propTypes: {
         schema: PropTypes.object.isRequired,
-        record: PropTypes.string.isRequired,
+        errors: PropTypes.object.isRequired,
+        record: PropTypes.string,
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
@@ -24,7 +27,7 @@ const DateTimeField = React.createClass({
 
     getDefaultProps() {
         return ({
-            record: new Date().toUTCString()
+            errors: { values: [] }
         });
     },
 
@@ -57,16 +60,18 @@ const DateTimeField = React.createClass({
                         <DatePicker
                             fullWidth
                             hintText={`${this.props.label}.date`}
-                            value={new Date(this.props.record)}
+                            value={this.props.record && new Date(this.props.record)}
                             mode="landscape"
                             onChange={this.handleDayChange}
+                            errorText={translateErrors(this.props.errors.values, this.context.translation)}
                         />
                         <TimePicker
                             fullWidth
                             hintText={`${this.props.label}.time`}
-                            value={new Date(this.props.record)}
+                            value={this.props.record && new Date(this.props.record)}
                             format="24hr"
                             onChange={this.handleHourChange}
+                            errorText={translateErrors(this.props.errors.values, this.context.translation)}
                         />
                     </div>
                 }

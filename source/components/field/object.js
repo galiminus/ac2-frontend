@@ -8,15 +8,12 @@ import Divider from 'material-ui/Divider';
 
 import Field from 'components/field/field';
 
-const defaultProps = {
-    record: {}
-};
-
 const ObjectField = React.createClass({
     propTypes: {
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        record: PropTypes.object,
+        record: PropTypes.object.isRequired,
+        errors: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
         onChange: PropTypes.func.isRequired,
@@ -26,7 +23,10 @@ const ObjectField = React.createClass({
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return (defaultProps);
+        return ({
+            record: {},
+            errors: { values: [] }
+        });
     },
 
     handleChange(field, record) {
@@ -45,6 +45,7 @@ const ObjectField = React.createClass({
                     title={this.context.translation.t(`${this.props.label}.${field}`)}
                     record={(this.props.record || {})[field]}
                     schema={this.props.schema.properties[field]}
+                    errors={this.props.errors[field]}
                     key={field}
                     onChange={(record) => this.handleChange(field, record)}
                     editable={this.props.editable}
