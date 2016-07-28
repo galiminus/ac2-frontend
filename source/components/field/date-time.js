@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
+import ResponsiveMixin from 'react-responsive-mixin';
 
 import moment from 'moment';
 
@@ -10,6 +11,21 @@ import TimePicker from 'material-ui/TimePicker';
 import InputTitle from './input-title';
 
 import { translateErrors } from 'utils/errors';
+
+const style = {
+    fields: {
+        display: 'flex'
+    }
+};
+
+const phoneScreenStyle = {
+    ...style,
+    fields: {
+        ...style.fields,
+        display: 'block'
+    }
+};
+
 
 const DateTimeField = React.createClass({
     propTypes: {
@@ -23,12 +39,31 @@ const DateTimeField = React.createClass({
         translateLabel: PropTypes.bool
     },
 
-    mixins: [PureRenderMixin],
+    mixins: [PureRenderMixin, ResponsiveMixin],
 
     getDefaultProps() {
         return ({
             errors: { values: [] }
         });
+    },
+
+    getInitialState() {
+        return ({
+            datePickerMode: 'landscape',
+            style
+        });
+    },
+
+    componentDidMount() {
+        this.media({ minWidth: 800 }, () => this.setState({
+            datePickerMode: 'landscape',
+            style
+        }));
+
+        this.media({ maxWidth: 800 }, () => this.setState({
+            datePickerMode: 'portrait',
+            style: phoneScreenStyle
+        }));
     },
 
     handleDayChange(_event, date) {
@@ -57,22 +92,24 @@ const DateTimeField = React.createClass({
                         <InputTitle>
                             {this.props.title}
                         </InputTitle>
-                        <DatePicker
-                            fullWidth
-                            hintText={`${this.props.label}.date`}
-                            value={this.props.record && new Date(this.props.record)}
-                            mode="landscape"
-                            onChange={this.handleDayChange}
-                            errorText={translateErrors(this.props.errors.values, this.context.translation)}
-                        />
-                        <TimePicker
-                            fullWidth
-                            hintText={`${this.props.label}.time`}
-                            value={this.props.record && new Date(this.props.record)}
-                            format="24hr"
-                            onChange={this.handleHourChange}
-                            errorText={translateErrors(this.props.errors.values, this.context.translation)}
-                        />
+                        <div style={this.state.style.fields}>
+                            <DatePicker
+                                fullWidth
+                                hintText={this.context.translation.t(`${this.props.label}.date`)}
+                                value={this.props.record && new Date(this.props.record)}
+                                mode={this.state.datePickerMode}
+                                onChange={this.handleDayChange}
+                                errorText={translateErrors(this.props.errors.values, this.context.translation)}
+                            />
+                            <TimePicker
+                                fullWidth
+                                hintText={this.context.translation.t(`${this.props.label}.time`)}
+                                value={this.props.record && new Date(this.props.record)}
+                                format="24hr"
+                                onChange={this.handleHourChange}
+                                errorText={translateErrors(this.props.errors.values, this.context.translation)}
+                            />
+                        </div>
                     </div>
                 }
             />

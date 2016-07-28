@@ -87,7 +87,7 @@ const Form = React.createClass({
                 <Field
                     key={category}
                     label={`${this.props.label}.${category}`}
-                    title={this.context.translation.t(`${this.props.label}.${category}`)}
+                    title={this.context.translation.t(`${this.props.label}.${category}.label`)}
                     record={this.state.record[category]}
                     schema={this.props.schema.properties[category]}
                     onUpdate={this.handleUpdate}
