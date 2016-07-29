@@ -17,7 +17,7 @@ const ProfilePages = React.createClass({
     mixins: [PureRenderMixin],
 
     componentWillMount() {
-        this.props.setTitle(this.context.translation.t('links.members'));
+        this.props.setTitle(this.context.translation.t('links.profiles'));
     },
 
     render() {

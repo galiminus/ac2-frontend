@@ -17,7 +17,15 @@ const Profile = React.createClass({
     mixins: [PureRenderMixin],
 
     componentWillMount() {
-        this.props.setTitle(this.props.resource.title);
+        this.setTitle();
+    },
+
+    componentWillReceiveProps() {
+        this.setTitle();
+    },
+
+    setTitle() {
+        this.props.setTitle(this.props.resource.data.personal_informations.user_name);
     },
 
     render() {

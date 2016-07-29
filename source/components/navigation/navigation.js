@@ -52,7 +52,7 @@ const Navigation = React.createClass({
                     </Link>
                     <Link to="/profiles">
                         <ListItem
-                            primaryText={this.context.translation.t('links.members')}
+                            primaryText={this.context.translation.t('links.profiles')}
                             leftIcon={<MembersIcon />}
                         />
                     </Link>

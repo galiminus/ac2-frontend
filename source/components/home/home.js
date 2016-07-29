@@ -110,7 +110,7 @@ const tabletScreenStyle = {
 
     headerBar: {
         ...smallScreenStyle.headerBar,
-        top: 56
+        top: 55
     },
 
     mainContent: {

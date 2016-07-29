@@ -17,7 +17,15 @@ const Event = React.createClass({
     mixins: [PureRenderMixin],
 
     componentWillMount() {
-        this.props.setTitle(this.props.resource.title);
+        this.setTitle();
+    },
+
+    componentWillReceiveProps() {
+        this.setTitle();
+    },
+
+    setTitle() {
+        this.props.setTitle(this.props.resource.data.base_informations.title);
     },
 
     render() {

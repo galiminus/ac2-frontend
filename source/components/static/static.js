@@ -17,12 +17,20 @@ const Static = React.createClass({
     mixins: [PureRenderMixin],
 
     componentWillMount() {
+        this.setTitle();
+    },
+
+    componentWillReceiveProps() {
+        this.setTitle();
+    },
+
+    setTitle() {
         this.props.setTitle(this.props.resource.data.title);
     },
 
     render() {
         return (
-            <Card style={{ minHeight: '100%', marginTop: 56 }}>
+            <Card style={{ minHeight: '100%', marginTop: 16 }}>
                 <CardText>
                     <Marked body={this.props.resource.data.body} />
                 </CardText>
