@@ -39,12 +39,22 @@ const PagesGridList = React.createClass({
     },
 
     render() {
+        const hasFeatured = (React.Children.count(this.props.children) % 2);
+
         return (
             <GridList
                 style={this.state.style.gridList}
                 padding={this.state.style.gridListPadding}
+                cols={2}
             >
-                {this.props.children}
+                {
+                    React.Children.toArray(this.props.children).map((child, index) => {
+                        if (hasFeatured && index === 0) {
+                            return (React.cloneElement(child, { cols: 2, rows: 2 }));
+                        }
+                        return (child);
+                    })
+                }
             </GridList>
         );
     }

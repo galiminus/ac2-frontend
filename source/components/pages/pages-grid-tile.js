@@ -21,10 +21,6 @@ const style = {
     }
 };
 
-const defaultProps = {
-    actionIcons: []
-};
-
 const PagesGridTile = React.createClass({
     propTypes: {
         page: PropTypes.object.isRequired,
@@ -37,18 +33,23 @@ const PagesGridTile = React.createClass({
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return (defaultProps);
+        return ({
+            actionIcons: [],
+            featured: false
+        });
     },
 
     render() {
+        const { page, banner, relationshipStatus, actionIcons, ...props } = this.props;
+
         return (
             <GridTile
+                {...props}
                 titleBackground="rgba(0, 0, 0, 0.9)"
-                title={this.props.title}
                 actionIcon={
                     <div>
                         {
-                            this.props.actionIcons.map((actionIcon, index) =>
+                            actionIcons.map((actionIcon, index) =>
                                 React.cloneElement(actionIcon, { key: index })
                             )
                         }
@@ -58,14 +59,14 @@ const PagesGridTile = React.createClass({
                 <div
                     style={{
                         ...style.banner,
-                        backgroundImage: `url(${this.props.banner})`
+                        backgroundImage: `url(${banner})`
                     }}
                 >
                     <div style={style.relationChip}>
                         <RelationChip
                             proposer={this.context.currentUserPage}
-                            recipient={this.props.page}
-                            relationshipStatus={this.props.relationshipStatus}
+                            recipient={page}
+                            relationshipStatus={relationshipStatus}
                         />
                     </div>
                 </div>

@@ -60,7 +60,7 @@ const Message = React.createClass({
 
     getInitialState() {
         return {
-            messageEditDialogOpen: false,
+            messageEditDialogOpen: false
         };
     },
 
