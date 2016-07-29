@@ -18,7 +18,7 @@ const Navigation = React.createClass({
 
     render() {
         return (
-            <nav style={{ height: '100%' }}>
+            <nav>
                 <List>
                     <Link to="/">
                         <ListItem

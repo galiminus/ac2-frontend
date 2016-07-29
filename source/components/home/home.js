@@ -49,10 +49,11 @@ const style = {
         position: 'fixed',
         width: 240,
         maxWidth: 240,
-        height: '100%',
+        height: 'calc(100% - 56px)',
         marginTop: 56,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        justifyContent: 'space-between'
     },
 
     mainContent: {

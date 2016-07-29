@@ -31,7 +31,8 @@ const AdditionalLinks = React.createClass({
                             >
                                 <Link
                                     style={{
-                                        color: this.context.muiTheme.palette.accent3Color
+                                        color: this.context.muiTheme.palette.accent3Color,
+                                        fontSize: 12
                                     }}
                                     to={`/statics/${page.slug}`}
                                 >
