@@ -16,6 +16,7 @@ import createMessage from 'api/create-message';
 import findMessages from 'api/find-messages';
 import updateMessage from 'api/update-message';
 import destroyMessage from 'api/destroy-message';
+import getMessage from 'api/get-message';
 import createLike from 'api/create-like';
 import destroyLike from 'api/destroy-like';
 import createRelationship from 'api/create-relationship';
@@ -43,7 +44,8 @@ export default {
         create: createMessage,
         find: findMessages,
         update: updateMessage,
-        destroy: destroyMessage
+        destroy: destroyMessage,
+        get: getMessage
     },
 
     pages: {

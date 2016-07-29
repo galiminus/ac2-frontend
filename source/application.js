@@ -25,6 +25,8 @@ import LoginForm from 'components/welcome/login-form';
 import SignupForm from 'components/welcome/signup-form';
 import RecoverForm from 'components/welcome/recover-form';
 
+import MessagePage from 'components/messages/message-page';
+
 import MainPage from 'components/pages/main-page';
 import QuizzPage from 'components/pages/quizz-page';
 import PollsPage from 'components/pages/polls-page';
@@ -174,6 +176,7 @@ const Application = React.createClass({
 
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
                     <IndexRoute component={MainPage} />
+                    <Route path="/messages/:resourceId" component={MessagePage} />
 
                     <Route path="quizz" component={QuizzPage} />
                     <Route path="polls" component={PollsPage} />

@@ -13,6 +13,7 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+import LinkIcon from 'material-ui/svg-icons/editor/insert-link';
 import ReportIcon from 'material-ui/svg-icons/content/report';
 
 import api from 'api';
@@ -24,14 +25,15 @@ import Marked from 'components/marked/marked';
 import CreationDate from 'components/creation-date';
 import PlusCounter from 'components/plus-counter';
 import PlusButton from 'components/plus-button';
+import Link from 'components/link';
 
 import MessageDialog from './message-dialog';
 
 function mapStateToProps(state, props) {
     return {
-        sender: state.pages.get(props.message.sender_id),
-        recipient: state.pages.get(props.message.recipient_id),
-        likes: state.likesByMessage.get(props.message.id)
+        sender: state.pages.get(props.resource.sender_id),
+        recipient: state.pages.get(props.resource.recipient_id),
+        likes: state.likesByMessage.get(props.resource.id)
     };
 }
 
@@ -43,7 +45,7 @@ const Message = React.createClass({
     propTypes: {
         sender: PropTypes.object,
         recipient: PropTypes.object,
-        message: PropTypes.object.isRequired,
+        resource: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
         likes: PropTypes.object.isRequired,
@@ -57,21 +59,23 @@ const Message = React.createClass({
     },
 
     getInitialState() {
-        return { messageEditModalOpen: false };
+        return {
+            messageEditDialogOpen: false,
+        };
     },
 
-    handleOpenMessageEditModal() {
-        this.setState({ messageEditModalOpen: true });
+    handleOpenMessageEditDialog() {
+        this.setState({ messageEditDialogOpen: true });
     },
 
-    handleCloseMessageEditModal() {
-        this.setState({ messageEditModalOpen: false });
+    handleCloseMessageEditDialog() {
+        this.setState({ messageEditDialogOpen: false });
     },
 
     handleMessageDestroy() {
-        api.messages.destroy(this.props.message.id).then(
+        api.messages.destroy(this.props.resource.id).then(
             () => {
-                this.props.removeResource(this.props.message);
+                this.props.removeResource(this.props.resource);
             },
             () => {
                 this.props.pushNotification('message_destroy_fatal_error');
@@ -84,7 +88,7 @@ const Message = React.createClass({
 
     handleLikeCreate() {
         api.likes.create({
-            liked_id: this.props.message.id,
+            liked_id: this.props.resource.id,
             liked_type: 'Message'
         }).then(
             (response) => {
@@ -124,7 +128,7 @@ const Message = React.createClass({
                     subtitle={
                         <CreationDate
                             style={{ marginLeft: 0, textAlign: 'left' }}
-                            date={this.props.message.created_at}
+                            date={this.props.resource.created_at}
                         />
                     }
                 >
@@ -146,17 +150,17 @@ const Message = React.createClass({
                             style={{ margin: -12 }}
                         >
                             {
-                                this.props.message.permissions.update &&
+                                this.props.resource.permissions.update &&
                                     <MenuItem
                                         leftIcon={<EditIcon />}
                                         style={{ cursor: 'pointer' }}
                                         primaryText={this.context.translation.t('actions.edit')}
-                                        onTouchTap={this.handleOpenMessageEditModal}
+                                        onTouchTap={this.handleOpenMessageEditDialog}
                                     />
                             }
 
                             {
-                                this.props.message.permissions.destroy &&
+                                this.props.resource.permissions.destroy &&
                                     <MenuItem
                                         leftIcon={<DeleteIcon />}
                                         style={{ cursor: 'pointer' }}
@@ -164,6 +168,13 @@ const Message = React.createClass({
                                         onTouchTap={this.handleMessageDestroy}
                                     />
                             }
+                            <Link to={`/messages/${this.props.resource.id}`} target="_false">
+                                <MenuItem
+                                    leftIcon={<LinkIcon />}
+                                    style={{ cursor: 'pointer' }}
+                                    primaryText={this.context.translation.t('actions.openMessage')}
+                                />
+                            </Link>
                             <MenuItem
                                 leftIcon={<ReportIcon />}
                                 style={{ cursor: 'pointer' }}
@@ -175,21 +186,21 @@ const Message = React.createClass({
                     </div>
                     <MessageDialog
                         modal={false}
-                        open={this.state.messageEditModalOpen}
-                        onRequestClose={this.handleCloseMessageEditModal}
+                        open={this.state.messageEditDialogOpen}
+                        onRequestClose={this.handleCloseMessageEditDialog}
                         sender={this.context.currentUserPage}
                         recipient={this.props.recipient}
-                        initialValues={this.props.message.data}
-                        id={this.props.message.id}
-                        formKey={this.props.message.id}
+                        initialValues={this.props.resource.data}
+                        id={this.props.resource.id}
+                        formKey={this.props.resource.id}
                     />
                 </PageCardHeader>
                 <Divider inset />
                 <CardText>
-                    <Marked body={this.props.message.data.body} />
+                    <Marked body={this.props.resource.data.body} />
                 </CardText>
                 <Comments
-                    messageId={this.props.message.id}
+                    messageId={this.props.resource.id}
                     parentId={null}
                 />
             </Card>
