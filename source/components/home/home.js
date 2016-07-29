@@ -32,7 +32,7 @@ const style = {
         width: '100%',
         position: 'fixed',
         zIndex: 3,
-        top: 0
+        top: -1
     },
 
     navigationBar: {
@@ -40,7 +40,7 @@ const style = {
         width: '100%',
         position: 'fixed',
         zIndex: 3,
-        top: 0
+        top: -1
     },
 
     leftNav: {
@@ -111,7 +111,7 @@ const tabletScreenStyle = {
 
     headerBar: {
         ...smallScreenStyle.headerBar,
-        top: 55
+        top: 54
     },
 
     mainContent: {

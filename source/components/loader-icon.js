@@ -10,7 +10,7 @@ const LoaderIcon = React.createClass({
         comment: PropTypes.string,
         onTouchTap: PropTypes.func,
         icon: PropTypes.node.isRequired,
-        buttonStyle: PropTypes.object,
+        buttonStyle: PropTypes.object
     },
 
     mixins: [PureRenderMixin],

@@ -4,50 +4,28 @@ import ResponsiveMixin from 'react-responsive-mixin';
 
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
-import { connect } from 'react-redux';
-
 import Link from 'components/link';
 
 import MaterialFloatingActionButton from 'material-ui/FloatingActionButton';
 
 const style = {
-    button: {
-        position: 'fixed',
-        bottom: 24,
-        right: 328,
-        animation: 'slideup 2s'
-    },
-
-    visible: {
-        opacity: 1
-    },
-
-    invisible: {
-        opacity: 0,
-        visibility: 'hidden'
-    }
+    position: 'fixed',
+    bottom: 24,
+    right: 328,
+    animation: 'slideup 2s'
 };
 
 const phoneScreenStyle = {
     ...style,
-    button: {
-        ...style.button,
-        right: 28
-    }
+    right: 28
 };
-
-function mapStateToProps(state) {
-    return ({
-        visible: !state.formFocused
-    });
-}
 
 const FloatingActionButton = React.createClass({
     propTypes: {
         children: PropTypes.node.isRequired,
+        style: PropTypes.object,
         onMouseUp: PropTypes.func,
         href: PropTypes.string,
-        visible: PropTypes.bool.isRequired,
         loading: PropTypes.bool
     },
 
@@ -62,14 +40,11 @@ const FloatingActionButton = React.createClass({
         this.media({ maxWidth: 800 }, () => this.setState({ style: phoneScreenStyle }));
     },
 
-    renderLink() {
+    renderLink(style) {
         return (
             <Link to={this.props.href}>
                 <MaterialFloatingActionButton
-                    style={{
-                        ...this.state.style.button,
-                        ...(this.props.visible ? this.state.style.visible : this.state.style.invisible)
-                    }}
+                    style={style}
                 >
                     {this.props.children}
                 </MaterialFloatingActionButton>
@@ -77,13 +52,10 @@ const FloatingActionButton = React.createClass({
         );
     },
 
-    renderButton() {
+    renderButton(style) {
         return (
             <MaterialFloatingActionButton
-                style={{
-                    ...this.state.style.button,
-                    ...(this.props.visible ? this.state.style.visible : this.state.style.invisible)
-                }}
+                style={style}
                 onMouseUp={this.props.onMouseUp}
                 href={this.props.href}
             >
@@ -92,9 +64,9 @@ const FloatingActionButton = React.createClass({
         );
     },
 
-    renderLoading() {
+    renderLoading(style) {
         return (
-            <div style={this.state.style.button}>
+            <div style={style}>
                 <RefreshIndicator
                     top={0}
                     left={0}
@@ -112,16 +84,20 @@ const FloatingActionButton = React.createClass({
     },
 
     render() {
+        const style = {
+            ...this.state.style,
+            ...this.props.style
+        };
+
         if (this.props.loading) {
-            return (this.renderLoading());
+            return (this.renderLoading(style));
         }
 
         if (this.props.href) {
-            return (this.renderLink());
+            return (this.renderLink(style));
         }
-
-        return (this.renderButton());
+        return (this.renderButton(style));
     }
 });
 
-export default connect(mapStateToProps)(FloatingActionButton);
+export default FloatingActionButton;
