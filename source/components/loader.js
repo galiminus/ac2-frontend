@@ -21,7 +21,9 @@ const Loader = React.createClass({
         loadingMore: PropTypes.bool.isRequired,
         children: PropTypes.node.isRequired,
         onLoadMore: PropTypes.func.isRequired,
+        onReload: PropTypes.func.isRequired,
         hasMore: PropTypes.bool.isRequired,
+        hasNew: PropTypes.bool.isRequired,
         endIconThreshold: PropTypes.number.isRequired,
         style: PropTypes.object
     },
@@ -44,16 +46,32 @@ const Loader = React.createClass({
         };
 
         const {
-            resources, endIconThreshold, hasMore, loadingMore, onLoadMore, style, children, loaderTop
+            resources, endIconThreshold, hasMore, loadingMore, onLoadMore, onReload, style, children, loaderTop
         } = this.props;
 
         let marginTop = 0;
         if (resources.size === 0 && !loaderTop) {
-            marginTop = `calc(38% - ${(size / 2)}px)`;
+            marginTop = `calc(38% - ${((border + size) / 2)}px)`;
         }
 
         return (
             <div style={{ width: '100%' }}>
+                <div style={{ position: 'relative' }}>
+                    {this.props.hasNew &&
+                        <LoaderIcon
+                            buttonStyle={{
+                                position: 'absolute',
+                                left: `calc(50% - ${(border + size) / 2}px)`,
+                                top: -40,
+                                zIndex: 2
+                            }}
+                            size={size}
+                            border={border}
+                            onTouchTap={onReload}
+                            icon={<RefreshIcon />}
+                        />
+                    }
+                </div>
                 <div style={style}>
                     {children}
                 </div>

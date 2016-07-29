@@ -3,24 +3,24 @@ import PureRenderMixin from 'components/pure-render-mixin';
 
 import IconButton from 'material-ui/IconButton';
 
-const defaultProps = {
-    size: 40,
-    border: 60
-};
-
 const LoaderIcon = React.createClass({
     propTypes: {
         size: PropTypes.number,
         border: PropTypes.number,
         comment: PropTypes.string,
         onTouchTap: PropTypes.func,
-        icon: PropTypes.node.isRequired
+        icon: PropTypes.node.isRequired,
+        buttonStyle: PropTypes.object,
     },
 
     mixins: [PureRenderMixin],
 
     getDefaultProps() {
-        return (defaultProps);
+        return ({
+            size: 40,
+            border: 60,
+            buttonStyle: {}
+        });
     },
 
     render() {
@@ -28,7 +28,8 @@ const LoaderIcon = React.createClass({
 
         const iconButtonStyle = {
             width: border + size,
-            height: border + size
+            height: border + size,
+            ...this.props.buttonStyle
         };
 
         const iconStyle = {
@@ -38,6 +39,7 @@ const LoaderIcon = React.createClass({
             borderRadius: size / 2,
             boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px'
         };
+
 
         return (
             <div>

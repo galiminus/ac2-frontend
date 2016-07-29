@@ -3,13 +3,15 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import Immutable from 'immutable';
 
 import { connect } from 'react-redux';
+import connectToCable from 'components/action-cable';
 
 import actionCreators from 'action-creators';
 
 const defaultProps = {
     filters: {},
     sort: [],
-    include: []
+    include: [],
+    channels: []
 };
 
 function mapStateToProps(state, props) {
@@ -24,6 +26,7 @@ const ResourcesContainer = React.createClass({
         filters: PropTypes.object.isRequired,
         sort: PropTypes.array.isRequired,
         include: PropTypes.array.isRequired,
+        channels: PropTypes.array.isRequired,
         pushNotification: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         factory: PropTypes.func.isRequired
@@ -40,12 +43,23 @@ const ResourcesContainer = React.createClass({
             page: 1,
             loadingMore: false,
             hasMore: false,
+            hasNew: false,
             ids: []
         };
     },
 
     componentWillMount() {
         this.load(1);
+    },
+
+    getChannels() {
+        return (this.props.channels);
+    },
+
+    handleMessage(message) {
+        if (message && message.meta.action === 'create') {
+            this.setState({ hasNew: true });
+        }
     },
 
     load(pageNum) {
@@ -86,6 +100,11 @@ const ResourcesContainer = React.createClass({
         this.load(this.state.page);
     },
 
+    handleReload() {
+        this.setState(this.getInitialState);
+        this.load(1);
+    },
+
     render() {
         const resources = this.props.resources.reduce((accumulator, resource) => {
             return (accumulator.set(resource.id, resource));
@@ -101,7 +120,9 @@ const ResourcesContainer = React.createClass({
                     ...this.props,
                     resources,
                     onLoadMore: this.handleLoadMore,
+                    onReload: this.handleReload,
                     hasMore: this.state.hasMore,
+                    hasNew: this.state.hasNew,
                     loadingMore: this.state.loadingMore
                 }
             )
@@ -109,4 +130,4 @@ const ResourcesContainer = React.createClass({
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(ResourcesContainer);
+export default connect(mapStateToProps, actionCreators)(connectToCable(ResourcesContainer));

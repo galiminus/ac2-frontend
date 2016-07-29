@@ -16,6 +16,7 @@ const MessagesContainer = React.createClass({
             <ResourcesContainer {...this.props}
                 factory={MessagesFactory}
                 find={api.messages.find}
+                channels={['MessagesChannel']}
                 storeName="messages"
             />
         );
