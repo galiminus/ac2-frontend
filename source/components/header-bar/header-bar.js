@@ -1,11 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 import ResponsiveMixin from 'react-responsive-mixin';
 
-import { connect } from 'react-redux';
-
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
-import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import AutoComplete from 'material-ui/AutoComplete';
 import ToolbarLogo from 'components/toolbar-logo';
 import CurrentPageTitle from 'components/current-page-title';
@@ -13,14 +10,9 @@ import CurrentUserMenu from 'components/current-user-menu';
 
 import SettingsMenu from './settings-menu';
 
-import actionCreators from 'action-creators';
-
 const style = {
     root: {
-        position: 'fixed',
-        zIndex: 3,
         backgroundColor: '#333333',
-        width: '100%',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'end'
@@ -29,13 +21,6 @@ const style = {
     left: {
         flex: 2,
         justifyContent: 'flex-start'
-    },
-
-    leftNavTrigger: {
-        paddingLeft: 0,
-        paddingRight: 8,
-        height: 56,
-        display: 'none'
     },
 
     separator: {
@@ -64,11 +49,6 @@ const tabletScreenStyle = {
         display: 'none'
     },
 
-    leftNavTrigger: {
-        ...style.leftNavTrigger,
-        display: 'block'
-    },
-
     searchField: {
         ...style.searchField,
         width: '100%',
@@ -90,10 +70,6 @@ const phoneScreenStyle = {
 };
 
 const HeaderBar = React.createClass({
-    propTypes: {
-        toggleLeftNav: PropTypes.func.isRequired
-    },
-
     mixins: [PureRenderMixin, ResponsiveMixin],
 
     getInitialState() {
@@ -110,14 +86,6 @@ const HeaderBar = React.createClass({
         return (
             <Toolbar style={this.state.style.root}>
                 <ToolbarGroup key={0} style={this.state.style.left}>
-                    <div style={this.state.style.leftNavTrigger}>
-                        <MenuIcon
-                            style={this.state.style.leftNavTrigger}
-                            color="#ffffff"
-                            hoverColor="#ffffff"
-                            onClick={this.props.toggleLeftNav}
-                        />
-                    </div>
                     <div style={this.state.style.logo}>
                         <ToolbarLogo />
                     </div>
@@ -149,4 +117,4 @@ const HeaderBar = React.createClass({
     }
 });
 
-export default connect(undefined, actionCreators)(HeaderBar);
+export default HeaderBar;

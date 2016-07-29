@@ -25,19 +25,16 @@ function mapStateToProps(state) {
         currentUser,
         currentUserPage,
         currentToken: state.tokens.get(state.currentToken),
-        leftNav: state.leftNav,
         translation: state.translations.get(state.currentLocale)
     };
 }
 
 const HomeContainer = React.createClass({
     propTypes: {
-        toggleLeftNav: PropTypes.func.isRequired,
         setCurrentUser: PropTypes.func.isRequired,
         addResource: PropTypes.func.isRequired,
         removeJSONAPIResource: PropTypes.func.isRequired,
         currentUserPage: PropTypes.object,
-        leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired,
         translation: PropTypes.object.isRequired,
         pushNotification: PropTypes.func.isRequired,
@@ -119,9 +116,7 @@ const HomeContainer = React.createClass({
 
         return (
             <Home
-                toggleLeftNav={this.props.toggleLeftNav}
                 children={this.props.children}
-                leftNav={this.props.leftNav}
                 isDisconnected={!this.props.currentToken}
                 currentUserPage={this.props.currentUserPage}
             />

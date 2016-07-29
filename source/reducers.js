@@ -23,7 +23,6 @@ import settings from 'reducers/settings';
 
 import schemaByModel from 'reducers/schema-by-model';
 
-import leftNav from 'reducers/leftnav';
 import formFocused from 'reducers/form-focused';
 
 import title from 'reducers/title';
@@ -40,7 +39,6 @@ const reducers = combineReducers({
     commentsByMessage,
     likesByComment,
     likesByMessage,
-    leftNav,
     form,
     notifications,
     translations,

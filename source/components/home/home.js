@@ -3,13 +3,13 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 import ResponsiveMixin from 'react-responsive-mixin';
 
-import Drawer from 'material-ui/Drawer';
 import Paper from 'material-ui/Paper';
 
 import Notifier from 'components/notifier';
 
 import Chat from 'components/chat/chat-container';
 import Navigation from 'components/navigation/navigation';
+import NavigationBar from 'components/navigation/navigation-bar';
 import HeaderBar from 'components/header-bar/header-bar';
 import AdditionalLinksContainer from 'components/static/additional-links-container';
 
@@ -26,6 +26,21 @@ const style = {
 
     mainLayout: {
         minHeight: '100%'
+    },
+
+    headerBar: {
+        width: '100%',
+        position: 'fixed',
+        zIndex: 3,
+        top: 0
+    },
+
+    navigationBar: {
+        display: 'none',
+        width: '100%',
+        position: 'fixed',
+        zIndex: 3,
+        top: 0
     },
 
     leftNav: {
@@ -64,8 +79,15 @@ const smallScreenStyle = {
     ...style,
     leftNav: {
         ...style.leftNav,
-        maxWidth: 200
+        maxWidth: 200,
+        display: 'block'
     },
+
+    navigationBar: {
+        ...style.navigationBar,
+        display: 'none'
+    },
+
     mainContent: {
         ...style.mainContent,
         maxWidth: 'none',
@@ -80,8 +102,20 @@ const tabletScreenStyle = {
         ...smallScreenStyle.leftNav,
         display: 'none'
     },
+
+    navigationBar: {
+        ...smallScreenStyle.navigationBar,
+        display: 'block'
+    },
+
+    headerBar: {
+        ...smallScreenStyle.headerBar,
+        top: 56
+    },
+
     mainContent: {
         ...smallScreenStyle.mainContent,
+        marginTop: 112,
         marginLeft: 'auto',
         marginRight: 'auto',
         paddingLeft: 0
@@ -102,8 +136,6 @@ const phoneScreenStyle = {
 
 const Home = React.createClass({
     propTypes: {
-        toggleLeftNav: PropTypes.func.isRequired,
-        leftNav: PropTypes.bool.isRequired,
         children: PropTypes.object.isRequired
     },
 
@@ -123,18 +155,12 @@ const Home = React.createClass({
     render() {
         return (
             <div style={this.state.style.home}>
-                <HeaderBar />
-
-                <Drawer
-                    docked={false}
-                    open={this.props.leftNav}
-                    onRequestChange={this.props.toggleLeftNav}
-                >
-                    <div>
-                        <Navigation />
-                        <AdditionalLinksContainer />
-                    </div>
-                </Drawer>
+                <div style={this.state.style.navigationBar}>
+                    <NavigationBar />
+                </div>
+                <div style={this.state.style.headerBar}>
+                    <HeaderBar />
+                </div>
 
                 <div style={this.state.style.flexLayout}>
                     <div style={this.state.style.leftNav}>
