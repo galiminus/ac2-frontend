@@ -11,7 +11,6 @@ const Form = React.createClass({
         style: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
-        focus: PropTypes.bool,
         label: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
         only: PropTypes.array
@@ -22,8 +21,7 @@ const Form = React.createClass({
     getDefaultProps() {
         return ({
             record: {},
-            style: {},
-            focus: true
+            style: {}
         });
     },
 
@@ -80,7 +78,6 @@ const Form = React.createClass({
 
     render() {
         const cards = [];
-        let focus = this.props.focus;
 
         for (const category of Object.keys(this.props.schema.properties)) {
             if (this.props.only && this.props.only.indexOf(category) < 0) {
@@ -89,7 +86,6 @@ const Form = React.createClass({
 
             cards.push(
                 <Field
-                    focus={focus}
                     key={category}
                     label={`${this.props.label}.${category}`}
                     title={this.context.translation.t(`${this.props.label}.${category}.label`)}
@@ -100,8 +96,6 @@ const Form = React.createClass({
                     errors={this.state.errors[category]}
                 />
             );
-
-            focus = false;
         }
         return (
             <form style={this.props.style}>

@@ -14,8 +14,7 @@ const StringField = React.createClass({
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
-        editable: PropTypes.bool.isRequired,
-        focus: PropTypes.bool.isRequired
+        editable: PropTypes.bool.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -34,7 +33,6 @@ const StringField = React.createClass({
     renderEdit() {
         const valueField = (
             <TextField
-                autoFocus={this.props.focus}
                 fullWidth
                 errorText={translateErrors(this.props.errors.values, this.context.translation)}
                 value={this.props.record}

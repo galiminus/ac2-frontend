@@ -15,7 +15,6 @@ const TextField = React.createClass({
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
         editable: PropTypes.bool.isRequired,
-        focus: PropTypes.bool.isRequired,
         translateLabel: PropTypes.bool
     },
 
@@ -35,7 +34,6 @@ const TextField = React.createClass({
     renderEdit() {
         return (
             <MaterialTextField
-                autoFocus={this.props.focus}
                 fullWidth
                 multiLine
                 rows={2}

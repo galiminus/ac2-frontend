@@ -26,8 +26,7 @@ const MessageCreateForm = React.createClass({
         pushNotification: PropTypes.func.isRequired,
         schema: PropTypes.object.isRequired,
         sender: PropTypes.object.isRequired,
-        recipient: PropTypes.object,
-        focus: PropTypes.bool
+        recipient: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
@@ -73,7 +72,6 @@ const MessageCreateForm = React.createClass({
                 <Form
                     style={{ padding: '0 16px' }}
                     editable
-                    focus={this.props.focus}
                     label={typeToShortPluralType(this.props.type)}
                     loading={this.state.loading}
                     schema={this.props.schema.data}

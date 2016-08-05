@@ -15,7 +15,6 @@ const ObjectField = React.createClass({
         errors: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired,
-        focus: PropTypes.bool.isRequired,
         onChange: PropTypes.func.isRequired,
         depth: PropTypes.number.isRequired
     },
@@ -41,7 +40,6 @@ const ObjectField = React.createClass({
         for (const field of Object.keys(this.props.schema.properties)) {
             fields.push(
                 <Field
-                    focus={this.props.focus}
                     label={this.props.label}
                     title={this.context.translation.t(`${this.props.label}.${field}`)}
                     record={(this.props.record || {})[field]}

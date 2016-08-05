@@ -27,7 +27,6 @@ const Messages = React.createClass({
                         sender={this.context.currentUserPage}
                         recipient={this.props.page}
                         onSubmit={this.props.onReload}
-                        focus={false}
                     />
                 </Paper>
                 <Loader {...this.props}>
