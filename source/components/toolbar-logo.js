@@ -31,7 +31,7 @@ const ToolbarLogo = React.createClass({
                 style={{
                     fontFamily: this.context.muiTheme.fontFamily,
                     fontWeight: 400,
-                    color: 'rgb(204, 150, 116)',
+                    color: '#fff',
                     paddingRight: 0,
                     textDecoration: 'none'
                 }}

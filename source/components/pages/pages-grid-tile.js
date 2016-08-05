@@ -45,7 +45,7 @@ const PagesGridTile = React.createClass({
         return (
             <GridTile
                 {...props}
-                titleBackground="rgba(0, 0, 0, 0.9)"
+                titleBackground="rgba(0, 0, 0, 0.85)"
                 actionIcon={
                     <div>
                         {
@@ -59,6 +59,7 @@ const PagesGridTile = React.createClass({
                 <div
                     style={{
                         ...style.banner,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
                         backgroundImage: `url(${banner})`
                     }}
                 >

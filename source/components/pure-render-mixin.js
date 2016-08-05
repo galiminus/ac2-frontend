@@ -12,6 +12,7 @@ const ReactComponentWithPureRenderMixin = {
         muiTheme: PropTypes.object,
         settings: PropTypes.object,
         currentUserPage: PropTypes.object,
+        currentUser: PropTypes.object,
         translation: PropTypes.object
     },
 

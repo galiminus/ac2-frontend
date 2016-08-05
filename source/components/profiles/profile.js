@@ -1,36 +1,20 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import { connect } from 'react-redux';
-
-import actionCreators from 'action-creators';
 import PageEditForm from 'components/pages/page-edit-form';
 
 import ProfileBanner from 'components/profiles/profile-banner';
 
 const Profile = React.createClass({
     propTypes: {
-        resource: PropTypes.object.isRequired,
-        setTitle: PropTypes.func.isRequired
+        resource: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
 
-    componentWillMount() {
-        this.setTitle();
-    },
-
-    componentWillReceiveProps() {
-        this.setTitle();
-    },
-
-    setTitle() {
-        this.props.setTitle(this.props.resource.data.personal_informations.user_name);
-    },
-
     render() {
         return (
-            <div style={{ marginTop: 16 }}>
+            <div>
                 <ProfileBanner page={this.props.resource} />
                 <PageEditForm
                     resource={this.props.resource}
@@ -41,4 +25,4 @@ const Profile = React.createClass({
     }
 });
 
-export default connect(undefined, actionCreators)(Profile);
+export default Profile;

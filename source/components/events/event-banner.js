@@ -18,7 +18,7 @@ const EventBanner = React.createClass({
 
     render() {
         return (
-            <Card>
+            <Card style={{ marginBottom: 12 }}>
                 <CardMedia
                     overlay={
                         <PageCardTitle page={this.props.page}>

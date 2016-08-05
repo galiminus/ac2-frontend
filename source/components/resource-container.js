@@ -4,47 +4,30 @@ import PureRenderMixin from 'components/pure-render-mixin';
 import { connect } from 'react-redux';
 import actionCreators from 'action-creators';
 
-function mapStateToProps(state, props) {
-    const resource = state[props.storeName].get(props.id);
-
-    if (!resource) {
-        return ({});
-    }
-
-    return {
-        resource,
-        schema: state.schemas.get(resource.schema_id)
-    };
-}
-
 const ResourceContainer = React.createClass({
     propTypes: {
         addResource: PropTypes.func.isRequired,
         pushNotification: PropTypes.func.isRequired,
-        id: PropTypes.string.isRequired,
-        get: PropTypes.func.isRequired,
-        factory: PropTypes.func.isRequired,
-        resource: PropTypes.object,
-        schema: PropTypes.object
+        promises: PropTypes.array.isRequired,
+        factory: PropTypes.func.isRequired
     },
 
     mixins: [PureRenderMixin],
 
+    getInitialState() {
+        return ({
+            loading: true
+        });
+    },
+
     componentWillMount() {
-        this.load(this.props.id);
-    },
-
-    componentWillReceiveProps(newProps) {
-        if (newProps.id !== this.props.id) {
-            this.load(newProps.id);
-        }
-    },
-
-    load(id) {
-        this.props.get(id)
+        Promise.all(this.props.promises)
             .then(
-                (response) => {
-                    this.props.addResource(response);
+                (responses) => {
+                    for (const response of responses) {
+                        this.props.addResource(response);
+                    }
+                    this.setState({ loading: false });
                 },
                 () => {
                     this.props.pushNotification('resource_get_fatal_error');
@@ -53,20 +36,19 @@ const ResourceContainer = React.createClass({
     },
 
     render() {
-        if (!this.props.resource || !this.props.schema) {
+        if (this.state.loading) {
             return (<div />);
         }
 
         return (
             this.props.factory(
                 {
-                    ...this.props,
-                    resource: this.props.resource,
-                    schema: this.props.schema
+                    loading: this.state.loading,
+                    ...this.props
                 }
             )
         );
     }
 });
 
-export default connect(mapStateToProps, actionCreators)(ResourceContainer);
+export default connect(undefined, actionCreators)(ResourceContainer);

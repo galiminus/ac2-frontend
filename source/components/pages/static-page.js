@@ -16,10 +16,9 @@ const StaticPage = React.createClass({
     render() {
         return (
             <PageContainer
-                {...this.props}
                 factory={StaticFactory}
                 id={this.props.params.resourceId}
-                storeName="pages"
+                {...this.props}
             />
         );
     }

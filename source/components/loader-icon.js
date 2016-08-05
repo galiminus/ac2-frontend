@@ -53,6 +53,7 @@ const LoaderIcon = React.createClass({
                 {comment &&
                     <p
                         style={{
+                            margin: 0,
                             color: this.context.muiTheme.palette.accent3Color,
                             fontFamily: this.context.muiTheme.fontFamily
                         }}

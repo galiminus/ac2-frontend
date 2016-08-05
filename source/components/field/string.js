@@ -14,7 +14,8 @@ const StringField = React.createClass({
         label: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
-        editable: PropTypes.bool.isRequired
+        editable: PropTypes.bool.isRequired,
+        focus: PropTypes.bool.isRequired
     },
 
     mixins: [PureRenderMixin],
@@ -32,17 +33,13 @@ const StringField = React.createClass({
 
     renderEdit() {
         const valueField = (
-            <ListItem
-                disabled
-                primaryText={
-                    <TextField
-                        fullWidth
-                        errorText={translateErrors(this.props.errors.values, this.context.translation)}
-                        value={this.props.record}
-                        floatingLabelText={this.props.title}
-                        onChange={this.handleChange}
-                    />
-                }
+            <TextField
+                autoFocus={this.props.focus}
+                fullWidth
+                errorText={translateErrors(this.props.errors.values, this.context.translation)}
+                value={this.props.record}
+                floatingLabelText={this.props.title}
+                onChange={this.handleChange}
             />
         );
         return (valueField);

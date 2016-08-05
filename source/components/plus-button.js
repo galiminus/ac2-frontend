@@ -21,7 +21,7 @@ const PlusButton = React.createClass({
                     width: 16,
                     height: 16,
                     background: (this.props.isSelected ?
-                        this.context.muiTheme.palette.accent1Color : this.context.muiTheme.palette.accent2Color),
+                        this.context.muiTheme.palette.accent1Color : 'transparent'),
                     color: (this.props.isSelected ?
                         this.context.muiTheme.palette.alternateTextColor : this.context.muiTheme.palette.textColor),
                     borderRadius: 24,

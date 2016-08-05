@@ -80,10 +80,7 @@ const MessageDialog = React.createClass({
     },
 
     render() {
-        const {
-            fields: { body },
-            handleSubmit
-        } = this.props;
+        const { sender, recipient, fields: { body }, handleSubmit, ...dialogProps } = this.props;
 
         if (!body.value) {
             body.value = '';
@@ -91,9 +88,9 @@ const MessageDialog = React.createClass({
 
         return (
             <Dialog
-                {...this.props}
+                {...dialogProps}
                 title={
-                    <PageCardHeader sender={this.props.sender} recipient={this.props.recipient} />
+                    <PageCardHeader sender={sender} recipient={recipient} />
                 }
                 actions={[
                     <FlatButton

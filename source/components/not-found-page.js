@@ -1,22 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
-
-import { connect } from 'react-redux';
-import { setTitle } from 'action-creators';
 
 import NotFoundIcon from 'material-ui/svg-icons/social/sentiment-dissatisfied';
 import LoaderIcon from 'components/loader-icon';
 
 const NotFoundPage = React.createClass({
-    propTypes: {
-        setTitle: PropTypes.func.isRequired
-    },
-
     mixins: [PureRenderMixin],
-
-    componentWillMount() {
-        this.props.setTitle(this.context.translation.t('links.notFound'));
-    },
 
     render() {
         return (
@@ -32,4 +21,4 @@ const NotFoundPage = React.createClass({
     }
 });
 
-export default connect(undefined, { setTitle })(NotFoundPage);
+export default NotFoundPage;

@@ -76,7 +76,7 @@ const PlusCounter = React.createClass({
                 style={{
                     fontSize: 12,
                     marginLeft: 8,
-                    color: this.context.muiTheme.palette.accent3Color,
+                    color: 'rgba(0, 0, 0, 0.8)',
                     fontWeight: 500
                 }}
             >

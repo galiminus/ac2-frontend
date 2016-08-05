@@ -1,36 +1,20 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import { connect } from 'react-redux';
-
 import EventBanner from 'components/events/event-banner';
 
-import actionCreators from 'action-creators';
 import PageEditForm from 'components/pages/page-edit-form';
 
 const Event = React.createClass({
     propTypes: {
-        resource: PropTypes.object.isRequired,
-        setTitle: PropTypes.func.isRequired
+        resource: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
 
-    componentWillMount() {
-        this.setTitle();
-    },
-
-    componentWillReceiveProps() {
-        this.setTitle();
-    },
-
-    setTitle() {
-        this.props.setTitle(this.props.resource.data.base_informations.title);
-    },
-
     render() {
         return (
-            <div style={{ marginTop: 16 }}>
+            <div>
                 <EventBanner page={this.props.resource} />
                 <PageEditForm
                     resource={this.props.resource}
@@ -41,4 +25,4 @@ const Event = React.createClass({
     }
 });
 
-export default connect(undefined, actionCreators)(Event);
+export default Event;

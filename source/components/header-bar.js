@@ -2,20 +2,26 @@ import React from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 import ResponsiveMixin from 'react-responsive-mixin';
 
-import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
+import IconButton from 'material-ui/IconButton';
+
 import AutoComplete from 'material-ui/AutoComplete';
+import HomeIcon from 'material-ui/svg-icons/action/home';
+import EventsIcon from 'material-ui/svg-icons/action/event';
+import GroupsIcon from 'material-ui/svg-icons/social/group';
+import MembersIcon from 'material-ui/svg-icons/action/language';
+
 import ToolbarLogo from 'components/toolbar-logo';
-import CurrentPageTitle from 'components/current-page-title';
 import CurrentUserMenu from 'components/current-user-menu';
 
-import SettingsMenu from './settings-menu';
+import Link from 'components/link';
 
 const style = {
     root: {
-        backgroundColor: '#333333',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'end'
+        alignItems: 'end',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.2)'
     },
 
     left: {
@@ -23,17 +29,26 @@ const style = {
         justifyContent: 'flex-start'
     },
 
-    separator: {
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
-        marginRight: 16,
-        marginLeft: 16
-    },
+    right: {},
 
     searchField: {
         width: 460,
         margin: '5px 0 5px 16px',
-        background: '#444',
+        background: 'rgba(0, 0, 0, 0.1)',
         padding: '0 12px'
+    },
+
+    button: {
+        margin: '8px 4px 0 4px',
+        height: 40,
+        width: 40,
+        padding: 0
+    },
+
+    icon: {
+        color: 'rgba(255, 255, 255, 1)',
+        width: 24,
+        height: 24
     }
 };
 
@@ -53,19 +68,28 @@ const tabletScreenStyle = {
         ...style.searchField,
         width: '100%',
         marginLeft: 0
-    },
-
-    separator: {
-        ...style.separator,
-        display: 'none'
     }
 };
 
 const phoneScreenStyle = {
     ...tabletScreenStyle,
+    root: {
+        borderBottom: 'none'
+    },
+
     title: {
         ...tabletScreenStyle.title,
         display: 'none'
+    },
+
+    left: {
+        ...tabletScreenStyle.left,
+        display: 'none'
+    },
+
+    right: {
+        ...tabletScreenStyle.right,
+        width: '100%'
     }
 };
 
@@ -84,15 +108,10 @@ const HeaderBar = React.createClass({
 
     render() {
         return (
-            <Toolbar style={this.state.style.root}>
-                <ToolbarGroup key={0} style={this.state.style.left}>
+            <Toolbar style={{ ...this.state.style.root, backgroundColor: this.context.muiTheme.palette.backgroundColor }}>
+                <ToolbarGroup style={this.state.style.left}>
                     <div style={this.state.style.logo}>
                         <ToolbarLogo />
-                    </div>
-                    <ToolbarSeparator style={this.state.style.separator} />
-
-                    <div style={this.state.style.title}>
-                        <CurrentPageTitle />
                     </div>
 
                     <div style={this.state.style.searchField}>
@@ -106,10 +125,30 @@ const HeaderBar = React.createClass({
                         />
                     </div>
                 </ToolbarGroup>
-                <ToolbarGroup key={2}>
-                    {this.context.settings.permissions.update &&
-                        <SettingsMenu />
-                    }
+                <ToolbarGroup style={this.state.style.right}>
+                    <Link to="/">
+                        <IconButton style={this.state.style.button} iconStyle={this.state.style.icon}>
+                            <HomeIcon />
+                        </IconButton>
+                    </Link>
+
+                    <Link to="/events">
+                        <IconButton style={this.state.style.button} iconStyle={this.state.style.icon}>
+                            <EventsIcon />
+                        </IconButton>
+                    </Link>
+
+                    <Link to="/groups">
+                        <IconButton style={this.state.style.button} iconStyle={this.state.style.icon}>
+                            <GroupsIcon />
+                        </IconButton>
+                    </Link>
+
+                    <Link to="/profiles">
+                        <IconButton style={this.state.style.button} iconStyle={this.state.style.icon}>
+                           <MembersIcon />
+                        </IconButton>
+                    </Link>
                     <CurrentUserMenu />
                 </ToolbarGroup>
             </Toolbar>

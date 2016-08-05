@@ -16,10 +16,9 @@ const ProfilePage = React.createClass({
     render() {
         return (
             <PageContainer
-                {...this.props}
                 factory={ProfileFactory}
                 id={this.props.params.resourceId}
-                storeName="profiles"
+                {...this.props}
             />
         );
     }

@@ -6,9 +6,6 @@ import Link from 'components/link';
 import InfoButton from 'material-ui/svg-icons/action/info';
 import IconButton from 'material-ui/IconButton';
 
-import FloatingActionButton from 'components/floating-action-button';
-import CreateContentIcon from 'material-ui/svg-icons/action/note-add';
-
 import PageAvatar from 'components/pages/page-avatar';
 import PagesGridList from 'components/pages/pages-grid-list';
 import PagesGridTile from 'components/pages/pages-grid-tile';
@@ -54,9 +51,6 @@ const Events = React.createClass({
                 <PagesGridList>
                     {this.renderResources()}
                 </PagesGridList>
-                <FloatingActionButton href={`/events/new`}>
-                    <CreateContentIcon />
-                </FloatingActionButton>
             </Loader>
         );
     }

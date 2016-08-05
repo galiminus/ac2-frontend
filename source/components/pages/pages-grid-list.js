@@ -6,7 +6,6 @@ import { GridList } from 'material-ui/GridList';
 
 const style = {
     gridList: {
-        marginTop: 8,
         marginBottom: 8
     },
     gridListPadding: 16
@@ -16,7 +15,6 @@ const phoneScreenStyle = {
     ...style,
     gridList: {
         ...style.gridList,
-        marginTop: 2,
         marginBottom: 2
     },
     gridListPadding: 4

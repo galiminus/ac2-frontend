@@ -1,32 +1,16 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import { connect } from 'react-redux';
-import { setTitle } from 'action-creators';
-
 import { Card, CardText } from 'material-ui/Card';
 
 import Marked from 'components/marked/marked';
 
 const Static = React.createClass({
     propTypes: {
-        resource: PropTypes.object.isRequired,
-        setTitle: PropTypes.func.isRequired
+        resource: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
-
-    componentWillMount() {
-        this.setTitle();
-    },
-
-    componentWillReceiveProps() {
-        this.setTitle();
-    },
-
-    setTitle() {
-        this.props.setTitle(this.props.resource.data.title);
-    },
 
     render() {
         return (
@@ -39,4 +23,4 @@ const Static = React.createClass({
     }
 });
 
-export default connect(undefined, { setTitle })(Static);
+export default Static;

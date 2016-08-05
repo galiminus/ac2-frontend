@@ -36,17 +36,12 @@ const EnumField = React.createClass({
 
     renderEdit() {
         const valueField = (
-            <ListItem
-                disabled
-                primaryText={
-                    <div>
-                        <InputTitle>{this.props.title}</InputTitle>
-                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                            {this.renderField()}
-                        </div>
-                    </div>
-                }
-            />
+            <div style={{ marginTop: 16 }}>
+                <InputTitle>{this.props.title}</InputTitle>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {this.renderField()}
+                </div>
+            </div>
         );
         return (valueField);
     },

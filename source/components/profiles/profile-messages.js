@@ -1,39 +1,23 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import { connect } from 'react-redux';
-import { setTitle } from 'action-creators';
-
 import ProfileBanner from 'components/profiles/profile-banner';
-import MessagesContainer from 'components/messages/messages-container';
+import MessagesTabs from 'components/messages/messages-tabs';
 
 const ProfileMessages = React.createClass({
     propTypes: {
-        resource: PropTypes.object.isRequired,
-        setTitle: PropTypes.func.isRequired
+        resource: PropTypes.object.isRequired
     },
 
     mixins: [PureRenderMixin],
-
-    componentWillMount() {
-        this.setTitle();
-    },
-
-    componentWillReceiveProps() {
-        this.setTitle();
-    },
-
-    setTitle() {
-        this.props.setTitle(this.props.resource.data.personal_informations.user_name);
-    },
 
     render() {
         return (
             <div style={{ marginTop: 16 }}>
                 <ProfileBanner page={this.props.resource} />
-                <MessagesContainer
+                <MessagesTabs
                     {...this.props}
-                    loaderTop
+                    baseUrl={`/profiles/${this.props.resource.slug}`}
                     page={this.props.resource}
                     sort={[
                         '-updated_at'
@@ -55,4 +39,4 @@ const ProfileMessages = React.createClass({
     }
 });
 
-export default connect(undefined, { setTitle })(ProfileMessages);
+export default ProfileMessages;

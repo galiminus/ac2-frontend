@@ -1,14 +1,10 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
-import AddIcon from 'material-ui/svg-icons/content/add';
-
 import SelectableChip from 'components/selectable-chip';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import Avatar from 'material-ui/Avatar';
 
-import ListItem from 'material-ui/List/ListItem';
 import TextField from 'material-ui/TextField';
 
 import InputTitle from './input-title';
@@ -61,11 +57,8 @@ const ArrayField = React.createClass({
         const newArray = this.props.record.slice();
         newArray.push(this.state.newItemValue);
 
-        return (
-            this.props.onChange(newArray).then(() => {
-                this.handleRequestClose();
-            })
-        );
+        this.props.onChange(newArray);
+        this.handleRequestClose();
     },
 
     renderChips() {
@@ -116,7 +109,6 @@ const ArrayField = React.createClass({
             <SelectableChip
                 onTouchTap={this.handleOpenAddDialog}
             >
-                <Avatar icon={<AddIcon />} />
                 {this.context.translation.t('forms.array.add')}
             </SelectableChip>
         );
@@ -124,19 +116,14 @@ const ArrayField = React.createClass({
 
     render() {
         return (
-            <ListItem
-                disabled
-                primaryText={
-                    <div>
-                        <InputTitle>{this.props.title}</InputTitle>
-                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                            {this.renderChips()}
-                            {this.props.editable && this.renderAddChip()}
-                        </div>
-                        {this.renderDialog()}
-                    </div>
-                }
-            />
+            <div style={{ marginTop: 16 }}>
+                <InputTitle>{this.props.title}</InputTitle>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {this.renderChips()}
+                    {this.props.editable && this.renderAddChip()}
+                </div>
+                {this.renderDialog()}
+            </div>
         );
     }
 });

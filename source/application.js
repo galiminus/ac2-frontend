@@ -27,9 +27,10 @@ import RecoverForm from 'components/welcome/recover-form';
 
 import MessagePage from 'components/messages/message-page';
 
+import EventsPages from 'components/events/pages';
+import GroupsPages from 'components/groups/pages';
+
 import MainPage from 'components/pages/main-page';
-import QuizzPage from 'components/pages/quizz-page';
-import PollsPage from 'components/pages/polls-page';
 
 import StaticPage from 'components/pages/static-page';
 import Settings from 'components/settings';
@@ -121,20 +122,9 @@ const Application = React.createClass({
         return (
             this.props.pages.map(resource => {
                 const pages = require(`components/${resource}/pages`);
-                return (
+                return ([
                     <Route key={`${resource}-pages`} path={resource} component={pages} />
-                );
-            })
-        );
-    },
-
-    renderPageNewRoutes() {
-        return (
-            this.props.pages.map(resource => {
-                const pageNew = require(`components/${resource}/new`);
-                return (
-                    <Route key={`${resource}-new`} path={`${resource}/new`} component={pageNew} />
-                );
+                ]);
             })
         );
     },
@@ -143,9 +133,11 @@ const Application = React.createClass({
         return (
             this.props.pages.map(resource => {
                 const messagesPage = require(`components/${resource}/messages-page`);
-                return (
-                    <Route key={`${resource}-messages-page`} path={`${resource}/:resourceId`} component={messagesPage} />
-                );
+                return ([
+                    <Route key={`${resource}-messages-page`} path={`${resource}/:resourceId`} component={messagesPage} />,
+                    <Route key={`${resource}-messages-page`} path={`${resource}/:resourceId/quizz`} component={messagesPage} />,
+                    <Route key={`${resource}-messages-page`} path={`${resource}/:resourceId/polls`} component={messagesPage} />
+                ]);
             })
         );
     },
@@ -176,16 +168,21 @@ const Application = React.createClass({
 
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
                     <IndexRoute component={MainPage} />
-                    <Route path="/messages/:resourceId" component={MessagePage} />
 
-                    <Route path="quizz" component={QuizzPage} />
-                    <Route path="polls" component={PollsPage} />
+                    <Route path="quizz" component={MainPage} />
+                    <Route path="polls" component={MainPage} />
+
+                    <Route path="/messages/:resourceId" component={MessagePage} />
 
                     <Route path="settings/:category" component={Settings} />
                     <Route path="statics/:resourceId" component={StaticPage} />
 
                     {this.renderPagesRoutes()}
-                    {this.renderPageNewRoutes()}
+                    <Route path="/events/past" component={EventsPages} />
+                    <Route path="/events/new" component={EventsPages} />
+
+                    <Route path="/groups/new" component={GroupsPages} />
+
                     {this.renderMessagePagesRoutes()}
                     {this.renderPageRoutes()}
 

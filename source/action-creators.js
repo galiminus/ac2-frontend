@@ -6,7 +6,6 @@ import notifications from 'action-creators/notifications';
 import resources from 'action-creators/resources';
 import translations from 'action-creators/translations';
 import currentLocale from 'action-creators/current-locale';
-import title from 'action-creators/title';
 
 export default {
     ...currentUser,
@@ -16,6 +15,5 @@ export default {
     ...notifications,
     ...translations,
     ...currentLocale,
-    ...resources,
-    ...title
+    ...resources
 };

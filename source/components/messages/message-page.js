@@ -1,28 +1,40 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
+import { connect } from 'react-redux';
+
 import Message from 'components/messages/message';
-import MessageContainer from 'components/messages/message-container';
+import ResourceContainer from 'components/resource-container';
+
+import api from 'api';
 
 const MessageFactory = React.createFactory(Message);
 
+function mapStateToProps(state, props) {
+    return ({
+        message: state.messages.get(props.params.resourceId)
+    });
+}
+
 const MessagePage = React.createClass({
     propTypes: {
-        params: PropTypes.object.isRequired
+        params: PropTypes.object.isRequired,
+        message: PropTypes.object
     },
 
     mixins: [PureRenderMixin],
 
     render() {
         return (
-            <MessageContainer
-                {...this.props}
+            <ResourceContainer
+                promises={[
+                    api.messages.get(this.props.params.resourceId)
+                ]}
                 factory={MessageFactory}
-                id={this.props.params.resourceId}
-                storeName="messages"
+                resource={this.props.message}
             />
         );
     }
 });
 
-export default MessagePage;
+export default connect(mapStateToProps)(MessagePage);

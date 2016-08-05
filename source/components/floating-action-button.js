@@ -8,7 +8,7 @@ import Link from 'components/link';
 
 import MaterialFloatingActionButton from 'material-ui/FloatingActionButton';
 
-const style = {
+const baseStyle = {
     position: 'fixed',
     bottom: 24,
     right: 328,
@@ -16,7 +16,7 @@ const style = {
 };
 
 const phoneScreenStyle = {
-    ...style,
+    ...baseStyle,
     right: 28
 };
 
@@ -32,11 +32,11 @@ const FloatingActionButton = React.createClass({
     mixins: [PureRenderMixin, ResponsiveMixin],
 
     getInitialState() {
-        return ({ style });
+        return ({ style: baseStyle });
     },
 
     componentDidMount() {
-        this.media({ minWidth: 800 }, () => this.setState({ style }));
+        this.media({ minWidth: 800 }, () => this.setState({ style: baseStyle }));
         this.media({ maxWidth: 800 }, () => this.setState({ style: phoneScreenStyle }));
     },
 
@@ -55,6 +55,7 @@ const FloatingActionButton = React.createClass({
     renderButton(style) {
         return (
             <MaterialFloatingActionButton
+                tooltip="Ligature"
                 style={style}
                 onMouseUp={this.props.onMouseUp}
                 href={this.props.href}

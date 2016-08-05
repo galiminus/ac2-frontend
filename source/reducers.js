@@ -25,8 +25,6 @@ import schemaByModel from 'reducers/schema-by-model';
 
 import formFocused from 'reducers/form-focused';
 
-import title from 'reducers/title';
-
 import resourcesReducerFactory from 'reducer-factories/resources';
 
 const reducers = combineReducers({
@@ -46,7 +44,6 @@ const reducers = combineReducers({
     settings,
     schemaByModel,
     formFocused,
-    title,
     users: resourcesReducerFactory('USER'),
     schemas: resourcesReducerFactory('SCHEMA'),
     relationships: resourcesReducerFactory('RELATIONSHIP'),

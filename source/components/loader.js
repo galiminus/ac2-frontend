@@ -10,14 +10,12 @@ import LoaderIcon from 'components/loader-icon';
 
 const defaultProps = {
     style: {},
-    loaderTop: false,
     endIconThreshold: 20
 };
 
 const Loader = React.createClass({
     propTypes: {
         resources: PropTypes.object.isRequired,
-        loaderTop: PropTypes.bool.isRequired,
         loadingMore: PropTypes.bool.isRequired,
         children: PropTypes.node.isRequired,
         onLoadMore: PropTypes.func.isRequired,
@@ -46,13 +44,8 @@ const Loader = React.createClass({
         };
 
         const {
-            resources, endIconThreshold, hasMore, loadingMore, onLoadMore, onReload, style, children, loaderTop
+            resources, endIconThreshold, hasMore, loadingMore, onLoadMore, onReload, style, children
         } = this.props;
-
-        let marginTop = 0;
-        if (resources.size === 0 && !loaderTop) {
-            marginTop = `calc(38% - ${((border + size) / 2)}px)`;
-        }
 
         return (
             <div style={{ width: '100%' }}>
@@ -75,7 +68,7 @@ const Loader = React.createClass({
                 <div style={style}>
                     {children}
                 </div>
-                <div style={{ textAlign: 'center', marginTop }}>
+                <div style={{ textAlign: 'center', marginTop: 0 }}>
                     {resources.size === 0 && !hasMore && !loadingMore &&
                         <LoaderIcon
                             size={size}
@@ -101,7 +94,7 @@ const Loader = React.createClass({
                         />
                     }
                     {resources.size <= endIconThreshold && !hasMore && !loadingMore &&
-                        <div style={{ height: border + size }} />
+                        <div />
                     }
                     {loadingMore &&
                         <div style={loadingStyle}>

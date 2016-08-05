@@ -15,6 +15,7 @@ const TextField = React.createClass({
         title: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
         editable: PropTypes.bool.isRequired,
+        focus: PropTypes.bool.isRequired,
         translateLabel: PropTypes.bool
     },
 
@@ -32,25 +33,18 @@ const TextField = React.createClass({
     },
 
     renderEdit() {
-        const valueField = (
-            <ListItem
-                disabled
-                primaryText={
-                    <div>
-                        <MaterialTextField
-                            fullWidth
-                            multiLine
-                            rows={2}
-                            value={this.props.record}
-                            floatingLabelText={this.props.title}
-                            onChange={this.handleChange}
-                            errorText={translateErrors(this.props.errors.values, this.context.translation)}
-                        />
-                    </div>
-                }
+        return (
+            <MaterialTextField
+                autoFocus={this.props.focus}
+                fullWidth
+                multiLine
+                rows={2}
+                value={this.props.record}
+                floatingLabelText={this.props.title}
+                onChange={this.handleChange}
+                errorText={translateErrors(this.props.errors.values, this.context.translation)}
             />
         );
-        return (valueField);
     },
 
     renderValue() {
@@ -65,7 +59,6 @@ const TextField = React.createClass({
         return (
             <ListItem
                 disabled={!this.props.editable}
-                style={{ maxHeight: 80, minHeight: 80 }}
                 primaryText={this.props.title}
                 secondaryText={secondaryText}
             />

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
+import { typeToShortPluralType } from 'utils/types';
+
 import { connect } from 'react-redux';
 
 import Immutable from 'immutable';
@@ -9,6 +11,7 @@ import { Card, CardText } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
@@ -26,14 +29,14 @@ import CreationDate from 'components/creation-date';
 import PlusCounter from 'components/plus-counter';
 import PlusButton from 'components/plus-button';
 import Link from 'components/link';
-
-import MessageDialog from './message-dialog';
+import Form from 'components/form';
 
 function mapStateToProps(state, props) {
     return {
         sender: state.pages.get(props.resource.sender_id),
         recipient: state.pages.get(props.resource.recipient_id),
-        likes: state.likesByMessage.get(props.resource.id)
+        likes: state.likesByMessage.get(props.resource.id),
+        schema: state.schemas.get(props.resource.schema_id)
     };
 }
 
@@ -43,9 +46,10 @@ const defaultProps = {
 
 const Message = React.createClass({
     propTypes: {
-        sender: PropTypes.object,
+        sender: PropTypes.object.isRequired,
         recipient: PropTypes.object,
         resource: PropTypes.object.isRequired,
+        schema: PropTypes.object.isRequired,
         addResource: PropTypes.func.isRequired,
         removeResource: PropTypes.func.isRequired,
         likes: PropTypes.object.isRequired,
@@ -59,17 +63,38 @@ const Message = React.createClass({
     },
 
     getInitialState() {
-        return {
-            messageEditDialogOpen: false
-        };
+        return ({
+            edit: false,
+            record: this.props.resource.data,
+            loading: false,
+            isValid: false
+        });
     },
 
-    handleOpenMessageEditDialog() {
-        this.setState({ messageEditDialogOpen: true });
+    handleChange(record, errors) {
+        this.setState({
+            record,
+            isValid: Object.keys(errors).length === 0
+        });
     },
 
-    handleCloseMessageEditDialog() {
-        this.setState({ messageEditDialogOpen: false });
+    handleUpdate() {
+        this.setState({ loading: true });
+        return (
+            api.messages.update(this.props.resource.id, { data: this.state.record })
+                .then(
+                    (resource) => {
+                        this.props.addResource(resource);
+                        this.props.pushNotification('saveSuccess');
+                    },
+                    () => {
+                        this.props.pushNotification('saveError');
+                    }
+                )
+                .then(() => {
+                    this.setState({ loading: false, edit: false });
+                })
+        );
     },
 
     handleMessageDestroy() {
@@ -114,13 +139,16 @@ const Message = React.createClass({
     },
 
     render() {
-        if (!this.props.sender) {
-            return (<div />);
-        }
         const isLiked = !!this.myLike();
 
         return (
-            <Card style={{ marginTop: 24, fontSize: '0.9em', lineHeight: '1.4em' }}>
+            <Card
+                style={{
+                    marginTop: 24,
+                    fontSize: '0.9em',
+                    lineHeight: '1.4em'
+                }}
+            >
                 <PageCardHeader
                     sender={this.props.sender}
                     recipient={this.props.recipient}
@@ -155,7 +183,7 @@ const Message = React.createClass({
                                         leftIcon={<EditIcon />}
                                         style={{ cursor: 'pointer' }}
                                         primaryText={this.context.translation.t('actions.edit')}
-                                        onTouchTap={this.handleOpenMessageEditDialog}
+                                        onTouchTap={() => this.setState({ edit: true })}
                                     />
                             }
 
@@ -184,21 +212,36 @@ const Message = React.createClass({
 
                         </IconMenu>
                     </div>
-                    <MessageDialog
-                        modal={false}
-                        open={this.state.messageEditDialogOpen}
-                        onRequestClose={this.handleCloseMessageEditDialog}
-                        sender={this.context.currentUserPage}
-                        recipient={this.props.recipient}
-                        initialValues={this.props.resource.data}
-                        id={this.props.resource.id}
-                        formKey={this.props.resource.id}
-                    />
                 </PageCardHeader>
                 <Divider inset />
-                <CardText>
-                    <Marked body={this.props.resource.data.body} />
-                </CardText>
+                {this.state.edit &&
+                    [
+                        <Form
+                            key="form"
+                            editable
+                            style={{ padding: '0 16px' }}
+                            label={typeToShortPluralType(this.props.resource.type)}
+                            loading={this.state.loading}
+                            schema={this.props.schema.data}
+                            onChange={this.handleChange}
+                            record={this.state.record}
+                        />,
+                        <div key="actions" style={{ textAlign: 'right', padding: '0 16px 8px 0' }}>
+                            <FlatButton
+                                disabled={!this.state.isValid}
+                                type="submit"
+                                label={this.context.translation.t('actions.edit')}
+                                secondary
+                                onTouchTap={this.handleUpdate}
+                            />
+                        </div>
+                    ]
+                }
+                {!this.state.edit &&
+                    <CardText>
+                        <Marked body={this.props.resource.data.body} />
+                    </CardText>
+                }
                 <Comments
                     messageId={this.props.resource.id}
                     parentId={null}

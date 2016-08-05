@@ -8,9 +8,8 @@ import Paper from 'material-ui/Paper';
 import Notifier from 'components/notifier';
 
 import Chat from 'components/chat/chat-container';
-import Navigation from 'components/navigation/navigation';
-import NavigationBar from 'components/navigation/navigation-bar';
-import HeaderBar from 'components/header-bar/header-bar';
+import HeaderBar from 'components/header-bar';
+import SettingsMenu from 'components/settings-menu';
 import AdditionalLinksContainer from 'components/static/additional-links-container';
 
 const style = {
@@ -35,14 +34,6 @@ const style = {
         top: -1
     },
 
-    navigationBar: {
-        display: 'none',
-        width: '100%',
-        position: 'fixed',
-        zIndex: 3,
-        top: -1
-    },
-
     leftNav: {
         paddingRight: 0,
         zIndex: 2,
@@ -57,22 +48,24 @@ const style = {
     },
 
     mainContent: {
-        marginTop: 56,
+        marginTop: 68,
         width: 660,
         marginLeft: 'auto',
         marginRight: 'auto',
+        paddingRight: 310,
         paddingLeft: 240,
-        paddingRight: 300
+        overflow: 'hidden'
     },
 
     messagePanel: {
         paddingRight: 0,
-        marginTop: 56,
+        marginTop: 55,
         width: 300,
         zIndex: 2,
         position: 'fixed',
         height: '100%',
-        right: 0
+        right: 0,
+        borderRadius: 0
     }
 };
 
@@ -80,46 +73,31 @@ const smallScreenStyle = {
     ...style,
     leftNav: {
         ...style.leftNav,
-        maxWidth: 200,
-        display: 'block'
-    },
-
-    navigationBar: {
-        ...style.navigationBar,
-        display: 'none'
+        maxWidth: 200
     },
 
     mainContent: {
         ...style.mainContent,
         maxWidth: 'none',
-        width: 480,
+        width: '90%',
         paddingLeft: 210
     }
 };
 
 const tabletScreenStyle = {
     ...smallScreenStyle,
+
     leftNav: {
         ...smallScreenStyle.leftNav,
         display: 'none'
     },
 
-    navigationBar: {
-        ...smallScreenStyle.navigationBar,
-        display: 'block'
-    },
-
-    headerBar: {
-        ...smallScreenStyle.headerBar,
-        top: 54
-    },
-
     mainContent: {
         ...smallScreenStyle.mainContent,
-        marginTop: 112,
+        marginTop: 55,
         marginLeft: 'auto',
         marginRight: 'auto',
-        paddingLeft: 0
+        paddingLeft: 10
     }
 };
 
@@ -131,7 +109,9 @@ const phoneScreenStyle = {
     },
     mainContent: {
         ...tabletScreenStyle.mainContent,
-        paddingRight: 0
+        paddingRight: 0,
+        paddingLeft: 0,
+        width: '100%'
     }
 };
 
@@ -155,18 +135,21 @@ const Home = React.createClass({
 
     render() {
         return (
-            <div style={this.state.style.home}>
-                <div style={this.state.style.navigationBar}>
-                    <NavigationBar />
-                </div>
+            <div style={{ ...this.state.style.home, backgroundColor: this.context.muiTheme.palette.backgroundColor }}>
                 <div style={this.state.style.headerBar}>
                     <HeaderBar />
                 </div>
 
                 <div style={this.state.style.flexLayout}>
                     <div style={this.state.style.leftNav}>
-                        <Navigation />
-                        <AdditionalLinksContainer />
+                        <div />
+                        <div>
+                            <AdditionalLinksContainer />
+
+                            {this.context.settings.permissions.update &&
+                                <SettingsMenu />
+                            }
+                        </div>
                     </div>
                     <div style={this.state.style.mainContent}>
                         {this.props.children}

@@ -57,7 +57,7 @@ const ResourcesContainer = React.createClass({
     },
 
     handleMessage(message) {
-        if (message && message.meta.action === 'create') {
+        if (message && message.meta.action === 'create' && this.state.ids.indexOf(message.id) < 0) {
             this.setState({ hasNew: true });
         }
     },

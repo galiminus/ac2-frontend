@@ -85,34 +85,29 @@ const DateTimeField = React.createClass({
 
     renderEdit() {
         const valueField = (
-            <ListItem
-                disabled
-                primaryText={
-                    <div>
-                        <InputTitle>
-                            {this.props.title}
-                        </InputTitle>
-                        <div style={this.state.style.fields}>
-                            <DatePicker
-                                fullWidth
-                                hintText={this.context.translation.t(`${this.props.label}.date`)}
-                                value={this.props.record && new Date(this.props.record)}
-                                mode={this.state.datePickerMode}
-                                onChange={this.handleDayChange}
-                                errorText={translateErrors(this.props.errors.values, this.context.translation)}
-                            />
-                            <TimePicker
-                                fullWidth
-                                hintText={this.context.translation.t(`${this.props.label}.time`)}
-                                value={this.props.record && new Date(this.props.record)}
-                                format="24hr"
-                                onChange={this.handleHourChange}
-                                errorText={translateErrors(this.props.errors.values, this.context.translation)}
-                            />
-                        </div>
-                    </div>
-                }
-            />
+            <div style={{ marginTop: 16 }}>
+                <InputTitle>
+                    {this.props.title}
+                </InputTitle>
+                <div style={this.state.style.fields}>
+                    <DatePicker
+                        fullWidth
+                        hintText={this.context.translation.t(`${this.props.label}.date`)}
+                        value={this.props.record && new Date(this.props.record)}
+                        mode={this.state.datePickerMode}
+                        onChange={this.handleDayChange}
+                        errorText={translateErrors(this.props.errors.values, this.context.translation)}
+                    />
+                    <TimePicker
+                        fullWidth
+                        hintText={this.context.translation.t(`${this.props.label}.time`)}
+                        value={this.props.record && new Date(this.props.record)}
+                        format="24hr"
+                        onChange={this.handleHourChange}
+                        errorText={translateErrors(this.props.errors.values, this.context.translation)}
+                    />
+                </div>
+            </div>
         );
         return (valueField);
     },

@@ -44,6 +44,7 @@ const HomeContainer = React.createClass({
 
     childContextTypes: {
         currentUserPage: React.PropTypes.object,
+        currentUser: React.PropTypes.object,
         translation: React.PropTypes.object
     },
 
@@ -51,6 +52,7 @@ const HomeContainer = React.createClass({
 
     getChildContext() {
         return ({
+            currentUser: this.props.currentUser,
             currentUserPage: this.props.currentUserPage,
             translation: this.props.translation
         });

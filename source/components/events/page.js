@@ -16,10 +16,9 @@ const EventPage = React.createClass({
     render() {
         return (
             <PageContainer
-                {...this.props}
                 factory={EventFactory}
                 id={this.props.params.resourceId}
-                storeName="events"
+                {...this.props}
             />
         );
     }
