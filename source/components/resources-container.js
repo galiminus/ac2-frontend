@@ -43,7 +43,7 @@ const ResourcesContainer = React.createClass({
             page: 1,
             loadingMore: false,
             hasMore: false,
-            hasNew: false,
+            newIds: [],
             ids: []
         };
     },
@@ -57,12 +57,12 @@ const ResourcesContainer = React.createClass({
     },
 
     handleMessage(message) {
-        if (message && message.meta.action === 'create' && this.state.ids.indexOf(message.id) < 0) {
-            this.setState({ hasNew: true });
+        if (message && message.meta.action === 'create' && this.state.ids.indexOf(message.data.id) < 0) {
+            this.setState({ newIds: [...this.state.newIds, message.data.id] });
         }
     },
 
-    load(pageNum) {
+    load(pageNum, reload = false) {
         const query = {};
 
         for (const filter of Object.keys(this.props.filters)) {
@@ -84,7 +84,8 @@ const ResourcesContainer = React.createClass({
 
                     const ids = response.data.map((resource) => resource.id);
                     this.setState({
-                        ids: this.state.ids.concat(ids),
+                        ids: (reload ? ids : this.state.ids.concat(ids)),
+                        newIds: this.state.newIds.filter((id) => ids.indexOf(id) < 0),
                         hasMore: !!response.links.last,
                         loadingMore: false,
                         page: (!!response.links.last ? pageNum + 1 : pageNum)
@@ -101,8 +102,7 @@ const ResourcesContainer = React.createClass({
     },
 
     handleReload() {
-        this.setState(this.getInitialState);
-        this.load(1);
+        this.load(1, true);
     },
 
     render() {
@@ -122,7 +122,7 @@ const ResourcesContainer = React.createClass({
                     onLoadMore: this.handleLoadMore,
                     onReload: this.handleReload,
                     hasMore: this.state.hasMore,
-                    hasNew: this.state.hasNew,
+                    hasNew: this.state.newIds.length > 0,
                     loadingMore: this.state.loadingMore
                 }
             )

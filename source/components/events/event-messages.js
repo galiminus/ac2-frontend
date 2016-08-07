@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
 import EventBanner from 'components/events/event-banner';
-import MessagesTabs from 'components/messages/messages-tabs';
+import MessagesContainer from 'components/messages/messages-container';
 
 const EventMessages = React.createClass({
     propTypes: {
@@ -15,9 +15,9 @@ const EventMessages = React.createClass({
         return (
             <div>
                 <EventBanner page={this.props.resource} />
-                <MessagesTabs
+                <MessagesContainer
                     {...this.props}
-                    baseUrl={`/events/${this.props.resource.slug}`}
+                    formType="Message::Post"
                     page={this.props.resource}
                     sort={[
                         '-updated_at'

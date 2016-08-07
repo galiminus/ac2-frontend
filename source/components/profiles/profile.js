@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
 import PageEditForm from 'components/pages/page-edit-form';
-
 import ProfileBanner from 'components/profiles/profile-banner';
+import MainLayout from 'components/main-layout';
 
 const Profile = React.createClass({
     propTypes: {
@@ -14,13 +14,13 @@ const Profile = React.createClass({
 
     render() {
         return (
-            <div>
+            <MainLayout>
                 <ProfileBanner page={this.props.resource} />
                 <PageEditForm
                     resource={this.props.resource}
                     editable={this.props.resource.permissions.update}
                 />
-            </div>
+            </MainLayout>
         );
     }
 });

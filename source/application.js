@@ -169,6 +169,7 @@ const Application = React.createClass({
                 <Route path="/" component={HomeContainer} onEnter={redirectToLoginPage}>
                     <IndexRoute component={MainPage} />
 
+                    <Route path="posts" component={MainPage} />
                     <Route path="quizz" component={MainPage} />
                     <Route path="polls" component={MainPage} />
 
@@ -178,9 +179,11 @@ const Application = React.createClass({
                     <Route path="statics/:resourceId" component={StaticPage} />
 
                     {this.renderPagesRoutes()}
+                    <Route path="/events/incoming" component={EventsPages} />
                     <Route path="/events/past" component={EventsPages} />
                     <Route path="/events/new" component={EventsPages} />
 
+                    <Route path="/groups/all" component={GroupsPages} />
                     <Route path="/groups/new" component={GroupsPages} />
 
                     {this.renderMessagePagesRoutes()}

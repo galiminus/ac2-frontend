@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
 import ProfileBanner from 'components/profiles/profile-banner';
-import MessagesTabs from 'components/messages/messages-tabs';
+import MessagesContainer from 'components/messages/messages-container';
 
 const GroupMessages = React.createClass({
     propTypes: {
@@ -13,11 +13,11 @@ const GroupMessages = React.createClass({
 
     render() {
         return (
-            <div style={{ marginTop: 16 }}>
+            <div>
                 <ProfileBanner page={this.props.resource} />
-                <MessagesTabs
+                <MessagesContainer
                     {...this.props}
-                    baseUrl={`/groups/${this.props.resource.slug}`}
+                    formType="Message::Post"
                     page={this.props.resource}
                     sort={[
                         '-updated_at'

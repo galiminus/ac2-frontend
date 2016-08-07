@@ -3,6 +3,7 @@ import PureRenderMixin from 'components/pure-render-mixin';
 
 import PageContainer from 'components/pages/page-container';
 import EventMessages from 'components/events/event-messages';
+import MainLayout from 'components/main-layout';
 
 const EventMessagesFactory = React.createFactory(EventMessages);
 
@@ -15,12 +16,14 @@ const EventMessagesPage = React.createClass({
 
     render() {
         return (
-            <PageContainer
-                {...this.props}
-                factory={EventMessagesFactory}
-                id={this.props.params.resourceId}
-                storeName="events"
-            />
+            <MainLayout>
+                <PageContainer
+                    {...this.props}
+                    factory={EventMessagesFactory}
+                    id={this.props.params.resourceId}
+                    storeName="events"
+                />
+            </MainLayout>
         );
     }
 });

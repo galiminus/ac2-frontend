@@ -19,8 +19,7 @@ const style = {
 
     flexLayout: {
         display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap'
+        justifyContent: 'space-between'
     },
 
     mainLayout: {
@@ -32,29 +31,6 @@ const style = {
         position: 'fixed',
         zIndex: 3,
         top: -1
-    },
-
-    leftNav: {
-        paddingRight: 0,
-        zIndex: 2,
-        position: 'fixed',
-        width: 240,
-        maxWidth: 240,
-        height: 'calc(100% - 56px)',
-        marginTop: 56,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-    },
-
-    mainContent: {
-        marginTop: 68,
-        width: 660,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        paddingRight: 310,
-        paddingLeft: 240,
-        overflow: 'hidden'
     },
 
     messagePanel: {
@@ -69,49 +45,16 @@ const style = {
     }
 };
 
-const smallScreenStyle = {
-    ...style,
-    leftNav: {
-        ...style.leftNav,
-        maxWidth: 200
-    },
-
-    mainContent: {
-        ...style.mainContent,
-        maxWidth: 'none',
-        width: '90%',
-        paddingLeft: 210
-    }
-};
-
-const tabletScreenStyle = {
-    ...smallScreenStyle,
-
-    leftNav: {
-        ...smallScreenStyle.leftNav,
-        display: 'none'
-    },
-
-    mainContent: {
-        ...smallScreenStyle.mainContent,
-        marginTop: 55,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        paddingLeft: 10
-    }
-};
-
 const phoneScreenStyle = {
-    ...tabletScreenStyle,
-    messagePanel: {
-        ...tabletScreenStyle.messagePanel,
-        display: 'none'
+    ...style,
+    
+    flexLayout: {
+        display: 'block'
     },
-    mainContent: {
-        ...tabletScreenStyle.mainContent,
-        paddingRight: 0,
-        paddingLeft: 0,
-        width: '100%'
+
+    messagePanel: {
+        ...style.messagePanel,
+        display: 'none'
     }
 };
 
@@ -127,9 +70,7 @@ const Home = React.createClass({
     },
 
     componentDidMount() {
-        this.media({ minWidth: 1230 }, () => this.setState({ style }));
-        this.media({ maxWidth: 1230 }, () => this.setState({ style: smallScreenStyle }));
-        this.media({ maxWidth: 1010 }, () => this.setState({ style: tabletScreenStyle }));
+        this.media({ minWidth: 800 }, () => this.setState({ style }));
         this.media({ maxWidth: 800 }, () => this.setState({ style: phoneScreenStyle }));
     },
 
@@ -141,19 +82,7 @@ const Home = React.createClass({
                 </div>
 
                 <div style={this.state.style.flexLayout}>
-                    <div style={this.state.style.leftNav}>
-                        <div />
-                        <div>
-                            <AdditionalLinksContainer />
-
-                            {this.context.settings.permissions.update &&
-                                <SettingsMenu />
-                            }
-                        </div>
-                    </div>
-                    <div style={this.state.style.mainContent}>
-                        {this.props.children}
-                    </div>
+                    {this.props.children}
                     <Paper style={this.state.style.messagePanel}>
 
                     </Paper>
@@ -164,10 +93,5 @@ const Home = React.createClass({
         );
     }
 });
-
-// <Chat
-//     currentUserPage={this.props.currentUserPage}
-//     translation={this.props.translation}
-// />
 
 export default Home;

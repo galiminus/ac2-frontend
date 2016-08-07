@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import PureRenderMixin from 'components/pure-render-mixin';
 
 import ProfileBanner from 'components/profiles/profile-banner';
-import MessagesTabs from 'components/messages/messages-tabs';
+import MessagesContainer from 'components/messages/messages-container';
+import MainLayout from 'components/main-layout';
 
 const ProfileMessages = React.createClass({
     propTypes: {
@@ -13,11 +14,11 @@ const ProfileMessages = React.createClass({
 
     render() {
         return (
-            <div style={{ marginTop: 16 }}>
+            <MainLayout>
                 <ProfileBanner page={this.props.resource} />
-                <MessagesTabs
+                <MessagesContainer
                     {...this.props}
-                    baseUrl={`/profiles/${this.props.resource.slug}`}
+                    formType="Message::Post"
                     page={this.props.resource}
                     sort={[
                         '-updated_at'
@@ -34,7 +35,7 @@ const ProfileMessages = React.createClass({
                         'comments.received_likes.page'
                     ]}
                 />
-            </div>
+            </MainLayout>
         );
     }
 });

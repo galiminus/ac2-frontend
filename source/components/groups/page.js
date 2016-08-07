@@ -3,6 +3,7 @@ import PureRenderMixin from 'components/pure-render-mixin';
 
 import Group from 'components/groups/group';
 import PageContainer from 'components/pages/page-container';
+import MainLayout from 'components/main-layout';
 
 const GroupFactory = React.createFactory(Group);
 
@@ -15,11 +16,13 @@ const GroupPage = React.createClass({
 
     render() {
         return (
-            <PageContainer
-                factory={GroupFactory}
-                id={this.props.params.resourceId}
-                {...this.props}
-            />
+            <MainLayout>
+                <PageContainer
+                    factory={GroupFactory}
+                    id={this.props.params.resourceId}
+                    {...this.props}
+                />
+            </MainLayout>
         );
     }
 });
